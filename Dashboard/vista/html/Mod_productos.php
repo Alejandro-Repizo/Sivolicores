@@ -1,5 +1,7 @@
 <?php 
-require_once "conexion.php";
+require_once "../../controlador/ViewData.php";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -141,28 +143,9 @@ require_once "conexion.php";
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
-                            $sql="SELECT Pt_Imagen, PK_ID_Producto, Pt_Nombre, Pt_Precio from tbl_producto ";
-                            $result=mysqli_query($conn,$sql);
-                            while($mostar=mysqli_fetch_assoc($result)){
-                        ?>
-                        <tr>
-                           <td><?php echo $mostar['Pt_Imagen'] ?></td>
-                           <td><?php echo $mostar['PK_ID_Producto'] ?></td>
-                           <td><?php echo $mostar['Pt_Nombre'] ?></td>
-                           <td><?php echo $mostar['Pt_Precio'] ?></td>
-                           <td>
-                                <a href="Mod_editar_producto.php?PK_ID_Producto=<?php echo $mostar ['PK_ID_Producto']?>">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="Eliminar_producto.php?PK_ID_Producto=<?php echo $mostar ['PK_ID_Producto']?>">
-                                <i class="fas fa-trash-alt"></i>
-                                </a>
-                           </td>     
-                        </tr>
-                        <?php  
-                            }
-                         ?>              
+                  <?php
+                  mostrarProductos()
+                  ?>
                 </tbody>
             </table>
         </div>

@@ -1,8 +1,6 @@
 <?php 
-include "../../controlador/seleccionar.php";
-include "../../modelo/consultas.php";
-include "../../modelo/conexion.php";
-
+    include '../../controlador/ViewData.php';
+    date_default_timezone_set('America/Bogota');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -49,7 +47,6 @@ include "../../modelo/conexion.php";
                         <a href="Index.php"><i class=" user-icons fas fa-lock-open"></i>Cerrar sesión</a></li>
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -88,7 +85,7 @@ include "../../modelo/conexion.php";
                 </li>
                 <li><a href="Mod_banner.php"><i class="cont-icons fas fa-images"></i>Banners</a></li>
                 <li><a href="Mod_receta_coctel.php"><i class="cont-icons fas fa-cocktail"></i>Recetas cócteles</a></li>
-
+ 
             </ul>
         </div>
         <!--Barra lateral izquierda estadísticas-->
@@ -110,11 +107,12 @@ include "../../modelo/conexion.php";
                 <hr>
                 <li><i class="inf-icons far fa-clock"></i>HORA</a>
                 </li>
-                <li class="inf-date">6:42:00 P.M</li>
+                <li class="inf-date"><?php echo date('h:i:s A');?></li>
                 <hr>
             </ul>
         </div>
     </div>
+
 
 
     <!--contendor central-->
@@ -134,7 +132,7 @@ include "../../modelo/conexion.php";
                 <h4>Información básica</h4>
                     <hr>
                    <?php 
-                        seleccionar1();
+                        seleccionar();
                    ?>
                 </div>
             </div>

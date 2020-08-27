@@ -1,3 +1,8 @@
+<?php 
+require_once "../../controlador/ViewData.php";
+
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -5,12 +10,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Productos</title>
     <!--css-->
-    <link rel="stylesheet" href="css/Style_dashboard.css">
-    <link rel="stylesheet" href="css/Style_Mod_añadir_productos.css">
-    <link rel="stylesheet" href="font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <link rel="stylesheet" href="../css/Style_Mod_añadir_productos.css">
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <!--scritp-->
 </head>
 
@@ -53,7 +58,7 @@
     <div class="barra-lat-izq">
         <!--logo-->
         <a href="Dashboard.php">
-            <img src="imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
+            <img src="../imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
         </a>
         <div class="contenedor-menu">
             <ul class="menu">
@@ -127,71 +132,18 @@
                 <div class="formulario">
                     <h4>Información básica</h4>
                     <hr>
-                    <form action="" method="post">
-                        <label for="">Nombre del producto:</label>
-                        <input type="text" name="Nombre_pro" id="Nombre_pro" >
-                        
-                        <label for="">Presentación:</label>
-                        <input type="text" name="Presentacion" id="Presentacion">
-
-                        <h4>Unidades y precio</h4>
-                        <hr>
-
-                        <label for="">Unidades:</label>
-                        <input type="text" name="Stock" id="Stock" >
-    
-                        <label for="">Precio:</label>
-                        <input type="text" name="Precio" id="Precio">
-    
-                        <h4>Categoría y marca</h4>
-                        <hr>
-                        
-                        <label for="">Categoría:</label>
-                        <input type="text" name="Nom_Categoria" id="Categoria" >
-    
-                        <label for="">Marca:</label>
-                        <input type="text" name="Marca" id="Marca" >
-
-                        <h4>Otros datos</h4>
-                        <hr>
-                        
-                        <label for="">País del producto:</label>
-                        <input type="text" name="Pais" id="Pais" >
-    
-                        <label for="">Grado Alcohol:</label>
-                        <input type="text" name="Grados" id="Grados" >
-
-                        <label for="">Color:</label>
-                        <input type="text" name="Color" id="Color" >
-
-                        <h4>Imagen del producto</h4>
-                        <hr>
-
-                        <input type="file" id="Imagen" name="Imagen">
-                        <div class="button">
-                            <button type="submit" name="guardar">Guardar</button>
-                        </div>
-                    </form>
-                    <?php 
-                    if(isset($_POST['nombre'])){
-                        $nombre=$_POST['nombre'];
-                        if ($nombre!=null) {
-                            $sql = "INSERT INTO tbl_producto (Pt_Nombre) values ('$nombre')";
-                        $result=mysqli_query($conn,$sql);
-                        $alerta="Usuario registrado";
-                        if ($result) {
-                            echo "<script> alert('El usuario a sido creado con exito'); </script>";
-                        }
-                        } 
-                    }
+                    
+                    <?php
+                    mostrarEditProducto()
+                    
                     ?> 
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

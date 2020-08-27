@@ -23,7 +23,7 @@ class Consultar {
                 header("Location:../vista/html/Dashboard.php");
             
             }else {
-                echo "<script>alert('Los datos han sido actualizados!'); window.location = '../index.php'</script>";
+                echo("<script>alert('Email o contraseña incorrectos');</script>");
             }
 
         } catch (Exception $ex) {
@@ -111,4 +111,91 @@ class Consultar {
         }
     }
 
+    public function deleteCliente(Cliente $con){
+        try{
+            $conexion  = new ConexionDB();
+            $conexion->abrir();
+            $id = $con->getNombre();
+            $sql = "DELETE FROM tbl_cliente WHERE PK_ID_Cliente = '$id'";
+            $conexion->consulta($sql);
+            $res=$conexion->obtenerFilasAfectadas();
+            print($res);
+            $conexion->cerrar();
+            if($res == TRUE){
+                header("Location:../vista/html/Mod_clientes.php");
+            }
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+    }
+
+    public function upInventario(Productos $con){
+        try{
+            $conexion  = new ConexionDB();
+            $conexion->abrir();
+            $precio = $con->getPrecio();
+            $stock = $con->getStock();
+            $id = $con->getId();
+            $sql = "UPDATE tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto SET Pt_Precio = '$precio', Pt_Stock = '$stock' where PK_ID_Producto = '$id'";
+            $conexion->consulta($sql);
+            $res=$conexion->obtenerFilasAfectadas();
+            print($res);
+            $conexion->cerrar();
+            if($res == TRUE){
+                header("Location:../vista/html/Mod_inventario.php");
+            }
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+    }
+    public function upProducto(Producto $con){
+        try{
+            $conexion  = new ConexionDB();
+            $conexion->abrir();
+            $edit_i  = $con->getPK_ID_Producto();
+            $Pt_codigo = $con->getPt_codigo();
+            $Pt_Nombre = $con->getPt_Nombre();
+            $Pt_Precio = $con->getPt_Precio();
+
+            $Pt_Presentacion = $con->getPt_Presentacion();
+            $Pt_Grados_alchol= $con->getPt_Grados_alchol();
+            $Pt_Pais = $con->getPt_Pais();
+            $Pt_Color = $con->getPt_Color();
+            $Pt_Stock = $con->getPt_Stock();
+            $sql = "UPDATE tbl_producto SET Pt_codigo='$Pt_codigo', Pt_Nombre ='$Pt_Nombre', Pt_Precio ='$Pt_Precio', Pt_Presentacion = '$Pt_Presentacion', 
+            Pt_Grados_alchol ='$Pt_Grados_alchol', Pt_Pais ='$Pt_Pais', Pt_Color ='$Pt_Color', Pt_Stock ='$Pt_Stock' WHERE PK_ID_Producto = '$edit_i'";
+            $conexion->consulta($sql);
+            $res=$conexion->obtenerFilasAfectadas();
+            print($res);
+            $conexion->cerrar();
+            if($res == TRUE){
+                header("Location:../vista/html/Mod_producto.php");
+            }
+
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+    }
+
+    public function deleteProducto(Producto $con){
+        try{
+            $conexion  = new ConexionDB();
+            $conexion->abrir();
+            $edit_i  = $con->getPt_Nombre();
+            $sql = "DELETE FROM tbl_producto WHERE PK_ID_Producto = '$edit_i'";
+            $conexion->consulta($sql);
+            $res=$conexion->obtenerFilasAfectadas();
+            print($res);
+            $conexion->cerrar();
+            if($res == TRUE){
+                header("Location:../vista/html/Mod_productos.php");
+            }
+
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+    }
+
+
 }
+

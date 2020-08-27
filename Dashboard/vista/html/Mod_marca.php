@@ -11,7 +11,7 @@ include '../../controlador/ViewData.php';
     <!--Favicon-->
     <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Marcas</title>
-    <!--css-->
+    <!--css--> 
     <link rel="stylesheet" href="../css/Style_Mod_marca.css">
     <link rel="stylesheet" href="../css/Style_dashboard.css">
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">

@@ -8,7 +8,7 @@ require_once "conexion.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Productos</title>
     <!--css-->
     <link rel="stylesheet" href="../css/Style_dashboard.css">
@@ -130,47 +130,50 @@ require_once "conexion.php";
                 <div class="formulario">
                     <h4>Información básica</h4>
                     <hr>
-                    <form method="post" enctype="multipart/form-data">
+                    <form action="Mod_añadir_productos.php" method="post" enctype="multipart/form-data">
                     <label for="">Nombre del producto:</label>
-                        <input type="text" name="Nombre_pro" id="Nombre_pro" >
+                        <input type="text" name="Pt_Nombre" id="Pt_Nombre" >
+
+                        <label for="">Codigo:</label>
+                        <input type="text" name="Pt_codigo" id="Pt_codigo">
     
                         <label for="">Presentación:</label>
-                        <input type="text" name="Presentacion" id="Presentacion">
+                        <input type="text" name="Pt_Presentacion" id="Pt_Presentacion">
 
                         <h4>Unidades y precio</h4>
                         <hr>
 
                         <label for="">Unidades:</label>
-                        <input type="text" name="Stock" id="Stock" >
+                        <input type="text" name="Pt_Stock" id="Pt_Stock" >
     
                         <label for="">Precio:</label>
-                        <input type="text" name="Precio" id="Precio">
+                        <input type="text" name="Pt_Precio" id="Pt_Precio">
     
                         <h4>Categoría y marca</h4>
                         <hr>
                         
                         <label for="">Categoría:</label>
-                        <input type="text" name="Nom_Categoria" id="Categoria" >
+                        <input type="text" name="FK_ID_Categoria" id="FK_ID_Categoria" >
     
                         <label for="">Marca:</label>
-                        <input type="text" name="Marca" id="Marca" >
+                        <input type="text" name="FK_ID_Marca Índice	" id="FK_ID_Marca Índice" >
 
                         <h4>Otros datos</h4>
                         <hr>
                         
                         <label for="">País del producto:</label>
-                        <input type="text" name="Pais" id="Pais" >
+                        <input type="text" name="Pt_Pais" id="Pt_Pais" >
     
                         <label for="">Grado Alcohol:</label>
-                        <input type="text" name="Grados" id="Grados" >
+                        <input type="text" name="Pt_Grados_alchol" id="Pt_Grados_alchol" >
 
                         <label for="">Color:</label>
-                        <input type="text" name="Color" id="Color" >
+                        <input type="text" name="Pt_Color" id="Pt_Color" >
 
                         <h4>Imagen del producto</h4>
                         <hr>
 
-                        <input type="file" id="Imagen" name="Imagen">
+                        <input type="file" id="Pt_Imagen" name="Pt_Imagen">
 
                         <div class="button">
                             <button type="submit">Guardar</button>
@@ -192,8 +195,9 @@ require_once "conexion.php";
 
                         $Pt_Imagen =addslashes(file_get_contents($_FILES['Imagen']['tmp_name']));
 
-                        $sql= "INSERT INTO tbl_producto ( Pt_Nombre, Pt_Presentacion, Pt_Stock, Pt_Precio, Pt_Pais, FK_ID_Categoria, FK_ID_Marca, Pt_Grados_alchol, Pt_Color, Pt_Imagen) 
-                            VALUES ('$Pt_Nombre', '$Pt_Presentacion','$Pt_Stock', '$Pt_Precio', '$Pt_Pais', 'Cerveza', '1' $Pt_Grados_alchol', '$Pt_Color', '$Pt_Imagen')";
+                        $sql= "INSERT INTO `tbl_producto`(`PK_ID_Producto`, `Pt_codigo`, `Pt_Nombre`, `Pt_Precio`, `Pt_Imagen`, `Pt_Presentacion`, `Pt_Grados_alchol`, `Pt_Pais`, `Pt_Color`, `Pt_Stock`, `FK_ID_Categoria`, `FK_ID_Marca`) 
+                        
+                            VALUES ('', '$Pt_Nombre', '$Pt_Presentacion','$Pt_Stock', '$Pt_Precio', '$Pt_Pais', '1', '1' $Pt_Grados_alchol', '$Pt_Color', '$Pt_Imagen')";
         
                         
                         $result =mysqli_query($conn, $sql); 
@@ -209,8 +213,8 @@ require_once "conexion.php";
         </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

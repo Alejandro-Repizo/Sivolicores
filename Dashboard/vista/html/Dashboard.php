@@ -1,5 +1,5 @@
 <?php 
- 
+ include '../../controlador/ViewData.php';
  require_once('../../modelo/sesion.php');
  date_default_timezone_set('America/Bogota');
 
@@ -233,23 +233,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <?php 
-                                $sql="SELECT PK_ID_Cliente,Cl_Nombre,Cl_email from tbl_cliente ";
-                                $result=mysqli_query($conn,$sql);
-
-                                while($mostar=mysqli_fetch_assoc($result)){
+                            <?php 
+                            cargarClientesDash();
                             ?>
-                            <tr>
-                            <td><?php echo $mostar['Cl_Nombre'] ?></td>
-                            <td><?php echo $mostar['Cl_email'] ?></td>
-                            <td>
-                                    <a href="Eliminar_Cliente.php?PK_ID_Cliente=<?php echo $mostar ['PK_ID_Cliente']?>">
-                                    <i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            <?php  
-                                }
-                            ?> -->
                         </tbody>
                         <!-- <tbody>
                             <tr>
