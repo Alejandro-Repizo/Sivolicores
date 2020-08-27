@@ -1,0 +1,85 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+table{
+    width: 100%;
+    padding: 5px;
+}
+
+.tabla_clientes{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tabla_clientes table thead tr th{
+    padding: 20px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    color: #800000;
+}
+.tabla_clientes table tbody tr td{
+    padding: 20px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    text-align: center;
+    margin-bottom: 20px;
+    
+}
+.tabla_clientes table tbody tr td a{
+    color: #000002;
+    font-size: 20px;
+    margin-left: 10px;
+}
+.tabla_clientes table tbody tr td a:hover{
+    color: #800000;
+}
+
+
+.parte_superior{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.281);
+    padding: 30px 0px;
+}
+.parte_superior a{
+    position: absolute;
+    left:40px;
+    font-size: 32px;
+    color: #000002;
+}
+.parte_superior a:hover{
+    color: #800000;
+}
+.parte_superior h4{
+    position: absolute;
+    left: 80px;
+    font-size: 20px;
+    color: #000002;
+}
+.parte_superior input{
+    position: absolute;
+    right: 40px;
+    padding: 11px;
+    border: none;
+    border-radius: 5px;
+    width: 220px;
+    transition: .4s ease all;
+}
+.parte_superior input:hover,
+.parte_superior input:focus,
+.parte_superior input:active{
+
+    background-color: #800000;
+    color: #fff;
+    outline:none;
+}
+
+.img-banner{
+    height: 60px;
+    width: 100px;
+}

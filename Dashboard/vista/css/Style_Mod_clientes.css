@@ -1,0 +1,36 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+table{
+    width: 100%;
+    padding: 5px;
+}
+
+.tabla_clientes{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tabla_clientes table thead tr th{
+    padding: 20px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    color: #800000;
+}
+.tabla_clientes table tbody tr td{
+    padding: 20px 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    text-align: center;
+    margin-bottom: 20px;
+    
+}
+.tabla_clientes table tbody tr td a{
+    color: #000002;
+    font-size: 20px;
+}
+.tabla_clientes table tbody tr td a:hover{
+    color: #800000;
+}

@@ -1,0 +1,59 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+table{
+    width: 100%;
+    padding: 5px;
+}
+.tabla_reporte_ventas{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+.tabla_reporte_ventas table thead tr th{
+    padding: 20px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    color: #800000;
+}
+
+.tabla_reporte_ventas table tbody tr td{
+    padding: 20px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.parte_superior{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.281);
+    padding: 30px 0px;
+}
+
+.parte_superior a{
+    font-size: 32px;
+    color: #800000;
+}
+.parte_superior input{
+  
+    padding: 11px;
+    border-radius: 5px;
+    width: 180px;
+    transition: .4s ease all;
+    border: 1px solid rgba(0, 0, 0, 0.281);
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgba(0, 0, 0, 0.281);
+}
+.parte_superior input:hover,
+.parte_superior input:focus,
+.parte_superior input:active{
+
+    background-color: #800000;
+    color: #fff;
+    outline: none;
+}

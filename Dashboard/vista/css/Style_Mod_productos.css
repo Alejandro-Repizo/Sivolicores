@@ -1,0 +1,101 @@
+
+
+
+
+
+
+.fas.fa-plus-circle {
+    color: #000002;
+    font-variant-numeric: proportional-nums;
+    padding: 8px;
+    font-size: 27px;
+}
+
+.fas.fa-plus-circle:hover {
+    color: #800000;
+}
+
+.far.fa-folder-open {
+    color: #000002;
+    font-variant-numeric: proportional-nums;
+    padding: 8px;
+    font-size: 20px;
+}
+
+.far.fa-folder-open:hover {
+    color: #800000;
+}
+
+.fas.fa-trash-alt {
+    color: #000002;
+    font-variant-numeric: proportional-nums;
+    padding: 8px;
+    font-size: 20px;
+}
+
+.fas.fa-trash-alt:hover {
+    color: #800000;
+}
+
+.fas.fa-edit {
+    color: #000002;
+    font-variant-numeric: proportional-nums;
+    padding: 8px;
+    font-size: 20px;
+}
+
+.fas.fa-edit:hover {
+    color: #800000;
+}
+
+
+.fas.fa-beer {
+    color: #000002;
+    font-variant-numeric: proportional-nums;
+    padding: 12px;
+    font-size: 30px;
+}
+
+
+
+.table {
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+ 
+}
+
+.table thead tr th{
+    padding: 20px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    color: #800000;
+}
+.table tbody tr td{
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    
+}
+
+.parte_superior{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.281);
+    padding: 30px 0px;
+}
+.parte_superior a{
+    position: absolute;
+    left:40px;
+    font-size: 32px;
+    color: #000002;
+}
+.parte_superior a:hover{
+    color: #800000;
+}
+.parte_superior h4{
+    position: absolute;
+    left: 80px;
+    font-size: 20px;
+    color: #000002;
+}
