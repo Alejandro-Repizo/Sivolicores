@@ -16,12 +16,7 @@ function viewMarca(){
             <td>'.$mostar['PK_ID_Marca'].'</td>
             <td>'.$mostar['Ma_Nombre'].'</td>
                 <td>
-                    <a href="Mod_editar_marca.php?editar='.$mostar ['PK_ID_Marca'].'">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="../../controlador/DataRoute.php?deleteMarca='.$mostar ['PK_ID_Marca'].'">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
+                   
                 </td>     
         </tr>';
     }

@@ -14,6 +14,7 @@ date_default_timezone_set('America/Bogota');
     <link rel="stylesheet" href="../css/Style_dashboard.css">
     <link rel="stylesheet" href="../css/Style_Mod_añadir_productos.css">
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="../js/plugins/sweetAlert2/sweetalert2.min.css">
     <!--scritp-->
 </head>
 
@@ -135,16 +136,21 @@ date_default_timezone_set('America/Bogota');
                         <input type="text" name="Ma_nombre" id="Ma_nombre" >
      
                         <div class="button">
-                            <button type="submit">Guardar</button>
+                            <button id="btn" type="submit">Guardar</button>
                         </div>
                     </form> 
+                    <div class="button">
+                            <button id="btn1" type="submit">Guardar</button>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="../js/jquery.js"></script>
+    <script src="../js/plugins/sweetAlert2/sweetalert2.all.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/prueba.js"></script>
 </body>
 
 </html>

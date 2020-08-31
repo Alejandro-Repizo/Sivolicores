@@ -10,6 +10,7 @@
     <title>Iniciar sesión</title>
     <!--css -->
     <link rel="stylesheet" href="vista/css/Style_login.css">
+    <link rel="stylesheet" href="../js/plugins/sweetAlert2/sweetalert2.min.css">
     <!-- script-->
 </head>
 
@@ -34,5 +35,10 @@
 
             </form>
         </div>
+        
+        <button id="btn1">Básico</button>
     </div>
-</body>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/plugins/sweetAlert2/sweetalert2.all.min.js"></script>
+    <script src="../js/prueba.js"></script>
+</body>     

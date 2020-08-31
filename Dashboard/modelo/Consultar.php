@@ -67,7 +67,11 @@ class Consultar {
             print($res);
             $conexion->cerrar();
             if($res == TRUE){
-                header("Location:../vista/html/Mod_añadir_marca.php");
+                echo("
+                <script>
+                window.location = '../vista/html/Mod_añadir_marca.php'
+                </script>");
+                //header("Location:../vista/html/Mod_añadir_marca.php");
             }
         } catch (Exception $ex) {
             $ex->getMessage();

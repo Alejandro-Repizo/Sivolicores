@@ -11,11 +11,19 @@ include '../../controlador/ViewData.php';
     <!--Favicon-->
     <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Marcas</title>
-    <!--css--> 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"> 
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css"/>
+    <!--datables estilo bootstrap 4 CSS-->  
+    <link rel="stylesheet" href="../assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css">
+    <!-- CSS personalizado --> 
     <link rel="stylesheet" href="../css/Style_Mod_marca.css">
     <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <!--Font Awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
-    <!--script-->
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -125,14 +133,13 @@ include '../../controlador/ViewData.php';
         <!--Subcontenedor central-->
         <div class="sub-central-box">
             <div class="parte_superior">
-                <a href="Mod_añadir_marca.php">
-                    <i class="far fa-plus-square"></i>
-                </a>
+                <div class="col-lg-12">
+                    <button id="btnNuevo" type="button" class="btn btn-dark"><i class="far fa-plus-square"></i></button>
+                </div>
                 <h4>Añadir marca</h4>
-                <input type="search" name="" id="" placeholder="Buscar">
             </div>
-            <div class="tabla_marca">
-                <table>
+            <!-- <div class="tabla_marca" style="border: 1px solid red;"> -->
+                <!-- <table>
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -141,15 +148,71 @@ include '../../controlador/ViewData.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <?php viewMarca()?>  
+                        <?php //viewMarca()?>  
                     </tbody>
-                </table>
+                </table> -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table id="tablaMarcas" class="table table-striped table-bordered table-condensed"
+                                    style="width:100%">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombre marca</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                    <?php viewMarca()?>  
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="../js/jquery.js"></script>
+    <!--Modal para CRUD-->
+    <div class="modal fade" id="modalMarca" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formNuevaMarca" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nombreMarca" class="col-form-label">Nombre marca:</label>
+                            <input type="text" class="form-control" id="nombreMarca">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-dark" id="btnGuardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--Datatables JS-->
+    <script src="../assets/datatables/datatables.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
     <script src="../js/main.js"></script>
+    <script src="../js/tables.js"></script>
+   
 </body>
 
 </html>
