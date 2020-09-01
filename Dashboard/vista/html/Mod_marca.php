@@ -165,7 +165,7 @@ include '../../controlador/ViewData.php';
                                         </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                    <?php viewMarca()?>  
+                                    <?php //viewMarca()?>  
                                     </tbody>
                                 </table>
                             </div>

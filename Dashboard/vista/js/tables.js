@@ -1,22 +1,31 @@
 $(document).ready(function(){
     var idMarca, opcion;
-    //opcion = 1;
+    opcion = 1;
 
     tablaMarcas = $('#tablaMarcas').DataTable({
         // Para agregar los botones de editar y borrar de forma predeterminada
-        //  "ajax":{
-        //     "url": "../../controlador/DataRoute.php",
-        //     "method": 'POST',
-        //     "data":{opcion:opcion},//enviamos opcion 4 para que haga un SELECT
-        //     "dataSrc":""
+      
+         "ajax":{
+            "url": "../../controlador/prueba.php",
+            "method": 'POST',
+            "data":{opcion:opcion},//enviamos opcion 4 para que haga un SELECT
+            "dataSrc":""
 
-        // },
+        },
+
+        "columns":[
+            {"data": "PK_ID_Marca"},
+            {"data": "Ma_Nombre"},
+            {"defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-secondary btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>"}
+        ],
+
+
         //Agregamos las columnas del tbody los botones
-        "columnDefs":[{
-            "targets": -1,
-            "data": null,
-            "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-secondary btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>"
-        }],
+        // "columnDefs":[{
+        //     "targets": -1,
+        //     "data": null,
+        //     "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-secondary btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>"
+        // }],
 
         //Para cambiar el lenguaje a español
         "language": {
@@ -36,6 +45,34 @@ $(document).ready(function(){
     });
 
     var fila; //Captura la fila para editar o borrar el registro
+
+    
+    $('#btnNuevo').click(function(){
+        $('#formNuevaMarca').trigger("reset");
+        $(".modal-header").css("background-color", "#800000");//Para colocar color al header
+        $(".modal-title").text("Nueva Marca").css("color", "#fff");//Para colocar titulo y color
+        $("#modalMarca").modal("show");//Para mostrar el modal
+        id = null;
+        apuntador = 10;
+        opcion = 2;
+    });
+
+
+    $("#formNuevaMarca").submit(function(e){
+        e.preventDefault();
+        nombreMarca = $.trim($("#nombreMarca").val());
+        $.ajax({
+            type: "POST",
+            url: "../../controlador/prueba.php",
+            data: {nombreMarca:nombreMarca, id:id, opcion:opcion},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+            }
+        });
+        $("#modalMarca").modal("hide");
+    });
+
 
     //Código para el botón editar
     $(document).on("click", ".btnEditar", function(){
@@ -88,13 +125,6 @@ $(document).ready(function(){
         }
     });
 
-
-    $('#btnNuevo').click(function(){
-        $('formNuevaMarca').trigger("reset");
-        $(".modal-header").css("background-color", "#800000");//Para colocar color al header
-        $(".modal-title").text("Nueva Marca").css("color", "#fff");//Para colocar titulo y color
-        $("#modalMarca").modal("show");//Para mostrar el modal
-    });
 
 
 });

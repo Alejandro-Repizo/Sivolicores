@@ -6,7 +6,7 @@ require_once  'ConexionDB.php';
 class Consultar {
 
     public function conSesion(Administrador $con){
-        try{
+        try{ //nodo
             $conexion  = new ConexionDB();
             $conexion->abrir();
             $email = $con->getEmail();
@@ -17,16 +17,16 @@ class Consultar {
             print($res);
             $conexion->cerrar();
 
-            if($res == TRUE){
+            if($res == TRUE){ ///nodod
                 session_start();
-                $_SESSION['email'] = $email; 
+                $_SESSION['email'] = $email; //nodo 
                 header("Location:../vista/html/Dashboard.php");
             
-            }else {
+            }else { //nodo 
                 echo("<script>alert('Email o contraseña incorrectos');</script>");
             }
 
-        } catch (Exception $ex) {
+        } catch (Exception $ex) { //nodo
             $ex->getMessage();
         }
     }

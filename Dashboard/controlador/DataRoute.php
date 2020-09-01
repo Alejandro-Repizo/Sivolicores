@@ -2,6 +2,13 @@
 
 require_once 'Controlador.php';
 
+
+if(isset($_POST['apuntador'])){
+    if($_POST['apuntador'] == '10'){
+        echo "<script>alert('wenas');</script>";
+    }
+}
+
 //Acá se capturan todos los datos
 if(isset($_GET['accion'])){
     if($_GET['accion'] == 'login'){
