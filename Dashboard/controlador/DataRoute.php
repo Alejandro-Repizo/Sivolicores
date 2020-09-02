@@ -3,10 +3,34 @@
 require_once 'Controlador.php';
 
 
-if(isset($_POST['apuntador'])){
-    if($_POST['apuntador'] == '10'){
-        echo "<script>alert('wenas');</script>";
+if(isset($_POST['opcion'])){
+    
+    $opcion = $_POST['opcion'];
+    switch ($opcion) {
+        case 'agregar':
+            $Controlador = new Controlador();
+            //$nombreMarca =  (isset($_POST['nombreMarca'])) ? $_POST['nombreMarca'] : '';
+            $Controlador->saveMarca($_POST['nombreMarca']);
+            break;
+
+        case 'editar':
+            $Controlador = new Controlador();
+            $id = (isset($_POST['id'])) ? $_POST['id'] : '';
+            $nombreMarca =  (isset($_POST['nombreMarca'])) ? $_POST['nombreMarca'] : '';
+            $Controlador->updateMarca($_POST['nombreMarca'], $_POST['id']);
+            break;
+
+        case 'borrar':
+            $Controlador = new Controlador();
+            $id = (isset($_POST['id'])) ? $_POST['id'] : '';
+            $Controlador->deleteMarca($_POST['nombreMarca'], $_POST['id']);
+            break;
+            
+        default:
+                # code...
+         break;
     }
+
 }
 
 //Acá se capturan todos los datos

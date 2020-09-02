@@ -28,8 +28,9 @@ class Controlador{
         $consultar->updateMarcas($marca);
     }
 
-    public function deleteMarca($nombre){
+    public function deleteMarca($nombre, $id){
         $marca = new Marca($nombre);
+        $marca->setId($id);
         $consultar =  new consultar();
         $consultar->deleteMarcas($marca);
     }

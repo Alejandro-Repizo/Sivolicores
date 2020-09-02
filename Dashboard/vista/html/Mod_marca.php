@@ -1,6 +1,6 @@
 <?php 
 date_default_timezone_set('America/Bogota');
-include '../../controlador/ViewData.php';
+//include '../../controlador/ViewData.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -138,19 +138,6 @@ include '../../controlador/ViewData.php';
                 </div>
                 <h4>Añadir marca</h4>
             </div>
-            <!-- <div class="tabla_marca" style="border: 1px solid red;"> -->
-                <!-- <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre marca</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php //viewMarca()?>  
-                    </tbody>
-                </table> -->
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -165,7 +152,6 @@ include '../../controlador/ViewData.php';
                                         </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                    <?php //viewMarca()?>  
                                     </tbody>
                                 </table>
                             </div>

@@ -1,6 +1,7 @@
 <?php 
 
 require_once  'ConexionDB.php';
+require_once 'ConexionBD.php';
 
 //Acá se realizan todas las consultas SQL
 class Consultar {
@@ -16,7 +17,6 @@ class Consultar {
             $res=$conexion->obtenerFilasAfectadas();
             print($res);
             $conexion->cerrar();
-
             if($res == TRUE){ ///nodod
                 session_start();
                 $_SESSION['email'] = $email; //nodo 
@@ -58,21 +58,26 @@ class Consultar {
 
     public function saveMarcas(Marca $con){
         try{
-            $conexion  = new ConexionDB();
-            $conexion->abrir();
+            //Actualizar
+            $conexion = new ConexionBD();
             $nombre = $con->getNombre();
-            $sql = "INSERT INTO tbl_marca (Ma_nombre) VALUES ('$nombre')";
-            $conexion->consulta($sql);
-            $res=$conexion->obtenerFilasAfectadas();
-            print($res);
-            $conexion->cerrar();
-            if($res == TRUE){
-                echo("
-                <script>
-                window.location = '../vista/html/Mod_añadir_marca.php'
-                </script>");
-                //header("Location:../vista/html/Mod_añadir_marca.php");
-            }
+            $consulta = "INSERT INTO tbl_marca (Ma_nombre) VALUES ('$nombre')";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta del último registro genererado
+            $consulta = "SELECT PK_ID_Marca,Ma_Nombre from tbl_marca ORDER BY PK_ID_Marca DESC LIMIT 1";		
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Envíar el arreglo final en formato JSON a JS
+            print json_encode($data, JSON_UNESCAPED_UNICODE);
+
+            //Cerrar conexión
+            $conexion = null;
         } catch (Exception $ex) {
             $ex->getMessage();
         }
@@ -80,18 +85,27 @@ class Consultar {
 
     public function updateMarcas(Marca $con){
         try{
-            $conexion  = new ConexionDB();
-            $conexion->abrir();
+            //Actualizar
+            $conexion = new ConexionBD();
             $nombre = $con->getNombre();
             $id = $con->getId();
-            $sql = "UPDATE tbl_marca SET Ma_nombre = '$nombre' WHERE PK_ID_Marca = '$id'";
-            $conexion->consulta($sql);
-            $res=$conexion->obtenerFilasAfectadas();
-            print($res);
-            $conexion->cerrar();
-            if($res == TRUE){
-                header("Location:../vista/html/Mod_marca.php");
-            }
+            $consulta = "UPDATE tbl_marca SET Ma_nombre = '$nombre' WHERE PK_ID_Marca = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta del último registro genererado
+            $consulta = "SELECT PK_ID_Marca,Ma_Nombre from tbl_marca ORDER BY PK_ID_Marca DESC LIMIT 1";		
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Envíar el arreglo final en formato JSON a JS
+            print json_encode($data, JSON_UNESCAPED_UNICODE);
+
+            //Cerrar conexión
+            $conexion = null;
         } catch (Exception $ex) {
             $ex->getMessage();
         }
@@ -99,17 +113,28 @@ class Consultar {
 
     public function deleteMarcas(Marca $con){
         try{
-            $conexion  = new ConexionDB();
-            $conexion->abrir();
-            $id = $con->getNombre();
-            $sql = "DELETE FROM tbl_marca WHERE PK_ID_Marca = '$id'";
-            $conexion->consulta($sql);
-            $res=$conexion->obtenerFilasAfectadas();
-            print($res);
-            $conexion->cerrar();
-            if($res == TRUE){
-                header("Location:../vista/html/Mod_marca.php");
-            }
+            
+            //Borrar
+            $conexion = new ConexionBD();
+            $nombre = $con->getNombre();
+            $id = $con->getId();
+            $consulta = "DELETE FROM tbl_marca WHERE PK_ID_Marca = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta del último registro genererado
+            $consulta = "SELECT PK_ID_Marca,Ma_Nombre from tbl_marca ORDER BY PK_ID_Marca DESC LIMIT 1";		
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Envíar el arreglo final en formato JSON a JS
+            print json_encode($data, JSON_UNESCAPED_UNICODE);
+
+            //Cerrar conexión
+            $conexion = null;
         } catch (Exception $ex) {
             $ex->getMessage();
         }
