@@ -148,7 +148,7 @@ date_default_timezone_set('America/Bogota');
                                         <tr>
                                             <th>Id</th>
                                             <th>Nombre marca</th>
-                                            <th>Acción</th>
+                                            <th>Acci&oacute;n</th>
                                         </tr>
                                     </thead>
                                     <tbody class="text-center">

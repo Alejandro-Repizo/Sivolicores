@@ -1,0 +1,41 @@
+* {
+    padding   : 0;
+    margin    : 0;
+    box-sizing: border-box;
+}
+
+table {
+    width  : 100%;
+    padding: 5px;
+}
+
+.tabla_clientes {
+    display        : flex;
+    width          : 100%;
+    align-items    : center;
+    justify-content: space-around;
+}
+
+.tabla_clientes table thead tr th {
+    padding      : 20px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    color        : #000002;
+    text-align   : center;
+}
+
+.tabla_clientes table tbody tr td {
+    padding      : 3px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.295);
+    text-align   : center;
+    margin-bottom: 20px;
+
+}
+
+.img-producto {
+    height: 70px;
+    width : 50px;
+}
+
+.contenedor {
+    overflow-y: scroll;
+}
