@@ -6,14 +6,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Banners</title>
-    <!--css-->
-    <link rel="stylesheet" href="css/Style_Mod_banner.css">
-    <link rel="stylesheet" href="css/Style_dashboard.css">
-    <link rel="stylesheet" href="font-awesome/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css" />
+    <!--datables estilo bootstrap 4 CSS-->
+    <link rel="stylesheet" href="../assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/Style_Mod_banner.css">
+    <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <!--Font Awesome -->
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
     
-    <!--scritp-->
 </head>
 
 <body>
@@ -55,7 +63,7 @@
     <div class="barra-lat-izq">
         <!--logo-->
         <a href="Dashboard.php">
-            <img src="imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
+            <img src="../imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
         </a>
         <div class="contenedor-menu">
             <ul class="menu">
@@ -119,43 +127,74 @@
             <h3>Banners</h3>
         </div>
         <!--Subcontenedor central-->
-        <div class="sub-central-box">
-            <div class="parte_superior">
-                <input type="search" name="" id="" placeholder="Buscar">
-            </div>
-            <div class="tabla_clientes">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Imagen</th>
-                            <th>Nombre banner</th>
-                            <th>Fecha de actualización</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                           <td>0</td>
-                           <td><img src="imagenes/Banner/Ejemplo banner.jpg" alt="banner" class="img-banner"></td>
-                           <td>Lorem ipsum</td>
-                           <td>26/03/2020</td>
-                           <td>
-                               <a href="Mod_editar_banner.php">
-                                   <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>                        
-                    </tbody>
-                </table>
+        <div class="sub-central-box mt-3" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive mt-4 mb-4">
+                            <table id="tablaBanner" class="table table-striped table-bordered table-condensed"
+                                style="width:100%">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Imagen</th>
+                                        <th>Nombre banner</th>
+                                        <th>Fecha de actualización</th>
+                                        <th>Acci&oacute;n</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <tr>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+    <!--Modal para CRUD-->
+    <div class="modal fade" id="modalMarca" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formNuevaMarca" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nombreMarca" class="col-form-label">Nombre marca:</label>
+                            <input type="text" class="form-control" id="nombreMarca">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-dark" id="btnGuardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
         
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--Datatables JS-->
+    <script src="../assets/datatables/datatables.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
+    <script src="../js/main.js"></script>
+    <script src="../js/bannerTable.js"></script>
 </body>
 
 </html>

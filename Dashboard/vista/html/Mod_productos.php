@@ -1,7 +1,6 @@
 <?php 
 require_once "../../controlador/ViewData.php";
-
-
+date_default_timezone_set('America/Bogota');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,11 +11,20 @@ require_once "../../controlador/ViewData.php";
     <!--Favicon-->
     <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Productos</title>
-    <!--css-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"> 
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css"/>
+    <!--datables estilo bootstrap 4 CSS-->  
+    <link rel="stylesheet" href="../assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css">
+    <!-- CSS personalizado --> 
     <link rel="stylesheet" href="../css/Style_dashboard.css">
     <link rel="stylesheet" href="../css/Style_Mod_productos.css">
+    <!--Font Awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
-    <!--scritp-->
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
+    
 </head>
 
 <body>
@@ -109,7 +117,7 @@ require_once "../../controlador/ViewData.php";
                 <hr>
                 <li><i class="inf-icons far fa-clock"></i>HORA</a>
                 </li>
-                <li class="inf-date">6:42:00 P.M</li>
+                <li class="inf-date"><?php echo date('h:i:s A');?></li>
                 <hr>
             </ul>
         </div>
@@ -124,35 +132,55 @@ require_once "../../controlador/ViewData.php";
             <h3>Productos</h3>
         </div>
         <!--Subcontenedor central-->
-        <div class="sub-central-box">
-            <!--Opciones centrales-->
+        <div class="sub-central-box" >
             <div class="parte_superior">
+                <!--Opciones centrales-->
                 <a href="Mod_añadir_productos.php">
-                    <i class="far fa-plus-square"></i>
+                     <i class="far fa-plus-square"></i>
                 </a>
                 <h4>Añadir Producto</h4>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>imagen</th>
-                        <th>Id producto</th>
-                        <th>Nombre del Producto</th>
-                        <th>Precio</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  mostrarProductos()
-                  ?>
-                </tbody>
-            </table>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive mt-4 mb-4">
+                            <table id="tablaProducto" class="table table-striped table-bordered table-condensed"
+                                style="width:100%">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>imagen</th>
+                                        <th>Id producto</th>
+                                        <th>Nombre del Producto</th>
+                                        <th>Precio</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    
+                                    <?php
+                                        mostrarProductos()
+                                        ?>
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+       
     </div>
-
-    <script src="../js/jquery.js"></script>
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--Datatables JS-->
+    <script src="../assets/datatables/datatables.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
     <script src="../js/main.js"></script>
+    <script src="../js/productoTable.js"></script>
 </body>
 
 </html>

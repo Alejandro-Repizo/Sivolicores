@@ -17,21 +17,31 @@ class Consultar {
             $res=$conexion->obtenerFilasAfectadas();
             print($res);
             $conexion->cerrar();
-            if($res == TRUE){ ///nodod
+            if($res){ ///nodod
                 session_start();
                 $_SESSION['email'] = $email; //nodo 
                 header("Location:../vista/html/Dashboard.php");
             
             }else { //nodo 
-                echo("<script>alert('Email o contraseña incorrectos');</script>");
+                echo("<script>
+                $(document).ready(function () {
+
+                    $('#btnIngreso').click(function () {  
+                        Swal.fire({        
+                            type: 'success',
+                            title: 'Éxito', 
+                            text: 'Marca registrada con éxito'      
+                        });
+                    });
+                });</script>");
             }
 
         } catch (Exception $ex) { //nodo
             $ex->getMessage();
         }
     }
-
     
+    //Módulo Marcas
     public function updateUsers(Administrador $con){
         try{
             $conexion  = new ConexionDB();
@@ -56,8 +66,48 @@ class Consultar {
         }
     }
 
-    public function saveMarcas(Marca $con){
+    public function cargarMarcas(){
         try{
+            //Cargar datos a la tabla marcas
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Marca, Ma_Nombre FROM tbl_marca";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            print json_encode($data, JSON_UNESCAPED_UNICODE);
+            
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+
+    }
+    public function saveMarcas(Marca $con){
+        $prueba = true;
+        // try{
+        //     //Actualizar
+        //     $conexion = new ConexionBD();
+        //     $nombre = $con->getNombre();
+        //     $consulta = "INSERT INTO tbl_marca (Ma_nombre) VALUES ('$nombre')";
+        //     $resultado = $conexion->prepare($consulta);
+        //     $resultado->execute();
+
+        //     //Consulta del último registro genererado
+        //     $consulta = "SELECT PK_ID_Marca,Ma_Nombre from tbl_marca ORDER BY PK_ID_Marca DESC LIMIT 1";		
+        //     $resultado = $conexion->prepare($consulta);
+        //     $resultado->execute();
+    
+
+        //     //Coloca todo en una arreglo
+        //     $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        //     //Cerrar conexión
+        //     $conexion = null;
+        // } catch (Exception $ex) {
+        //     $ex->getMessage();
+        //     $data = ['error'=> true];
+        // }
+        // print json_encode($data, JSON_UNESCAPED_UNICODE);
+        if($prueba){
             //Actualizar
             $conexion = new ConexionBD();
             $nombre = $con->getNombre();
@@ -69,18 +119,19 @@ class Consultar {
             $consulta = "SELECT PK_ID_Marca,Ma_Nombre from tbl_marca ORDER BY PK_ID_Marca DESC LIMIT 1";		
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
+    
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Envíar el arreglo final en formato JSON a JS
-            print json_encode($data, JSON_UNESCAPED_UNICODE);
-
             //Cerrar conexión
             $conexion = null;
-        } catch (Exception $ex) {
-            $ex->getMessage();
-        }
+        }else{
+            $data = ['error'=> true];
+        }   
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+
+       
     }
 
     public function updateMarcas(Marca $con){
@@ -140,42 +191,95 @@ class Consultar {
         }
     }
 
+    //Módulo Cliente
+    public function cargarCliente(){
+        try{
+            //Cargar datos a la tabla cliente
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Cliente,Cl_Nombre,Cl_email,Cl_Pedidos_realizado,Cl_Fecha_registro FROM tbl_cliente ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Envíar el arreglo final en formato JSON a JS
+            print json_encode($data, JSON_UNESCAPED_UNICODE);
+            
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+    }
     public function deleteCliente(Cliente $con){
         try{
-            $conexion  = new ConexionDB();
-            $conexion->abrir();
-            $id = $con->getNombre();
-            $sql = "DELETE FROM tbl_cliente WHERE PK_ID_Cliente = '$id'";
-            $conexion->consulta($sql);
-            $res=$conexion->obtenerFilasAfectadas();
-            print($res);
-            $conexion->cerrar();
-            if($res == TRUE){
-                header("Location:../vista/html/Mod_clientes.php");
-            }
+              
+            //Borrar
+            $conexion = new ConexionBD();
+            $nombre = $con->getNombre();
+            $id = $con->getId();
+            $consulta = "DELETE FROM tbl_cliente WHERE PK_ID_Cliente = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta del último registro genererado
+            $consulta = "SELECT PK_ID_Cliente,Cl_Nombre,Cl_email,Cl_Pedidos_realizado,Cl_Fecha_registro FROM tbl_cliente ORDER BY PK_ID_Cliente DESC LIMIT 1";		
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Envíar el arreglo final en formato JSON a JS
+            print json_encode($data, JSON_UNESCAPED_UNICODE);
+
+            //Cerrar conexión
+            $conexion = null;
         } catch (Exception $ex) {
             $ex->getMessage();
         }
     }
 
-    public function upInventario(Productos $con){
+    //Módulo Inventario
+    public function cargarInventario(){
         try{
-            $conexion  = new ConexionDB();
-            $conexion->abrir();
-            $precio = $con->getPrecio();
-            $stock = $con->getStock();
-            $id = $con->getId();
-            $sql = "UPDATE tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto SET Pt_Precio = '$precio', Pt_Stock = '$stock' where PK_ID_Producto = '$id'";
-            $conexion->consulta($sql);
-            $res=$conexion->obtenerFilasAfectadas();
-            print($res);
-            $conexion->cerrar();
-            if($res == TRUE){
-                header("Location:../vista/html/Mod_inventario.php");
-            }
-        } catch (Exception $ex) {
+            //Cargar datos a la tabla Inventario
+            $conexion = new ConexionBD();
+            $consulta = "SELECT Pt_Imagen,PK_ID_Producto,Pt_Nombre,Pt_Precio,Pt_Stock from tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            print json_encode($data, JSON_UNESCAPED_UNICODE);
+            
+        }catch (Exception $ex) {
             $ex->getMessage();
         }
+    }
+    public function upInventario(Producto $con){
+        try{
+            //Actualizar
+            $conexion = new ConexionBD();
+            $precio = $con->getPt_Precio();
+            $stock = $con->getPt_Stock();
+            $id = $con->getPK_ID_Producto();
+            $consulta = "UPDATE tbl_inventarioo inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto SET Pt_Precio = '$precio', Pt_Stock = '$stock' where PK_ID_Producto = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta del último registro genererado
+            $consulta = "SELECT Pt_Imagen,Pt_Nombre,PK_ID_Producto,Pt_Precio,Pt_Stock from tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto ORDER BY PK_ID_Producto DESC LIMIT 1";		
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+            $data = ['error'=> true];
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    
     }
     public function upProducto(Producto $con){
         try{

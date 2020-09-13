@@ -15,6 +15,21 @@ class Controlador{
         $consultar->conSesion($admin);
     }
 
+    public function updateUser($id, $apellido, $nombre ,$email, $password){
+        $admin = new Administrador($email, $password);
+        $admin->setNombre($nombre);
+        $admin->setApellido($apellido);
+        $admin->setId($id);
+        $consultar =  new consultar();
+        $consultar->updateUsers($admin);
+    }
+
+    //Módulo Marcas
+    public function cargarMarca(){
+        $consultar = new consultar();
+        $consultar->cargarMarcas();
+    }
+
     public function saveMarca($nombre){
         $marca = new Marca($nombre);
         $consultar = new consultar();
@@ -35,29 +50,35 @@ class Controlador{
         $consultar->deleteMarcas($marca);
     }
 
-    public function updateUser($id, $apellido, $nombre ,$email, $password){
-        $admin = new Administrador($email, $password);
-        $admin->setNombre($nombre);
-        $admin->setApellido($apellido);
-        $admin->setId($id);
-        $consultar =  new consultar();
-        $consultar->updateUsers($admin);
+    public function cargarInventario(){
+        $consultar = new consultar();
+        $consultar->cargarInventario();
     }
-    
-    public function deleteCliente($nombre){
+
+    //Módulo Inventario
+    public function updateInventario($id, $precio, $stock, $nombre){
+        $Producto = new Producto($nombre);
+        $Producto->setPK_ID_Producto($id); 
+        $Producto->setPt_Precio($precio);
+        $Producto->setPt_Stock($stock);   
+        $consultar =  new consultar();
+        $consultar->upInventario($Producto);
+    }
+
+    //Módulo Cliente
+    public function deleteCliente($id, $nombre){
         $cliente = new Cliente($nombre);
+        $cliente->setId($id);
         $consultar =  new consultar();
         $consultar->deleteCliente($cliente);
     }
 
-    public function updateInventario($id, $precio, $stock){
-        $marca = new Productos();
-        $marca->setId($id); 
-        $marca->setPrecio($precio);
-        $marca->setStock($stock);   
-        $consultar =  new consultar();
-        $consultar->upInventario($marca);
+    public function cargarCliente(){
+        $consultar = new consultar();
+        $consultar->cargarCliente();
     }
+
+
 
     public function updateProducto($Pt_Nombre, $PK_ID_Producto, $Pt_codigo,$Pt_Precio, $Pt_Presentacion, $Pt_Pais, 
     $Pt_Color,$Pt_Stock, $Pt_Grados_alchol){

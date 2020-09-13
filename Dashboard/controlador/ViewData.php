@@ -92,22 +92,19 @@ function viewEditUser(){
 function cargarInventario(){
     $conexion  = new ConexionDB();
     $conexion->abrir();
-    $sql="SELECT Pt_Imagen,Pt_Nombre,Pt_Precio,Pt_Stock from tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto";
+    $sql="SELECT Pt_Imagen,Pt_Nombre,PK_ID_Inventario,Pt_Precio,Pt_Stock from tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto";
     $conexion->consulta($sql);
     $result=$conexion->obtenerResult();
     while($mostar=$result->fetch_assoc()){
         echo "
             <tr>
                 <td>".$mostar['Pt_Imagen']."</td>
+                <td>".$mostar['PK_ID_Inventario']."</td>
                 <td>".$mostar['Pt_Nombre']."</td>
                 <td>".$mostar['Pt_Precio']."</td>
                 <td>".$mostar['Pt_Stock']."</td>
-                <td>
-                    <a href='Mod_editar_inventario.php?editarInventario=".$mostar['Pt_Nombre']."'>
-                        <i class='fas fa-edit'></i>
-                    </a>
-                </td>
-        </tr>";                           
+                <td></td>
+            </tr>";                           
     }        
 }
 

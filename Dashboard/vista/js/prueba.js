@@ -1,15 +1,17 @@
 $(document).ready(function () {
-    
+
     //Captura la fila para editar o borrar el registro 
     //captura la acción para enviar al switch en data route
-    var fila, opcion, nombreMarca;
-    opcion = 'cargarMarca';
+    var fila, opcion;
+
+    opcion = 'cargar';
+
     tablaMarcas = $('#tablaMarcas').DataTable({
         // Para agregar los botones de editar y borrar de forma predeterminada
         "ajax": {
             "url": "../../controlador/DataRoute.php",
             "method": 'POST',
-            "data": { opcion: opcion},//enviamos cargar para que haga un SELECT
+            "data": { opcion: opcion },//enviamos cargar para que haga un SELECT
             "dataSrc": ""
 
         },
@@ -35,7 +37,16 @@ $(document).ready(function () {
             "sProcessing": "Procesando...",
         }
     });
- 
+
+    //SweetAlert para botón de guardar
+    $('#btnGuardar').click(function () {
+        Swal.fire({
+            type: 'success',
+            title: 'Éxito',
+            text: 'Marca registrada con éxito'
+        });
+    });
+
     //Botón nueva marca
     $('#btnNuevo').click(function () {
         $('#formNuevaMarca').trigger("reset");
@@ -43,57 +54,31 @@ $(document).ready(function () {
         $(".modal-title").text("Nueva Marca").css("color", "#fff");//Para colocar titulo y color
         $("#modalMarca").modal("show");//Para mostrar el modal
         id = null;
-        opcion = "agregarMarca"; //Agregar
+        opcion = "agregar"; //Agregar
     });
 
     //Formulario que está dentro del modal
     $("#formNuevaMarca").submit(function (e) {
         e.preventDefault();
-        var peticionXML = new XMLHttpRequest;
-        peticionXML.open('POST', '../../controlador/DataRoute.php');
-
         nombreMarca = $.trim($("#nombreMarca").val());
-        console.log(nombreMarca);
-        if(formulario_valido()){
-            var parametros = 'id='+ id +'&nombreMarca='+ nombreMarca +'&opcion=' + opcion;
-            console.log('OK!');
-            peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            peticionXML.onload = function(){ 
-                var datos = JSON.parse(peticionXML.responseText);
-                console.log(datos);
-                if(datos.error){
-                    Swal.fire({
-                        type: 'warning',
-                        title: 'Error',
-                        text: 'Se ha producido un error.'
-                    });
-                }else{
-                    tablaMarcas.ajax.reload(null, false);
-                }
+        //Acá con Ajax le decimos con que archivo vamos a interactuar
+        $.ajax({
+            type: "POST",
+            url: "../../controlador/DataRoute.php",
+            data: { id: id, nombreMarca: nombreMarca, opcion: opcion },
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                tablaMarcas.ajax.reload(null, false);
             }
-            peticionXML.onreadystatechange = function(){
-                if(peticionXML.readyState == 4 && peticionXML.status == 200){
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Éxito',
-                        text: 'Marca registrada con éxito'
-                    });
-                }
-            }
-            peticionXML.send(parametros);
-        }else {
-            Swal.fire({
-                type: 'warning',
-                title: 'Error',
-                text: 'Se ha producido un error.'
-            });
-        }
+        });
         $("#modalMarca").modal("hide");
     });
 
+
     //Código para el botón editar
     $(document).on("click", ".btnEditar", function () {
-        opcion = "editarMarca"; //editar
+        opcion = "editar"; //editar
         fila = $(this).closest("tr");
         id = parseInt(fila.find('td:eq(0)').text()); //Con esto se captura los datos de la tabla.
         nombreMarca = fila.find('td:eq(1)').text();
@@ -102,14 +87,21 @@ $(document).ready(function () {
         $(".modal-title").text("Editar marca").css("color", "#fff");;
         $("#modalMarca").modal("show");
 
+        $('#btnGuardar').click(function () {
+            Swal.fire({
+                type: 'success',
+                title: 'Éxito',
+                text: 'Marca actualizada con éxito'
+            });
+        });
     });
 
-     //Código para el botón borrar
+    //Código para el botón borrar
     $(document).on("click", ".btnBorrar", function () {
         fila = $(this);
         id = parseInt($(this).closest("tr").find('td:eq(0)').text());
         nombreMarca = $(this).closest("tr").find('td:eq(1)').text();
-        opcion = 'borrarMarca' //borrar
+        opcion = 'borrar' //borrar
         // var respuesta = confirm('¿Estás seguro de eliminar el registro: ' + id + ' ?');
         Swal.fire({
             title: '¿Estás seguro de eliminar el registro?',
@@ -138,15 +130,4 @@ $(document).ready(function () {
             }
         });
     });
-
-    //función para válidar datos vácios
-    function formulario_valido() { 
-        if(nombreMarca == ''){
-            return false;
-        }
-        return true;
-     }
-  
-
-    
 });

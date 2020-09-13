@@ -1,45 +1,5 @@
 <?php 
-class Productos{
-    private $id;
-    private $nombre;
-    private $precio;
-    private $stock;
 
-    public function __construct(){
-    }
-
-     public function getId(){
-        return $this->id;
-    }
-
-    public function getNombre(){
-        return $this->nombre;
-    }
-
-    public function getPrecio(){
-        return $this->precio;
-    }
-    
-    public function getStock(){
-        return $this->stock;
-    }
-
-    public function setId($id){
-        return $this->id = $id;
-    }
-
-    public function setNombre($nombre){
-        return $this->nombre = $nombre;
-    }
-
-    public function setPrecio($precio){
-        return $this->precio = $precio;
-    }
-
-    public function setStock($stock){
-        return $this->stock = $stock;
-    }
-}
 class Producto{
     private $PK_ID_Producto ;
     private $Pt_Nombre;
@@ -57,6 +17,8 @@ class Producto{
     public function __construct($Pt_Nombre){
         $this->Pt_Nombre = $Pt_Nombre;
     }
+
+
     public function getPK_ID_Producto(){
         return $this->PK_ID_Producto;
     }

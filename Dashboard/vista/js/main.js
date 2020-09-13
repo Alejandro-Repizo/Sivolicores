@@ -1,17 +1,16 @@
-const btnAdministrador = document.getElementById('btn-administrador'),
- opcion = document.getElementById('opcion');
-
-btnAdministrador.addEventListener('mouseover', () =>{
-    opcion.classList.add('activo');
-});
-
-
-opcion.addEventListener('mouseleave', () =>{
-    opcion.classList.remove('activo');
-});
-
-
 $(document).ready(function() {
+    //Botón Adminstrador
+    const btnAdministrador = document.getElementById('btn-administrador'),
+    opcion = document.getElementById('opcion');
+   
+    btnAdministrador.addEventListener('mouseover', () =>{
+        opcion.classList.add('activo');
+    }); 
+    opcion.addEventListener('mouseleave', () =>{
+        opcion.classList.remove('activo');
+    });
+
+    //Menú lateral desplegable
     $('.menu li:has(ul)').click(function(e) {
         e.preventDefault();
 
@@ -30,13 +29,9 @@ $(document).ready(function() {
         window.location.href = $(this).attr("href");
     });
 
+  
+
+
+
 });
-$("#btn").click(function(){
-    //alert("Hola");
-    Swal.fire({
-        icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-    });
-});
+

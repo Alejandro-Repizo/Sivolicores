@@ -6,13 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Reportes ventas</title>
-    <!--css-->
-    <link rel="stylesheet" href="css/Style_Mod_reporte_ventas.css">
-    <link rel="stylesheet" href="css/Style_dashboard.css">
-    <link rel="stylesheet" href="font-awesome/css/all.min.css">
-    <!--scritp-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css" />
+    <!--datables estilo bootstrap 4 CSS-->
+    <link rel="stylesheet" href="../assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/Style_Mod_reporte_ventas.css">
+    <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <!--Font Awesome -->
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -54,7 +62,7 @@
     <div class="barra-lat-izq">
         <!--logo-->
         <a href="Dashboard.php">
-            <img src="imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
+            <img src="../imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
         </a>
         <div class="contenedor-menu">
             <ul class="menu">
@@ -120,53 +128,49 @@
             <h3>Reportes ventas</h3>
         </div>
         <!--Subcontenedor central-->
-        <div class="sub-central-box">
-            <!--Parte superior de la tabla de pedidos-->
-            <div class="parte_superior">
-                <th><input type="date" name="" id=""></th>
-                <th>
-                    <a href="reporte_ventas.php"><i class="far fa-calendar-alt"></i></a>
-                </th>
-                <th><input type="date" name="" id=""></th>
-                <th>
-                    <a href="reporte_ventas.php"><i class="far fa-calendar-alt"></i></a>
-                </th>
-                <th><input type="number" name="" id="" placeholder="Dias"></th>
-                <th><input type="search" name="" id="" placeholder="Buscar"></th>
-                <th>
-
-                </th>
+        <div class="sub-central-box mt-3" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive mt-4 mb-4">
+                            <table id="tablaReporte" class="table table-striped table-bordered table-condensed"
+                                style="width:100%">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Nombre cliente</th>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <tr>
+                                        <td>10/02/2020</td>
+                                        <td>Lorem ipsum</td>
+                                        <td>Lorem ipsum</td>
+                                        <td>0</td>
+                                        <td>$0.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--Condenido de la tabla de pedidos-->
-            <div class="tabla_reporte_ventas">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Nombre cliente</th>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>10/02/2020</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum</td>
-                            <td>0</td>
-                            <td>$0.00</td>
-                         </tr>
-                        
-                    </tbody>
-                </table>
-             
-            </div>
-        </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--Datatables JS-->
+    <script src="../assets/datatables/datatables.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
+    <script src="../js/main.js"></script>
+    <script src="../js/repoteVentasTable.js"></script>
 </body>
 
 </html>

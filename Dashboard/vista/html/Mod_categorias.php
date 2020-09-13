@@ -1,5 +1,5 @@
 <?php 
-require_once "conexion.php";
+date_default_timezone_set('America/Bogota');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -8,13 +8,21 @@ require_once "conexion.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Categorías</title>
-    <!--css-->
-    <link rel="stylesheet" href="css/Style_Mod_categorias.css">
-    <link rel="stylesheet" href="css/Style_dashboard.css">
-    <link rel="stylesheet" href="font-awesome/css/all.min.css">
-    <!--scritp-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css" />
+    <!--datables estilo bootstrap 4 CSS-->
+    <link rel="stylesheet" href="../assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/Style_Mod_categorias.css">
+    <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <!--Font Awesome -->
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -56,7 +64,7 @@ require_once "conexion.php";
     <div class="barra-lat-izq">
         <!--logo-->
         <a href="Dashboard.php">
-            <img src="imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
+            <img src="../imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
         </a>
         <div class="contenedor-menu">
             <ul class="menu">
@@ -107,7 +115,7 @@ require_once "conexion.php";
                 <hr>
                 <li><i class="inf-icons far fa-clock"></i>HORA</a>
                 </li>
-                <li class="inf-date">6:42:00 P.M</li>
+                <li class="inf-date"><?php echo date('h:i:s A');?></li>
                 <hr>
             </ul>
         </div>
@@ -118,61 +126,59 @@ require_once "conexion.php";
     <div class="central-box">
         <!--Nombre página-->
         <div class="name-page">
-            <a href="Mod_categorias.php"><i class="name-page-icon fas fa-box-open"></i></a>
+            <a href="../html/Mod_categorias.php"><i class="name-page-icon fas fa-box-open"></i></a>
             <h3>Categorías</h3>
         </div>
         <!--Subcontenedor central-->
-        <div class="sub-central-box">
+        <div class="sub-central-box mt-3" >
             <div class="parte_superior">
-                <a href="Mod_añadir_categorias.php">
+                <a href="Mod_añadir_categorias.php" >
                     <i class="far fa-plus-square"></i>
                 </a>
                 <h4>Añadir categoría</h4>
-                <input type="search" name="" id="" placeholder="Buscar">
             </div>
-            <div class="tabla_clientes">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre categoría</th>
-                            <th>Cuenta de productos</th>
-                            <th>Subcategorías</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                            $sql="SELECT Cat_Nombre, Pt_Stock,	SCat_Nombre  from tbl_categoria, tbl_producto, tbl_subcategoria ";
-                            $result=mysqli_query($conn,$sql);
-                            while($mostar=mysqli_fetch_assoc($result)){
-                        ?>
-                        <tr>
-                           <td><?php echo $mostar['Cat_Nombre'] ?></td>
-                           <td><?php echo $mostar['Pt_Stock'] ?></td>
-                           <td><?php echo $mostar['SCat_Nombre'] ?></td>
-                           
-                           
-                           <td>
-                                <a href="Mod_editar_categoria.php?PK_ID_Categoria=<?php echo $mostar ['PK_ID_Categoria']?>">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="Eliminar_categoria.php?PK_ID_Categoria=<?php echo $mostar ['PK_ID_Categoria']?>">
-                                <i class="fas fa-trash-alt"></i>
-                                </a>
-                           </td>     
-                        </tr>
-                        <?php  
-                            }
-                         ?>                          
-                    </tbody>
-                </table>
-             
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive mt-4 mb-4">
+                            <table id="tablaCategoria" class="table table-striped table-bordered table-condensed"
+                                style="width:100%">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Nombre categoría</th>
+                                        <th>Cuenta de productos</th>
+                                        <th>Subcategorías</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <tr>
+                                        <td>PRUEBA</td>
+                                        <td>PRUEBA</td>
+                                        <td>PRUEBA</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+       
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--Datatables JS-->
+    <script src="../assets/datatables/datatables.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
+    <script src="../js/main.js"></script>
+    <script src="../js/categoriaTable.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 <?php 
 date_default_timezone_set('America/Bogota');
-include '../../controlador/ViewData.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,11 +10,19 @@ include '../../controlador/ViewData.php';
     <!--Favicon-->
     <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Clientes</title>
-    <!--css-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css" />
+    <!--datables estilo bootstrap 4 CSS-->
+    <link rel="stylesheet" href="../assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css">
+    <!-- CSS personalizado -->
     <link rel="stylesheet" href="../css/Style_Mod_clientes.css">
     <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <!--Font Awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
-    <!--scritp-->
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -63,25 +70,31 @@ include '../../controlador/ViewData.php';
             <ul class="menu">
 
                 <li><a href="Dashboard.php"><i class="cont-icons fas fa-home"></i>Dashboard</a></li>
-                <li><a href="#"><i class="cont-icons fas fa-boxes"></i>Cátalogo<i class="fa fa-chevron-down cont-icons-right"></i></a>
+                <li><a href="#"><i class="cont-icons fas fa-boxes"></i>Cátalogo<i
+                            class="fa fa-chevron-down cont-icons-right"></i></a>
                     <ul>
                         <li><a href="Mod_categorias.php"><i class="cont-icons fas fa-box-open"></i>Categorías</a></li>
                         <li><a href="Mod_productos.php"><i class="cont-icons fas fa-wine-bottle"></i>Productos</a></li>
-                        <li><a href="Mod_inventario.php"><i class="cont-icons fas fa-clipboard-list"></i>Inventario</a></li>
+                        <li><a href="Mod_inventario.php"><i class="cont-icons fas fa-clipboard-list"></i>Inventario</a>
+                        </li>
                         <li><a href="Mod_marca.php"><i class="cont-icons fab fa-modx"></i>Marca</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="cont-icons fas fa-store"></i>Ventas<i class="fa fa-chevron-down cont-icons-right"></i></a>
+                <li><a href="#"><i class="cont-icons fas fa-store"></i>Ventas<i
+                            class="fa fa-chevron-down cont-icons-right"></i></a>
                     <ul>
                         <li><a href="Mod_pedidos.php"><i class="cont-icons fas fa-truck"></i>Pedidos</a></li>
                         <li><a href="Mod_clientes.php"><i class="cont-icons fas fa-users"></i>Clientes</a></li>
                         <li><a href="Mod_envios.php"><i class="cont-icons fas fa-truck-loading"></i>Envíos</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="cont-icons fas fa-chart-area"></i>Reportes<i class="fa fa-chevron-down cont-icons-right"></i></a>
+                <li><a href="#"><i class="cont-icons fas fa-chart-area"></i>Reportes<i
+                            class="fa fa-chevron-down cont-icons-right"></i></a>
                     <ul>
-                        <li><a href="Mod_reporte_ventas.php"><i class="cont-icons fas fa-file-invoice-dollar"></i>Reportes ventas</a></li>
-                        <li><a href="Mod_reporte_pedidos.php"><i class="cont-icons fas fa-truck"></i>Reportes pedidos</a></li>
+                        <li><a href="Mod_reporte_ventas.php"><i
+                                    class="cont-icons fas fa-file-invoice-dollar"></i>Reportes ventas</a></li>
+                        <li><a href="Mod_reporte_pedidos.php"><i class="cont-icons fas fa-truck"></i>Reportes
+                                pedidos</a></li>
                     </ul>
                 </li>
                 <li><a href="Mod_banner.php"><i class="cont-icons fas fa-images"></i>Banners</a></li>
@@ -122,32 +135,44 @@ include '../../controlador/ViewData.php';
             <a href="../html/Mod_clientes.php"><i class="name-page-icon fas fa-users"></i></a>
             <h3>Clientes</h3>
         </div>
-        <!--Subcontenedor central--> 
-        <div class="sub-central-box">
-            <div class="parte_superior">        
-            </div>
-            <div class="tabla_clientes"> 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Cliente nombre</th>
-                            <th>Corre electrónico</th>
-                            <th>Total pedidos</th>
-                            <th>Fecha registro</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody> 
-                        <?php cargarClientes(); ?>
-                    </tbody>
-                </table>
+        <!--Subcontenedor central-->
+        <div class="sub-central-box mt-3" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive mt-4 mb-4">
+                            <table id="tablaCliente" class="table table-striped table-bordered table-condensed"
+                                style="width:100%">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Cliente nombre</th>
+                                        <th>Corre electrónico</th>
+                                        <th>Total pedidos</th>
+                                        <th>Fecha registro</th>
+                                        <th>Acci&oacute;n</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <script src="../js/jquery.js"></script>
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--Datatables JS-->
+    <script src="../assets/datatables/datatables.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
     <script src="../js/main.js"></script>
+    <script src="../js/clienteTable.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 <?php 
 date_default_timezone_set('America/Bogota');
-//include '../../controlador/ViewData.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -136,7 +135,7 @@ date_default_timezone_set('America/Bogota');
                 <div class="col-lg-12">
                     <button id="btnNuevo" type="button" class="btn btn-dark"><i class="far fa-plus-square"></i></button>
                 </div>
-                <h4>Añadir marca</h4>
+                <h4>Añadir marcas</h4>
             </div>
                 <div class="container">
                     <div class="row">

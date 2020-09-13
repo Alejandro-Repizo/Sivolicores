@@ -1,5 +1,4 @@
 <?php 
-require_once "conexion.php";
 date_default_timezone_set('America/Bogota');
 ?>
 <!DOCTYPE html>
@@ -9,13 +8,21 @@ date_default_timezone_set('America/Bogota');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Pedidos</title>
-    <!--css-->
-    <link rel="stylesheet" href="css/Style_Mod_pedidos.css">
-    <link rel="stylesheet" href="css/Style_dashboard.css">
-    <link rel="stylesheet" href="font-awesome/css/all.min.css">
-    <!--scritp-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css" />
+    <!--datables estilo bootstrap 4 CSS-->
+    <link rel="stylesheet" href="../assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/Style_Mod_pedidos.css">
+    <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <!--Font Awesome -->
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -57,7 +64,7 @@ date_default_timezone_set('America/Bogota');
     <div class="barra-lat-izq">
         <!--logo-->
         <a href="Dashboard.php">
-            <img src="imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
+            <img src="../imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
         </a>
         <div class="contenedor-menu">
             <ul class="menu">
@@ -119,55 +126,62 @@ date_default_timezone_set('America/Bogota');
     <div class="central-box">
         <!--Nombre página-->
         <div class="name-page">
-            <a href="Mod_pedidos.php"><i class="name-page-icon fas fa-truck"></i></a>
+            <a href="../html/Mod_pedido.php"><i class="name-page-icon fas fa-truck"></i></a>
             <h3>Pedidos</h3>
         </div>
         <!--Subcontenedor central-->
-        <div class="sub-central-box">
-            <div class="parte_superior">
-                
-            </div>
-            <div class="tabla_clientes">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre cliente</th>
-                            <th>Fecha</th>
-                            <th>Producto</th>
-                            <th>Cant.</th>
-                            <th>Dirección</th>
-                            <th>Teléfono</th>
-                            <th>Total</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                            <td>0</td>
-                            <td>Lorem Ipsum</td>
-                            <td>23/03/2020</td>
-                            <td>Lorem Ipsum</td>
-                            <td>0</td>
-                            <td class="direccion">Cra 0 n° 0-0</td>
-                            <td>3222312397</td>
-                            <td>$0.000</td>
-                            <td>
-                                <select name="" id="">
-                                    <option value="" class="pendiente">Pendiente</option>
-                                    <option value="" class="por-completar">Por completar</option>
-                                    <option value="" class="cancelado">Cancelado</option>
-                                </select>
-                            </td>
-                    </tbody>
-                </table>
-             
+        <div class="sub-central-box mt-3" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive mt-4 mb-4">
+                            <table id="tablaPedido" class="table table-striped table-bordered table-condensed"
+                                style="width:100%">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre cliente</th>
+                                        <th>Fecha</th>
+                                        <th>Producto</th>
+                                        <th>Cant.</th>
+                                        <th>Dirección</th>
+                                        <th>Teléfono</th>
+                                        <th>Total</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <tr>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td>prueba</td>
+                                       <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--Datatables JS-->
+    <script src="../assets/datatables/datatables.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
+    <script src="../js/main.js"></script>
+    <script src="../js/pedidoTable.js"></script>
 </body>
 
 </html>

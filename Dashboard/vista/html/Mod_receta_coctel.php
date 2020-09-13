@@ -1,5 +1,5 @@
 <?php 
-require_once "conexion.php";
+date_default_timezone_set('America/Bogota');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -9,12 +9,20 @@ require_once "conexion.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
     <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
-    <title>Recetas cócteles</title>
-    <!--css-->
-    <link rel="stylesheet" href="css/Style_Mod_receta_coctel.css">
-    <link rel="stylesheet" href="css/Style_dashboard.css">
-    <link rel="stylesheet" href="font-awesome/css/all.min.css">
-    <!--scritp-->
+    <title>Recetas c&oacute;cteles</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css" />
+    <!--datables estilo bootstrap 4 CSS-->
+    <link rel="stylesheet" href="../assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/Style_Mod_receta_coctel.css">
+    <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <!--Font Awesome -->
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -56,7 +64,7 @@ require_once "conexion.php";
     <div class="barra-lat-izq">
         <!--logo-->
         <a href="Dashboard.php">
-            <img src="imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
+            <img src="../imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
         </a>
         <div class="contenedor-menu">
             <ul class="menu">
@@ -107,7 +115,7 @@ require_once "conexion.php";
                 <hr>
                 <li><i class="inf-icons far fa-clock"></i>HORA</a>
                 </li>
-                <li class="inf-date">6:42:00 P.M</li>
+                <li class="inf-date"><?php echo date('h:i:s A');?></li>
                 <hr>
             </ul>
         </div>
@@ -130,49 +138,73 @@ require_once "conexion.php";
                 <h4>Añadir receta cóctel</h4>
                 <input type="search" name="" id="" placeholder="Buscar">
             </div>
-            <div class="tabla_clientes">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            
-                            <th>Nombre cóctel</th>
-                            <th>Fecha de publicación</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                            $sql="SELECT PK_ID_Receta, RC_Nombre, RC_Fecha  from tbl_receta_coctel ";
-                            $result=mysqli_query($conn,$sql);
-                            while($mostar=mysqli_fetch_assoc($result)){
-                        ?>
-                        <tr>
-                           <td><?php echo $mostar['PK_ID_Receta'] ?></td>
-                           
-                           <td><?php echo $mostar['RC_Nombre'] ?></td>
-                           <td><?php echo $mostar['RC_Fecha'] ?></td>
-                           <td>
-                                <a href="Mod_editar_marca.php?PK_ID_Receta=<?php echo $mostar ['PK_ID_Receta']?>">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="Eliminar_coctel.php?PK_ID_Receta=<?php echo $mostar ['PK_ID_Receta']?>">
-                                <i class="fas fa-trash-alt"></i>
-                                </a>
-                           </td>     
-                        </tr>
-                        <?php  
-                            }
-                         ?>                 
-                    </tbody>
-                </table>
-             
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive mt-4 mb-4">
+                                <table id="tablaCoctel" class="table table-striped table-bordered table-condensed"
+                                    style="width:100%">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombre cóctel</th>
+                                            <th>Fecha de publicación</th>
+                                            <th>Acci&oacute;n</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td>prueba</td>
+                                            <td>prueba</td>
+                                            <td>prueba</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <!--Modal para CRUD-->
+    <div class="modal fade" id="modalMarca" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formNuevaMarca" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nombreMarca" class="col-form-label">Nombre marca:</label>
+                            <input type="text" class="form-control" id="nombreMarca">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-dark" id="btnGuardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--Datatables JS-->
+    <script src="../assets/datatables/datatables.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
+    <script src="../js/main.js"></script>
+    <script src="../js/coctelTable.js"></script>
 </body>
 
 </html>
