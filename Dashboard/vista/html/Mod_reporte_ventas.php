@@ -145,13 +145,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
-                                    <tr>
-                                        <td>10/02/2020</td>
-                                        <td>Lorem ipsum</td>
-                                        <td>Lorem ipsum</td>
-                                        <td>0</td>
-                                        <td>$0.00</td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>

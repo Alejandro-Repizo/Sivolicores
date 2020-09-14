@@ -6,12 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Recetas cóctel</title>
     <!--css-->
-    <link rel="stylesheet" href="css/Style_Mod_añadir_rec_coctel.css">
-    <link rel="stylesheet" href="css/Style_dashboard.css">
-    <link rel="stylesheet" href="font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="../css/Style_Mod_añadir_rec_coctel.css">
+    <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
 
     <!--scritp-->
 </head>
@@ -55,7 +55,7 @@
     <div class="barra-lat-izq">
         <!--logo-->
         <a href="Dashboard.php">
-            <img src="imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
+            <img src="../imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
         </a>
         <div class="contenedor-menu">
             <ul class="menu">
@@ -179,8 +179,17 @@
         </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--Datatables JS-->
+    <script src="../assets/datatables/datatables.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
+    <script src="../js/main.js"></script>
+    <script src="../js/coctelTable.js"></script>
 </body>
 
 </html>

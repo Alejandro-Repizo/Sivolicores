@@ -5,6 +5,8 @@ require_once '../modelo/Consultar.php';
 require_once '../modelo/Marca.php';
 require_once '../modelo/Cliente.php';
 require_once '../modelo/Producto.php';
+require_once '../modelo/Coctel.php';
+require_once '../modelo/Categoria.php';
 
 class Controlador{
 
@@ -77,6 +79,85 @@ class Controlador{
         $consultar = new consultar();
         $consultar->cargarCliente();
     }
+
+
+    //Módulo Receta Cóctel
+    public function cargarRecetaCoctel(){
+        $consultar = new consultar();
+        $consultar->cargarRecetaCoctel();
+    }
+
+    public function saveRecetaCoctel($RC_Nombre, $RC_Receta, $RC_Autor, $RC_Descripcion, $RC_Image){
+        $Coctel = new Coctel($RC_Nombre);
+        // $Coctel->setRC_Receta($RC_Receta);
+        // $Coctel->setRC_Autor($RC_Autor);
+        // $Coctel->setRC_Descripcion($RC_Descripcion);
+        // #Acá está el error
+        // // $Coctel->setRC_Image($RC_Image);
+        // // echo $RC_Image['file']['name'];
+        // echo $Coctel->getRC_Autor();
+        $consultar = new consultar();
+        $consultar->saveRecetaCoctel($Coctel, $RC_Receta, $RC_Autor, $RC_Descripcion, $RC_Image);
+    }
+
+    public function deleteRecetaCoctel($id, $RC_Nombre){
+        $Coctel = new Coctel($RC_Nombre);
+        $Coctel->setPK_ID_Receta($id);
+        $consultar = new consultar();
+        $consultar->deleteRecetaCoctel($Coctel);
+    }
+
+    public function cargarReporteVentas(){
+        $consultar = new consultar();
+        $consultar->cargarReporteVentas();
+    }
+
+    public function cargarCategoria(){
+        $consultar = new consultar();
+        $consultar->cargarCategoria();
+    }
+
+    public function agregarCategoria($Cat_Nombre){
+        $Consultar = new consultar();
+        $Categoria = new Categoria($Cat_Nombre);
+        $Consultar->agregarCategoria($Categoria);
+    }
+
+    public function editarCategoria($id, $Cat_Nombre){
+        $Consultar = new consultar();
+        $Categoria = new Categoria($Cat_Nombre);
+        $Categoria->setPK_ID_Categoria($id);
+        $Consultar->editarCategoria($Categoria);
+    }
+
+    public function borrarCategoria($id, $Cat_Nombre){
+        $Consultar = new consultar();
+        $Categoria = new Categoria($Cat_Nombre);
+        $Categoria->setPK_ID_Categoria($id);
+        $Consultar->borrarCategoria($Categoria);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

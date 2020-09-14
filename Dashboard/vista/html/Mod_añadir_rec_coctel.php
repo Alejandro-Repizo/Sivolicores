@@ -135,8 +135,8 @@
                         <label for="">Nombre autor:</label>
                         <input type="number" name="" id="" >
     
-                        <label for="">Fecha de la publicación:</label>
-                        <input type="date" name="" id="date">
+                        <!-- <label for="">Fecha de la publicación:</label>
+                        <input type="date" name="" id="date"> -->
 
                         <h4>Otros datos</h4>
                         <hr>
@@ -150,18 +150,6 @@
                         <label for="">Preparación:</label>
                         <textarea name="" id="" cols="30" rows="10" placeholder="Ingrese texto..."></textarea>
     
-                        <label for="">Cantidad de productos:</label>
-                        <input type="number" name="" id="" min="3" max="3" >
-    
-                        <label for="">Nombre producto n°1:</label>
-                        <input type="text" name="" id="" >
-    
-                        <label for="">Nombre producto n°2:</label>
-                        <input type="text" name="" id="" >
-    
-                        <label for="">Nombre producto n°3:</label>
-                        <input type="text" name="" id="" >
-
                         <input type="file">
 
                         <div class="button">

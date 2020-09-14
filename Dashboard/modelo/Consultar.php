@@ -3,6 +3,7 @@
 require_once  'ConexionDB.php';
 require_once 'ConexionBD.php';
 
+
 //Acá se realizan todas las consultas SQL
 class Consultar {
 
@@ -66,6 +67,7 @@ class Consultar {
         }
     }
 
+    //Módulo Marcas
     public function cargarMarcas(){
         try{
             //Cargar datos a la tabla marcas
@@ -73,70 +75,56 @@ class Consultar {
             $consulta = "SELECT PK_ID_Marca, Ma_Nombre FROM tbl_marca";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
+
+            //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            print json_encode($data, JSON_UNESCAPED_UNICODE);
-            
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
         }catch (Exception $ex) {
             $ex->getMessage();
         }
-
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
     public function saveMarcas(Marca $con){
-        $prueba = true;
-        // try{
-        //     //Actualizar
-        //     $conexion = new ConexionBD();
-        //     $nombre = $con->getNombre();
-        //     $consulta = "INSERT INTO tbl_marca (Ma_nombre) VALUES ('$nombre')";
-        //     $resultado = $conexion->prepare($consulta);
-        //     $resultado->execute();
-
-        //     //Consulta del último registro genererado
-        //     $consulta = "SELECT PK_ID_Marca,Ma_Nombre from tbl_marca ORDER BY PK_ID_Marca DESC LIMIT 1";		
-        //     $resultado = $conexion->prepare($consulta);
-        //     $resultado->execute();
-    
-
-        //     //Coloca todo en una arreglo
-        //     $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-        //     //Cerrar conexión
-        //     $conexion = null;
-        // } catch (Exception $ex) {
-        //     $ex->getMessage();
-        //     $data = ['error'=> true];
-        // }
-        // print json_encode($data, JSON_UNESCAPED_UNICODE);
-        if($prueba){
-            //Actualizar
+        try{
+            //Guardar Marca
             $conexion = new ConexionBD();
             $nombre = $con->getNombre();
             $consulta = "INSERT INTO tbl_marca (Ma_nombre) VALUES ('$nombre')";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
-            //Consulta del último registro genererado
+            // Consulta del último registro genererado
             $consulta = "SELECT PK_ID_Marca,Ma_Nombre from tbl_marca ORDER BY PK_ID_Marca DESC LIMIT 1";		
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
-    
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
             //Cerrar conexión
             $conexion = null;
-        }else{
-            $data = ['error'=> true];
-        }   
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
         print json_encode($data, JSON_UNESCAPED_UNICODE);
-
-       
     }
 
     public function updateMarcas(Marca $con){
-        try{
-            //Actualizar
+        try{ 
+            //Actualizar Marca
             $conexion = new ConexionBD();
             $nombre = $con->getNombre();
             $id = $con->getId();
@@ -144,7 +132,7 @@ class Consultar {
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
-            //Consulta del último registro genererado
+            // Consulta del último registro genererado
             $consulta = "SELECT PK_ID_Marca,Ma_Nombre from tbl_marca ORDER BY PK_ID_Marca DESC LIMIT 1";		
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
@@ -152,20 +140,23 @@ class Consultar {
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Envíar el arreglo final en formato JSON a JS
-            print json_encode($data, JSON_UNESCAPED_UNICODE);
-
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+            
             //Cerrar conexión
             $conexion = null;
         } catch (Exception $ex) {
             $ex->getMessage();
         }
+        // Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     public function deleteMarcas(Marca $con){
         try{
-            
-            //Borrar
+            //Borrar Marca
             $conexion = new ConexionBD();
             $nombre = $con->getNombre();
             $id = $con->getId();
@@ -173,7 +164,7 @@ class Consultar {
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
-            //Consulta del último registro genererado
+            // Consulta del último registro genererado
             $consulta = "SELECT PK_ID_Marca,Ma_Nombre from tbl_marca ORDER BY PK_ID_Marca DESC LIMIT 1";		
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
@@ -181,14 +172,18 @@ class Consultar {
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Envíar el arreglo final en formato JSON a JS
-            print json_encode($data, JSON_UNESCAPED_UNICODE);
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
 
             //Cerrar conexión
             $conexion = null;
         } catch (Exception $ex) {
             $ex->getMessage();
         }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     //Módulo Cliente
@@ -199,19 +194,26 @@ class Consultar {
             $consulta = "SELECT PK_ID_Cliente,Cl_Nombre,Cl_email,Cl_Pedidos_realizado,Cl_Fecha_registro FROM tbl_cliente ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
+
+            //Coloca todo el un arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Envíar el arreglo final en formato JSON a JS
-            print json_encode($data, JSON_UNESCAPED_UNICODE);
-            
+            ///Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
         }catch (Exception $ex) {
             $ex->getMessage();
         }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
     public function deleteCliente(Cliente $con){
-        try{
-              
-            //Borrar
+        try{    
+            //Borrar Cliente
             $conexion = new ConexionBD();
             $nombre = $con->getNombre();
             $id = $con->getId();
@@ -227,14 +229,18 @@ class Consultar {
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Envíar el arreglo final en formato JSON a JS
-            print json_encode($data, JSON_UNESCAPED_UNICODE);
+           //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
 
             //Cerrar conexión
             $conexion = null;
         } catch (Exception $ex) {
             $ex->getMessage();
         }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     //Módulo Inventario
@@ -245,26 +251,129 @@ class Consultar {
             $consulta = "SELECT Pt_Imagen,PK_ID_Producto,Pt_Nombre,Pt_Precio,Pt_Stock from tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
+
+            //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            print json_encode($data, JSON_UNESCAPED_UNICODE);
-            
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
         }catch (Exception $ex) {
             $ex->getMessage();
         }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
+
     public function upInventario(Producto $con){
         try{
-            //Actualizar
+            //Actualizar inventario
             $conexion = new ConexionBD();
             $precio = $con->getPt_Precio();
             $stock = $con->getPt_Stock();
             $id = $con->getPK_ID_Producto();
-            $consulta = "UPDATE tbl_inventarioo inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto SET Pt_Precio = '$precio', Pt_Stock = '$stock' where PK_ID_Producto = '$id'";
+            $consulta = "UPDATE tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto SET Pt_Precio = '$precio', Pt_Stock = '$stock' where PK_ID_Producto = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             //Consulta del último registro genererado
-            $consulta = "SELECT Pt_Imagen,Pt_Nombre,PK_ID_Producto,Pt_Precio,Pt_Stock from tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto ORDER BY PK_ID_Producto DESC LIMIT 1";		
+            $consulta = "SELECT Pt_Imagen,PK_ID_Producto,Pt_Nombre,Pt_Precio,Pt_Stock from tbl_inventario inner join tbl_producto on tbl_inventario.FK_ID_Productoinventario = tbl_producto.PK_ID_Producto ORDER BY PK_ID_Inventario DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+            
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    
+    }
+
+    //Módulo Receta Coctel
+    public function cargarRecetaCoctel(){
+        try{
+            //Cargar datos a la tabla receta coctel
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Receta,RC_Image,RC_Nombre,RC_Fecha FROM tbl_receta_coctel";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function saveRecetaCoctel(Coctel $con, $RC_Receta, $RC_Autor, $RC_Descripcion, $RC_Image){
+        try{
+            //Cargar datos a la tabla receta coctel
+            // $RC_Image = $con->getRC_Image();
+            $RC_Nombre = $con->getRC_Nombre();
+            // $RC_Receta = $con->getRC_Receta();
+            // $RC_Autor= $con->getRC_Autor();
+            // $RC_Descripcion = $con->getRC_Descripcion();
+            // echo $RC_Image["file"]["name"];
+            echo '======';
+            echo $RC_Autor;
+            //acá está el error
+            $check = getimagesize($RC_Image['file']['tmp_name']);
+           if($check != false){
+                $carpeta_destino ='../vista/imagenes/imagenesBD/';
+                $archivo_subido = $carpeta_destino . $RC_Image['file']['name'];
+                #Con está función movemos la foto
+                move_uploaded_file($RC_Image['file']['tmp_name'], $archivo_subido);
+                $conexion = new ConexionBD();
+                $ImNombre = $RC_Image['file']['name'];
+                $consulta = "INSERT INTO tbl_receta_coctel(RC_Nombre,RC_Receta,RC_Autor,RC_Descripcion,RC_Image) VALUES ('$RC_Nombre','$RC_Receta','$RC_Autor','$RC_Descripcion','$ImNombre')";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+                
+                //Coloca todo en una arreglo
+                $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            
+                //Cerrar conexión
+                $conexion = null;
+            }
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+         //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function deleteRecetaCoctel(Coctel $con){
+        try{
+            //Borrar
+            $conexion = new ConexionBD();
+            $RC_Nombre = $con->getRC_Nombre();
+            $id = $con->getPK_ID_Receta();
+            $consulta = "DELETE FROM tbl_receta_coctel WHERE PK_ID_Receta = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -275,12 +384,172 @@ class Consultar {
             $conexion = null;
         } catch (Exception $ex) {
             $ex->getMessage();
-            $data = ['error'=> true];
         }
         //Envíar el arreglo final en formato JSON a JS
         print json_encode($data, JSON_UNESCAPED_UNICODE);
-    
     }
+    
+    //Módulo cargar Reporte Ventas
+    public function cargarReporteVentas(){
+        try {
+            //Cargar datos a la tabla reporte venta
+            $conexion = new ConexionBD();
+            $consulta = "SELECT Ped_Fecha,Cl_Nombre, Pt_Nombre,Pt_Cantidad, Car_Total 
+            FROM tbl_pedido JOIN tbl_carrito_pedidos ON tbl_pedido.FK_ID_Carrito = tbl_carrito_pedidos.PK_ID_Carrito JOIN tbl_cliente ON tbl_carrito_pedidos.FK_ID_Cliente = tbl_cliente.PK_ID_Cliente JOIN tbl_producto ON
+            tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+
+     //Módulo cargar categorias
+     public function cargarCategoria(){
+        try {
+            //Cargar datos a la tabla reporte venta
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM Tbl_Categoria";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function agregarCategoria(Categoria $con){
+        try {
+            //Guardar categoria
+            $conexion = new ConexionBD();
+            $Cat_Nombre = $con->getNombre();
+            $consulta = "INSERT INTO Tbl_Categoria (Cat_Nombre) VALUES ('$Cat_Nombre') ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            // Consulta del último registro genererado
+            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM Tbl_Categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function editarCategoria(Categoria $con){
+        try {
+            //Guardar categoria
+            $conexion = new ConexionBD();
+            $Cat_Nombre = $con->getNombre();
+            $id = $con->getPK_ID_Categoria();
+            $consulta = "UPDATE Tbl_Categoria SET Cat_Nombre = '$Cat_Nombre' WHERE PK_ID_Categoria = '$id' ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            // Consulta del último registro genererado
+            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM Tbl_Categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    
+    public function borrarCategoria(Categoria $con){
+        try {
+            //Guardar categoria
+            $conexion = new ConexionBD();
+            // $Cat_Nombre = $con->getNombre();
+            $id = $con->getPK_ID_Categoria();
+            $consulta = "DELETE FROM Tbl_Categoria WHERE PK_ID_Categoria = '$id' ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            // Consulta del último registro genererado
+            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM Tbl_Categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+
+
+
+
+
+
+
+
+
+
     public function upProducto(Producto $con){
         try{
             $conexion  = new ConexionDB();

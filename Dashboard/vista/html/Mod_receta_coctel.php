@@ -8,7 +8,7 @@ date_default_timezone_set('America/Bogota');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Recetas c&oacute;cteles</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
@@ -132,11 +132,10 @@ date_default_timezone_set('America/Bogota');
         <!--Subcontenedor central-->
         <div class="sub-central-box">
             <div class="parte_superior">
-                <a href="Mod_añadir_rec_coctel.php">
-                    <i class="far fa-plus-square"></i>
-                </a>
-                <h4>Añadir receta cóctel</h4>
-                <input type="search" name="" id="" placeholder="Buscar">
+                <div class="col-lg-12">
+                    <button id="btnNuevo" type="button" class="btn btn-dark"><i class="far fa-plus-square"></i></button>
+                </div>
+                <h4>Añadir receta c&oacute;ctel</h4>
             </div>
                 <div class="container">
                     <div class="row">
@@ -147,18 +146,13 @@ date_default_timezone_set('America/Bogota');
                                     <thead class="text-center">
                                         <tr>
                                             <th>Id</th>
+                                            <th>Imagen</th>
                                             <th>Nombre cóctel</th>
                                             <th>Fecha de publicación</th>
                                             <th>Acci&oacute;n</th>
                                         </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                        <tr>
-                                            <td>prueba</td>
-                                            <td>prueba</td>
-                                            <td>prueba</td>
-                                            <td></td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -170,19 +164,48 @@ date_default_timezone_set('America/Bogota');
     </div>
 
     <!--Modal para CRUD-->
-    <div class="modal fade" id="modalMarca" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="modalRecetaCoctel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="formNuevaMarca" method="POST">
+                <form id="formNuevoCoctel" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nombreMarca" class="col-form-label">Nombre marca:</label>
-                            <input type="text" class="form-control" id="nombreMarca">
+                            <label for="RC_Nombre" class="col-form-label">Nombre del c&oacute;ctel:</label>
+                            <input type="text" class="form-control" id="RC_Nombre">
+
+                            <label for="RC_Autor" class="col-form-label">Nombre autor:</label>
+                            <input type="text" class="form-control" id="RC_Autor">
+                            
+                            <h5 class="mt-4">Otros datos</h5>
+                            <hr>
+
+                            <label for="RC_Descripcion" class="col-form-label">Descripci&oacute;n c&oacute;ctel:</label>
+                            <div class="input-group">
+                                <textarea class="form-control" name="RC_Descripcion" id="RC_Descripcion" cols="30" rows="5" placeholder="Ingrese texto..."></textarea>
+                            </div>
+
+                            <h5 class="mt-4">Preparaci&oacute;n y imagenes</h5>
+                            <hr>
+
+                            <label for="RC_Receta" class="col-form-label">Preparaci&oacute;n:</label>
+                            <div class="input-group mb-4">
+                                <textarea class="form-control" name="RC_Receta" id="RC_Receta" cols="30" rows="5" placeholder="Ingrese texto..."></textarea>
+                            </div>
+                        
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-cloud-upload-alt"></i></span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" onchange='cambiar()' id="RC_Image" name="RC_Image" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" id="info" for="RC_Image">Seleciona la imagen</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -193,6 +216,7 @@ date_default_timezone_set('America/Bogota');
             </div>
         </div>
     </div>
+
 
     <!--Jquery, Bootstrap, Popper-->
     <script src="../assets/jquery/jquery-3.3.1.min.js"></script>

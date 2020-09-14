@@ -131,11 +131,11 @@ date_default_timezone_set('America/Bogota');
         </div>
         <!--Subcontenedor central-->
         <div class="sub-central-box mt-3" >
-            <div class="parte_superior">
-                <a href="Mod_añadir_categorias.php" >
-                    <i class="far fa-plus-square"></i>
-                </a>
-                <h4>Añadir categoría</h4>
+        <div class="parte_superior">
+                <div class="col-lg-12">
+                    <button id="btnNuevo" type="button" class="btn btn-dark"><i class="far fa-plus-square"></i></button>
+                </div>
+                <h4>Añadir categor&iacute;as</h4>
             </div>
             <div class="container">
                 <div class="row">
@@ -145,19 +145,12 @@ date_default_timezone_set('America/Bogota');
                                 style="width:100%">
                                 <thead class="text-center">
                                     <tr>
+                                        <th>Id</th>
                                         <th>Nombre categoría</th>
-                                        <th>Cuenta de productos</th>
-                                        <th>Subcategorías</th>
-                                        <th>Acción</th>
+                                        <th>Acci&oacute;n</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
-                                    <tr>
-                                        <td>PRUEBA</td>
-                                        <td>PRUEBA</td>
-                                        <td>PRUEBA</td>
-                                        <td></td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -166,6 +159,33 @@ date_default_timezone_set('America/Bogota');
             </div>
         </div>
        
+    </div>
+
+     <!--Modal para CRUD-->
+     <div class="modal fade" id="modalCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formNuevaCategoria" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Cat_Nombre" class="col-form-label">Nombre categor&iacute;a:</label>
+                            <input type="text" class="form-control" id="Cat_Nombre">
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-dark" id="btnGuardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <!--Jquery, Bootstrap, Popper-->

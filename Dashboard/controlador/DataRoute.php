@@ -49,12 +49,12 @@ if(isset($_POST['opcion'])){
             $Pt_Stock = $_POST['Pt_Stock'];
             $id = $_POST['id'];
             if(!empty($Pt_Nombre)){
-                $Pt_Nombre = trim($Pt_Nombre);
-                $Pt_Nombre = filter_var($Pt_Nombre, FILTER_SANITIZE_STRING);
+                $Pt_Nombre = trim($Pt_Nombre); //Quitar espaciados      Producto 1 
+                $Pt_Nombre = filter_var($Pt_Nombre, FILTER_SANITIZE_STRING); # <b>Producto</b> -> producto
             }
             if(!empty($Pt_Precio)){
                 $Pt_Precio = trim($Pt_Precio);
-                $Pt_Precio = htmlspecialchars($Pt_Precio);
+                $Pt_Precio = htmlspecialchars($Pt_Precio); //# <b>Producto</b> -> producto
             }
             if(!empty($Pt_Stock)){
                 $Pt_Stock = trim($Pt_Stock);
@@ -62,7 +62,7 @@ if(isset($_POST['opcion'])){
             }
             if(!empty($id)){
                 $id = trim($id);
-                $id = filter_var($id, FILTER_VALIDATE_INT);
+                $id = filter_var($id, FILTER_VALIDATE_INT); # <b>1</b> -> 1
             }
             $Controlador->updateInventario($id, $Pt_Precio, $Pt_Stock, $Pt_Nombre);
             break;
@@ -91,24 +91,117 @@ if(isset($_POST['opcion'])){
             }
             $controlador->deleteCliente($id, $Cl_Nombre);
             break;
+        
+        case 'cargarRecetaCoctel':
+            $controlador = new Controlador();
+            $controlador->cargarRecetaCoctel();
+            break;  
 
-    }
+        case 'agregarRecetaCoctel':
+            $Controlador = new Controlador();
+            $RC_Nombre = $_POST['RC_Nombre'];
+            $RC_Receta = $_POST['RC_Receta'];
+            $RC_Autor = $_POST['RC_Autor'];
+            $RC_Descripcion = $_POST['RC_Descripcion'];
+            $RC_Image = $_FILES;
+            
+            // echo $RC_Image['file']['name'];
+            // echo $RC_Image['file']['tmp_name'];
+            if(!empty($RC_Nombre)){
+                $RC_Nombre = trim($RC_Nombre);
+                $RC_Nombre = filter_var($RC_Nombre, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($RC_Autor)) {
+                $RC_Autor = trim($RC_Autor);
+                $RC_Autor = filter_var($RC_Autor, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($RC_Descripcion)) {
+                $RC_Descripcion = trim($RC_Descripcion);
+                $RC_Descripcion = filter_var($RC_Descripcion, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($RC_Receta)) {
+                $RC_Receta = trim($RC_Receta);
+                $RC_Receta = filter_var($RC_Receta , FILTER_SANITIZE_STRING);
+            };
+            $Controlador->saveRecetaCoctel($RC_Nombre, $RC_Receta, $RC_Autor, $RC_Descripcion, $RC_Image);
+            break;
+            
+        case 'borrarRecetaCoctel':
+            $controlador = new Controlador();
+            $id = $_POST['id'];
+            $RC_Nombre = $_POST['RC_Nombre'];
+            if (!empty($id)) {
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            if (!empty($RC_Nombre)) {
+                $RC_Nombre = trim($RC_Nombre);
+                $RC_Nombre = filter_var($RC_Nombre, FILTER_SANITIZE_STRING);
+            }
+            $controlador->deleteRecetaCoctel($id, $RC_Nombre);
+            break;
 
-}
-//Acá se captura la variable opcion y se redirije con un switch
-if(isset($_POST['opcionInventario'])){
-    $opcionInventario = $_POST['opcionInventario'];
-    switch ($opcionInventario) {
-        case 'cargarInventario':
-            $controlador = new controlador();
-            $controlador->cargarMarca();
+        case 'cargarReporteVentas':
+            $controlador = new Controlador();
+            $controlador->cargarReporteVentas();
             break;
         
-        default:
-            # code...
+        case 'cargarCategoria':
+            $controlador = new Controlador();
+            $controlador->cargarCategoria();
             break;
+
+        case 'agregarCategoria':
+            $controlador = new Controlador();
+            $Cat_Nombre = $_POST['Cat_Nombre'];
+            if (!empty($Cat_Nombre)) {
+                $Cat_Nombre = trim($Cat_Nombre);
+                $Cat_Nombre = filter_var($Cat_Nombre, FILTER_SANITIZE_STRING);
+            }
+            $controlador->agregarCategoria($Cat_Nombre);
+            break;
+        case 'editarCategoria':
+            $controlador = new Controlador();
+            $Cat_Nombre = $_POST['Cat_Nombre'];
+            $id = $_POST['id'];
+            if (!empty($Cat_Nombre)) {
+                $Cat_Nombre = trim($Cat_Nombre);
+                $Cat_Nombre = filter_var($Cat_Nombre, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($id)) {
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            $controlador->editarCategoria($id,$Cat_Nombre);
+            break;
+        
+        case 'borrarCategoria':
+            $controlador = new Controlador();
+            $Cat_Nombre = $_POST['Cat_Nombre'];
+            $id = $_POST['id'];
+            if (!empty($Cat_Nombre)) {
+                $Cat_Nombre = trim($Cat_Nombre);
+                $Cat_Nombre = filter_var($Cat_Nombre, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($id)) {
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            $controlador->borrarCategoria($id,$Cat_Nombre);
+            break;  
+
     }
+
 }
+
+
+
+
+
+
+
+
+
 
 
 //Acá se capturan todos los datos
