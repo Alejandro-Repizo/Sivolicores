@@ -140,18 +140,11 @@
                                         <th>Id</th>
                                         <th>Imagen</th>
                                         <th>Nombre banner</th>
-                                        <th>Fecha de actualización</th>
+                                        <th>Fecha de actualizaci&oacute;n</th>
                                         <th>Acci&oacute;n</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
-                                    <tr>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td></td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -161,7 +154,7 @@
         </div>
 
     <!--Modal para CRUD-->
-    <div class="modal fade" id="modalMarca" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -169,11 +162,24 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="formNuevaMarca" method="POST">
+                <form id="formEditarBanner" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nombreMarca" class="col-form-label">Nombre marca:</label>
-                            <input type="text" class="form-control" id="nombreMarca">
+                            <label for="B_Nombre" class="col-form-label">Nombre del banner:</label>
+                            <input type="text" class="form-control" id="B_Nombre">
+
+                            <h5 class="mt-4">Imagen banner</h5>
+                            <hr>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-cloud-upload-alt"></i></span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" onchange='cambiar()' id="B_Imagen" name="B_Imagen" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" id="info" for="B_Imagen">Seleciona la imagen</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

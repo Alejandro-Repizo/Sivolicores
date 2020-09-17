@@ -163,7 +163,7 @@ date_default_timezone_set('America/Bogota');
         </div>
     </div>
 
-    <!--Modal para CRUD-->
+    <!--Modal para Guardar una receta cóctel-->
     <div class="modal fade" id="modalRecetaCoctel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered " role="document">
             <div class="modal-content">
@@ -205,6 +205,50 @@ date_default_timezone_set('America/Bogota');
                                     <input type="file" class="custom-file-input" onchange='cambiar()' id="RC_Image" name="RC_Image" aria-describedby="inputGroupFileAddon01">
                                     <label class="custom-file-label" id="info" for="RC_Image">Seleciona la imagen</label>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-dark" id="btnGuardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para editar una receta cóctel-->
+    <div class="modal fade" id="modalEditarRecetaCoctel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formEditarCoctel" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="RC_Nombre2" class="col-form-label">Nombre del c&oacute;ctel:</label>
+                            <input type="text" class="form-control" id="RC_Nombre2">
+
+                            <label for="RC_Autor2" class="col-form-label">Nombre autor:</label>
+                            <input type="text" class="form-control" id="RC_Autor2">
+                            
+                            <h5 class="mt-4">Otros datos</h5>
+                            <hr>
+
+                            <label for="RC_Descripcion2" class="col-form-label">Descripci&oacute;n c&oacute;ctel:</label>
+                            <div class="input-group">
+                                <textarea class="form-control" name="RC_Descripcion" id="RC_Descripcion2" cols="30" rows="5" placeholder="Ingrese texto..."></textarea>
+                            </div>
+
+                            <h5 class="mt-4">Preparaci&oacute;n y imagenes</h5>
+                            <hr>
+
+                            <label for="RC_Receta2" class="col-form-label">Preparaci&oacute;n:</label>
+                            <div class="input-group mb-4">
+                                <textarea class="form-control" name="RC_Receta" id="RC_Receta2" cols="30" rows="5" placeholder="Ingrese texto..."></textarea>
                             </div>
                         </div>
                     </div>

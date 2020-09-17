@@ -6,12 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-    <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Banners</title>
     <!--css-->
-    <link rel="stylesheet" href="css/Style_Mod_editar_banner.css">
-    <link rel="stylesheet" href="css/Style_dashboard.css">
-    <link rel="stylesheet" href="font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="../css/Style_Mod_editar_banner.css">
+    <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <!--scritp-->
 </head>
 
@@ -54,7 +54,7 @@
     <div class="barra-lat-izq">
         <!--logo-->
         <a href="Dashboard.php">
-            <img src="imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
+            <img src="../imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
         </a>
         <div class="contenedor-menu">
             <ul class="menu">

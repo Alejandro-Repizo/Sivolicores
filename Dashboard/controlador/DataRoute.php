@@ -6,6 +6,8 @@ require_once 'Controlador.php';
 if(isset($_POST['opcion'])){
     $opcion = $_POST['opcion'];
     switch ($opcion) {
+
+        //Módulo Marcas
         case 'agregarMarca':
             $Controlador = new Controlador();
             $nombreMarca = $_POST['nombreMarca'];
@@ -42,6 +44,7 @@ if(isset($_POST['opcion'])){
             $controlador->cargarMarca();
             break;
         
+        //Módulo Inventario
         case 'editarInventario':
             $Controlador = new Controlador();
             $Pt_Nombre = $_POST['Pt_Nombre'];
@@ -72,6 +75,7 @@ if(isset($_POST['opcion'])){
             $controlador->cargarInventario();
             break;
 
+        //Módulo Cliente
         case 'cargarCliente':
             $controlador = new Controlador();
             $controlador->cargarCliente();
@@ -92,6 +96,7 @@ if(isset($_POST['opcion'])){
             $controlador->deleteCliente($id, $Cl_Nombre);
             break;
         
+        //Módulo Receta Cóctel
         case 'cargarRecetaCoctel':
             $controlador = new Controlador();
             $controlador->cargarRecetaCoctel();
@@ -125,6 +130,52 @@ if(isset($_POST['opcion'])){
             };
             $Controlador->saveRecetaCoctel($RC_Nombre, $RC_Receta, $RC_Autor, $RC_Descripcion, $RC_Image);
             break;
+
+        case 'cargarEditarReceta':
+            $controlador = new Controlador();
+            $id = $_POST['id'];
+            $RC_Nombre = $_POST['RC_Nombre'];
+            if(!empty($RC_Nombre)){
+                $RC_Nombre = trim($RC_Nombre);
+                $RC_Nombre = filter_var($RC_Nombre, FILTER_SANITIZE_STRING);
+            }
+            if(!empty($id)){
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            $controlador->cargarEditarReceta($id, $RC_Nombre);
+            break;
+
+        case 'editarCoctel':
+            $controlador =  new Controlador();
+            $id = $_POST['id'];
+            $RC_Nombre = $_POST['RC_Nombre'];
+            $RC_Receta = $_POST['RC_Receta'];
+            $RC_Autor = $_POST['RC_Autor'];
+            $RC_Descripcion = $_POST['RC_Descripcion'];
+            echo $RC_Nombre;
+            if(!empty($id)){
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            if(!empty($RC_Nombre)){
+                $RC_Nombre = trim($RC_Nombre);
+                $RC_Nombre = filter_var($RC_Nombre, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($RC_Autor)) {
+                $RC_Autor = trim($RC_Autor);
+                $RC_Autor = filter_var($RC_Autor, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($RC_Descripcion)) {
+                $RC_Descripcion = trim($RC_Descripcion);
+                $RC_Descripcion = filter_var($RC_Descripcion, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($RC_Receta)) {
+                $RC_Receta = trim($RC_Receta);
+                $RC_Receta = filter_var($RC_Receta , FILTER_SANITIZE_STRING);
+            };
+            $controlador->editarCoctel($id, $RC_Nombre, $RC_Receta, $RC_Autor, $RC_Descripcion);
+            break;
             
         case 'borrarRecetaCoctel':
             $controlador = new Controlador();
@@ -141,11 +192,19 @@ if(isset($_POST['opcion'])){
             $controlador->deleteRecetaCoctel($id, $RC_Nombre);
             break;
 
+        //Módulo Reporte Ventas
         case 'cargarReporteVentas':
             $controlador = new Controlador();
             $controlador->cargarReporteVentas();
             break;
+
+        //Módulo reporte pedidos
+        case 'cargarReportePedidos':
+            $controlador = new Controlador();
+            $controlador->cargarReportePedidos();
+            break;
         
+        //Módulo Categoria
         case 'cargarCategoria':
             $controlador = new Controlador();
             $controlador->cargarCategoria();
@@ -160,6 +219,7 @@ if(isset($_POST['opcion'])){
             }
             $controlador->agregarCategoria($Cat_Nombre);
             break;
+
         case 'editarCategoria':
             $controlador = new Controlador();
             $Cat_Nombre = $_POST['Cat_Nombre'];
@@ -189,7 +249,34 @@ if(isset($_POST['opcion'])){
             }
             $controlador->borrarCategoria($id,$Cat_Nombre);
             break;  
+        
+        //Módulo Banner
+        case 'cargarBanner':
+            $controlador = new Controlador();
+            $controlador->cargarBanner();
+            break;
+        
+        case 'editarBanner':
+            $controlador = new Controlador();
+            $id = $_POST['id'];
+            $B_Nombre = $_POST['B_Nombre'];
+            $B_Imagen = $_FILES;
+            if (!empty($id)) {
+                $id = trim($id);
+                $id =  filter_var($id, FILTER_VALIDATE_INT);
+            }
+            if (!empty($B_Nombre)) {
+                $B_Nombre = trim($B_Nombre);
+                $$B_Nombre = filter_var($B_Nombre, FILTER_SANITIZE_STRING);
+            }
+            $controlador->editarBanner($id, $B_Nombre, $B_Imagen);
+            break;
 
+        //Módulo Pedidos
+        case 'cargarPedido':
+            $controlador = new Controlador();
+            $controlador->cargarPedido();
+            break;
     }
 
 }
@@ -213,24 +300,7 @@ if(isset($_GET['accion'])){
         $_POST['ses_email'],$_POST['ses_password'],md5($ses_password));
     }
 }
-// if(isset($_GET['accion'])){
-//     if($_GET['accion'] == 'save'){
-//         $Controlador = new Controlador();
-//         $Controlador->saveMarca($_POST['Ma_nombre']);
-//     }
-// }
-// if(isset($_GET['accion'])){
-//     if($_GET['accion'] == 'updateMarca'){
-//         $Controlador = new Controlador();
-//         $a = $_POST['Marca'];
-//         var_dump($a);
-//         $Controlador->updateMarca($_POST['Ma_nombre'], $_POST['Marca']);
-//     }
-// }
-// if(isset($_GET['deleteMarca'])){
-//     $Controlador = new Controlador();
-//     $Controlador->deleteMarca($_GET['deleteMarca']);
-// }
+
 if(isset($_GET['accion'])){
     if($_GET['accion'] == 'updateUsers'){
         $Controlador = new Controlador();
@@ -240,23 +310,11 @@ if(isset($_GET['accion'])){
         $_POST['ad_nombre'],$_POST['ad_email'], $_POST['ad_password']);
     }
 }
-if(isset($_GET['deleteCliente'])){
-    $Controlador = new Controlador();
-    $Controlador->deleteCliente($_GET['deleteCliente']);
-}
-// if(isset($_GET['accion'])){
-//     if($_GET['accion'] == 'c'){
-//         $Controlador = new Controlador();
-//         $Controlador->updateInventario($_POST['Pt_Nombre'], $_POST['Pt_Precio'], $_POST['Pt_Stock']);
-//     }
-// }
-// if(isset($_GET['accion'])){
-//     if($_GET['accion'] == 'updateInventario'){
-//         $Controlador = new Controlador();
-//         $Controlador->updateInventario($_POST['PK_ID_Producto'],$_POST['Pt_Precio'], $_POST['Pt_Stock']);
-//     }
-// } 
-//////
+
+
+
+
+
 
 if(isset($_GET['editProducto'])){
     $controlador = new Controlador();

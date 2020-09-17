@@ -48,8 +48,8 @@ $(document).ready(function(){
         opcion = "agregarRecetaCoctel"; //Agregar
     });
 
-     //Formulario que está dentro del modal
-     $("#formNuevoCoctel").submit(function (e) {
+    //Formulario que está dentro del modal para agregar una nueva recetá cóctel
+    $("#formNuevoCoctel").submit(function (e) {
         e.preventDefault();
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
@@ -101,27 +101,101 @@ $(document).ready(function(){
         $("#modalRecetaCoctel").modal("hide");
     });
 
+    //Formulario que está dentro del modal para editar una recetá cóctel
+    $("#formEditarCoctel").submit(function (e) {
+        e.preventDefault();
+        opcion = "editarCoctel"//editar
+        var peticionXML = new XMLHttpRequest;
+        peticionXML.open('POST', '../../controlador/DataRoute.php');
+
+        RC_Nombre = $.trim($("#RC_Nombre2").val());
+        RC_Receta = $.trim($("#RC_Receta2").val());
+        RC_Autor = $.trim($("#RC_Autor2").val());
+        RC_Descripcion = $.trim($("#RC_Descripcion2").val());
+           
+        if(formulario_valido2()){
+            var parametros = 'id=' + id + '&RC_Nombre=' + RC_Nombre + '&RC_Receta='+ RC_Receta + '&RC_Autor='+ RC_Autor + '&RC_Descripcion='+ RC_Descripcion + '&opcion=' + opcion;
+            console.log(parametros);
+            //Establecer el header de como vamos a enviar los datos
+            peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            peticionXML.onload = function(){ 
+                var datos = JSON.parse(peticionXML.responseText);
+                console.log(datos);
+                if(datos.error){
+                    Swal.fire({
+                        type: 'warning',
+                        title: 'Error',
+                        text: 'Se ha producido un error.'
+                    });
+                }else{
+                    tablaCoctel.ajax.reload(null, false);
+                }
+                tablaCoctel.ajax.reload(null, false);
+            }
+            peticionXML.onreadystatechange = function(){
+                if(peticionXML.readyState == 4 && peticionXML.status == 200){
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Éxito',
+                        text: 'Recectá Cóctel registrada con éxito'
+                    });
+                }
+            }
+            peticionXML.send(parametros);
+        }else {
+            Swal.fire({
+                type: 'warning',
+                title: 'Error',
+                text: 'Revise que todas las casillas estén llenas.'
+            });
+        }
+        $("#modalEditarRecetaCoctel").modal("hide");
+    });
+
     //Código para el botón editar
     $(document).on("click", ".btnEditar", function () {
-        opcion = "editarInventario"; //editar
+        opcion = "cargarEditarReceta"; //editar
         //Con esto se captura los datos de la tabla.
         fila = $(this).closest("tr");
-        id = parseInt(fila.find('td:eq(1)').text());
+        id = parseInt(fila.find('td:eq(0)').text());
         RC_Nombre = fila.find('td:eq(2)').text();
-        RC_Receta = fila.find('td:eq(2)').text();
-        RC_Autor = fila.find('td:eq(2)').text();
-        RC_Descripcion = fila.find('td:eq(2)').text();
-        RC_Image = fila.find('td:eq(1)').text();
-        //seteamos los valores recolectados en la tabla hacia los input's.
-        $("#RC_Nombre").val(RC_Nombre);
-        $("#RC_Receta").val(RC_Receta);
-        $("#RC_Autor").val(RC_Autor);
-        $("#RC_Descripcion").val(RC_Descripcion);
-        $("#RC_Image").val(RC_Image);
+
+        //Inicializamos una petición XML
+        var peticionXML = new XMLHttpRequest();
+        peticionXML.open('POST', '../../controlador/DataRoute.php');
+        //Acá una inicializamos y declaramos una variable que va a tener todos los datos
+        var parametros = 'id=' + id + '&RC_Nombre=' + RC_Nombre + '&opcion=' + opcion;
+        console.log(parametros);
+        //Establecer el header de como vamos a enviar los datos
+        peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        peticionXML.onload = function(){
+            //Pasamos conversión a JSON
+            var datos = JSON.parse(peticionXML.responseText);
+            if(datos.error){
+                Swal.fire({
+                    type: 'warning',
+                    title: 'Error',
+                    text: 'Se ha producido un error.'
+                });
+            }else{
+                datos.forEach(coctel => {
+                    //seteamos los valores recolectados en la tabla hacia los input's.
+                    $("#RC_Nombre2").val(coctel.RC_Nombre);
+                    $("#RC_Receta2").val(coctel.RC_Receta);
+                    $("#RC_Autor2").val(coctel.RC_Autor);
+                    $("#RC_Descripcion2").val(coctel.RC_Descripcion);
+                });
+               
+            }
+        }
+
+        peticionXML.send(parametros);
+
         //Opciones de color y demás
         $(".modal-header").css("background-color", "#6C757D");
         $(".modal-title").text("Editar receta cóctel").css("color", "#fff");;
-        $("#modalRecetaCoctel").modal("show");
+        $("#modalEditarRecetaCoctel").modal("show");
 
     });
 
@@ -177,9 +251,26 @@ $(document).ready(function(){
         return true;
     }
 
+    function formulario_valido2(){
+        if(RC_Nombre == ''){
+            return false;
+        }else if(RC_Receta == ''){
+            return false;
+        }else if(RC_Autor == ''){
+            return false;
+        }else if(RC_Descripcion == ''){
+            return false;
+        }
+        return true;
+    }
+
 });
 
 function cambiar(){
     var pdrs = document.getElementById('RC_Image').files[0].name;
     document.getElementById('info').innerHTML = pdrs;
 }
+
+
+
+

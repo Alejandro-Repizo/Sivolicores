@@ -146,20 +146,10 @@
                                         <th>Total</th>
                                         <th>Obs.</th>
                                         <th>Estado</th>
+                                        <th>Acci&oacute;n</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
-                                    <tr>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td></td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>

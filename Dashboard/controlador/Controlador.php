@@ -7,6 +7,7 @@ require_once '../modelo/Cliente.php';
 require_once '../modelo/Producto.php';
 require_once '../modelo/Coctel.php';
 require_once '../modelo/Categoria.php';
+require_once '../modelo/Banner.php';
 
 class Controlador{
 
@@ -25,6 +26,7 @@ class Controlador{
         $consultar =  new consultar();
         $consultar->updateUsers($admin);
     }
+
 
     //Módulo Marcas
     public function cargarMarca(){
@@ -57,6 +59,7 @@ class Controlador{
         $consultar->cargarInventario();
     }
 
+
     //Módulo Inventario
     public function updateInventario($id, $precio, $stock, $nombre){
         $Producto = new Producto($nombre);
@@ -66,6 +69,7 @@ class Controlador{
         $consultar =  new consultar();
         $consultar->upInventario($Producto);
     }
+
 
     //Módulo Cliente
     public function deleteCliente($id, $nombre){
@@ -89,15 +93,31 @@ class Controlador{
 
     public function saveRecetaCoctel($RC_Nombre, $RC_Receta, $RC_Autor, $RC_Descripcion, $RC_Image){
         $Coctel = new Coctel($RC_Nombre);
-        // $Coctel->setRC_Receta($RC_Receta);
-        // $Coctel->setRC_Autor($RC_Autor);
-        // $Coctel->setRC_Descripcion($RC_Descripcion);
-        // #Acá está el error
-        // // $Coctel->setRC_Image($RC_Image);
-        // // echo $RC_Image['file']['name'];
-        // echo $Coctel->getRC_Autor();
+        $Coctel->setRC_Receta($RC_Receta);
+        $Coctel->setRC_Autor($RC_Autor);
+        $Coctel->setRC_Descripcion($RC_Descripcion);
+        $Coctel->setRC_Image($RC_Image);
+        // echo $RC_Image['file']['name'];
+        echo $Coctel->getRC_Autor();
         $consultar = new consultar();
-        $consultar->saveRecetaCoctel($Coctel, $RC_Receta, $RC_Autor, $RC_Descripcion, $RC_Image);
+        $consultar->saveRecetaCoctel($Coctel);
+    }
+
+    public function cargarEditarReceta($id, $RC_Nombre){
+        $Coctel = new Coctel($RC_Nombre);
+        $Coctel->setPK_ID_Receta($id);
+        $consultar = new consultar();
+        $consultar->cargarEditarReceta($Coctel);
+    }
+
+    public function editarCoctel($id, $RC_Nombre, $RC_Receta, $RC_Autor, $RC_Descripcion){
+        $Coctel = new Coctel($RC_Nombre);
+        $Coctel->setPK_ID_Receta($id);
+        $Coctel->setRC_Receta($RC_Receta);
+        $Coctel->setRC_Autor($RC_Autor);
+        $Coctel->setRC_Descripcion($RC_Descripcion);
+        $consultar = new consultar();
+        $consultar->editarCoctel($Coctel);
     }
 
     public function deleteRecetaCoctel($id, $RC_Nombre){
@@ -107,11 +127,20 @@ class Controlador{
         $consultar->deleteRecetaCoctel($Coctel);
     }
 
+
+    //Módulo Reportes Ventas
     public function cargarReporteVentas(){
         $consultar = new consultar();
         $consultar->cargarReporteVentas();
     }
 
+    //Módulo Reportes pedidos
+    public function cargarReportePedidos(){
+        $consultar = new consultar();
+        $consultar->cargarReportePedidos();
+    }
+    
+    //Módulo Categorias
     public function cargarCategoria(){
         $consultar = new consultar();
         $consultar->cargarCategoria();
@@ -135,6 +164,28 @@ class Controlador{
         $Categoria = new Categoria($Cat_Nombre);
         $Categoria->setPK_ID_Categoria($id);
         $Consultar->borrarCategoria($Categoria);
+    }
+
+    //Módulo Banner
+    public function cargarBanner(){
+        $consultar = new consultar();
+        $consultar->cargarBanner();
+    }
+
+    public function editarBanner($id, $B_Nombre, $B_Imagen){
+        $Banner = new Banner();
+        $Banner->setPK_ID_Banner($id);
+        $Banner->setB_Nombre($B_Nombre);
+        $Banner->setB_Imagen($B_Imagen);
+        $consultar = new consultar();
+        $consultar->editarBanner($Banner);
+
+    }
+
+    //Módulo Pedido
+    public function cargarPedido(){
+        $consultar = new consultar();
+        $consultar->cargarPedido();
     }
 
 

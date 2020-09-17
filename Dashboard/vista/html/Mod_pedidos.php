@@ -148,20 +148,10 @@ date_default_timezone_set('America/Bogota');
                                         <th>Teléfono</th>
                                         <th>Total</th>
                                         <th>Estado</th>
+                                        <th>Acci&oacute;n</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
-                                    <tr>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td>prueba</td>
-                                       <td></td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>

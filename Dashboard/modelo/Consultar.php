@@ -330,17 +330,14 @@ class Consultar {
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
-    public function saveRecetaCoctel(Coctel $con, $RC_Receta, $RC_Autor, $RC_Descripcion, $RC_Image){
+    public function saveRecetaCoctel(Coctel $con){
         try{
             //Cargar datos a la tabla receta coctel
-            // $RC_Image = $con->getRC_Image();
+            $RC_Image = $con->getRC_Image();
             $RC_Nombre = $con->getRC_Nombre();
-            // $RC_Receta = $con->getRC_Receta();
-            // $RC_Autor= $con->getRC_Autor();
-            // $RC_Descripcion = $con->getRC_Descripcion();
-            // echo $RC_Image["file"]["name"];
-            echo '======';
-            echo $RC_Autor;
+            $RC_Receta = $con->getRC_Receta();
+            $RC_Autor= $con->getRC_Autor();
+            $RC_Descripcion = $con->getRC_Descripcion();
             //acá está el error
             $check = getimagesize($RC_Image['file']['tmp_name']);
            if($check != false){
@@ -364,6 +361,69 @@ class Consultar {
             $ex->getMessage();
         }
          //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function cargarEditarReceta(Coctel $con){
+        try{
+            //Cargar datos a la tabla receta coctel
+            $conexion = new ConexionBD();
+            $id = $con->getPK_ID_Receta();
+            $RC_Nombre = $con->getRC_Nombre();
+            $consulta = "SELECT RC_Nombre,RC_Receta,RC_Autor,RC_Descripcion FROM tbl_receta_coctel WHERE PK_ID_Receta = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function editarCoctel(Coctel $con){
+        try{
+            //Cargar datos a la tabla receta coctel
+            $conexion = new ConexionBD();
+            $id = $con->getPK_ID_Receta();
+            $RC_Nombre = $con->getRC_Nombre();
+            $RC_Receta = $con->getRC_Receta();
+            $RC_Autor= $con->getRC_Autor();
+            echo $RC_Autor;
+            $RC_Descripcion = $con->getRC_Descripcion();
+            $consulta = "UPDATE tbl_receta_coctel SET RC_Nombre = '$RC_Nombre', RC_Receta = '$RC_Receta',RC_Autor = '$RC_Autor',RC_Descripcion = '$RC_Descripcion'  WHERE PK_ID_Receta = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta último registro generado
+            $consulta = "SELECT PK_ID_Receta,RC_Image,RC_Nombre,RC_Fecha FROM tbl_receta_coctel ORDER BY PK_ID_Inventario DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
@@ -397,6 +457,34 @@ class Consultar {
             $consulta = "SELECT Ped_Fecha,Cl_Nombre, Pt_Nombre,Pt_Cantidad, Car_Total 
             FROM tbl_pedido JOIN tbl_carrito_pedidos ON tbl_pedido.FK_ID_Carrito = tbl_carrito_pedidos.PK_ID_Carrito JOIN tbl_cliente ON tbl_carrito_pedidos.FK_ID_Cliente = tbl_cliente.PK_ID_Cliente JOIN tbl_producto ON
             tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    //Módulo cargar Reporte Ventas
+    public function cargarReportePedidos(){
+        try {
+            //Cargar datos a la tabla reporte venta
+            $conexion = new ConexionBD();
+            $consulta = "SELECT Ped_Fecha,Cl_Nombre, Pt_Nombre,Pt_Cantidad, Car_Total, Ped_Estado FROM tbl_pedido JOIN tbl_carrito_pedidos
+            ON tbl_pedido.FK_ID_Carrito = tbl_carrito_pedidos.PK_ID_Carrito JOIN tbl_cliente ON tbl_carrito_pedidos.FK_ID_Cliente = tbl_cliente.PK_ID_Cliente 
+            JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -540,8 +628,98 @@ class Consultar {
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
+    //Módulo Banner
+    public function cargarBanner(){
+        try{
+            //Cargar datos de la tabla tbl_banner
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Banner, B_Imagen, B_Nombre, B_Fecha_actualizacion FROM tbl_banner";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
 
 
+    public function editarBanner(Banner $con){
+        try{
+            //Cargar datos a la tabla banner
+            $B_Imagen = $con->getB_Imagen();
+            $B_Nombre = $con->getB_Nombre();
+            $PK_ID_Banner = $con->getPK_ID_Banner();
+      
+            //acá está el error
+            $check = getimagesize($B_Imagen['file']['tmp_name']);
+           if($check != false){
+                $carpeta_destino ='../vista/imagenes/Banner/';
+                $archivo_subido = $carpeta_destino . $B_Imagen['file']['name'];
+                #Con está función movemos la foto
+                move_uploaded_file($B_Imagen['file']['tmp_name'], $archivo_subido);
+                $conexion = new ConexionBD();
+                $ImNombre = $B_Imagen['file']['name'];
+                $consulta = "UPDATE tbl_banner SET B_Nombre = '$B_Nombre', B_Imagen = '$ImNombre' WHERE PK_ID_Banner = '$PK_ID_Banner'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+            
+                //Cerrar conexión
+                $conexion = null;
+            }else{
+                $conexion = new ConexionBD();
+                $consulta = "UPDATE tbl_banner SET B_Nombre = '$B_Nombre' WHERE PK_ID_Banner = '$PK_ID_Banner'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+            
+                //Cerrar conexión
+                $conexion = null;
+            }
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+         //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function cargarPedido(){
+        try{
+            //Cargar datos a la tabla receta coctel
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Ped_Fecha, Pt_Nombre, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Car_Total, Ped_Estado FROM tbl_pedido
+             JOIN tbl_carrito_pedidos ON tbl_carrito_pedidos.PK_ID_Carrito = tbl_pedido.FK_ID_Carrito 
+             JOIN tbl_cliente ON tbl_cliente.PK_ID_Cliente = tbl_carrito_pedidos.FK_ID_Cliente 
+             JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
 
 
 

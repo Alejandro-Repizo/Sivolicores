@@ -1,8 +1,7 @@
 $(document).ready(function(){
 
-    //Tabla Inventario
-    // var fila, opcion;
-    // opcion = "cargarInventario";
+    var fila, opcion;
+    opcion = "cargarEnvio";
 
     tablaEnvio = $('#tablaEnvio').DataTable({
         // // Para agregar los botones de editar y borrar de forma predeterminada
@@ -15,19 +14,17 @@ $(document).ready(function(){
         // },
         // //Agregamos las columnas del tbody los botones
         // "columns": [
-        //     { "data": "Pt_Imagen" },
-        //     { "data": "PK_ID_Producto" },
+        //     { "data": "PK_ID_Pedido" },
+        //     { "data": "Cl_Nombre" },
         //     { "data": "Pt_Nombre" },
-        //     { "data": "Pt_Precio" },
-        //     { "data": "Pt_Stock" },
+        //     { "data": "Pt_Cantidad" },
+        //     { "data": "Ped_Direccion" },
+        //     { "data": "Cl_Telefono" },
+        //     { "data": "Car_Total" },
+        //     { "data": "Ped_Estado" },
         //     { "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-secondary btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>" }
         // ],
 
-        // "columnDefs": [{
-        //     "targets": -1,
-        //     "data": null,
-        //     "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-secondary btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>"
-        // }],
         //Para cambiar el lenguaje a español
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros",
