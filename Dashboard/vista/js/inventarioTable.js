@@ -14,7 +14,7 @@ $(document).ready(function () {
         },
         //Agregamos las columnas del tbody los botones
         "columns": [
-            { "data": "Pt_Imagen" },
+            { "data": "Pt_Imagen" , "render": function(data, type, row) {return '<img src="../imagenes/Productos/'+data+'" width="50px" height="70px"/>' ;}},
             { "data": "PK_ID_Producto" },
             { "data": "Pt_Nombre" },
             { "data": "Pt_Precio" },

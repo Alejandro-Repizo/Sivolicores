@@ -517,11 +517,6 @@ class Consultar {
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
         
             //Cerrar conexión
             $conexion = null;
@@ -722,59 +717,328 @@ class Consultar {
     }
 
 
+    //Módulo cargar Subcategorias
+    public function cargarSubCategoria(){
+        try {
+            //Cargar datos a la tabla reporte venta
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre FROM tbl_subcategoria";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function agregarSubCategoria(SubCategoria $con, $PK_ID_Categoria){
+        try {
+            //Guardar Subcategoria
+            $conexion = new ConexionBD();
+            $SCat_Nombre = $con->getNombre();
+            $consulta = "INSERT INTO tbl_subcategoria (SCat_Nombre) VALUES ('$SCat_Nombre') ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            // Consulta el id del último registro genererado
+            $consulta = "SELECT PK_ID_SubCategoria FROM tbl_subcategoria ORDER BY PK_ID_SubCategoria DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca el ID en una arreglo 
+            $llave = $resultado->fetch(PDO::FETCH_ASSOC);
+            $PK_ID_SubCategoria = $llave['PK_ID_SubCategoria'];
+        
+
+            // Guarda consulta en la tabla de categoria por subcategoria
+            $consulta = "INSERT INTO `tbl_catxsub`(`FK_ID_Categoria`, `FK_ID_SubCategoria`) VALUES  ('$PK_ID_Categoria', '$PK_ID_SubCategoria')";
+            $resultados = $conexion->prepare($consulta);
+            $resultados->execute();
 
 
+            // Consulta el id del último registro genererado
+            $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre FROM tbl_subcategoria ORDER BY PK_ID_SubCategoria DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function editarSubCategoria(SubCategoria $con){
+        try {
+            //Guardar Subcategoria
+            $conexion = new ConexionBD();
+            $SCat_Nombre = $con->getNombre();
+            $id = $con->getPK_ID_SubCategoria();
+            $consulta = "UPDATE tbl_subcategoria SET SCat_Nombre = '$SCat_Nombre' WHERE PK_ID_SubCategoria = '$id' ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            // Consulta del último registro genererado
+            $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre FROM tbl_subcategoria ORDER BY PK_ID_SubCategoria DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    
+    public function borrarSubCategoria(SubCategoria $con){
+        try {
+            //Guardar Subcategoria
+            $conexion = new ConexionBD();
+            // $SCat_Nombre = $con->getNombre();
+            $id = $con->getPK_ID_SubCategoria();
+            $consulta = "DELETE FROM tbl_subcategoria WHERE PK_ID_SubCategoria = '$id' ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            // Consulta del último registro genererado
+            $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre FROM tbl_subcategoria ORDER BY PK_ID_SubCategoria DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
 
 
+    //Módulo Producto
 
-
-    public function upProducto(Producto $con){
+    public function cargarProducto(){
         try{
-            $conexion  = new ConexionDB();
-            $conexion->abrir();
-            $edit_i  = $con->getPK_ID_Producto();
-            $Pt_codigo = $con->getPt_codigo();
+            //Cargar datos de la tabla tbl_banner
+            $conexion = new ConexionBD();
+            $consulta = "SELECT  PK_ID_Producto, Pt_Imagen, Pt_Nombre, Pt_Precio from tbl_producto";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+        
+    }
+
+
+    public function agregarProducto(Producto $con){
+        try{
+            //Cargar datos a la tabla banner
             $Pt_Nombre = $con->getPt_Nombre();
-            $Pt_Precio = $con->getPt_Precio();
-
+            $Pt_codigo = $con->getPt_codigo();
             $Pt_Presentacion = $con->getPt_Presentacion();
-            $Pt_Grados_alchol= $con->getPt_Grados_alchol();
-            $Pt_Pais = $con->getPt_Pais();
-            $Pt_Color = $con->getPt_Color();
             $Pt_Stock = $con->getPt_Stock();
-            $sql = "UPDATE tbl_producto SET Pt_codigo='$Pt_codigo', Pt_Nombre ='$Pt_Nombre', Pt_Precio ='$Pt_Precio', Pt_Presentacion = '$Pt_Presentacion', 
-            Pt_Grados_alchol ='$Pt_Grados_alchol', Pt_Pais ='$Pt_Pais', Pt_Color ='$Pt_Color', Pt_Stock ='$Pt_Stock' WHERE PK_ID_Producto = '$edit_i'";
-            $conexion->consulta($sql);
-            $res=$conexion->obtenerFilasAfectadas();
-            print($res);
-            $conexion->cerrar();
-            if($res == TRUE){
-                header("Location:../vista/html/Mod_producto.php");
-            }
+            $Pt_Precio = $con->getPt_Precio();
+            $FK_ID_Categoria = $con->getFK_ID_Categoria();
+            $FK_ID_Marca = $con->getFK_ID_Marca();
+            $Pt_Pais = $con->getPt_Pais();
+            $Pt_Grados_alchol= $con->getPt_Grados_alchol();
+            $Pt_Color = $con->getPt_Color();
+            $Pt_Imagen = $con->getPt_Imagen();
+            
+      
+            //acá está el error
+            $check = getimagesize($Pt_Imagen['file']['tmp_name']);
+           if($check != false){
+                $carpeta_destino ='../vista/imagenes/Productos/';
+                $archivo_subido = $carpeta_destino . $Pt_Imagen['file']['name'];
+                #Con está función movemos la foto
+                move_uploaded_file($Pt_Imagen['file']['tmp_name'], $archivo_subido);
+                $conexion = new ConexionBD();
+                $ImNombre = $Pt_Imagen['file']['name'];
 
-        } catch (Exception $ex) {
+                $consulta = "INSERT INTO tbl_producto (`Pt_codigo`, `Pt_Nombre`, `Pt_Precio`, `Pt_Imagen`, `Pt_Presentacion`, 
+                `Pt_Grados_alchol`, `Pt_Pais`, `Pt_Color`, `Pt_Stock`, `FK_ID_Categoria`, `FK_ID_Marca`) 
+                VALUES ('$Pt_codigo', '$Pt_Nombre', '$Pt_Precio', '$ImNombre', '$Pt_Presentacion', 
+                '$Pt_Grados_alchol', '$Pt_Pais', '$Pt_Color', '$Pt_Stock', '$FK_ID_Categoria', '$FK_ID_Marca')";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+            
+                //Cerrar conexión
+                $conexion = null;
+            }
+        }catch (Exception $ex) {
             $ex->getMessage();
         }
+         //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
-    public function deleteProducto(Producto $con){
+    
+    public function cargarEditarProducto(Producto $con){
         try{
-            $conexion  = new ConexionDB();
-            $conexion->abrir();
-            $edit_i  = $con->getPt_Nombre();
-            $sql = "DELETE FROM tbl_producto WHERE PK_ID_Producto = '$edit_i'";
-            $conexion->consulta($sql);
-            $res=$conexion->obtenerFilasAfectadas();
-            print($res);
-            $conexion->cerrar();
-            if($res == TRUE){
-                header("Location:../vista/html/Mod_productos.php");
+            //Cargar datos a la tabla receta coctel
+            $conexion = new ConexionBD();
+            $id = $con->getPK_ID_Producto();
+            $Pt_Nombre = $con->getPt_Nombre();
+            $consulta = "SELECT `PK_ID_Producto`, `Pt_codigo`, `Pt_Nombre`, `Pt_Precio`, `Pt_Imagen`, `Pt_Presentacion`, 
+            `Pt_Grados_alchol`, `Pt_Pais`, `Pt_Color`, `Pt_Stock`, `FK_ID_Categoria`, `FK_ID_Marca` FROM tbl_producto
+            WHERE PK_ID_Producto = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
             }
 
-        } catch (Exception $ex) {
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
             $ex->getMessage();
         }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
+
+
+    public function editarProducto(Producto $con){
+        try{
+            //Cargar datos a la tabla banner
+            $id = $con->getPK_ID_Producto();
+            $Pt_Nombre = $con->getPt_Nombre();
+            $Pt_codigo = $con->getPt_codigo();
+            $Pt_Presentacion = $con->getPt_Presentacion();
+            $Pt_Stock = $con->getPt_Stock();
+            $Pt_Precio = $con->getPt_Precio();
+       
+            $Pt_Pais = $con->getPt_Pais();
+            $Pt_Grados_alchol= $con->getPt_Grados_alchol();
+            $Pt_Color = $con->getPt_Color();
+            $Pt_Imagen = $con->getPt_Imagen();
+            
+      
+            //acá está el error
+            $check = getimagesize($Pt_Imagen['file']['tmp_name']);
+           if($check != false){
+                $carpeta_destino ='../vista/imagenes/Productos/';
+                $archivo_subido = $carpeta_destino . $Pt_Imagen['file']['name'];
+                #Con está función movemos la foto
+                move_uploaded_file($Pt_Imagen['file']['tmp_name'], $archivo_subido);
+                $conexion = new ConexionBD();
+                $ImNombre = $Pt_Imagen['file']['name'];
+
+                $consulta = "UPDATE tbl_producto SET Pt_codigo = '$Pt_codigo', Pt_Nombre = '$Pt_Nombre', Pt_Precio = '$Pt_Precio', 
+                Pt_Imagen = '$ImNombre', Pt_Presentacion = '$Pt_Presentacion', Pt_Grados_alchol = '$Pt_Grados_alchol', Pt_Pais = '$Pt_Pais',
+                Pt_Color='$Pt_Color', Pt_Stock = '$Pt_Stock'  WHERE PK_ID_Producto = '$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+            
+                //Cerrar conexión
+                $conexion = null;
+            }else{
+                $conexion = new ConexionBD();
+                $consulta = "UPDATE tbl_producto SET Pt_codigo = '$Pt_codigo', Pt_Nombre = '$Pt_Nombre', Pt_Precio = '$Pt_Precio', 
+                Pt_Presentacion = '$Pt_Presentacion', Pt_Grados_alchol = '$Pt_Grados_alchol', Pt_Pais = '$Pt_Pais',
+                Pt_Color='$Pt_Color', Pt_Stock = '$Pt_Stock'  WHERE PK_ID_Producto = '$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+                //Cerrar conexión
+                $conexion = null;
+            }
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+         //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function borrarProducto(Producto $con){
+        try{
+            //Cargar datos de la tabla tbl_banner
+            $conexion = new ConexionBD();
+            $id = $con->getPK_ID_Producto();
+            $Pt_Nombre = $con->getPt_Nombre();
+            $consulta = "DELETE FROM tbl_producto WHERE PK_ID_Producto = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+        
+    }
+
+   
 
 
 }

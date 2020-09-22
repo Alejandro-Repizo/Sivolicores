@@ -1,5 +1,4 @@
 <?php 
-
 date_default_timezone_set('America/Bogota');
 ?>
 <!DOCTYPE html>
@@ -10,21 +9,20 @@ date_default_timezone_set('America/Bogota');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
     <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
-    <title>Productos</title>
+    <title>Sub Categor&iacute;a</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <!--datables CSS básico-->
-    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css"/>
-    <!--datables estilo bootstrap 4 CSS-->  
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.min.css" />
+    <!--datables estilo bootstrap 4 CSS-->
     <link rel="stylesheet" href="../assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.min.css">
-    <!-- CSS personalizado --> 
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../css/Style_Mod_categorias.css">
     <link rel="stylesheet" href="../css/Style_dashboard.css">
-    <link rel="stylesheet" href="../css/Style_Mod_marca.css">
     <!--Font Awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <!--SweetAlert-->
     <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
-    
 </head>
 
 <body>
@@ -38,7 +36,7 @@ date_default_timezone_set('America/Bogota');
             <div class="nav-search">
                 <input type="search" id="search" placeholder="Buscar" />
             </div>
-            <a href="#">
+            <a href="../Sitio-web/index.php">
                 <i class="external-icon-nav fas fa-external-link-alt"></i>
             </a>
         </div>
@@ -75,6 +73,7 @@ date_default_timezone_set('America/Bogota');
                 <li><a href="#"><i class="cont-icons fas fa-boxes"></i>Cátalogo<i class="fa fa-chevron-down cont-icons-right"></i></a>
                     <ul>
                         <li><a href="Mod_categorias.php"><i class="cont-icons fas fa-box-open"></i>Categorías</a></li>
+                        <li><a href="Mod_sub_categorias.php"><i class="cont-icons fas fa-box-open"></i>Sub-categor&iacute;as</a></li>
                         <li><a href="Mod_productos.php"><i class="cont-icons fas fa-wine-bottle"></i>Productos</a></li>
                         <li><a href="Mod_inventario.php"><i class="cont-icons fas fa-clipboard-list"></i>Inventario</a></li>
                         <li><a href="Mod_marca.php"><i class="cont-icons fab fa-modx"></i>Marca</a></li>
@@ -128,34 +127,31 @@ date_default_timezone_set('America/Bogota');
     <div class="central-box">
         <!--Nombre página-->
         <div class="name-page">
-            <a href="Mod_productos.php"><i class="name-page-icon fas fa-wine-bottle"></i></a>
-            <h3>Productos</h3>
+            <a href="../html/Mod_Sub_categorias.php"><i class="name-page-icon fas fa-box-open"></i></a>
+            <h3>Subcategor&iacute;as</h3>
         </div>
         <!--Subcontenedor central-->
-        <div class="sub-central-box" >
-            <div class="parte_superior">
-                <!--Opciones centrales-->
+        <div class="sub-central-box mt-3" >
+        <div class="parte_superior">
                 <div class="col-lg-12">
                     <button id="btnNuevo" type="button" class="btn btn-dark"><i class="far fa-plus-square"></i></button>
                 </div>
-                <h4>Añadir Producto</h4>
+                <h4>Añadir Subcategor&iacute;as</h4>
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsive mt-4 mb-4">
-                            <table id="tablaProducto" class="table table-striped table-bordered table-condensed"
+                            <table id="tablaSubCategoria" class="table table-striped table-bordered table-condensed"
                                 style="width:100%">
                                 <thead class="text-center">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Imagen</th>
-                                        <th>Nombre del Producto</th>
-                                        <th>Precio</th>
+                                        <th>Nombre subcategoría</th>
                                         <th>Acci&oacute;n</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-center">     
+                                <tbody class="text-center">
                                 </tbody>
                             </table>
                         </div>
@@ -163,81 +159,32 @@ date_default_timezone_set('America/Bogota');
                 </div>
             </div>
         </div>
+       
     </div>
 
-
-     <!--Modal para Guardar una receta cóctel-->
-     <div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered " role="document">
+    <!--Modal para CRUD-->
+    <div class="modal fade" id="modalSubCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="formNuevoProducto" method="POST" enctype="multipart/form-data">
+                <form id="formNuevaSubCategoria" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            
-                            <h5>Informaci&oacute;n b&aacute;sica</h5>
-                            <hr>
-                            <label for="Pt_Nombre" class="col-form-label">Nombre del producto:</label>
-                            <input type="text" class="form-control" id="Pt_Nombre">
+                            <label for="SCat_Nombre" class="col-form-label">Nombre SubCategor&iacute;a:</label>
+                            <input type="text" class="form-control" id="SCat_Nombre">
 
-                            <label for="Pt_codigo" class="col-form-label">C&oacute;digo:</label>
-                            <input type="text" class="form-control" id="Pt_codigo">
-
-                            <label for="Pt_Presentacion" class="col-form-label">Presentaci&oacute;n:</label>
-                            <input type="text" class="form-control" id="Pt_Presentacion">
-                            
-                            <h5 class="mt-4">Unidades y precio</h5>
-                            <hr>
-
-                            <label for="Pt_Stock" class="col-form-label">Unidades:</label>
-                            <input type="text" class="form-control" id="Pt_Stock">
-
-                            <label for="Pt_Precio" class="col-form-label">Precio:</label>
-                            <input type="text" class="form-control" id="Pt_Precio" placeholder="$">
-
-                            <h5 class="mt-4">Categor&iacute;a y marca</h5>
-                            <hr>
-
-                            <label for="FK_ID_Categoria" class="col-form-label">Categor&iacute;a:</label>
-                            <select class="form-control" id="FK_ID_Categoria">
-                                <option selected="true" disabled="disabled">Seleccione la categoria</option>
+                            <label for="exampleFormControlSelect1" class="col-form-label">Categoria:</label>
+                            <select class="form-control" id="PK_ID_Categoria">
                             </select>
 
-                            <label for="FK_ID_Marca" class="col-form-label">Marca:</label>
-                            <select class="form-control" id="FK_ID_Marca">
-                                <option selected="true" disabled="disabled">Seleccione la marca</option>
-                            </select>
-
-                            <h5 class="mt-4">Otros datos</h5>
-                            <hr>
-
-                            <label for="Pt_Pais" class="col-form-label">Pa&iacute;s del producto:</label>
-                            <input type="text" class="form-control" id="Pt_Pais">
-
-                            <label for="Pt_Grados_alchol" class="col-form-label">Grado Alcohol:</label>
-                            <input type="text" class="form-control" id="Pt_Grados_alchol" >
-
-                            <label for="Pt_Color" class="col-form-label">Color:</label>
-                            <input type="text" class="form-control" id="Pt_Color" >
-
-                            <h5 class="mt-4">Imagen del producto</h5>
-                            <hr> 
-
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-cloud-upload-alt"></i></span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" onchange='cambiar()' id="Pt_Imagen" name="Pt_Imagen" aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" id="info" for="Pt_Imagen">Seleciona la imagen</label>
-                                </div>
-                            </div>
                         </div>
                     </div>
+
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-dark" id="btnGuardar">Guardar</button>
@@ -247,65 +194,30 @@ date_default_timezone_set('America/Bogota');
         </div>
     </div>
 
-    <!--Modal para editar una receta cóctel-->
-    <div class="modal fade" id="modalEditarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered " role="document">
+
+    <!--Modal para editar SubCategoria-->
+    <div class="modal fade" id="modalEditarSubCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="formEditarProducto" method="POST" enctype="multipart/form-data">
+                <form id="formEditarSubCategoria" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            
-                            <h5>Informaci&oacute;n b&aacute;sicae</h5>
-                            <hr>
-                            <label for="Pt_Nombre2" class="col-form-label">Nombre del producto:</label>
-                            <input type="text" class="form-control" id="Pt_Nombre2">
+                            <label for="SCat_Nombre" class="col-form-label">Nombre SubCategor&iacute;a:</label>
+                            <input type="text" class="form-control" id="SCat_Nombre">
 
-                            <label for="Pt_codigo2" class="col-form-label">C&oacute;digo:</label>
-                            <input type="text" class="form-control" id="Pt_codigo2">
+                            <label for="exampleFormControlSelect1" class="col-form-label">Categoria:</label>
+                            <select class="form-control" id="PK_ID_Categoria">
+                            </select>
 
-                            <label for="Pt_Presentacion2" class="col-form-label">Presentaci&oacute;n:</label>
-                            <input type="text" class="form-control" id="Pt_Presentacion2">
-                            
-                            <h5 class="mt-4">Unidades y precio</h5>
-                            <hr>
-
-                            <label for="Pt_Stock2" class="col-form-label">Unidades:</label>
-                            <input type="text" class="form-control" id="Pt_Stock2">
-
-                            <label for="Pt_Precio2" class="col-form-label">Precio:</label>
-                            <input type="text" class="form-control" id="Pt_Precio2" placeholder="$">
-
-                            <h5 class="mt-4">Otros datos</h5>
-                            <hr>
-
-                            <label for="Pt_Pais2" class="col-form-label">Pa&iacute;s del producto:</label>
-                            <input type="text" class="form-control" id="Pt_Pais2">
-
-                            <label for="Pt_Grados_alchol2" class="col-form-label">Grado Alcohol:</label>
-                            <input type="text" class="form-control" id="Pt_Grados_alchol2" >
-
-                            <label for="Pt_Color2" class="col-form-label">Color:</label>
-                            <input type="text" class="form-control" id="Pt_Color2" >
-
-                            <h5 class="mt-4">Imagen del producto</h5>
-                            <hr> 
-
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-cloud-upload-alt"></i></span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" onchange='cambiar2()' id="Pt_Imagen2" name="Pt_Imagen2" aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" id="info2" for="Pt_Imagen2">Seleciona la imagen</label>
-                                </div>
-                            </div>
                         </div>
                     </div>
+
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-dark" id="btnGuardar">Guardar</button>
@@ -314,7 +226,6 @@ date_default_timezone_set('America/Bogota');
             </div>
         </div>
     </div>
-
 
     <!--Jquery, Bootstrap, Popper-->
     <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
@@ -326,7 +237,7 @@ date_default_timezone_set('America/Bogota');
     <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
     <!--Main-->
     <script src="../js/main.js"></script>
-    <script src="../js/productoTable.js"></script>
+    <script src="../js/subcategoriaTable.js"></script>
 </body>
 
 </html>

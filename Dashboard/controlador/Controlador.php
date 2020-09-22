@@ -7,6 +7,7 @@ require_once '../modelo/Cliente.php';
 require_once '../modelo/Producto.php';
 require_once '../modelo/Coctel.php';
 require_once '../modelo/Categoria.php';
+require_once '../modelo/SubCategoria.php';
 require_once '../modelo/Banner.php';
 
 class Controlador{
@@ -98,7 +99,7 @@ class Controlador{
         $Coctel->setRC_Descripcion($RC_Descripcion);
         $Coctel->setRC_Image($RC_Image);
         // echo $RC_Image['file']['name'];
-        echo $Coctel->getRC_Autor();
+        // echo $Coctel->getRC_Autor();
         $consultar = new consultar();
         $consultar->saveRecetaCoctel($Coctel);
     }
@@ -188,53 +189,121 @@ class Controlador{
         $consultar->cargarPedido();
     }
 
+    //Módulo SubCategoria
+    public function cargarSubCategoria(){
+        $consultar = new consultar();
+        $consultar->cargarSubCategoria();
+    }
+
+    public function agregarSubCategoria($SCat_Nombre, $PK_ID_Categoria){
+        $Consultar = new consultar();
+        $SubCategoria = new SubCategoria($SCat_Nombre);
+        $Consultar->agregarSubCategoria($SubCategoria, $PK_ID_Categoria);
+    }
+
+    public function editarSubCategoria($id, $SCat_Nombre){
+        $Consultar = new consultar();
+        $SubCategoria = new SubCategoria($SCat_Nombre);
+        $SubCategoria->setPK_ID_SubCategoria($id);
+        $Consultar->editarSubCategoria($SubCategoria);
+    }
+
+    public function borrarSubCategoria($id, $SCat_Nombre){
+        $Consultar = new consultar();
+        $SubCategoria = new SubCategoria($SCat_Nombre);
+        $SubCategoria->setPK_ID_SubCategoria($id);
+        $Consultar->borrarSubCategoria($SubCategoria);
+    }
 
 
+    //Módulo Producto
 
+    public function cargarProducto(){
+        $Consultar =  new consultar();
+        $Consultar->cargarProducto();
+    }
 
+    public function agregarProducto($Pt_Nombre,$Pt_codigo,$Pt_Presentacion,$Pt_Stock,$Pt_Precio, 
+    $FK_ID_Categoria,$FK_ID_Marca,$Pt_Pais,$Pt_Grados_alchol, $Pt_Color, $Pt_Imagen){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function updateProducto($Pt_Nombre, $PK_ID_Producto, $Pt_codigo,$Pt_Precio, $Pt_Presentacion, $Pt_Pais, 
-    $Pt_Color,$Pt_Stock, $Pt_Grados_alchol){
         $Producto = new Producto($Pt_Nombre);
-        $Producto->setPK_ID_Producto($PK_ID_Producto);
         $Producto->setPt_codigo($Pt_codigo);
-        $Producto->setPt_Precio($Pt_Precio);
-
         $Producto->setPt_Presentacion($Pt_Presentacion);
-        $Producto->setPt_Pais($Pt_Pais);
-        $Producto->setPt_Color($Pt_Color);
         $Producto->setPt_Stock($Pt_Stock);
-
+        $Producto->setPt_Precio($Pt_Precio);
+        $Producto->setFK_ID_Categoria($FK_ID_Categoria);
+        $Producto->setFK_ID_Marca($FK_ID_Marca);
+        $Producto->setPt_Pais($Pt_Pais);
         $Producto->setPt_Grados_alchol($Pt_Grados_alchol);
-        $conexion =  new Consultar();
-        $conexion->upProducto($Producto);
+        $Producto->setPt_Color($Pt_Color);
+        $Producto->setPt_Imagen($Pt_Imagen);
+        $Consultar =  new consultar();
+        $Consultar->agregarProducto($Producto);
+
+
     }
 
-    public function deleteProducto($PK_ID_Producto){
-
-        $Producto = new Producto($PK_ID_Producto);
-        $conexion =  new Consultar();
-        $conexion->deleteProducto($Producto);
+    public function cargarEditarProducto($id, $Pt_Nombre){
+        $Producto = new Producto($Pt_Nombre);
+        $Producto->setPK_ID_Producto($id);
+        $Consultar =  new consultar();
+        $Consultar->cargarEditarProducto($Producto);
     }
+
+    public function editarProducto($id,$Pt_Nombre,$Pt_codigo,$Pt_Presentacion,$Pt_Stock,$Pt_Precio, 
+    $Pt_Pais,$Pt_Grados_alchol, $Pt_Color, $Pt_Imagen){
+
+        $Producto = new Producto($Pt_Nombre);
+        $Producto->setPK_ID_Producto($id);
+        $Producto->setPt_codigo($Pt_codigo);
+        $Producto->setPt_Presentacion($Pt_Presentacion);
+        $Producto->setPt_Stock($Pt_Stock);
+        $Producto->setPt_Precio($Pt_Precio);
+       
+        $Producto->setPt_Pais($Pt_Pais);
+        $Producto->setPt_Grados_alchol($Pt_Grados_alchol);
+        $Producto->setPt_Color($Pt_Color);
+        $Producto->setPt_Imagen($Pt_Imagen);
+        $Consultar =  new consultar();
+        $Consultar->editarProducto($Producto);
+
+
+    }
+
+    public function borrarProducto($id, $Pt_Nombre){
+        $Producto = new Producto($Pt_Nombre);
+        $Producto->setPK_ID_Producto($id);
+        $Consultar =  new consultar();
+        $Consultar->borrarProducto($Producto);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
     
     
 }
