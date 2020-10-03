@@ -6,6 +6,23 @@ require_once 'Controlador.php';
 if(isset($_POST['opcion'])){
     $opcion = $_POST['opcion'];
     switch ($opcion) {
+        //Módulo login
+        case 'login':
+            $Controlador = new Controlador();
+            $ses_email = $_POST['ses_email'];
+            $ses_password = $_POST['ses_password'];
+            $ses_password = hash('md5', $ses_password);
+            
+            if (!empty($ses_email)){
+                $ses_email = trim($ses_email);
+                $ses_email = filter_var($ses_email, FILTER_VALIDATE_EMAIL);
+            }
+            if (!empty($ses_password)){
+                $ses_password = trim($ses_password);
+                $ses_password = filter_var($ses_password, FILTER_SANITIZE_STRING);
+            }
+            $Controlador->consulSesion($ses_email, $ses_password);
+            break;
 
         //Módulo Marcas
         case 'agregarMarca':
@@ -482,24 +499,24 @@ if(isset($_POST['opcion'])){
 
 
 //Acá se capturan todos los datos
-if(isset($_GET['accion'])){
-    if($_GET['accion'] == 'login'){
-        $ses_password = $_POST['ses_password'];
-        $Controlador = new Controlador();
-        $Controlador->consulSesion(
-        $_POST['ses_email'],$_POST['ses_password'],md5($ses_password));
-    }
-}
+// if(isset($_GET['accion'])){
+//     if($_GET['accion'] == 'login'){
+//         $ses_password = $_POST['ses_password'];
+//         $Controlador = new Controlador();
+//         $Controlador->consulSesion(
+//         $_POST['ses_email'],$_POST['ses_password'],md5($ses_password));
+//     }
+// }
 
-if(isset($_GET['accion'])){
-    if($_GET['accion'] == 'updateUsers'){
-        $Controlador = new Controlador();
-        $ses_password = $_POST['ad_primaria'];
-        var_dump($ses_password);
-        $Controlador->updateUser($_POST['ad_primaria'], $_POST['ad_apellido'],
-        $_POST['ad_nombre'],$_POST['ad_email'], $_POST['ad_password']);
-    }
-}
+// if(isset($_GET['accion'])){
+//     if($_GET['accion'] == 'updateUsers'){
+//         $Controlador = new Controlador();
+//         $ses_password = $_POST['ad_primaria'];
+//         var_dump($ses_password);
+//         $Controlador->updateUser($_POST['ad_primaria'], $_POST['ad_apellido'],
+//         $_POST['ad_nombre'],$_POST['ad_email'], $_POST['ad_password']);
+//     }
+// }
 
 
 

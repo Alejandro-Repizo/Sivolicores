@@ -8,38 +8,34 @@ require_once 'ConexionBD.php';
 class Consultar {
 
     public function conSesion(Administrador $con){
-        try{ //nodo
-            $conexion  = new ConexionDB();
-            $conexion->abrir();
+
+        try{ 
+            //Login
+            $conexion = new ConexionBD();
             $email = $con->getEmail();
             $pass = $con->getPassword();
-            $sql = "SELECT PK_ID_Administrador, Ad_Nombre, Ad_Apellido, Ad_Email, Ad_Password FROM tbl_administrador WHERE Ad_Email = '$email' AND Ad_Password = '$pass'";
-            $conexion->consulta($sql);
-            $res=$conexion->obtenerFilasAfectadas();
-            print($res);
-            $conexion->cerrar();
-            if($res){ ///nodod
+            $consulta = "SELECT PK_ID_Administrador, Ad_Nombre, Ad_Apellido, Ad_Email, Ad_Password FROM tbl_administrador WHERE Ad_Email = '$email' AND Ad_Password = '$pass'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetch();
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if ($data != false) {
                 session_start();
-                $_SESSION['email'] = $email; //nodo 
-                header("Location:../vista/html/Dashboard.php");
-            
-            }else { //nodo 
-                echo("<script>
-                $(document).ready(function () {
-
-                    $('#btnIngreso').click(function () {  
-                        Swal.fire({        
-                            type: 'success',
-                            title: 'Éxito', 
-                            text: 'Marca registrada con éxito'      
-                        });
-                    });
-                });</script>");
+                $_SESSION['email'] = $email; //nodo     
+            } else {
+                $data = ['error'=> 'El usuario o la contraseña que ingresaste no coinciden con nuestros registros. Por favor, intenta de nuevo.'];
             }
-
-        } catch (Exception $ex) { //nodo
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
             $ex->getMessage();
         }
+        // Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+
     }
     
     //Módulo Marcas

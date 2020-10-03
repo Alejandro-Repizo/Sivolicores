@@ -51,7 +51,6 @@ $(document).ready(function () {
         e.preventDefault();
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
-
         nombreMarca = $.trim($("#nombreMarca").val());
         console.log(nombreMarca);
         if(formulario_valido()){
@@ -69,15 +68,16 @@ $(document).ready(function () {
                     });
                 }else{
                     tablaMarcas.ajax.reload(null, false);
-                }
-            }
-            peticionXML.onreadystatechange = function(){
-                if(peticionXML.readyState == 4 && peticionXML.status == 200){
                     Swal.fire({
                         type: 'success',
                         title: 'Éxito',
                         text: 'Marca registrada con éxito'
                     });
+                }
+            }
+            peticionXML.onreadystatechange = function(){
+                if(peticionXML.readyState == 4 && peticionXML.status == 200){
+                    console.log(peticionXML.status);
                 }
             }
             peticionXML.send(parametros);
