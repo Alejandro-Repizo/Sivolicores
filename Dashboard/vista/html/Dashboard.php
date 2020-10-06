@@ -1,5 +1,5 @@
 <?php 
- include '../../controlador/ViewData.php';
+
  require_once('../../modelo/sesion.php');
  date_default_timezone_set('America/Bogota');
 
@@ -37,7 +37,7 @@
         <div class="user-nav">
             <div class="btn-administrador" id="btn-administrador">
                 <i class="up user-icons fas fa-user"></i>
-                <p>Administradoar</p>
+                <p>Administrador</p>
                 <i class="down fas fa-caret-down"></i>
             </div>
 
@@ -45,7 +45,7 @@
                 <div class="opcion" id="opcion">
                     <div class="categorias">
                         <a href="Editar_perfil.php"><i class=" user-icons fas fa-user-edit"></i>Editar perfil</a></li>
-                        <a href="/mvcproyect/Dashboard/"><i class=" user-icons fas fa-lock-open"></i>Cerrar sesión</a></li>
+                        <a href="/mvcproyect/Dashboard/"><i class=" user-icons fas fa-lock-open"></i>Cerrar sesi&oacute;n</a></li>
                     </div>
                 </div>
 
@@ -64,9 +64,9 @@
             <ul class="menu">
 
                 <li><a href="Dashboard.php"><i class="cont-icons fas fa-home"></i>Dashboard</a></li>
-                <li><a href="#"><i class="cont-icons fas fa-boxes"></i>Cátalogo<i class="fa fa-chevron-down cont-icons-right"></i></a>
+                <li><a href="#"><i class="cont-icons fas fa-boxes"></i>C&aacute;talogo<i class="fa fa-chevron-down cont-icons-right"></i></a>
                     <ul>
-                        <li><a href="Mod_categorias.php"><i class="cont-icons fas fa-box-open"></i>Categorías</a></li>
+                        <li><a href="Mod_categorias.php"><i class="cont-icons fas fa-box-open"></i>Categor&iacute;as</a></li>
                         <li><a href="Mod_sub_categorias.php"><i class="cont-icons fas fa-box-open"></i>Sub-categor&iacute;as</a></li>
                         <li><a href="Mod_productos.php"><i class="cont-icons fas fa-wine-bottle"></i>Productos</a></li>
                         <li><a href="Mod_inventario.php"><i class="cont-icons fas fa-clipboard-list"></i>Inventario</a></li>
@@ -87,13 +87,13 @@
                     </ul>
                 </li>
                 <li><a href="Mod_banner.php"><i class="cont-icons fas fa-images"></i>Banners</a></li>
-                <li><a href="Mod_receta_coctel.php"><i class="cont-icons fas fa-cocktail"></i>Recetas cócteles</a></li>
+                <li><a href="Mod_receta_coctel.php"><i class="cont-icons fas fa-cocktail"></i>Recetas c&oacute;cteles</a></li>
 
             </ul>
         </div>
         <!--Barra lateral izquierda estadísticas-->
         <div class="barra-lat-information">
-            <h6>ESTADÍSTICAS RÁPIDAS</h6>
+            <h6>ESTAD&Iacute;STICAS R&Aacute;PIDAS</h6>
             <ul>
                 <hr>
                 <li><i class="inf-icons fas fa-truck"></i>NUEVOS PEDIDOS HOY</a>
@@ -127,7 +127,7 @@
         <div class="sub-central-box">
            <!--Opciones centrales-->
            <div class="sbc-opcion">
-                <div class="sbc-box"><a href="Mod_categorias.php"><i class="sbc-icons fas fa-box-open"></i>Categorías</a></div>
+                <div class="sbc-box"><a href="Mod_categorias.php"><i class="sbc-icons fas fa-box-open"></i>Categor&iacute;as</a></div>
                 <div class="sbc-box"><a href="Mod_productos.php"><i class="sbc-icons fas fa-wine-bottle"></i>Productos</a></div>
                 <div class="sbc-box"><a href="Mod_inventario.php"><i class="sbc-icons fas fa-clipboard-list"></i>Inventario</a></div>
                 <div class="sbc-box"><a href="Mod_clientes.php"><i class="sbc-icons fas fa-users"></i>Clientes</a></div>
@@ -140,7 +140,7 @@
                     <div class="sbc-inf-top">
                         <div class="sbc-inf-top-left">
                             <i class="sbc-icons-top-left fas fa-truck"></i>
-                            <h6>Últimos 10 pedidos</h6>
+                            <h6>&Uacute;ltimos 10 pedidos</h6>
                         </div>
                         <a href="Mod_pedidos.php">Todos los pedidos</a>
                     </div>
@@ -222,7 +222,7 @@
                     <div class="sbc-cli-top">
                         <div class="sbc-cli-top-left">
                             <i class="sbc-cli-icons-top-left fas fa-users"></i>
-                            <h6>Últimos clientes registrados</h6>
+                            <h6>&Uacute;ltimos clientes registrados</h6>
                         </div>
                     </div>
                     <table>
@@ -234,9 +234,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                            cargarClientesDash();
-                            ?>
+                        <tr>
+                            <td>".$mostar['Cl_Nombre']."</td>
+                            <td>".$mostar['Cl_email']."</td>
+                            <td>
+                            <a href='../../controlador/DataRoute.php?deleteCliente=".$mostar['PK_ID_Cliente']."'>
+                                    <i class='fas fa-trash-alt'></i></a>
+                                </a>
+                            </td>
+                        </tr>
                         </tbody>
                         <!-- <tbody>
                             <tr>
@@ -287,7 +293,7 @@
                     <div class="sbc-est-top">
                         <div class="sbc-est-top-left">
                             <i class="sbc-est-icons-top-left fas fa-chart-area"></i>
-                            <h6>Estadística</h6>
+                            <h6>Estad&iacute;sticas</h6>
                         </div>
                     </div>
                     <i class="temporal far fa-chart-bar"></i>
@@ -297,7 +303,12 @@
         </div>
     </div>
 
-    <script src="../js/jquery.js"></script>
+
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    
+     <!--Main-->
     <script src="../js/main.js"></script>
 </body>
 

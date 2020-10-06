@@ -61,7 +61,6 @@ $(document).ready(function(){
         RC_Image = $.trim($('#RC_Image').val()); //Estó solo es para la función formulario_Valido
            
         if(formulario_valido()){
-            console.log('OK!');
             var formData = new FormData();
             var files = $("#RC_Image")[0].files[0];
 
@@ -115,12 +114,10 @@ $(document).ready(function(){
            
         if(formulario_valido2()){
             var parametros = 'id=' + id + '&RC_Nombre=' + RC_Nombre + '&RC_Receta='+ RC_Receta + '&RC_Autor='+ RC_Autor + '&RC_Descripcion='+ RC_Descripcion + '&opcion=' + opcion;
-            console.log(parametros);
             //Establecer el header de como vamos a enviar los datos
             peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             peticionXML.onload = function(){ 
                 var datos = JSON.parse(peticionXML.responseText);
-                console.log(datos);
                 if(datos.error){
                     Swal.fire({
                         type: 'warning',
@@ -130,7 +127,6 @@ $(document).ready(function(){
                 }else{
                     tablaCoctel.ajax.reload(null, false);
                 }
-                tablaCoctel.ajax.reload(null, false);
             }
             peticionXML.onreadystatechange = function(){
                 if(peticionXML.readyState == 4 && peticionXML.status == 200){
@@ -159,16 +155,13 @@ $(document).ready(function(){
         fila = $(this).closest("tr");
         id = parseInt(fila.find('td:eq(0)').text());
         RC_Nombre = fila.find('td:eq(2)').text();
-
         //Inicializamos una petición XML
         var peticionXML = new XMLHttpRequest();
         peticionXML.open('POST', '../../controlador/DataRoute.php');
         //Acá una inicializamos y declaramos una variable que va a tener todos los datos
         var parametros = 'id=' + id + '&RC_Nombre=' + RC_Nombre + '&opcion=' + opcion;
-        console.log(parametros);
         //Establecer el header de como vamos a enviar los datos
         peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
         peticionXML.onload = function(){
             //Pasamos conversión a JSON
             var datos = JSON.parse(peticionXML.responseText);
@@ -186,12 +179,9 @@ $(document).ready(function(){
                     $("#RC_Autor2").val(coctel.RC_Autor);
                     $("#RC_Descripcion2").val(coctel.RC_Descripcion);
                 });
-               
             }
         }
-
         peticionXML.send(parametros);
-
         //Opciones de color y demás
         $(".modal-header").css("background-color", "#6C757D");
         $(".modal-title").text("Editar receta cóctel").css("color", "#fff");;
@@ -219,7 +209,7 @@ $(document).ready(function(){
             if (result.value) {
                 Swal.fire(
                     '¡Eliminado!',
-                    'La marca a sido eliminada.',
+                    'La recetá cóctel a sido eliminada.',
                     'success'
                 )
                 $.ajax({

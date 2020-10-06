@@ -72,7 +72,6 @@ $(document).ready(function(){
             }
         }
         controladorCargaCategoria++;
-        console.log("prueba de pk_id_Categoria" + controladorCargaCategoria);
         //Acá enviamos la petición pero pos acá en está no va nada 
         peticionXML.send(parametros);
     });
@@ -84,18 +83,15 @@ $(document).ready(function(){
         opcion = "agregarSubCategoria"; //Agregar
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
-
+        //Con esto se captura los datos de la tabla.
         SCat_Nombre = $.trim($("#SCat_Nombre").val());
         PK_ID_Categoria = $.trim($("#PK_ID_Categoria").val());
-        console.log(PK_ID_Categoria);
 
         if(formulario_valido()){
             var parametros = 'id='+ id +'&SCat_Nombre='+ SCat_Nombre + '&PK_ID_Categoria='+ PK_ID_Categoria +'&opcion=' + opcion;
-            console.log(parametros);
             peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             peticionXML.onload = function(){ 
                 var datos = JSON.parse(peticionXML.responseText);
-                // console.log(datos);
                 if(datos.error){
                     Swal.fire({
                         type: 'warning',
@@ -137,11 +133,9 @@ $(document).ready(function(){
 
         if(formulario_valido()){
             var parametros = 'id='+ id +'&SCat_Nombre='+ SCat_Nombre  +'&opcion=' + opcion;
-            console.log(parametros);
             peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             peticionXML.onload = function(){ 
                 var datos = JSON.parse(peticionXML.responseText);
-                // console.log(datos);
                 if(datos.error){
                     Swal.fire({
                         type: 'warning',
@@ -222,8 +216,6 @@ $(document).ready(function(){
             }
         });
     });
-
-
 
     //función para válidar datos vácios
     function formulario_valido() { 

@@ -10,23 +10,30 @@ require_once '../modelo/Categoria.php';
 require_once '../modelo/SubCategoria.php';
 require_once '../modelo/Banner.php';
 
+//Es el puente entre los datos y la sentencia SQL
 class Controlador{
 
-    //Es el puente entre los datos y la sentencia SQL
+    //Módulo Login
     public function consulSesion($email, $password){
         $admin = new Administrador($email, $password);
         $consultar =  new Consultar();
         $consultar->conSesion($admin);
     }
 
-    public function updateUser($id, $apellido, $nombre ,$email, $password){
-        $admin = new Administrador($email, $password);
-        $admin->setNombre($nombre);
-        $admin->setApellido($apellido);
-        $admin->setId($id);
-        $consultar =  new consultar();
-        $consultar->updateUsers($admin);
+    public function cargarEditarUsuario(){
+        $consultar = new consultar();
+        $consultar->cargarEditarUsuario();
     }
+
+    public function editarUsuario($PK_ID_Administrador, $Ad_Nombre, $Ad_Apellido, $Ad_Email, $Ad_Password){
+        $admin = new Administrador($Ad_Email, $Ad_Password);
+        $admin->setNombre($Ad_Nombre);
+        $admin->setApellido($Ad_Apellido);
+        $admin->setId($PK_ID_Administrador);
+        $consultar =  new consultar();
+        $consultar->editarUsuario($admin);
+    }
+
 
 
     //Módulo Marcas
@@ -98,8 +105,6 @@ class Controlador{
         $Coctel->setRC_Autor($RC_Autor);
         $Coctel->setRC_Descripcion($RC_Descripcion);
         $Coctel->setRC_Image($RC_Image);
-        // echo $RC_Image['file']['name'];
-        // echo $Coctel->getRC_Autor();
         $consultar = new consultar();
         $consultar->saveRecetaCoctel($Coctel);
     }

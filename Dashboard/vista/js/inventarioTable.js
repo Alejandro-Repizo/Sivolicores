@@ -49,18 +49,15 @@ $(document).ready(function () {
         e.preventDefault();
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
-
+        //Con esto se captura los datos de la tabla.
         Pt_Precio = $.trim($("#Pt_Precio").val());
         Pt_Stock = $.trim($("#Pt_Stock").val());
-        console.log(Pt_Precio);
-
+    
         if (formulario_valido()) {
             var parametros = 'id=' + id + '&Pt_Precio=' + Pt_Precio +'&Pt_Stock='+ Pt_Stock +'&Pt_Nombre='+Pt_Nombre + '&opcion=' + opcion;
-            console.log(parametros);
             peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             peticionXML.onload = function () {
                 var datos = JSON.parse(peticionXML.responseText);
-                console.log(datos);
                 if (datos.error) {
                     Swal.fire({
                         type: 'warning',

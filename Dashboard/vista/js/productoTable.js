@@ -109,7 +109,6 @@ $(document).ready(function(){
     $("#formNuevoProducto").submit(function (e) {
         e.preventDefault();
         opcion = "agregarProducto";
-        console.log(opcion);
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
 
@@ -126,7 +125,6 @@ $(document).ready(function(){
         Pt_Imagen = $.trim($('#Pt_Imagen').val()); //Estó solo es para la función formulario_Valido
            
         if(formulario_valido()){
-            console.log('OK!');
             var formData = new FormData();
             var files = $("#Pt_Imagen")[0].files[0];
 
@@ -177,10 +175,9 @@ $(document).ready(function(){
     $("#formEditarProducto").submit(function (e) {
         e.preventDefault();
         opcion = "editarProducto";
-        console.log(opcion);
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
-
+         //Con esto se captura los datos de la tabla.
         Pt_Nombre = $.trim($("#Pt_Nombre2").val());
         Pt_codigo = $.trim($("#Pt_codigo2").val());
         Pt_Presentacion = $.trim($("#Pt_Presentacion2").val());
@@ -193,7 +190,7 @@ $(document).ready(function(){
         Pt_Imagen = $.trim($('#Pt_Imagen2').val()); //Estó solo es para la función formulario_Valido
            
         if(formulario_valido2()){
-            console.log('OK!');
+            
             var formData = new FormData();
             var files = $("#Pt_Imagen2")[0].files[0];
 
@@ -252,7 +249,6 @@ $(document).ready(function(){
         peticionXML.open('POST', '../../controlador/DataRoute.php');
         //Acá una inicializamos y declaramos una variable que va a tener todos los datos
         var parametros = 'id=' + id + '&Pt_Nombre=' + Pt_Nombre + '&opcion=' + opcion;
-        // console.log(parametros);
         //Establecer el header de como vamos a enviar los datos
         peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
@@ -281,7 +277,6 @@ $(document).ready(function(){
                
             }
         }
-
         peticionXML.send(parametros);
 
         //Opciones de color y demás

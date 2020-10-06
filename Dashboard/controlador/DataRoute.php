@@ -6,11 +6,13 @@ require_once 'Controlador.php';
 if(isset($_POST['opcion'])){
     $opcion = $_POST['opcion'];
     switch ($opcion) {
+
         //Módulo login
         case 'login':
             $Controlador = new Controlador();
             $ses_email = $_POST['ses_email'];
             $ses_password = $_POST['ses_password'];
+            $_SESSION['password'] = $ses_password;
             $ses_password = hash('md5', $ses_password);
             
             if (!empty($ses_email)){
@@ -22,6 +24,41 @@ if(isset($_POST['opcion'])){
                 $ses_password = filter_var($ses_password, FILTER_SANITIZE_STRING);
             }
             $Controlador->consulSesion($ses_email, $ses_password);
+            break;
+
+        case 'cargarEditarUsuario':
+            $Controlador = new Controlador();
+            $Controlador->cargarEditarUsuario();
+            break;
+        
+        case 'editarUsuario':
+            $Controlador = new Controlador();
+            $PK_ID_Administrador = $_POST['id'];
+            $Ad_Nombre = $_POST['Ad_Nombre'];
+            $Ad_Apellido = $_POST['Ad_Apellido'];
+            $Ad_Email = $_POST['Ad_Email'];
+            $Ad_Password = $_POST['Ad_Password'];
+            
+            if (!empty($Ad_Password)) {
+                $Ad_Password = hash('md5', $Ad_Password);
+            }
+            if (!empty($PK_ID_Administrador)) {
+                $PK_ID_Administrador = trim( $PK_ID_Administrador);
+                $PK_ID_Administrador = filter_var($PK_ID_Administrador, FILTER_VALIDATE_INT);
+            }
+            if (!empty($Ad_Nombre)) {
+                $Ad_Nombre = trim( $Ad_Nombre);
+                $Ad_Nombre = filter_var($Ad_Nombre, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($Ad_Apellido)) {
+                $Ad_Apellido = trim( $Ad_Apellido);
+                $Ad_Apellido = filter_var($Ad_Apellido, FILTER_SANITIZE_STRING);
+            }
+            if (!empty($Ad_Email)) {
+                $Ad_Email = trim( $Ad_Email);
+                $Ad_Email = filter_var($Ad_Email, FILTER_VALIDATE_EMAIL);
+            }
+            $Controlador->editarUsuario($PK_ID_Administrador, $Ad_Nombre, $Ad_Apellido, $Ad_Email, $Ad_Password );
             break;
 
         //Módulo Marcas
@@ -126,7 +163,7 @@ if(isset($_POST['opcion'])){
             $RC_Autor = $_POST['RC_Autor'];
             $RC_Descripcion = $_POST['RC_Descripcion'];
             $RC_Image = $_FILES;
-            
+    
             // echo $RC_Image['file']['name'];
             // echo $RC_Image['file']['tmp_name'];
             if(!empty($RC_Nombre)){
@@ -144,7 +181,7 @@ if(isset($_POST['opcion'])){
             if (!empty($RC_Receta)) {
                 $RC_Receta = trim($RC_Receta);
                 $RC_Receta = filter_var($RC_Receta , FILTER_SANITIZE_STRING);
-            };
+            }
             $Controlador->saveRecetaCoctel($RC_Nombre, $RC_Receta, $RC_Autor, $RC_Descripcion, $RC_Image);
             break;
 
@@ -170,7 +207,7 @@ if(isset($_POST['opcion'])){
             $RC_Receta = $_POST['RC_Receta'];
             $RC_Autor = $_POST['RC_Autor'];
             $RC_Descripcion = $_POST['RC_Descripcion'];
-            echo $RC_Nombre;
+        
             if(!empty($id)){
                 $id = trim($id);
                 $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -190,7 +227,7 @@ if(isset($_POST['opcion'])){
             if (!empty($RC_Receta)) {
                 $RC_Receta = trim($RC_Receta);
                 $RC_Receta = filter_var($RC_Receta , FILTER_SANITIZE_STRING);
-            };
+            }
             $controlador->editarCoctel($id, $RC_Nombre, $RC_Receta, $RC_Autor, $RC_Descripcion);
             break;
             
@@ -348,7 +385,6 @@ if(isset($_POST['opcion'])){
             break;  
         
         //Módulo producto
-
         case 'cargarProducto':
             $controlador = new Controlador();
             $controlador->cargarProducto();
@@ -489,55 +525,3 @@ if(isset($_POST['opcion'])){
 }
 
 
-
-
-
-
-
-
-
-
-
-//Acá se capturan todos los datos
-// if(isset($_GET['accion'])){
-//     if($_GET['accion'] == 'login'){
-//         $ses_password = $_POST['ses_password'];
-//         $Controlador = new Controlador();
-//         $Controlador->consulSesion(
-//         $_POST['ses_email'],$_POST['ses_password'],md5($ses_password));
-//     }
-// }
-
-// if(isset($_GET['accion'])){
-//     if($_GET['accion'] == 'updateUsers'){
-//         $Controlador = new Controlador();
-//         $ses_password = $_POST['ad_primaria'];
-//         var_dump($ses_password);
-//         $Controlador->updateUser($_POST['ad_primaria'], $_POST['ad_apellido'],
-//         $_POST['ad_nombre'],$_POST['ad_email'], $_POST['ad_password']);
-//     }
-// }
-
-
-
-
-
-
-// if(isset($_GET['editProducto'])){
-//     $controlador = new Controlador();
-//     $a= $_GET['editProducto'];
-//     var_dump($a);
-    
-// }
-
-// if(isset($_GET['accion'])){
-//     if($_GET['accion'] == 'updateProducto'){
-//         $controlador = new Controlador();
-//         $controlador->updateProducto($_POST['Pt_Nombre'], $_POST['PK_ID_Producto'], $_POST['Pt_codigo'], $_POST['Pt_Precio'], $_POST['Pt_Presentacion'], $_POST['Pt_Pais'], $_POST['Pt_Color'],
-//          $_POST['Pt_Stock'], $_POST['Pt_Grados_alchol']);
-//     }
-// }
-// if(isset($_GET['PK_ID_Producto'])){
-//     $Controlador = new Controlador();
-//     $Controlador->deleteProducto($_GET['PK_ID_Producto']);
-// }

@@ -43,11 +43,9 @@ $(document).ready(function(){
         e.preventDefault();
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
-
+        //Con esto se captura los datos de la tabla.
         B_Nombre = $.trim($("#B_Nombre").val());
-           
         if(formulario_valido()){
-            console.log('OK!');
             var formData = new FormData();
             var files = $("#B_Imagen")[0].files[0];
 

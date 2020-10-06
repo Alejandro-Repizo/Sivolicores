@@ -35,11 +35,9 @@
             </form>
             <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alerta" style="display: none;">
                 <h4 id="mensaje_error" style="font-size: 13px; line-height: 1.4;"></h4>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
         </div>
+        
     </div>
     <!--Jquery, Bootstrap, Popper-->
     <script src="vista/assets/jquery/jquery-3.3.1.min.js"></script>

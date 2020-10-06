@@ -10,7 +10,6 @@ $(document).ready(function () {
         ses_password = $.trim($("#ses_password").val());
         
         if (formulario_valido()) {
-
             var parametros = 'ses_email=' + ses_email + '&ses_password=' + ses_password + '&opcion=' + opcion;
             peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             peticionXML.onload  = function() {

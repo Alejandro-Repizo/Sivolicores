@@ -51,21 +51,15 @@ $(document).ready(function(){
     $("#formNuevaCategoria").submit(function (e) {
         //Quitamos el evento al submit de recarga
         e.preventDefault();
-
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
-
+        //Con esto se captura los datos de la tabla.
         Cat_Nombre = $.trim($("#Cat_Nombre").val());
-        // console.log(Cat_Nombre);
-
         if(formulario_valido()){
-
             var parametros = 'id='+ id +'&Cat_Nombre='+ Cat_Nombre +'&opcion=' + opcion;
-            console.log(parametros);
             peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             peticionXML.onload = function(){ 
                 var datos = JSON.parse(peticionXML.responseText);
-                // console.log(datos);
                 if(datos.error){
                     Swal.fire({
                         type: 'warning',
@@ -102,7 +96,6 @@ $(document).ready(function(){
         fila = $(this).closest("tr");
         id = parseInt(fila.find('td:eq(0)').text()); //Con esto se captura los datos de la tabla.
         Cat_Nombre = fila.find('td:eq(1)').text();
-        console.log(Cat_Nombre);
 
         $("#Cat_Nombre").val(Cat_Nombre); //seteamos los valores recolectados en la tabla hacia los input's.
 
@@ -147,8 +140,6 @@ $(document).ready(function(){
             }
         });
     });
-
-
 
     //función para válidar datos vácios
     function formulario_valido() { 

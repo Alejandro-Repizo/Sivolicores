@@ -52,14 +52,12 @@ $(document).ready(function () {
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
         nombreMarca = $.trim($("#nombreMarca").val());
-        console.log(nombreMarca);
+        
         if(formulario_valido()){
             var parametros = 'id='+ id +'&nombreMarca='+ nombreMarca +'&opcion=' + opcion;
-            console.log('OK!');
             peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             peticionXML.onload = function(){ 
                 var datos = JSON.parse(peticionXML.responseText);
-                console.log(datos);
                 if(datos.error){
                     Swal.fire({
                         type: 'warning',

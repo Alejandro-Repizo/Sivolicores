@@ -1,12 +1,13 @@
 <?php 
 
-require_once  'ConexionDB.php';
 require_once 'ConexionBD.php';
+require_once 'sesion.php';
 
 
 //Acá se realizan todas las consultas SQL
 class Consultar {
-
+    
+    //Módulo Login
     public function conSesion(Administrador $con){
 
         try{ 
@@ -19,12 +20,13 @@ class Consultar {
             $resultado->execute();
 
             //Coloca todo en una arreglo
-            $data = $resultado->fetch();
+            $data = $resultado->fetch(PDO::FETCH_ASSOC);
 
             //Se comprueba si la variable data viene vacia y dado el caso envia un error
             if ($data != false) {
-                session_start();
-                $_SESSION['email'] = $email; //nodo     
+                $_SESSION['email'] = $email; //nodo    
+                $PK_ID_Administrador = $data['PK_ID_Administrador'];
+                $_SESSION['llave'] = $PK_ID_Administrador;
             } else {
                 $data = ['error'=> 'El usuario o la contraseña que ingresaste no coinciden con nuestros registros. Por favor, intenta de nuevo.'];
             }
@@ -37,30 +39,79 @@ class Consultar {
         print json_encode($data, JSON_UNESCAPED_UNICODE);
 
     }
-    
-    //Módulo Marcas
-    public function updateUsers(Administrador $con){
+
+    public function cargarEditarUsuario(){
         try{
-            $conexion  = new ConexionDB();
-            $conexion->abrir();
+            //Cargar datos al formulario editar administrador
+            $id = $_SESSION['llave'];
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Administrador, Ad_Nombre, Ad_Apellido, Ad_Email, Ad_Password FROM tbl_administrador WHERE PK_ID_Administrador = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function editarUsuario(Administrador $con){
+        try{
+            $conexion = new ConexionBD();
             $pk = $con->getId();
             $up_nombre = $con->getNombre();
             $up_apellido = $con->getApellido();
             $up_email = $con->getEmail();
             $up_password = $con->getPassword();
-            $sql = "UPDATE tbl_administrador SET Ad_Nombre = '$up_nombre', Ad_Apellido = '$up_apellido', 
-            Ad_Email = '$up_email', Ad_Password = '$up_password' WHERE PK_ID_Administrador = '$pk'";
-            $conexion->consulta($sql);
-            $res=$conexion->obtenerFilasAfectadas();
-            print($res);
-            $conexion->cerrar();
+          
+            if (empty($up_password)) {
+                //Actualizamos los datos sin la contrasena
+                $consulta = "UPDATE tbl_administrador SET Ad_Nombre = '$up_nombre', Ad_Apellido = '$up_apellido', 
+                Ad_Email = '$up_email'WHERE PK_ID_Administrador = '$pk'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
 
-            if($res == TRUE){
-                header("Location:../vista/html/Editar_perfil.php");
+            }else {
+                //Actualizamos losd datos con contrasena
+                $consulta = "UPDATE tbl_administrador SET Ad_Nombre = '$up_nombre', Ad_Apellido = '$up_apellido', 
+                Ad_Email = '$up_email', Ad_Password = '$up_password' WHERE PK_ID_Administrador = '$pk'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
             }
+            
+            //Cargar datos al formulario editar administrador
+            $consulta = "SELECT PK_ID_Administrador, Ad_Nombre, Ad_Apellido, Ad_Email FROM tbl_administrador WHERE PK_ID_Administrador = '$pk'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+           
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }else{
+                $data = ['correcto' => true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
         } catch (Exception $ex) {
             $ex->getMessage();
         }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     //Módulo Marcas
@@ -207,6 +258,7 @@ class Consultar {
         //Envíar el arreglo final en formato JSON a JS
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
+
     public function deleteCliente(Cliente $con){
         try{    
             //Borrar Cliente
@@ -328,7 +380,7 @@ class Consultar {
 
     public function saveRecetaCoctel(Coctel $con){
         try{
-            //Cargar datos a la tabla receta coctel
+            //Guardar receta 
             $RC_Image = $con->getRC_Image();
             $RC_Nombre = $con->getRC_Nombre();
             $RC_Receta = $con->getRC_Receta();
@@ -362,7 +414,7 @@ class Consultar {
 
     public function cargarEditarReceta(Coctel $con){
         try{
-            //Cargar datos a la tabla receta coctel
+            //Cargar datos para editar
             $conexion = new ConexionBD();
             $id = $con->getPK_ID_Receta();
             $RC_Nombre = $con->getRC_Nombre();
@@ -389,20 +441,19 @@ class Consultar {
 
     public function editarCoctel(Coctel $con){
         try{
-            //Cargar datos a la tabla receta coctel
+            //Editar receta 
             $conexion = new ConexionBD();
             $id = $con->getPK_ID_Receta();
             $RC_Nombre = $con->getRC_Nombre();
             $RC_Receta = $con->getRC_Receta();
             $RC_Autor= $con->getRC_Autor();
-            echo $RC_Autor;
             $RC_Descripcion = $con->getRC_Descripcion();
             $consulta = "UPDATE tbl_receta_coctel SET RC_Nombre = '$RC_Nombre', RC_Receta = '$RC_Receta',RC_Autor = '$RC_Autor',RC_Descripcion = '$RC_Descripcion'  WHERE PK_ID_Receta = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             //Consulta último registro generado
-            $consulta = "SELECT PK_ID_Receta,RC_Image,RC_Nombre,RC_Fecha FROM tbl_receta_coctel ORDER BY PK_ID_Inventario DESC LIMIT 1";
+            $consulta = "SELECT PK_ID_Receta,RC_Image,RC_Nombre,RC_Fecha FROM tbl_receta_coctel ORDER BY PK_ID_Receta DESC LIMIT 1";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -411,7 +462,7 @@ class Consultar {
 
             //Se comprueba si la variable data viene vacia y dado el caso envia un error
             if($data != TRUE){
-                $data = ['error'=> true];
+                $data = ['error' => true];
             }
 
             //Cerrar conexión
@@ -425,14 +476,28 @@ class Consultar {
 
     public function deleteRecetaCoctel(Coctel $con){
         try{
-            //Borrar
+            //Borrar receta coctel
             $conexion = new ConexionBD();
             $RC_Nombre = $con->getRC_Nombre();
             $id = $con->getPK_ID_Receta();
+
+            //Consulta para traer nombre imagen
+            $consulta = "SELECT RC_Image FROM tbl_receta_coctel WHERE PK_ID_Receta = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            
+            //Traemos el nombre de la imagen que esta en la base de datos
+            $Receta_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+            $Nombre_img_receta = $Receta_Image['RC_Image'];
+
+            //Con esta funcion la eliminamos
+            unlink("../vista/imagenes/imagenesBD/".$Nombre_img_receta);
+            
+            //Consulta para eliminar
             $consulta = "DELETE FROM tbl_receta_coctel WHERE PK_ID_Receta = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
-
+            
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
@@ -505,7 +570,7 @@ class Consultar {
      //Módulo cargar categorias
      public function cargarCategoria(){
         try {
-            //Cargar datos a la tabla reporte venta
+            //Cargar datos a la tabla categorias
             $conexion = new ConexionBD();
             $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM Tbl_Categoria";
             $resultado = $conexion->prepare($consulta);
@@ -556,7 +621,7 @@ class Consultar {
 
     public function editarCategoria(Categoria $con){
         try {
-            //Guardar categoria
+            //Editar categoria
             $conexion = new ConexionBD();
             $Cat_Nombre = $con->getNombre();
             $id = $con->getPK_ID_Categoria();
@@ -589,7 +654,7 @@ class Consultar {
     
     public function borrarCategoria(Categoria $con){
         try {
-            //Guardar categoria
+            //Borrar categoria
             $conexion = new ConexionBD();
             // $Cat_Nombre = $con->getNombre();
             $id = $con->getPK_ID_Categoria();
@@ -648,12 +713,10 @@ class Consultar {
 
     public function editarBanner(Banner $con){
         try{
-            //Cargar datos a la tabla banner
+            //Editar
             $B_Imagen = $con->getB_Imagen();
             $B_Nombre = $con->getB_Nombre();
             $PK_ID_Banner = $con->getPK_ID_Banner();
-      
-            //acá está el error
             $check = getimagesize($B_Imagen['file']['tmp_name']);
            if($check != false){
                 $carpeta_destino ='../vista/imagenes/Banner/';
@@ -666,17 +729,15 @@ class Consultar {
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
             
-                //Cerrar conexión
-                $conexion = null;
             }else{
                 $conexion = new ConexionBD();
                 $consulta = "UPDATE tbl_banner SET B_Nombre = '$B_Nombre' WHERE PK_ID_Banner = '$PK_ID_Banner'";
                 $resultado = $conexion->prepare($consulta);
-                $resultado->execute();
-            
-                //Cerrar conexión
-                $conexion = null;
+                $resultado->execute(); 
             }
+
+            //Cerrar conexión
+            $conexion = null;
         }catch (Exception $ex) {
             $ex->getMessage();
         }
@@ -684,9 +745,11 @@ class Consultar {
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
+
+    //Módulo Pedidos
     public function cargarPedido(){
         try{
-            //Cargar datos a la tabla receta coctel
+            //Cargar datos a pedidos
             $conexion = new ConexionBD();
             $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Ped_Fecha, Pt_Nombre, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Car_Total, Ped_Estado FROM tbl_pedido
              JOIN tbl_carrito_pedidos ON tbl_carrito_pedidos.PK_ID_Carrito = tbl_pedido.FK_ID_Carrito 
@@ -713,10 +776,10 @@ class Consultar {
     }
 
 
-    //Módulo cargar Subcategorias
+    //Módulo Subcategorias
     public function cargarSubCategoria(){
         try {
-            //Cargar datos a la tabla reporte venta
+            //Cargar datos a la tabla subcategoria
             $conexion = new ConexionBD();
             $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre FROM tbl_subcategoria";
             $resultado = $conexion->prepare($consulta);
@@ -787,7 +850,7 @@ class Consultar {
 
     public function editarSubCategoria(SubCategoria $con){
         try {
-            //Guardar Subcategoria
+            //Editar subcategoria
             $conexion = new ConexionBD();
             $SCat_Nombre = $con->getNombre();
             $id = $con->getPK_ID_SubCategoria();
@@ -852,10 +915,9 @@ class Consultar {
 
 
     //Módulo Producto
-
     public function cargarProducto(){
         try{
-            //Cargar datos de la tabla tbl_banner
+            //Cargar datos de la tabla productos
             $conexion = new ConexionBD();
             $consulta = "SELECT  PK_ID_Producto, Pt_Imagen, Pt_Nombre, Pt_Precio from tbl_producto";
             $resultado = $conexion->prepare($consulta);
@@ -882,7 +944,7 @@ class Consultar {
 
     public function agregarProducto(Producto $con){
         try{
-            //Cargar datos a la tabla banner
+            //Cargar datos a la tabla productos
             $Pt_Nombre = $con->getPt_Nombre();
             $Pt_codigo = $con->getPt_codigo();
             $Pt_Presentacion = $con->getPt_Presentacion();
@@ -895,10 +957,9 @@ class Consultar {
             $Pt_Color = $con->getPt_Color();
             $Pt_Imagen = $con->getPt_Imagen();
             
-      
             //acá está el error
             $check = getimagesize($Pt_Imagen['file']['tmp_name']);
-           if($check != false){
+            if($check != false){
                 $carpeta_destino ='../vista/imagenes/Productos/';
                 $archivo_subido = $carpeta_destino . $Pt_Imagen['file']['name'];
                 #Con está función movemos la foto
@@ -926,7 +987,7 @@ class Consultar {
     
     public function cargarEditarProducto(Producto $con){
         try{
-            //Cargar datos a la tabla receta coctel
+            //Cargar datos para editar producto
             $conexion = new ConexionBD();
             $id = $con->getPK_ID_Producto();
             $Pt_Nombre = $con->getPt_Nombre();
@@ -956,7 +1017,7 @@ class Consultar {
 
     public function editarProducto(Producto $con){
         try{
-            //Cargar datos a la tabla banner
+            //Editar producto
             $id = $con->getPK_ID_Producto();
             $Pt_Nombre = $con->getPt_Nombre();
             $Pt_codigo = $con->getPt_codigo();
@@ -972,7 +1033,7 @@ class Consultar {
       
             //acá está el error
             $check = getimagesize($Pt_Imagen['file']['tmp_name']);
-           if($check != false){
+            if($check != false){
                 $carpeta_destino ='../vista/imagenes/Productos/';
                 $archivo_subido = $carpeta_destino . $Pt_Imagen['file']['name'];
                 #Con está función movemos la foto
@@ -986,8 +1047,6 @@ class Consultar {
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
             
-                //Cerrar conexión
-                $conexion = null;
             }else{
                 $conexion = new ConexionBD();
                 $consulta = "UPDATE tbl_producto SET Pt_codigo = '$Pt_codigo', Pt_Nombre = '$Pt_Nombre', Pt_Precio = '$Pt_Precio', 
@@ -995,10 +1054,10 @@ class Consultar {
                 Pt_Color='$Pt_Color', Pt_Stock = '$Pt_Stock'  WHERE PK_ID_Producto = '$id'";
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
-
-                //Cerrar conexión
-                $conexion = null;
             }
+
+            //Cerrar conexión
+            $conexion = null;
         }catch (Exception $ex) {
             $ex->getMessage();
         }
@@ -1008,21 +1067,30 @@ class Consultar {
 
     public function borrarProducto(Producto $con){
         try{
-            //Cargar datos de la tabla tbl_banner
+            //Borrar producto
             $conexion = new ConexionBD();
             $id = $con->getPK_ID_Producto();
             $Pt_Nombre = $con->getPt_Nombre();
+
+            //Consulta para traer nombre imagen
+            $consulta = "SELECT Pt_Imagen FROM tbl_producto WHERE PK_ID_Producto = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Traemos el nombre de la imagen que esta en la base de datos
+            $Producto_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+            $Nombre_img_producto = $Producto_Image['Pt_Imagen'];
+
+            //Con esta funcion la eliminamos
+            unlink("../vista/imagenes/Productos/".$Nombre_img_producto);
+
+            //Consulta para eliminar
             $consulta = "DELETE FROM tbl_producto WHERE PK_ID_Producto = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
 
             //Cerrar conexión
             $conexion = null;

@@ -1,6 +1,4 @@
 <?php 
-    require_once '../../modelo/sesion.php';
-    include '../../controlador/ViewData.php';
     date_default_timezone_set('America/Bogota');
 ?>
 <!DOCTYPE html>
@@ -12,11 +10,16 @@
     <!--Favicon-->
     <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Editar perfil</title>
-    <!--css-->
+    <!-- CSS personalizado -->
     <link rel="stylesheet" href="../css/Style_editar_perfil.css">
     <link rel="stylesheet" href="../css/Style_dashboard.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <!--Font Awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
-    <!--scritp-->
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="../assets/sweetAlert2/sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -136,9 +139,33 @@
                 <!--formulario para editar perfil-->
                 <div class="formulario_2">
                     <hr>
-                   <?php
-                    viewEditUser();
-                   ?>
+                        <form action="" id='formEditarPerfil' method="POST">
+                        <!-- class="esconder"  -->
+                            <input type="text" name="ad_primaria" class="esconder" id="ad_primaria" value="">
+
+                            <label for="Name"> Nombre: </label>
+                            <input type="text" name="Ad_Nombre" id="Ad_Nombre" value="">
+
+                            <label for="last_name"> Apellido: </label>
+                            <input type="text" name="Ad_Apellido" id="Ad_Apellido" value="">
+
+                            <label for="correo_electronico"> Correo Electr&oacute;nico: </label>
+                            <input type="email" name="Ad_Email" id="Ad_Email" value="">
+
+                            <label for="password"> Contraseña: </label>
+                            <input type="password" name="Ad_Password" id="Ad_Password">
+                            
+                            <label for="confrim_password"> Confirmar contraseña: </label>
+                            <input  class="color-prueba" type="password"  name="Ad_Password2" id="Ad_Password2" >
+
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alerta" style="display: none;">
+                                <h4 id="mensaje_error" style="font-size: 13px; line-height: 1.4;"></h4>
+                            </div>
+                            <!--..-->
+                            <div class="button">
+                                <button type="submit" name="actualizar">Guardar</button>
+                            </div>
+                        </form>
                     <hr>
                 </div>
             </div>
@@ -146,8 +173,15 @@
         </div>
     </div>
 
-    <script src="../js/jquery.js"></script>
+    <!--Jquery, Bootstrap, Popper-->
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--SweetAlert-->
+    <script src="../assets/sweetAlert2/sweetalert2.all.min.js"></script>
+    <!--Main-->
     <script src="../js/main.js"></script>
+    <script src="../js/editarPerfil.js"></script>
 </body>
 
 </html>

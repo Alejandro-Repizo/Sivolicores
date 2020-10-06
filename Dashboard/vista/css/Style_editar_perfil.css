@@ -19,6 +19,7 @@
     margin: 14px 0px;
     border: 1px solid rgba(0, 0, 0, 0.26);
     border-radius: 5px;
+    
 }
 
 .formulario_2 form input:focus{
@@ -52,3 +53,7 @@
 }
 
 
+.color-prueba{
+    border: 1px solid red;
+    /* background-color: #000002; */
+}
