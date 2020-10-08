@@ -56,11 +56,17 @@ $(document).ready(function() {
                             text: 'Se ha producido un error.'
                         });
                     }else if(datos.correcto){
+                        document.getElementById('Ad_Password').style.borderColor = "#00000042";
+                        document.getElementById('Ad_Password2').style.borderColor = "#00000042";
+                        document.getElementById('alerta').style.display = "none";   
+                        document.getElementById('Ad_Password').value = '';
+                        document.getElementById('Ad_Password2').value = '';
                         Swal.fire({
                             type: 'success',
                             title: 'Éxito',
                             text: 'Perfil editado con éxito.'
-                        });                       
+                        }); 
+                                     
                     }
                 }
                 peticionXML.onreadystatechange = function(){

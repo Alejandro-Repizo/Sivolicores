@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     //Tabla Inventario
-    var fila, opcion, controladorCargaCategoria;
+    var fila, opcion, controladorCargaCategoria, accion;
     opcion = "cargarSubCategoria";
     controladorCargaCategoria = 1;
 
@@ -48,7 +48,8 @@ $(document).ready(function(){
         $(".modal-header").css("background-color", "#800000");//Para colocar color al header
         $(".modal-title").text("Nueva SubCategoría").css("color", "#fff");//Para colocar titulo y color
         $("#modalSubCategoria").modal("show");//Para mostrar el modal
-        
+        accion = "agregarSubCategoria"; //Agregar
+
     });
 
 
@@ -64,7 +65,7 @@ $(document).ready(function(){
                 var PK_ID_Categoria = $('#PK_ID_Categoria');
                 var datos = JSON.parse(peticionXML.responseText);
                
-                PK_ID_Categoria.append('<option selected="true" disabled="disabled">Seleccione la categoria</option>');
+                // PK_ID_Categoria.append('<option selected="true" disabled="disabled">Seleccione la categoria</option>');
                 $.each(datos, function (key, value) { 
                      PK_ID_Categoria.append('<option value=' + datos[key].PK_ID_Categoria + '>' + datos[key].Cat_Nombre + '</option>');
                 });
@@ -80,7 +81,7 @@ $(document).ready(function(){
     $("#formNuevaSubCategoria").submit(function (e) {
         //Quitamos el evento al submit de recarga
         e.preventDefault();
-        opcion = "agregarSubCategoria"; //Agregar
+        opcion = accion;
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
         //Con esto se captura los datos de la tabla.
@@ -100,15 +101,16 @@ $(document).ready(function(){
                     });
                 }else{
                     tablaSubCategoria.ajax.reload(null, false);
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Éxito',
+                        text: 'SubCategoría registrada con éxito'
+                    });
                 }
             }
             peticionXML.onreadystatechange = function(){
                 if(peticionXML.readyState == 4 && peticionXML.status == 200){
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Éxito',
-                        text: 'SubCategoria registrada con éxito'
-                    });
+                    console.log(peticionXML.status);
                 }
             }
             peticionXML.send(parametros);
@@ -122,62 +124,17 @@ $(document).ready(function(){
         $("#modalSubCategoria").modal("hide");
     });
 
-    //Formulario que está dentro del modal para editar una sub-categoria
-    $("#formEditarSubCategoria").submit(function (e) {
-        //Quitamos el evento al submit de recarga
-        e.preventDefault();
-        var peticionXML = new XMLHttpRequest;
-        peticionXML.open('POST', '../../controlador/DataRoute.php');
-
-        SCat_Nombre = $.trim($("#SCat_Nombre").val());
-
-        if(formulario_valido()){
-            var parametros = 'id='+ id +'&SCat_Nombre='+ SCat_Nombre  +'&opcion=' + opcion;
-            peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            peticionXML.onload = function(){ 
-                var datos = JSON.parse(peticionXML.responseText);
-                if(datos.error){
-                    Swal.fire({
-                        type: 'warning',
-                        title: 'Error',
-                        text: 'Se ha producido un error.'
-                    });
-                }else{
-                    tablaSubCategoria.ajax.reload(null, false);
-                }
-            }
-            peticionXML.onreadystatechange = function(){
-                if(peticionXML.readyState == 4 && peticionXML.status == 200){
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Éxito',
-                        text: 'SubCategoria registrada con éxito'
-                    });
-                }
-            }
-            peticionXML.send(parametros);
-        }else {
-            Swal.fire({
-                type: 'warning',
-                title: 'Error',
-                text: 'Se ha producido un error.'
-            });
-        }
-        $("#modalEditarSubCategoria").modal("hide");
-    });
 
     //Código para el botón editar
     $(document).on("click", ".btnEditar", function () {
-        opcion = "editarSubCategoria"; //editar
+        accion = "editarSubCategoria"; //editar
         fila = $(this).closest("tr");
         id = parseInt(fila.find('td:eq(0)').text()); //Con esto se captura los datos de la tabla.
-        SCat_Nombre = fila.find('td:eq(1)').text();
-
-        $("#SCat_Nombre").val(SCat_Nombre); //seteamos los valores recolectados en la tabla hacia los input's.
-
+        SCat_Nombre2 = fila.find('td:eq(1)').text();
+        $("#SCat_Nombre").val(SCat_Nombre2); //seteamos los valores recolectados en la tabla hacia los input's.
         $(".modal-header").css("background-color", "#6C757D");
         $(".modal-title").text("Editar SubCategoría").css("color", "#fff");;
-        $("#modalEditarSubCategoria").modal("show");
+        $("#modalSubCategoria").modal("show");
 
     });
 
@@ -222,6 +179,13 @@ $(document).ready(function(){
         if(SCat_Nombre == ''){
             return false;
         }else if(PK_ID_Categoria == ''){
+            return false;
+        }
+        return true;
+    }
+
+    function formulario_valido2() { 
+        if(SCat_Nombre == ''){
             return false;
         }
         return true;

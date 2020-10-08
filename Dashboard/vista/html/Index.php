@@ -15,29 +15,22 @@
 
 <body>
     <div class="contenedor">
-        <img src="vista/imagenes/Login/Login.jpg" alt="Imagen">
-        <div class="contenedor-form">
+        <div class="imagen">
+            <img src="vista/imagenes/Login/Login.jpg" alt="Imagen login">
+        </div>
+        <div class="contenedor-form ">
             <h2>Iniciar sesi&oacute;n para continuar </h2>
-
             <form action="" id='formLogin' method="post">
-                <ul>
-                    <li>
-                        <input type="text" name="ses_email" id="ses_email" placeholder="Correo electrónico">
-                    </li>
-                    <li>
-                        <input type="password" name="ses_password" id="ses_password" placeholder="Contraseña">
-                    </li>
-                    <li>
-                        <button type="submit" id="btnIngreso">Iniciar</button>
-                    </li>
-
-                </ul>
+                <input type="text" name="ses_email" id="ses_email" placeholder="Correo electrónico">
+                <input type="password" name="ses_password" id="ses_password" placeholder="Contraseña">
+                <button type="submit" id="btnIngreso">Iniciar</button>
             </form>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alerta" style="display: none;">
+            <div class="alert alert-danger" role="alert" id="alerta" style="Display:none; width: 60%; margin: 0 auto;">
                 <h4 id="mensaje_error" style="font-size: 13px; line-height: 1.4;"></h4>
             </div>
+           
         </div>
-        
+    
     </div>
     <!--Jquery, Bootstrap, Popper-->
     <script src="vista/assets/jquery/jquery-3.3.1.min.js"></script>

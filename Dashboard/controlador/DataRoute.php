@@ -99,6 +99,12 @@ if(isset($_POST['opcion'])){
             break;
         
         //Módulo Inventario
+
+        case 'cargarInventario':
+            $controlador = new Controlador();
+            $controlador->cargarInventario();
+            break;
+        
         case 'editarInventario':
             $Controlador = new Controlador();
             $Pt_Nombre = $_POST['Pt_Nombre'];
@@ -124,9 +130,20 @@ if(isset($_POST['opcion'])){
             $Controlador->updateInventario($id, $Pt_Precio, $Pt_Stock, $Pt_Nombre);
             break;
 
-        case 'cargarInventario':
+    
+        case 'borrarInventario':
             $controlador = new Controlador();
-            $controlador->cargarInventario();
+            $id = $_POST['id'];
+            $Pt_Nombre = $_POST['Pt_Nombre'];
+            if(!empty($Pt_Nombre)){
+                $Pt_Nombre = trim($Pt_Nombre);
+                $Pt_Nombre = filter_var($Pt_Nombre, FILTER_SANITIZE_STRING);
+            }
+            if(!empty($id)){
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            $controlador->borrarInventario($id, $Pt_Nombre);
             break;
 
         //Módulo Cliente

@@ -179,6 +179,7 @@ date_default_timezone_set('America/Bogota');
 
                             <label for="exampleFormControlSelect1" class="col-form-label">Categoria:</label>
                             <select class="form-control" id="PK_ID_Categoria">
+                                <option selected="true" disabled="disabled">Seleccione la categor&iacute;a</option>
                             </select>
 
                         </div>
@@ -195,37 +196,7 @@ date_default_timezone_set('America/Bogota');
     </div>
 
 
-    <!--Modal para editar SubCategoria-->
-    <div class="modal fade" id="modalEditarSubCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="formEditarSubCategoria" method="POST">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="SCat_Nombre" class="col-form-label">Nombre SubCategor&iacute;a:</label>
-                            <input type="text" class="form-control" id="SCat_Nombre">
 
-                            <label for="exampleFormControlSelect1" class="col-form-label">Categoria:</label>
-                            <select class="form-control" id="PK_ID_Categoria">
-                            </select>
-
-                        </div>
-                    </div>
-
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-dark" id="btnGuardar">Guardar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!--Jquery, Bootstrap, Popper-->
     <script src="../assets/jquery/jquery-3.3.1.min.js"></script>

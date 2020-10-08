@@ -204,7 +204,7 @@ date_default_timezone_set('America/Bogota');
 
                             <label for="FK_ID_Categoria" class="col-form-label">Categor&iacute;a:</label>
                             <select class="form-control" id="FK_ID_Categoria">
-                                <option selected="true" disabled="disabled">Seleccione la categoria</option>
+                                <option selected="true" disabled="disabled">Seleccione la categor&iacute;a</option>
                             </select>
 
                             <label for="FK_ID_Marca" class="col-form-label">Marca:</label>

@@ -49,6 +49,7 @@ $(document).ready(function(){
     //Botón nuevo producto
     $('#btnNuevo').click(function () {
         $('#formNuevoProducto').trigger("reset");
+        document.getElementById('info').innerHTML = 'Seleciona la imagen';           
         $(".modal-header").css("background-color", "#800000");//Para colocar color al header
         $(".modal-title").text("Nuevo producto").css("color", "#fff");//Para colocar titulo y color
         $("#modalProducto").modal("show");//Para mostrar el modal

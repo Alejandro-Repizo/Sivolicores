@@ -78,6 +78,13 @@ class Controlador{
         $consultar->upInventario($Producto);
     }
 
+    public function borrarInventario($id, $Pt_Nombre){
+        $Producto = new Producto($Pt_Nombre);
+        $Producto->setPK_ID_Producto($id);
+        $Consultar =  new consultar();
+        $Consultar->borrarInventario($Producto);
+    }
+
 
     //Módulo Cliente
     public function deleteCliente($id, $nombre){

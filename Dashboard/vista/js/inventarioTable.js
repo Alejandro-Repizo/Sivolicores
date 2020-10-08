@@ -110,6 +110,42 @@ $(document).ready(function () {
 
     });
 
+
+    //Código para el botón borrar
+    $(document).on("click", ".btnBorrar", function () {
+        opcion = 'borrarInventario' //borrar
+        //Con esto se captura los datos de la tabla.
+        fila = $(this);
+        id = parseInt($(this).closest("tr").find('td:eq(1)').text());
+        Pt_Nombre = $(this).closest("tr").find('td:eq(2)').text();
+        // var respuesta = confirm('¿Estás seguro de eliminar el registro: ' + id + ' ?');
+        Swal.fire({
+            title: '¿Estás seguro de eliminar el producto?',
+            text: 'Producto a eliminar id: ' + id,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, ¡Eliminar!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    '¡Eliminado!',
+                    'El producto a sido eliminada.',
+                    'success'
+                )
+                $.ajax({
+                    type: "POST",//Método
+                    url: "../../controlador/DataRoute.php",//Lugar
+                    data: { id: id, Pt_Nombre, Pt_Nombre, opcion: opcion },//lo enviamos nombre a una variable nombre que está en php
+                    dataType: "json",//Formato
+                    success: function () {
+                        tablaInventario.row(fila.parents('tr')).remove().draw();
+                    }
+                });
+            }
+        });
+    });
     //función para válidar datos vácios
     function formulario_valido() { 
         if(isNaN(Pt_Precio) || Pt_Precio == ''){

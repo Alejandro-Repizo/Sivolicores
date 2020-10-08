@@ -352,6 +352,44 @@ class Consultar {
     
     }
 
+    public function borrarInventario(Producto $con){
+        try{
+            //Borrar producto
+            $conexion = new ConexionBD();
+            $id = $con->getPK_ID_Producto();
+            $Pt_Nombre = $con->getPt_Nombre();
+
+            //Consulta para traer nombre imagen
+            $consulta = "SELECT Pt_Imagen FROM tbl_producto WHERE PK_ID_Producto = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Traemos el nombre de la imagen que esta en la base de datos
+            $Producto_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+            $Nombre_img_producto = $Producto_Image['Pt_Imagen'];
+
+            //Con esta funcion la eliminamos
+            unlink("../vista/imagenes/Productos/".$Nombre_img_producto);
+
+            //Consulta para eliminar
+            $consulta = "DELETE FROM tbl_inventario WHERE FK_ID_ProductoInventario = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+        
+    }
+
+
     //Módulo Receta Coctel
     public function cargarRecetaCoctel(){
         try{
@@ -887,6 +925,7 @@ class Consultar {
             $conexion = new ConexionBD();
             // $SCat_Nombre = $con->getNombre();
             $id = $con->getPK_ID_SubCategoria();
+
             $consulta = "DELETE FROM tbl_subcategoria WHERE PK_ID_SubCategoria = '$id' ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
