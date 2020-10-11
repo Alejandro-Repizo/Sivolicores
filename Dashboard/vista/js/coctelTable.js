@@ -41,6 +41,7 @@ $(document).ready(function(){
     //Botón nueva marca
     $('#btnNuevo').click(function () {
         $('#formNuevoCoctel').trigger("reset");
+        document.getElementById('info').innerHTML = 'Seleciona la imagen';   
         $(".modal-header").css("background-color", "#800000");//Para colocar color al header
         $(".modal-title").text("Nueva receta cóctel").css("color", "#fff");//Para colocar titulo y color
         $("#modalRecetaCoctel").modal("show");//Para mostrar el modal
@@ -126,15 +127,16 @@ $(document).ready(function(){
                     });
                 }else{
                     tablaCoctel.ajax.reload(null, false);
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Éxito',
+                        text: 'Receta Cóctel registrada con éxito'
+                    });  
                 }
             }
             peticionXML.onreadystatechange = function(){
                 if(peticionXML.readyState == 4 && peticionXML.status == 200){
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Éxito',
-                        text: 'Recectá Cóctel registrada con éxito'
-                    });
+                    console.log(peticionXML.status);
                 }
             }
             peticionXML.send(parametros);
@@ -209,7 +211,7 @@ $(document).ready(function(){
             if (result.value) {
                 Swal.fire(
                     '¡Eliminado!',
-                    'La recetá cóctel a sido eliminada.',
+                    'La receta cóctel a sido eliminada.',
                     'success'
                 )
                 $.ajax({

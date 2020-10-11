@@ -140,7 +140,7 @@ date_default_timezone_set('America/Bogota');
                                 <thead class="text-center">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nombre cliente</th>
+                                        <th>Nombre</th>
                                         <th>Fecha</th>
                                         <th>Producto</th>
                                         <th>Cant.</th>

@@ -138,11 +138,11 @@
                                 <thead class="text-center">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nombre cliente</th>
+                                        <th>Nombre</th>
                                         <th>Producto</th>
                                         <th>Cant.</th>
-                                        <th>Dirección</th>
-                                        <th>Teléfono</th>
+                                        <th>Direcci&oacute;n</th>
+                                        <th>Tel&eacute;fono</th>
                                         <th>Total</th>
                                         <th>Obs.</th>
                                         <th>Estado</th>

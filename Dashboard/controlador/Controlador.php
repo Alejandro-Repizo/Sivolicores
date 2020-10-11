@@ -201,6 +201,32 @@ class Controlador{
         $consultar->cargarPedido();
     }
 
+    public function enviarPedido($id){
+        $consultar = new consultar();
+        $consultar->enviarPedido($id);
+    }
+
+    public function reportePedido($id){
+        $consultar = new consultar();
+        $consultar->reportePedido($id);
+    }
+
+    //Módulo Envíos
+    public function cargarEnvio(){
+        $consultar = new consultar();
+        $consultar->cargarEnvio();
+    }
+
+    public function envioReporteVenta($id){
+        $consultar = new consultar();
+        $consultar->envioReporteVenta($id);
+    }
+
+    public function envioReportePedido($id){
+        $consultar = new consultar();
+        $consultar->envioReportePedido($id);
+    }
+
     //Módulo SubCategoria
     public function cargarSubCategoria(){
         $consultar = new consultar();
@@ -213,11 +239,11 @@ class Controlador{
         $Consultar->agregarSubCategoria($SubCategoria, $PK_ID_Categoria);
     }
 
-    public function editarSubCategoria($id, $SCat_Nombre){
+    public function editarSubCategoria($id,$SCat_Nombre,$PK_ID_Categoria){
         $Consultar = new consultar();
         $SubCategoria = new SubCategoria($SCat_Nombre);
         $SubCategoria->setPK_ID_SubCategoria($id);
-        $Consultar->editarSubCategoria($SubCategoria);
+        $Consultar->editarSubCategoria($SubCategoria, $PK_ID_Categoria);
     }
 
     public function borrarSubCategoria($id, $SCat_Nombre){
@@ -227,6 +253,10 @@ class Controlador{
         $Consultar->borrarSubCategoria($SubCategoria);
     }
 
+    public function cargarCategoriaCombo($id){
+        $consultar = new consultar();
+        $consultar->cargarCategoriaCombo($id);
+    }
 
     //Módulo Producto
 
@@ -278,7 +308,7 @@ class Controlador{
         $Producto->setPt_Imagen($Pt_Imagen);
         $Consultar =  new consultar();
         $Consultar->editarProducto($Producto);
-
+        
 
     }
 

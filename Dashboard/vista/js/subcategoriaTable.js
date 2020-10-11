@@ -18,6 +18,7 @@ $(document).ready(function(){
         "columns": [
             { "data": "PK_ID_SubCategoria"},
             { "data": "SCat_Nombre" },
+            { "data": "Cat_Nombre" },
             { "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-secondary btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>" }
         ],
 
@@ -128,10 +129,30 @@ $(document).ready(function(){
     //Código para el botón editar
     $(document).on("click", ".btnEditar", function () {
         accion = "editarSubCategoria"; //editar
+        // let cargadedatos = "cargarCategoriaCombo";
+        //Con esto se captura los datos de la tabla.
         fila = $(this).closest("tr");
         id = parseInt(fila.find('td:eq(0)').text()); //Con esto se captura los datos de la tabla.
-        SCat_Nombre2 = fila.find('td:eq(1)').text();
-        $("#SCat_Nombre").val(SCat_Nombre2); //seteamos los valores recolectados en la tabla hacia los input's.
+        SCat_Nombre = fila.find('td:eq(1)').text();
+        // //Inicializamos una petición XML
+        // let peticionXML = new XMLHttpRequest;
+        // peticionXML.open('POST', '../../controlador/DataRoute.php');
+        // //Acá una inicializamos y declaramos una variable que va a tener todos los datos
+        // let parametros = 'PK_ID_Categoria=' + id  + '&opcion=' + cargadedatos;
+        // //Establecer el header de como vamos a enviar los datos
+        // peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        // peticionXML.onload = function() {
+        //     let PK_ID_Categoria = $('#PK_ID_Categoria');
+        //     var datos = JSON.parse(peticionXML.responseText);
+        //     $.each(datos, function (key, value) { 
+        //         PK_ID_Categoria.append('<option  selected  disabled="disabled" value=' + datos[key].PK_ID_Categoria + '>' + datos[key].Cat_Nombre + '</option>');
+        //    });
+           
+        // }
+        // peticionXML.send(parametros);
+
+
+        $("#SCat_Nombre").val(SCat_Nombre); //seteamos los valores recolectados en la tabla hacia los input's.
         $(".modal-header").css("background-color", "#6C757D");
         $(".modal-title").text("Editar SubCategoría").css("color", "#fff");;
         $("#modalSubCategoria").modal("show");
@@ -178,17 +199,10 @@ $(document).ready(function(){
     function formulario_valido() { 
         if(SCat_Nombre == ''){
             return false;
-        }else if(PK_ID_Categoria == ''){
-            return false;
         }
         return true;
     }
 
-    function formulario_valido2() { 
-        if(SCat_Nombre == ''){
-            return false;
-        }
-        return true;
-    }
+   
   
 });

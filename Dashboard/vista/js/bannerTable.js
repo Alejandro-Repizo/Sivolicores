@@ -56,20 +56,15 @@ $(document).ready(function(){
 
             peticionXML.onload = function(){ 
                 tablaBanner.ajax.reload(null, false);
+                Swal.fire({
+                    type: 'success',
+                    title: 'Éxito',
+                    text: 'Banner actualizado con éxito'
+                });
             }
             peticionXML.onreadystatechange = function(){
                 if(peticionXML.readyState == 4 && peticionXML.status == 200){
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Éxito',
-                        text: 'Recectá Cóctel registrada con éxito'
-                    });
-                }else{
-                    Swal.fire({
-                        type: 'warning',
-                        title: 'Error',
-                        text: 'Se ha producido un error.'
-                    });
+                    console.log(peticionXML.status);
                 }
             }
             peticionXML.send(formData);

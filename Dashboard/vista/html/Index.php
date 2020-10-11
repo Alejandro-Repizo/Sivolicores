@@ -21,7 +21,7 @@
         <div class="contenedor-form ">
             <h2>Iniciar sesi&oacute;n para continuar </h2>
             <form action="" id='formLogin' method="post">
-                <input type="text" name="ses_email" id="ses_email" placeholder="Correo electrónico">
+                <input type="email" name="ses_email" id="ses_email" placeholder="Correo electrónico">
                 <input type="password" name="ses_password" id="ses_password" placeholder="Contraseña">
                 <button type="submit" id="btnIngreso">Iniciar</button>
             </form>

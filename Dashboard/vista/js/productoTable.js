@@ -175,7 +175,7 @@ $(document).ready(function(){
     //Formulario que está dentro del modal para editar un producto
     $("#formEditarProducto").submit(function (e) {
         e.preventDefault();
-        opcion = "editarProducto";
+        opcion = "editarProducto"; 
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
          //Con esto se captura los datos de la tabla.
@@ -239,6 +239,7 @@ $(document).ready(function(){
 
     //Código para el botón editar
     $(document).on("click", ".btnEditar", function () {
+        document.getElementById('info2').innerHTML = 'Seleciona la imagen';  
         opcion = "cargarEditarProducto"; //editar
         //Con esto se captura los datos de la tabla.
         fila = $(this).closest("tr");
@@ -282,7 +283,7 @@ $(document).ready(function(){
 
         //Opciones de color y demás
         $(".modal-header").css("background-color", "#6C757D");
-        $(".modal-title").text("Editar receta cóctel").css("color", "#fff");;
+        $(".modal-title").text("Editar producto").css("color", "#fff");;
         $("#modalEditarProducto").modal("show");
       
     });

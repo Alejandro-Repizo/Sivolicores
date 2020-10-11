@@ -68,15 +68,16 @@ $(document).ready(function(){
                     });
                 }else{
                     tablaCategoria.ajax.reload(null, false);
+                    Swal.fire({
+                        type: 'success',
+                        title: 'Éxito',
+                        text: 'Categoría registrada con éxito'
+                    });
                 }
             }
             peticionXML.onreadystatechange = function(){
                 if(peticionXML.readyState == 4 && peticionXML.status == 200){
-                    Swal.fire({
-                        type: 'success',
-                        title: 'Éxito',
-                        text: 'Categoria registrada con éxito'
-                    });
+                    console.log(peticionXML.status);
                 }
             }
             peticionXML.send(parametros);

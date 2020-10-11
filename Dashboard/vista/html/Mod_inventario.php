@@ -146,7 +146,7 @@ date_default_timezone_set('America/Bogota');
                                 <thead class="text-center">
                                     <tr>
                                         <th>Imagen</th>
-                                        <th>ID</th>
+                                        <th>Id</th>
                                         <th>Nombre producto</th>
                                         <th>Precio unitario</th>
                                         <th>Stock</th>

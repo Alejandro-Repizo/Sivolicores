@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     //Tabla Inventario
-    // var fila, opcion;
+    var opcion;
     opcion = "cargarReporteVentas";
 
     tablaReporte = $('#tablaReporte').DataTable({
@@ -15,11 +15,12 @@ $(document).ready(function(){
         },
         //Agregamos las columnas del tbody y los botones
         "columns": [
-            { "data": "Ped_Fecha" },
+            { "data": "RepV_Fecha" },
             { "data": "Cl_Nombre" },
             { "data": "Pt_Nombre" },
             { "data": "Pt_Cantidad" },
-            { "data": "Car_Total" }
+            { "data": "Car_Total" },
+            { "data": "RepV_Estado", "render": function(data, type, row) {return '<span class="badge badge-success">'+data+'</span>' ;}},
         ],
 
         //Para cambiar el lenguaje a español

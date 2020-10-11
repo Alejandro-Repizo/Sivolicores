@@ -66,16 +66,17 @@ $(document).ready(function () {
                     });
                 } else {
                     tablaInventario.ajax.reload(null, false);
-                }
-                //tablaInventario.ajax.reload(null, false);
-            }
-            peticionXML.onreadystatechange = function () {
-                if (peticionXML.readyState == 4 && peticionXML.status == 200) {
                     Swal.fire({
                         type: 'success',
                         title: 'Éxito',
                         text: 'Producto actualizado con éxito'
                     });
+                }
+                //tablaInventario.ajax.reload(null, false);
+            }
+            peticionXML.onreadystatechange = function () {
+                if (peticionXML.readyState == 4 && peticionXML.status == 200) {
+                    console.log(peticionXML.status);
                 }
             }
             peticionXML.send(parametros);

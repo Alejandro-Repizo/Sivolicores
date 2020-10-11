@@ -147,7 +147,8 @@ date_default_timezone_set('America/Bogota');
                                 <thead class="text-center">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nombre subcategoría</th>
+                                        <th>Nombre subcategor&iacute;a</th>
+                                        <th>Nombre categor&iacute;a</th>
                                         <th>Acci&oacute;n</th>
                                     </tr>
                                 </thead>

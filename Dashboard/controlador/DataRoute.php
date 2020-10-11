@@ -349,6 +349,54 @@ if(isset($_POST['opcion'])){
             $controlador->cargarPedido();
             break;
 
+        case 'enviarPedido':
+            $controlador = new Controlador();
+            $id = $_POST['id'];
+            if (!empty($id)) {
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            $controlador->enviarPedido($id);
+            break;
+
+        case 'reportePedido':
+            $controlador = new Controlador();
+            $id = $_POST['id'];
+            if (!empty($id)) {
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            $controlador->reportePedido($id);
+            break;
+
+        //Módulo Envíos
+        case 'cargarEnvio':
+            $controlador = new Controlador();
+            $controlador->cargarEnvio();
+            break;
+
+        case 'envioReporteVenta':
+            $controlador = new Controlador();
+            $id = $_POST['id'];
+            if (!empty($id)) {
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            $controlador->envioReporteVenta($id);
+            break;
+
+        case 'envioReportePedido':
+            $controlador = new Controlador();
+            $id = $_POST['id'];
+            if (!empty($id)) {
+                $id = trim($id);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+            }
+            $controlador->envioReportePedido($id);
+            break;
+
+
+
 
         // Modulo SubCategoria
         case 'cargarSubCategoria':
@@ -373,8 +421,9 @@ if(isset($_POST['opcion'])){
             
         case 'editarSubCategoria':
             $controlador = new Controlador();
-            $SCat_Nombre = $_POST['SCat_Nombre'];
             $id = $_POST['id'];
+            $SCat_Nombre = $_POST['SCat_Nombre'];
+            $PK_ID_Categoria = $_POST['PK_ID_Categoria'];
             if (!empty($SCat_Nombre)) {
                 $SCat_Nombre = trim($SCat_Nombre);
                 $SCat_Nombre = filter_var($SCat_Nombre, FILTER_SANITIZE_STRING);
@@ -383,7 +432,11 @@ if(isset($_POST['opcion'])){
                 $id = trim($id);
                 $id = filter_var($id, FILTER_VALIDATE_INT);
             }
-            $controlador->editarSubCategoria($id,$SCat_Nombre);
+            if (!empty($PK_ID_Categoria)) {
+                $PK_ID_Categoria = trim($PK_ID_Categoria);
+                $PK_ID_Categoria = filter_var($PK_ID_Categoria, FILTER_VALIDATE_INT);
+            }
+            $controlador->editarSubCategoria($id,$SCat_Nombre,$PK_ID_Categoria);
             break;
         
         case 'borrarSubCategoria':
@@ -400,6 +453,13 @@ if(isset($_POST['opcion'])){
             }
             $controlador->borrarSubCategoria($id,$SCat_Nombre);
             break;  
+
+        case 'cargarCategoriaCombo':
+            $controlador = new Controlador();
+            $id = $_POST['PK_ID_Categoria'];
+
+            $controlador->cargarCategoriaCombo($id);
+            break;
         
         //Módulo producto
         case 'cargarProducto':

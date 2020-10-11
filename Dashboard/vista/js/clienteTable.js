@@ -66,7 +66,7 @@ $(document).ready(function () {
             if (result.value) {
                 Swal.fire(
                     '¡Eliminado!',
-                    'La marca a sido eliminada.',
+                    'El cliente a sido eliminada.',
                     'success'
                 )
                 $.ajax({

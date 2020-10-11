@@ -142,6 +142,7 @@
                                         <th>Producto</th>
                                         <th>Cantidad</th>
                                         <th>Total</th>
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">

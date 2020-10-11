@@ -553,9 +553,9 @@ class Consultar {
         try {
             //Cargar datos a la tabla reporte venta
             $conexion = new ConexionBD();
-            $consulta = "SELECT Ped_Fecha,Cl_Nombre, Pt_Nombre,Pt_Cantidad, Car_Total 
-            FROM tbl_pedido JOIN tbl_carrito_pedidos ON tbl_pedido.FK_ID_Carrito = tbl_carrito_pedidos.PK_ID_Carrito JOIN tbl_cliente ON tbl_carrito_pedidos.FK_ID_Cliente = tbl_cliente.PK_ID_Cliente JOIN tbl_producto ON
-            tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
+            $consulta = "SELECT RepV_Fecha,Cl_Nombre, Pt_Nombre,Pt_Cantidad, Car_Total, RepV_Estado FROM tbl_reporte_ventas JOIN tbl_carrito_pedidos
+            ON tbl_reporte_ventas .FK_ID_Carrito = tbl_carrito_pedidos.PK_ID_Carrito JOIN tbl_cliente ON tbl_carrito_pedidos.FK_ID_Cliente = tbl_cliente.PK_ID_Cliente 
+            JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -576,13 +576,13 @@ class Consultar {
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
-    //Módulo cargar Reporte Ventas
+    //Módulo cargar Reporte Pedidos
     public function cargarReportePedidos(){
         try {
-            //Cargar datos a la tabla reporte venta
+            //Cargar datos a la tabla reporte pedidos
             $conexion = new ConexionBD();
-            $consulta = "SELECT Ped_Fecha,Cl_Nombre, Pt_Nombre,Pt_Cantidad, Car_Total, Ped_Estado FROM tbl_pedido JOIN tbl_carrito_pedidos
-            ON tbl_pedido.FK_ID_Carrito = tbl_carrito_pedidos.PK_ID_Carrito JOIN tbl_cliente ON tbl_carrito_pedidos.FK_ID_Cliente = tbl_cliente.PK_ID_Cliente 
+            $consulta = "SELECT RepP_Fecha,Cl_Nombre, Pt_Nombre,Pt_Cantidad, Car_Total, RepP_Estado FROM tbl_reporte_pedido JOIN tbl_carrito_pedidos
+            ON tbl_reporte_pedido .FK_ID_Carrito = tbl_carrito_pedidos.PK_ID_Carrito JOIN tbl_cliente ON tbl_carrito_pedidos.FK_ID_Cliente = tbl_cliente.PK_ID_Cliente 
             JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
@@ -814,12 +814,233 @@ class Consultar {
     }
 
 
+    public function enviarPedido($id){
+        try{
+            //Traemos los datos de los campos deacuerdo al id
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Pedido, Ped_Fecha, Ped_Estado, Ped_Direccion, 
+            Ped_observaciones, FK_ID_Carrito FROM tbl_pedido WHERE PK_ID_Pedido = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Hacemos un insert con los datos anteriores a la tabla envios
+            $datosPedido = $resultado->fetch(PDO::FETCH_ASSOC);
+            $PK_ID_Pedido = $datosPedido['PK_ID_Pedido'];
+            $Ped_Fecha = $datosPedido['Ped_Fecha'];
+            $Ped_Estado = "Por completar";
+            $Ped_Direccion = $datosPedido['Ped_Direccion'];
+            $Ped_observaciones = $datosPedido['Ped_observaciones'];
+            $FK_ID_Carrito = $datosPedido['FK_ID_Carrito'];
+            
+            $consulta = "INSERT INTO tbl_envio(PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,FK_ID_Carrito)
+            VALUES ('$PK_ID_Pedido','$Ped_Fecha','$Ped_Estado','$Ped_Direccion','$Ped_observaciones','$FK_ID_Carrito')";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Ahora si eliminamos el pedido de la tabla pedido
+            $consulta = "DELETE FROM tbl_pedido WHERE PK_ID_Pedido = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta último registro generado
+            $consulta = "SELECT PK_ID_Pedido, Ped_Fecha, Ped_Estado, Ped_Direccion, 
+            Ped_observaciones, FK_ID_Carrito FROM tbl_pedido ORDER BY PK_ID_Pedido DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+
+    public function reportePedido($id){
+        try{
+            //Traemos los datos de los campos deacuerdo al id
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Envio, Ped_Fecha, Ped_Estado, Ped_Direccion, 
+            Ped_observaciones, FK_ID_Carrito FROM tbl_pedido WHERE PK_ID_Pedido = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Hacemos un insert con los datos anteriores a la tabla reporte pedidos
+            $datosPedido = $resultado->fetch(PDO::FETCH_ASSOC);
+            $PK_ID_Pedido = $datosPedido['PK_ID_Pedido'];
+            $Ped_Fecha = $datosPedido['Ped_Fecha'];
+            $Ped_Estado = "Cancelado";
+            $Ped_Direccion = $datosPedido['Ped_Direccion'];
+            $Ped_observaciones = $datosPedido['Ped_observaciones'];
+            $FK_ID_Carrito = $datosPedido['FK_ID_Carrito'];
+            
+            $consulta = "INSERT INTO tbl_reporte_pedido(PK_ID_reporte, RepP_Fecha,RepP_Estado,RepP_Direccion,RepP_Observaciones,FK_ID_Carrito)
+            VALUES ('$PK_ID_Pedido','$Ped_Fecha','$Ped_Estado','$Ped_Direccion','$Ped_observaciones','$FK_ID_Carrito')";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Ahora si eliminamos el pedido de la tabla pedido
+            $consulta = "DELETE FROM tbl_pedido WHERE PK_ID_Pedido = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta último registro generado
+            $consulta = "SELECT PK_ID_Pedido, Ped_Fecha, Ped_Estado, Ped_Direccion, 
+            Ped_observaciones, FK_ID_Carrito FROM tbl_pedido ORDER BY PK_ID_Pedido DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    //Módulo Envíos
+    public function cargarEnvio(){
+        try{
+            //Cargar datos a pedidos
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Envio, Cl_Nombre, Pt_Nombre, Pt_Cantidad, Env_Direccion, Cl_Telefono, Car_Total,Env_observaciones, Env_Estado FROM tbl_envio
+            JOIN tbl_carrito_pedidos ON tbl_carrito_pedidos.PK_ID_Carrito = tbl_envio.FK_ID_Carrito 
+            JOIN tbl_cliente ON tbl_cliente.PK_ID_Cliente = tbl_carrito_pedidos.FK_ID_Cliente 
+            JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function envioReporteVenta($id){
+        try{
+            //Traemos los datos de los campos deacuerdo al id
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,
+            FK_ID_Carrito FROM tbl_envio WHERE PK_ID_Envio = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Hacemos un insert con los datos anteriores a la tabla envios
+            $datosEnvio = $resultado->fetch(PDO::FETCH_ASSOC);
+            $PK_ID_Envio = $datosEnvio['PK_ID_Envio'];
+            $Env_Fecha = $datosEnvio['Env_Fecha'];
+            $Env_Estado = "Completado";
+            $Env_Direccion = $datosEnvio['Env_Direccion'];
+            $Env_Observaciones = $datosEnvio['Env_Observaciones'];
+            $FK_ID_Carrito = $datosEnvio['FK_ID_Carrito'];
+            
+            $consulta = "INSERT INTO tbl_reporte_ventas(PK_ID_reporte, RepV_Fecha,RepV_Estado,RepV_Direccion,RepV_Observaciones,FK_ID_Carrito)
+            VALUES ('$PK_ID_Envio','$Env_Fecha','$Env_Estado','$Env_Direccion','$Env_Observaciones','$FK_ID_Carrito')";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Ahora si eliminamos el pedido de la tabla pedido
+            $consulta = "DELETE FROM tbl_envio WHERE PK_ID_Envio = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta último registro generado
+            $consulta = "SELECT PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,
+            FK_ID_Carrito FROM tbl_envio ORDER BY PK_ID_Envio DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+
+    public function envioReportePedido($id){
+        try{
+            //Traemos los datos de los campos deacuerdo al id
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,
+            FK_ID_Carrito FROM tbl_envio WHERE PK_ID_Envio = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Hacemos un insert con los datos anteriores a la tabla envios
+            $datosEnvio = $resultado->fetch(PDO::FETCH_ASSOC);
+            $PK_ID_Envio = $datosEnvio['PK_ID_Envio'];
+            $Env_Fecha = $datosEnvio['Env_Fecha'];
+            $Env_Estado = "Cancelado";
+            $Env_Direccion = $datosEnvio['Env_Direccion'];
+            $Env_Observaciones = $datosEnvio['Env_Observaciones'];
+            $FK_ID_Carrito = $datosEnvio['FK_ID_Carrito'];
+            
+            $consulta = "INSERT INTO tbl_reporte_pedido(PK_ID_reporte, RepP_Fecha,RepP_Estado,RepP_Direccion,RepP_Observaciones,FK_ID_Carrito)
+            VALUES ('$PK_ID_Envio','$Env_Fecha','$Env_Estado','$Env_Direccion','$Env_Observaciones','$FK_ID_Carrito')";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Ahora si eliminamos el pedido de la tabla pedido
+            $consulta = "DELETE FROM tbl_envio WHERE PK_ID_Envio = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta último registro generado
+            $consulta = "SELECT PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,
+            FK_ID_Carrito FROM tbl_envio ORDER BY PK_ID_Envio DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+
+
+
+
     //Módulo Subcategorias
     public function cargarSubCategoria(){
         try {
             //Cargar datos a la tabla subcategoria
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre FROM tbl_subcategoria";
+            $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre, Cat_Nombre FROM tbl_catxsub JOIN tbl_subcategoria 
+            ON tbl_catxsub.FK_ID_SubCategoria = tbl_subcategoria.PK_ID_SubCategoria 
+            JOIN tbl_categoria ON tbl_catxsub.FK_ID_Categoria = tbl_categoria.PK_ID_Categoria";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -886,7 +1107,7 @@ class Consultar {
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
-    public function editarSubCategoria(SubCategoria $con){
+    public function editarSubCategoria(SubCategoria $con, $PK_ID_Categoria){
         try {
             //Editar subcategoria
             $conexion = new ConexionBD();
@@ -895,6 +1116,12 @@ class Consultar {
             $consulta = "UPDATE tbl_subcategoria SET SCat_Nombre = '$SCat_Nombre' WHERE PK_ID_SubCategoria = '$id' ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
+
+            if(!empty($PK_ID_Categoria)) {
+                $consulta = "UPDATE tbl_catxsub SET FK_ID_Categoria ='$PK_ID_Categoria' WHERE FK_ID_SubCategoria = '$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+            }
 
             // Consulta del último registro genererado
             $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre FROM tbl_subcategoria ORDER BY PK_ID_SubCategoria DESC LIMIT 1";
@@ -932,6 +1159,32 @@ class Consultar {
 
             // Consulta del último registro genererado
             $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre FROM tbl_subcategoria ORDER BY PK_ID_SubCategoria DESC LIMIT 1";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Se comprueba si la variable data viene vacia y dado el caso envia un error
+            if($data != TRUE){
+                $data = ['error'=> true];
+            }
+        
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function cargarCategoriaCombo($id){
+        try {
+            //Cargar datos a la tabla subcategoria
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM tbl_catxsub JOIN tbl_categoria 
+            ON tbl_catxsub.FK_ID_Categoria = tbl_categoria.PK_ID_Categoria WHERE FK_ID_SubCategoria = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
