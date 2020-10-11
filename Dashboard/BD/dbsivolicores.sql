@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-10-2020 a las 04:31:58
+-- Tiempo de generación: 11-10-2020 a las 06:17:39
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.30
 
@@ -205,7 +205,7 @@ CREATE TABLE `tbl_producto` (
 --
 DELIMITER $$
 CREATE TRIGGER `Tbl_Producto_AFTER_INSERT` AFTER INSERT ON `tbl_producto` FOR EACH ROW BEGIN
-INSERT INTO Tbl_Inventario
+INSERT INTO tbl_inventario
 (FK_ID_ProductoInventario)
 VALUES(new.PK_ID_Producto);
 END

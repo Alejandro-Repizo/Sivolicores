@@ -126,11 +126,6 @@ class Consultar {
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
-
             //Cerrar conexión
             $conexion = null;
         }catch (Exception $ex) {
@@ -245,11 +240,6 @@ class Consultar {
             //Coloca todo el un arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            ///Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
-
             //Cerrar conexión
             $conexion = null;
         }catch (Exception $ex) {
@@ -302,11 +292,6 @@ class Consultar {
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
         
             //Cerrar conexión
             $conexion = null;
@@ -401,11 +386,6 @@ class Consultar {
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
 
             //Cerrar conexión
             $conexion = null;
@@ -548,7 +528,7 @@ class Consultar {
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
     
-    //Módulo cargar Reporte Ventas
+    //Módulo Reporte Ventas
     public function cargarReporteVentas(){
         try {
             //Cargar datos a la tabla reporte venta
@@ -562,11 +542,6 @@ class Consultar {
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
-        
             //Cerrar conexión
             $conexion = null;
         } catch (Exception $ex) {
@@ -576,7 +551,7 @@ class Consultar {
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
-    //Módulo cargar Reporte Pedidos
+    //Módulo Reporte Pedidos
     public function cargarReportePedidos(){
         try {
             //Cargar datos a la tabla reporte pedidos
@@ -589,11 +564,6 @@ class Consultar {
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
         
             //Cerrar conexión
             $conexion = null;
@@ -610,7 +580,7 @@ class Consultar {
         try {
             //Cargar datos a la tabla categorias
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM Tbl_Categoria";
+            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM tbl_categoria";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -631,12 +601,12 @@ class Consultar {
             //Guardar categoria
             $conexion = new ConexionBD();
             $Cat_Nombre = $con->getNombre();
-            $consulta = "INSERT INTO Tbl_Categoria (Cat_Nombre) VALUES ('$Cat_Nombre') ";
+            $consulta = "INSERT INTO tbl_categoria (Cat_Nombre) VALUES ('$Cat_Nombre') ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             // Consulta del último registro genererado
-            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM Tbl_Categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
+            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM tbl_categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -663,12 +633,12 @@ class Consultar {
             $conexion = new ConexionBD();
             $Cat_Nombre = $con->getNombre();
             $id = $con->getPK_ID_Categoria();
-            $consulta = "UPDATE Tbl_Categoria SET Cat_Nombre = '$Cat_Nombre' WHERE PK_ID_Categoria = '$id' ";
+            $consulta = "UPDATE tbl_categoria SET Cat_Nombre = '$Cat_Nombre' WHERE PK_ID_Categoria = '$id' ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             // Consulta del último registro genererado
-            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM Tbl_Categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
+            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM tbl_categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -696,12 +666,12 @@ class Consultar {
             $conexion = new ConexionBD();
             // $Cat_Nombre = $con->getNombre();
             $id = $con->getPK_ID_Categoria();
-            $consulta = "DELETE FROM Tbl_Categoria WHERE PK_ID_Categoria = '$id' ";
+            $consulta = "DELETE FROM tbl_categoria WHERE PK_ID_Categoria = '$id' ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             // Consulta del último registro genererado
-            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM Tbl_Categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
+            $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM tbl_categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -733,11 +703,6 @@ class Consultar {
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
 
             //Cerrar conexión
             $conexion = null;
@@ -798,11 +763,6 @@ class Consultar {
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
 
             //Cerrar conexión
             $conexion = null;
@@ -922,11 +882,6 @@ class Consultar {
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
-
             //Cerrar conexión
             $conexion = null;
         }catch (Exception $ex) {
@@ -1030,9 +985,6 @@ class Consultar {
     }
 
 
-
-
-
     //Módulo Subcategorias
     public function cargarSubCategoria(){
         try {
@@ -1047,11 +999,6 @@ class Consultar {
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
-        
             //Cerrar conexión
             $conexion = null;
         } catch (Exception $ex) {
@@ -1081,7 +1028,7 @@ class Consultar {
         
 
             // Guarda consulta en la tabla de categoria por subcategoria
-            $consulta = "INSERT INTO `tbl_catxsub`(`FK_ID_Categoria`, `FK_ID_SubCategoria`) VALUES  ('$PK_ID_Categoria', '$PK_ID_SubCategoria')";
+            $consulta = "INSERT INTO tbl_catxsub(FK_ID_Categoria, FK_ID_SubCategoria) VALUES  ('$PK_ID_Categoria', '$PK_ID_SubCategoria')";
             $resultados = $conexion->prepare($consulta);
             $resultados->execute();
 
@@ -1191,11 +1138,6 @@ class Consultar {
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
-        
             //Cerrar conexión
             $conexion = null;
         } catch (Exception $ex) {
@@ -1217,11 +1159,6 @@ class Consultar {
 
             //Coloca todo en una arreglo
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-            //Se comprueba si la variable data viene vacia y dado el caso envia un error
-            if($data != TRUE){
-                $data = ['error'=> true];
-            }
 
             //Cerrar conexión
             $conexion = null;
@@ -1259,10 +1196,8 @@ class Consultar {
                 $conexion = new ConexionBD();
                 $ImNombre = $Pt_Imagen['file']['name'];
 
-                $consulta = "INSERT INTO tbl_producto (`Pt_codigo`, `Pt_Nombre`, `Pt_Precio`, `Pt_Imagen`, `Pt_Presentacion`, 
-                `Pt_Grados_alchol`, `Pt_Pais`, `Pt_Color`, `Pt_Stock`, `FK_ID_Categoria`, `FK_ID_Marca`) 
-                VALUES ('$Pt_codigo', '$Pt_Nombre', '$Pt_Precio', '$ImNombre', '$Pt_Presentacion', 
-                '$Pt_Grados_alchol', '$Pt_Pais', '$Pt_Color', '$Pt_Stock', '$FK_ID_Categoria', '$FK_ID_Marca')";
+                $consulta = "INSERT INTO tbl_producto (Pt_codigo, Pt_Nombre, Pt_Precio,Pt_Imagen,Pt_Presentacion,Pt_Grados_alchol,Pt_Pais,Pt_Color,Pt_Stock,FK_ID_Categoria,FK_ID_Marca) 
+                VALUES ('$Pt_codigo', '$Pt_Nombre', '$Pt_Precio', '$ImNombre', '$Pt_Presentacion','$Pt_Grados_alchol', '$Pt_Pais', '$Pt_Color', '$Pt_Stock', '$FK_ID_Categoria', '$FK_ID_Marca')";
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
             
@@ -1283,8 +1218,8 @@ class Consultar {
             $conexion = new ConexionBD();
             $id = $con->getPK_ID_Producto();
             $Pt_Nombre = $con->getPt_Nombre();
-            $consulta = "SELECT `PK_ID_Producto`, `Pt_codigo`, `Pt_Nombre`, `Pt_Precio`, `Pt_Imagen`, `Pt_Presentacion`, 
-            `Pt_Grados_alchol`, `Pt_Pais`, `Pt_Color`, `Pt_Stock`, `FK_ID_Categoria`, `FK_ID_Marca` FROM tbl_producto
+            $consulta = "SELECT PK_ID_Producto, Pt_codigo, Pt_Nombre, Pt_Precio, Pt_Imagen, Pt_Presentacion, 
+            Pt_Grados_alchol, Pt_Pais, Pt_Color, Pt_Stock, FK_ID_Categoria, FK_ID_Marca FROM tbl_producto
             WHERE PK_ID_Producto = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();

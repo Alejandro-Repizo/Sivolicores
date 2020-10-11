@@ -1,6 +1,6 @@
 <?php 
 
-require_once '../modelo/administrador.php';
+require_once '../modelo/Administrador.php';
 require_once '../modelo/Consultar.php';
 require_once '../modelo/Marca.php';
 require_once '../modelo/Cliente.php';
