@@ -1,12 +1,10 @@
 <?php 
-	
-	require_once  'ConexionBD.php';
 
+	require_once 'ConexionBD.php';
 	// Iniciar sesión
 	session_start();
 
-	
 	if (!isset($_SESSION['email'])) {
-		header("/mvcproyect/Dashboard/");
+		header("Location: /mvcproyect/Dashboard/");
 	}
  ?>

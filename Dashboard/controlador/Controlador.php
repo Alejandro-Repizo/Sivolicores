@@ -320,6 +320,22 @@ class Controlador{
     }
 
 
+    public function cargarTablaClienteDashboard(){
+        $consultar = new consultar();
+        $consultar->cargarTablaClienteDashboard();
+    }
+
+    public function cargarTablaPedidoDashboard(){
+        $consultar = new consultar();
+        $consultar->cargarTablaPedidoDashboard();
+    }
+
+    public function cargarGraficaDashboard(){
+        $consultar = new consultar();
+        $consultar->cargarGraficaDashboard();
+    }
+
+
 
 
 

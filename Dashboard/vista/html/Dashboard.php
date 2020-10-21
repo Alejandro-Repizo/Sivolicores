@@ -13,6 +13,8 @@
     <!--Favicon-->
     <link rel="shortcut icon" href="../imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <!--css-->
     <link rel="stylesheet" href="../css/Style_dashboard.css">
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
@@ -27,9 +29,7 @@
             <!-- <a href="#">
                 <i class="fas fa-align-justify"></i>
             </a> -->
-            <div class="nav-search">
-                <input type="search" id="search" placeholder="Buscar" />
-            </div>
+            <div class="nav-search"></div>
             <a href="#">
                 <i class="external-icon-nav fas fa-external-link-alt"></i>
             </a>
@@ -45,7 +45,7 @@
                 <div class="opcion" id="opcion">
                     <div class="categorias">
                         <a href="Editar_perfil.php"><i class=" user-icons fas fa-user-edit"></i>Editar perfil</a></li>
-                        <a href="/mvcproyect/Dashboard/"><i class=" user-icons fas fa-lock-open"></i>Cerrar sesi&oacute;n</a></li>
+                        <a href="../../modelo/Cerrar.php"><i class=" user-icons fas fa-lock-open"></i>Cerrar sesi&oacute;n</a></li>
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                 <li><a href="#"><i class="cont-icons fas fa-boxes"></i>C&aacute;talogo<i class="fa fa-chevron-down cont-icons-right"></i></a>
                     <ul>
                         <li><a href="Mod_categorias.php"><i class="cont-icons fas fa-box-open"></i>Categor&iacute;as</a></li>
-                        <li><a href="Mod_sub_categorias.php"><i class="cont-icons fas fa-box-open"></i>Sub-categor&iacute;as</a></li>
+                        <li><a href="Mod_sub_categorias.php"><i class="cont-icons fas fa-box-open"></i>Sub categor&iacute;as</a></li>
                         <li><a href="Mod_productos.php"><i class="cont-icons fas fa-wine-bottle"></i>Productos</a></li>
                         <li><a href="Mod_inventario.php"><i class="cont-icons fas fa-clipboard-list"></i>Inventario</a></li>
                         <li><a href="Mod_marca.php"><i class="cont-icons fab fa-modx"></i>Marca</a></li>
@@ -77,7 +77,7 @@
                     <ul>
                         <li><a href="Mod_pedidos.php"><i class="cont-icons fas fa-truck"></i>Pedidos</a></li>
                         <li><a href="Mod_clientes.php"><i class="cont-icons fas fa-users"></i>Clientes</a></li>
-                        <li><a href="Mod_envios.php"><i class="cont-icons fas fa-truck-loading"></i>Envíos</a></li>
+                        <li><a href="Mod_envios.php"><i class="cont-icons fas fa-truck-loading"></i>Env&iacute;os</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="cont-icons fas fa-chart-area"></i>Reportes<i class="fa fa-chevron-down cont-icons-right"></i></a>
@@ -153,67 +153,8 @@
                                 <th>Total</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
-                            <tr>
-                                <td>0</td>
-                                <td>Administrador</td>
-                                <td>Completo</td>
-                                <td>$0.000</td>
-                            </tr>
+                        <tbody id='TablaDashboardPedido'>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -228,29 +169,14 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Nombre cliente</th>
-                                <th>Correo electrónico</th>
-                                <th>Acciones</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Correo electr&oacute;nico</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>".$mostar['Cl_Nombre']."</td>
-                            <td>".$mostar['Cl_email']."</td>
-                            <td>
-                            <a href='../../controlador/DataRoute.php?deleteCliente=".$mostar['PK_ID_Cliente']."'>
-                                    <i class='fas fa-trash-alt'></i></a>
-                                </a>
-                            </td>
-                        </tr>
+                        <tbody id="TablaDashboardCliente">
+                    
                         </tbody>
-                        <!-- <tbody>
-                            <tr>
-                                <td>Administrador</td>
-                                <td>Admin@gmail.com</td>
-                                <td><a href=""><i class="fas fa-edit"></i></a></td>
-                            </tr>
-                        </tbody> -->
                     </table>
                 </div>
             </div>
@@ -296,7 +222,8 @@
                             <h6>Estad&iacute;sticas</h6>
                         </div>
                     </div>
-                    <i class="temporal far fa-chart-bar"></i>
+                    <!-- En este container se muestran los graficos -->
+                    <div id="container" style="min-width: 280px; width: 90%; height: 350px; margin: 0 auto"></div>
                 </div>
             </div>
             
@@ -304,12 +231,16 @@
     </div>
 
 
-    <!--Jquery, Bootstrap, Popper-->
+    <!--Jquery, Bootstrap, HighChart-->
     <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     
-     <!--Main-->
+    <script src="../assets/highcharts/code/highcharts.js"></script>
+    <script src="../assets/highcharts/code/modules/exporting.js"></script>
+    <script src="../assets/highcharts/code/modules/export-data.js"></script>
+    <!--Main-->
     <script src="../js/main.js"></script>
+    <script src="../js/dashboard.js"></script>
 </body>
 
 </html>

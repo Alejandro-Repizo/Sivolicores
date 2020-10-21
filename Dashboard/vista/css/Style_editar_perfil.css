@@ -10,11 +10,11 @@
 }
 
 .formulario_2 {
-    width: 80%;
+    width: 68%;
 }
 
 .formulario_2 form input {
-    width: 100%;
+    width: 100%;  
     padding: 8px;
     margin: 14px 0px;
     border: 1px solid #00000042;
@@ -55,5 +55,5 @@
 
 .color-prueba{
     border: 1px solid red;
-    /* background-color: #000002; */
+    /* background-color: #000002; */ 
 }

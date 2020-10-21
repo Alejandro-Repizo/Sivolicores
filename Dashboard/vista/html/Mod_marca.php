@@ -1,5 +1,8 @@
 <?php 
-date_default_timezone_set('America/Bogota');
+
+ require_once('../../modelo/sesion.php');
+ date_default_timezone_set('America/Bogota');
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -34,7 +37,6 @@ date_default_timezone_set('America/Bogota');
                 <i class="fas fa-align-justify"></i>
             </a> -->
             <div class="nav-search">
-                <input type="search" id="search" placeholder="Buscar" />
             </div>
             <a href="#">
                 <i class="external-icon-nav fas fa-external-link-alt"></i>
@@ -51,7 +53,7 @@ date_default_timezone_set('America/Bogota');
                 <div class="opcion" id="opcion">
                     <div class="categorias">
                         <a href="Editar_perfil.php"><i class=" user-icons fas fa-user-edit"></i>Editar perfil</a></li>
-                        <a href="Index.php"><i class=" user-icons fas fa-lock-open"></i>Cerrar sesión</a></li>
+                        <a href="../../modelo/Cerrar.php"><i class=" user-icons fas fa-lock-open"></i>Cerrar sesi&oacute;n</a></li>
                     </div>
                 </div>
 
@@ -67,12 +69,13 @@ date_default_timezone_set('America/Bogota');
             <img src="../imagenes/icons/Logo.jpeg" alt="Logo" class="logo">
         </a>
         <div class="contenedor-menu">
-            <ul class="menu">
+           <ul class="menu">
 
                 <li><a href="Dashboard.php"><i class="cont-icons fas fa-home"></i>Dashboard</a></li>
-                <li><a href="#"><i class="cont-icons fas fa-boxes"></i>Cátalogo<i class="fa fa-chevron-down cont-icons-right"></i></a>
+                <li><a href="#"><i class="cont-icons fas fa-boxes"></i>C&aacute;talogo<i class="fa fa-chevron-down cont-icons-right"></i></a>
                     <ul>
-                        <li><a href="Mod_categorias.php"><i class="cont-icons fas fa-box-open"></i>Categorías</a></li>
+                        <li><a href="Mod_categorias.php"><i class="cont-icons fas fa-box-open"></i>Categor&iacute;as</a></li>
+                        <li><a href="Mod_sub_categorias.php"><i class="cont-icons fas fa-box-open"></i>Sub categor&iacute;as</a></li>
                         <li><a href="Mod_productos.php"><i class="cont-icons fas fa-wine-bottle"></i>Productos</a></li>
                         <li><a href="Mod_inventario.php"><i class="cont-icons fas fa-clipboard-list"></i>Inventario</a></li>
                         <li><a href="Mod_marca.php"><i class="cont-icons fab fa-modx"></i>Marca</a></li>
@@ -82,7 +85,7 @@ date_default_timezone_set('America/Bogota');
                     <ul>
                         <li><a href="Mod_pedidos.php"><i class="cont-icons fas fa-truck"></i>Pedidos</a></li>
                         <li><a href="Mod_clientes.php"><i class="cont-icons fas fa-users"></i>Clientes</a></li>
-                        <li><a href="Mod_envios.php"><i class="cont-icons fas fa-truck-loading"></i>Envíos</a></li>
+                        <li><a href="Mod_envios.php"><i class="cont-icons fas fa-truck-loading"></i>Env&iacute;os</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><i class="cont-icons fas fa-chart-area"></i>Reportes<i class="fa fa-chevron-down cont-icons-right"></i></a>
@@ -92,13 +95,13 @@ date_default_timezone_set('America/Bogota');
                     </ul>
                 </li>
                 <li><a href="Mod_banner.php"><i class="cont-icons fas fa-images"></i>Banners</a></li>
-                <li><a href="Mod_receta_coctel.php"><i class="cont-icons fas fa-cocktail"></i>Recetas cócteles</a></li>
+                <li><a href="Mod_receta_coctel.php"><i class="cont-icons fas fa-cocktail"></i>Recetas c&oacute;cteles</a></li>
 
             </ul>
         </div>
         <!--Barra lateral izquierda estadísticas-->
         <div class="barra-lat-information">
-            <h6>ESTADÍSTICAS RÁPIDAS</h6>
+            <h6>ESTAD&Iacute;STICAS R&Aacute;PIDAS</h6>
             <ul>
                 <hr>
                 <li><i class="inf-icons fas fa-truck"></i>NUEVOS PEDIDOS HOY</a>

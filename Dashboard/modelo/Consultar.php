@@ -1,7 +1,6 @@
 <?php 
 
 require_once 'ConexionBD.php';
-require_once 'sesion.php';
 
 
 //Acá se realizan todas las consultas SQL
@@ -24,9 +23,11 @@ class Consultar {
 
             //Se comprueba si la variable data viene vacia y dado el caso envia un error
             if ($data != false) {
+                session_start();
                 $_SESSION['email'] = $email; //nodo    
                 $PK_ID_Administrador = $data['PK_ID_Administrador'];
                 $_SESSION['llave'] = $PK_ID_Administrador;
+                
             } else {
                 $data = ['error'=> 'El usuario o la contraseña que ingresaste no coinciden con nuestros registros. Por favor, intenta de nuevo.'];
             }
@@ -43,6 +44,7 @@ class Consultar {
     public function cargarEditarUsuario(){
         try{
             //Cargar datos al formulario editar administrador
+            include 'sesion.php';
             $id = $_SESSION['llave'];
             $conexion = new ConexionBD();
             $consulta = "SELECT PK_ID_Administrador, Ad_Nombre, Ad_Apellido, Ad_Email, Ad_Password FROM tbl_administrador WHERE PK_ID_Administrador = '$id'";
@@ -1329,6 +1331,101 @@ class Consultar {
         
     }
 
+
+    public function cargarTablaClienteDashboard(){
+        try{
+            //Cargar datos a la tabla cliente dashboard
+            $conexion = new ConexionBD();
+            $consulta = "SELECT Cl_Nombre, Cl_Apellido, Cl_email FROM tbl_cliente ORDER BY PK_ID_Cliente DESC LIMIT 10";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+
+    public function cargarTablaPedidoDashboard(){
+        try{
+            //Cargar datos a la tabla pedidos Dashboard
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Ped_Estado, Car_Total  FROM tbl_pedido
+            JOIN tbl_carrito_pedidos ON tbl_carrito_pedidos.PK_ID_Carrito = tbl_pedido.FK_ID_Carrito 
+            JOIN tbl_cliente ON tbl_cliente.PK_ID_Cliente = tbl_carrito_pedidos.FK_ID_Cliente 
+            JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto ORDER BY PK_ID_Pedido DESC LIMIT 10";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function cargarGraficaDashboard(){
+        try{
+            //Cargar datos a la grafica
+            $conexion = new ConexionBD();
+            $consulta = "SELECT Ped_Estado, COUNT(PK_ID_Pedido) FROM tbl_pedido GROUP BY Ped_Estado ORDER BY COUNT(PK_ID_Pedido) DESC ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = [];
+
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, array($fila['Ped_Estado'], $fila['COUNT(PK_ID_Pedido)']));
+            }
+            
+            //Consulta para traer los envios
+            $consulta = "SELECT Env_Estado, COUNT(PK_ID_Envio) FROM tbl_envio GROUP BY Env_Estado ORDER BY COUNT(PK_ID_Envio) DESC ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, array($fila['Env_Estado'], $fila['COUNT(PK_ID_Envio)']));
+            }
+
+            //Consulta para traer los reporte envios
+            $consulta = "SELECT Repv_Estado, COUNT(PK_ID_reporte)FROM tbl_reporte_ventas GROUP BY Repv_Estado ORDER BY COUNT(PK_ID_reporte) DESC ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, array($fila['Repv_Estado'], $fila['COUNT(PK_ID_reporte)']));
+            }
+
+            //Consulta para traer los reporte pedidos
+            $consulta = "SELECT RepP_Estado, COUNT(PK_ID_reporte)FROM tbl_reporte_pedido GROUP BY RepP_Estado ORDER BY COUNT(PK_ID_reporte) DESC ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, array($fila['RepP_Estado'], $fila['COUNT(PK_ID_reporte)']));
+            }
+
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_NUMERIC_CHECK);
+    }
    
 
 

@@ -43,7 +43,7 @@ html {
 /*----------Header----------*/
 
 .header {
-    width: 81%;
+    width: 85%;
     height: 50px;
     background-color: #fff;
     position: absolute;
@@ -54,38 +54,10 @@ html {
 }
 
 .header .header-barra-nav {
-    width: 82%;
+    width: 85%;
     display: flex;
     justify-content: space-between;
     margin: 15px 20px;
-}
-
-
-/*---------------------------------------*/
-
-.header .header-barra-nav .nav-search input#search {
-    width: 300px;
-    height: 40px;
-    border: none;
-    padding: 10px;
-    font-size: 10pt;
-    background-color: #fff;
-    color: rgba(0, 0, 0, 0.5);
-    padding-left: 20px;
-    border-radius: 5px;
-    transition: .55s ease;
-    position: absolute;
-    left: 13px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.header .header-barra-nav .nav-search input#search:hover,
-.header .header-barra-nav .nav-search input#search:focus,
-.header .header-barra-nav .nav-search input#search:active {
-    color: #ffffff;
-    outline: none;
-    background-color: #800000;
 }
 
 
@@ -101,21 +73,25 @@ html {
 }
 
 .user-nav {
-    width: 15%;
+    width: 12%;
+    margin: auto 0;
 }
 
 .user-nav .btn-administrador {
     color: #fff;
-    padding: 7px;
-    border-radius: 3px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     border: 1px solid transparent;
-    font-size: 15px;
     transition: .3s ease all;
-    margin-top: 7px;
     color: #000002;
     cursor: pointer;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.user-nav .btn-administrador p {
+    margin: auto 0;
 }
 
 .user-nav .btn-administrador .up {
@@ -165,14 +141,14 @@ html {
     background-color: transparent;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #fff;
+    border-bottom: 10px solid#EFEFEF;
     position: absolute;
     top: -10px;
     left: 65px;
 }
 
 .opcion>div {
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, .10);
+    box-shadow: 0px 3px 0px rgba(0, 0, 0, .10);
 }
 
 .opcion .categorias {
@@ -187,6 +163,7 @@ html {
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
+    text-decoration: none;
 }
 
 .opcion .categorias a i {
@@ -213,7 +190,7 @@ html {
 
 .central-box {
     /*flexbox*/
-    width: 81%;
+    width: 85%;
     position: absolute;
     right: 0;
     top: 50px;
@@ -223,18 +200,18 @@ html {
 }
 
 .name-page {
-    height: 50px;
+    height: 45px;
     background-color: #ffffff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.116);
     /*flexbox*/
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
 }
 
 .name-page-icon {
-    padding: 10px;
-    font-size: 20px;
+    padding: 12px;
+    font-size: 24px;
     color: #000002;
     display: flex;
     flex-direction: row;
@@ -247,7 +224,8 @@ html {
 }
 
 .name-page h3 {
-    color: #65737E;
+    color: #000002;
+    font-size: 23px;
 }
 
 
@@ -305,7 +283,7 @@ html {
 
 .first-sub-central-box {
     height: auto;
-    background-color: #fff;
+    background-color: transparent;
     /*flexbox*/
     display: flex;
     flex-flow: row wrap;
@@ -473,7 +451,7 @@ html {
 
 .second-sub-central-box {
     height: auto;
-    background-color: #fff;
+    background-color: transparent;
     margin-top: 15px;
     /*flexbox*/
     display: flex;
@@ -589,7 +567,7 @@ html {
 /*-----------Barra naveagción lateral-----------*/
 
 .barra-lat-izq {
-    width: 19%;
+    width: 15%;
     height: 100%;
     background-color: #000002;
     position: fixed;
@@ -599,14 +577,14 @@ html {
 
 .barra-lat-izq .logo {
     width: 60%;
-    height: 69px;
+    height: 58px;
     margin-left: 50px;
 }
 
 .contenedor-menu {
     width: 100%;
     display: inline-block;
-    line-height: 18px;
+    line-height: 17.5px;
 }
 
 .contenedor-menu .menu {
@@ -620,7 +598,7 @@ html {
 .contenedor-menu .menu li a {
     color: #65737e;
     display: block;
-    padding: 15px 20px;
+    padding: 11px 16px;
     background: #000002;
     transition: .1s ease all;
 }
@@ -665,30 +643,30 @@ html {
 .barra-lat-information {
     width: 100%;
     display: flex;
-    flex-flow: column;
+    flex-flow: wrap;
     justify-content: center;
     align-items: center;
     background-color: #000002;
-    margin-top: 5px;
+    margin-top: 0.1px;
 }
 
 .barra-lat-information h6 {
-    padding: 10px 20px;
+    padding: 0px 20px;
     color: #65737e;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .barra-lat-information li {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 500;
-    padding: 5px 10px;
+    padding: 0px 20px;
     color: #65737e;
 }
 
 .barra-lat-information .inf-icons {
-    padding-right: 10px;
-    font-size: 20px;
+    padding-right: 13px;
+    font-size: 16px;
 }
 
 .barra-lat-information .inf-date {
@@ -703,3 +681,19 @@ hr {
 }
 
 
+/* Media queries */
+
+@media screen and (max-width: 1500px) {
+    .barra-lat-izq {
+        width: 20%;
+    }
+    .header {
+        width: 80%;
+    }
+    .central-box {
+        width: 80%;
+    }
+    .user-nav {
+        width: 18%;
+    }
+}

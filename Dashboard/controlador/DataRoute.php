@@ -596,7 +596,22 @@ if(isset($_POST['opcion'])){
                 $id = filter_var($id, FILTER_VALIDATE_INT);
             }
             $controlador->borrarProducto($id, $Pt_Nombre);
-        break;
+            break;
+
+        case 'cargarTablaClienteDashboard':
+            $Controlador = new Controlador();
+            $Controlador->cargarTablaClienteDashboard();
+            break;
+
+        case 'cargarTablaPedidoDashboard':
+            $Controlador = new Controlador();
+            $Controlador->cargarTablaPedidoDashboard();
+            break;
+        
+        case 'cargarGraficaDashboard':
+            $Controlador = new Controlador();
+            $Controlador->cargarGraficaDashboard();
+            break;
     }
 
 }
