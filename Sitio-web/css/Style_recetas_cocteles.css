@@ -6,12 +6,11 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #fff;
 }
 
-ul,
-li {
+ul, li {
     list-style: none;
 }
 
@@ -141,7 +140,7 @@ a {
 
 .menu4 {
     width: 100%;
-    height: 60px;
+    height: 70px;
     background-color: #000002;
     z-index: 1000;
     align-items: center;
@@ -269,27 +268,136 @@ a {
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.288);
 }
 
+/*----------------Menu mobile-----------------*/
+
+.menuMobile {
+    width: 100%;
+    height: 86px;
+    background-color: #000002;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    position: relative;
+}
+
+
+.contenedor-enlaces-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuMobile-logo {
+    display: flex;
+    position: absolute;
+    left: 52px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .3s ease all;
+}
+
+.menuMobile .menuMobile-icons {
+    display: flex;
+    position: absolute;
+    right: 52px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .3s ease all;
+}
+
+.menuMobile .menuMobile-icons a i {
+    font-size: 22px;
+    color: #888888;
+    padding: 5px 10px;
+}
+
+.menuMobile .menuMobile-icons a i:hover {
+    color: #d9a520;
+}
+
+/* Menu */
+
+.contenedor-menu {
+    width: 100%;
+    display: none;
+    line-height: 18px;
+    background: #d9a520;
+}
+
+.contenedor-menu-active {
+    display: block;
+}
+
+.menuMobileWrapper {
+    width: 100%;
+}
+
+.contenedor-menu ul {
+    list-style: none;
+    display: none;
+}
+
+.menuMobileWrapper  li a {
+    color: #fff;
+    display: block;
+    padding: 15px 20px;
+    background: #d9a520;
+}
+
+.menuMobileWrapper  li a:hover {
+    background-color: #d9a520;
+    color: #fff;
+    text-decoration: none;
+}
+
+.menuMobileWrapper .cont-icons-right {
+    float: right;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.menuMobileWrapper ul {
+    display: none;
+}
+
+.menuMobileWrapper   ul li a {
+    background-color: #fff;
+    color: #888888;
+    font-weight: lighter;
+}
+
+.menuMobileWrapper .activado>a {
+    background-color: #a3790e;
+    color: #fff;
+   
+}
+
+.sub-opciones {
+    padding-left: 10px;
+}
+
+
 
 /*-----------banners---------------------------*/
 
 .banner {
     width: 100%;
     height: 239px;
-    margin-top: -10px;
     background-repeat: no-repeat;
     background-image: url(../imagenes/Image_Title_Page/Wallpaper_Cócteles.jpg);
     background-position: center center;
-    background-size: 100% 239px;
+    background-size: cover;
     background-attachment: scroll;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     margin-bottom: 3em;
-    transition: .6s ease all;
+
 }
 
-.banner .text-banner {
+.text-banner {
     text-align: center;
     color: #fff;
     position: relative;
@@ -297,15 +405,16 @@ a {
 
 .banner .text-banner .h4 {
     font-size: 15px;
-    font-family: 'Montserrat Bold', arial;
+    font-family: 'Montserrat', sans-serif;
     letter-spacing: 1px;
     line-height: 1.8;
+    font-weight: lighter;
 }
 
 .banner .text-banner .h1 {
     font-size: 50px;
     text-transform: uppercase;
-    font-family: 'Montserrat Bold', arial;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -326,56 +435,54 @@ a {
 
 .text-bottom .text-bottom-title h1 {
     font-size: 30px;
-    font-family: 'Montserrat Bold', arial;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: #222222;
     line-height: 1.2;
     text-transform: uppercase;
 }
 
-.super-contenedor-coctel {
-    width: 91%;
-    height: auto;
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-}
-
-.contenedor-coctel {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /*las columnas son 4*/
-    grid-template-rows: 1fr;
-    grid-template-areas: "coctel1 coctel2";
-}
-
-.coctel1 {
-    grid-area: coctel1;
-}
-
-.coctel2 {
-    grid-area: coctel2;
-}
-
 
 /*------------------------------------*/
 
-.contenedor-coctel .cont-coctel {
-    width: 80%;
-    white-space: pre-line;
-    margin: 10px 10px;
-    flex-direction: column;
+.super-contenedor-coctel {
+    width: 100%;
+    height: auto;
     display: flex;
+    justify-content: center;
 }
 
-.contenedor-coctel .cont-coctel .cont-cot-img {
-    width: 170%;
-    height: 530px;
+.contenedor-coctel {
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 30%;
+    grid-template-areas: "article aside";
+}
+
+.article {
+    grid-area: article;
+}
+
+.aside {
+    grid-area: aside;
+    display: flex;
+    justify-content: center;
+}
+
+
+.cont-coctel {
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    margin-bottom: 1.5em;
+}
+
+.cont-cot-img{
+    width: 100%;
     overflow: hidden;
 }
 
-.contenedor-coctel .cont-coctel .cont-cot-img img {
+.cont-cot-img img {
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -384,38 +491,38 @@ a {
     transition: all .6s
 }
 
-.contenedor-coctel .cont-coctel .cont-cot-img:hover img {
+.cont-cot-img:hover img {
     transform: scale(1.1);
 }
 
-.contenedor-coctel .cont-coctel .paginas {
-    display: flex;
+.paginas {
     width: auto;
+    display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.contenedor-coctel .cont-coctel .paginas a {
-    border-radius: 100%;
+.paginas a {
+    border: 2px solid  rgb(230, 230, 230);
     text-decoration: none;
-    line-height: 2em;
-    margin-right: 15px;
-    text-align: center;
+    border-radius: 100%;
+    padding: 9px 15px;
+    font-weight: 600;
+    font-size: 12px;
+    color: rgb(230, 230, 230);
     font-family: segoe UI;
     transition: 1s ease all;
-    width: 2em;
-    color: rgb(230, 230, 230);
-    border: 2px solid rgb(230, 230, 230);
+    margin: 10px;
 }
 
-.contenedor-coctel .cont-coctel .paginas a:hover {
-    border: 2px solid goldenrod;
+.paginas a:hover {
+    border: 2px solid  goldenrod;
     background-color: goldenrod;
     color: #fff;
+    text-decoration: none;
 }
 
 .active {
-    border: 2px solid goldenrod;
     background-color: goldenrod;
     color: #fff;
 }
@@ -423,98 +530,91 @@ a {
 
 /*----------------------------------------*/
 
-.contenedor-coctel .cont-coctel .text-coctel {
+.text-coctel {
     white-space: pre-line;
-    width: 170%;
 }
 
-.contenedor-coctel .cont-coctel .text-coctel a {
-    font-size: 35px;
+.text-coctel a {
+    font-size: 26px;
     line-height: 1.5;
     width: 100%;
     text-transform: capitalize;
     color: #333333;
-    font-weight: inherit;
+    font-weight: 600;
+    transition: .2s ease all;
 }
 
-.contenedor-coctel .cont-coctel .seguir a {
-    font-size: 17px;
-    line-height: 1.5;
-    width: 100%;
-    text-transform: capitalize;
-    color: #333333;
-    font-weight: inherit;
-}
-
-.contenedor-coctel .cont-coctel .seguir a:hover {
+.text-coctel a:hover {
     color: goldenrod;
     text-decoration: none;
 }
 
-.contenedor-coctel .cont-coctel .text-coctel a:hover {
-    color: goldenrod;
-    text-decoration: none;
+.text-coctel span {
+    font-size: .8em;
+    line-height: 1.8;
+    color: #888888;
 }
 
-.contenedor-coctel .cont-coctel .text-coctel span {
-    font-size: 17px;
+.text-coctel p {
+    margin-top: 1.2em;
+    font-size: 1em;
     line-height: 1.8;
-    color: #464646;
-    font-weight: normal;
-}
-
-.contenedor-coctel .cont-coctel .text-coctel p {
-    margin-top: 10px;
-    font-size: 17px;
-    line-height: 1.8;
-    color: #464646;
+    color: #888888;
     white-space: normal;
-    text-align: justify;
 }
 
-.contenedor-coctel .cont-coctel .text-coctel a i {
+.seguir a {
+    font-size: 1em;
+    line-height: 1.5;
+    width: 100%;
+    text-transform: capitalize;
+    color: #333333;
+    font-weight: 600;
+    transition: .2s ease all;
+    
+}
+
+.seguir i {
     margin-left: 10px;
 }
 
 
+.seguir  a:hover {
+    color: goldenrod;
+    text-decoration: none;
+}
+
 /*_------------------------------------*/
 
-.contenedor-coctel .cont-search1 {
-    justify-content: flex-end;
-    margin: 50px 10px;
+.cont-search {
+    width: 90%;
+    height: 50px;
+    position: relative;
     display: flex;
+    justify-content: center;
 }
 
-.contenedor-coctel .cont-search1 h1 {
-    font-family: 'Montserrat Bold', arial;
-    font-weight: 700;
-    font-size: 16px;
-    color: black;
-    line-height: 1.5;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    margin-top: 10px;
+.cont-search .icon {
+    position: absolute;
+    width: 20px;
+    top: 25%;
+    left: 10px;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    color: #dbdbe2;
 }
 
-.contenedor-coctel .cont-search1 i input {
-    border: none;
-    padding: 10px;
+.cont-search input {
+    width: 100%;
+    padding: 10px 10px 10px 30px;
     color: black;
-    width: 300px;
     outline: none;
     transition: .3s all;
     font-size: 15px;
-    font-family: 'Montserrat', arial;
-}
-
-.contenedor-coctel .cont-search1 i {
-    border-bottom: 2px solid black;
-}
-
-.contenedor-coctel .cont-search1 i:hover,
-.contenedor-coctel .cont-search1 i:focus,
-.contenedor-coctel .cont-search1 i:active {
-    border-bottom: 2px solid #d9a520;
+    font-weight: lighter;
+    border: 1px solid #dbdbe2;
+    border-radius: 10px;
 }
 
 
@@ -525,36 +625,38 @@ footer {
     height: 580px;
     background-color: #000002;
     padding: 30px;
-    margin-top: 8em;
+    margin-top: 30px;
 }
 
-footer .contenedor-footer {
+.contenedor-footer {
     width: 100%;
-    height: 518px;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(11, minmax(120px, 150px));
+    grid-template-rows: 240px;
+    justify-content: center;
+    gap: 40px 0;
+    grid-auto-flow: row;
+    grid-auto-columns: 150px;
 }
 
-footer .contenedor-footer .sub-cont-footer {
-    width: 100%;
-    height: 240px;
-    margin-top: 2em;
-    display: flex;
-    flex-direction: row;
+.sub-cont-footer {
+    display: grid;
+    grid-template: repeat(2, 1fr) / 1fr;
+    gap: 40px 0;
+    margin-top: 60px;
+    justify-items: center;
     align-items: center;
-    justify-content: flex-end;
 }
-
 
 /*_------------------------------------*/
 
-footer .contenedor-footer .sub-cont-footer .cont-contacto {
-    position: absolute;
-    left: 60px;
-    width: 365px;
-    height: 240px;
+.cont-contacto {
+    grid-column: 1 / span 5;
 }
 
-footer .contenedor-footer .sub-cont-footer .cont-contacto h1 {
-    font-family: 'Montserrat Bold', arial;
+.cont-contacto h1 {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 16px;
     color: #fff;
@@ -564,13 +666,12 @@ footer .contenedor-footer .sub-cont-footer .cont-contacto h1 {
     margin-top: 10px;
 }
 
-footer .contenedor-footer .sub-cont-footer .cont-contacto h6 {
+.cont-contacto h6 {
     font-size: 15px;
     color: #555555;
-    padding: 1px;
 }
 
-footer .contenedor-footer .sub-cont-footer .cont-contacto a i {
+.cont-contacto a i {
     font-size: 22px;
     color: #888888;
     padding: 5px 10px;
@@ -578,20 +679,15 @@ footer .contenedor-footer .sub-cont-footer .cont-contacto a i {
     margin-top: 40px;
 }
 
-footer .contenedor-footer .sub-cont-footer .cont-contacto a i:hover {
+.cont-contacto a i:hover {
     color: #d9a520;
 }
 
-
 /*_--------------------------*/
 
-footer .contenedor-footer .sub-cont-footer .cont-footer-cat {
-    width: 145px;
-    height: 100%;
-}
 
-footer .contenedor-footer .sub-cont-footer .cont-footer-cat ul li .cat-footer-title {
-    font-family: 'Montserrat Bold', arial;
+.cont-footer-cat ul li .cat-footer-title {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 16px;
     color: #fff;
@@ -599,78 +695,177 @@ footer .contenedor-footer .sub-cont-footer .cont-footer-cat ul li .cat-footer-ti
     text-transform: uppercase;
 }
 
-footer .contenedor-footer .sub-cont-footer .cont-footer-cat ul li a {
+.cont-footer-cat ul li a {
     font-size: 15px;
     color: #555555;
     border: 1px solid transparent;
     padding: 5px 8px;
 }
 
-footer .contenedor-footer .sub-cont-footer .cont-footer-cat ul li a:hover {
+.cont-footer-cat ul li a:hover {
     text-decoration: none;
     color: #d9a520;
     border: 1px solid #d9a520;
 }
 
-footer .contenedor-footer .sub-cont-footer .cont-footer-cat ul li {
+.cont-footer-cat ul li {
     padding: 10px;
 }
 
-
 /*---------------------------------------*/
 
-footer .contenedor-footer .sub-cont-footer .cont-footer-search {
-    width: 310px;
-    height: 100%;
-}
-
-footer .contenedor-footer .sub-cont-footer .cont-footer-search h1 {
-    font-family: 'Montserrat Bold', arial;
-    font-weight: 700;
-    font-size: 16px;
-    color: #fff;
-    line-height: 1.5;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    margin-top: 10px;
-}
-
-footer .contenedor-footer .sub-cont-footer .cont-footer-search input {
-    border: none;
-    background-color: #000000;
-    border-bottom: 1px solid #fff;
-    padding: 10px;
-    color: #fff;
-    width: 300px;
-    outline: none;
-    transition: .3s all;
-    font-size: 15px;
-}
-
-footer .contenedor-footer .sub-cont-footer .cont-footer-search input:hover,
-footer .contenedor-footer .sub-cont-footer .cont-footer-search input:focus,
-footer .contenedor-footer .sub-cont-footer .cont-footer-search input:active {
-    border-bottom: 1px solid #d9a520;
-}
-
-
-/*---------------------------------------*/
-
-.contenedor-footer .ley {
-    margin-top: 9em;
+.ley {
+    /* margin-top     : 9em; */
     display: flex;
     justify-content: center;
     font-size: 14px;
+    text-align: center;
 }
 
-.contenedor-footer .ley p {
+.ley p {
     color: #555555;
 }
 
-.contenedor-footer .copyright {
+.copyright {
     margin-top: 2em;
     display: flex;
     justify-content: center;
     color: #555555;
     font-size: 14px;
 }
+
+
+/* Responsive */
+
+@media screen and (max-width: 1400px) {
+    /* Productos */
+    .contenedor {
+        width: 100%;
+    }
+    /* Footer */
+    .contenedor-footer {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 150px));
+        grid-template-rows: 240px;
+    }
+    .cont-contacto {
+        grid-column: 1 / span 3;
+    }
+}
+
+@media screen and (max-width: 1260px) {
+    /* Cocteles */
+    .contenedor-coctel {
+        width: 80%;
+    }
+
+    /* Footer */
+    footer {
+        height: auto
+    }
+    .sub-cont-footer {
+        gap: 10px 0;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    /* Header */
+    .header {
+        height: auto;
+    }
+    .header .header-top {
+        display: none;
+    }
+    .menu3 {
+        display: none;
+    }
+    .menu4 {
+        display: none;
+    }
+    /* Texto banner */
+    .banner .text-banner .h4 {
+        font-size: .8em;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: 1px;
+        line-height: 1.8;
+        font-weight: lighter;
+    }
+    
+    .banner .text-banner .h1 {
+        font-size: 2em;
+    }
+
+    /* Texto coctel */
+    .text-coctel a {
+        font-size: 20px;
+    }
+    .text-coctel span {
+        font-size: .6em;
+    }
+    .text-coctel p {
+        margin-top: 1em;
+        font-size: .8em;
+    }
+    .seguir a {
+        font-size: 1em;
+    }
+
+    /* Menu mobile */
+    .menuMobile {
+        display: flex;
+    }
+
+    /* Footer */
+    .cont-contacto {
+        grid-column: 1 / span 2;
+    }
+
+
+
+}
+
+@media screen and (max-width: 768px) {
+
+    /* Cocteles */
+    
+    .contenedor-coctel {
+        width: 95%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: "article"
+                              "aside";
+    }
+
+
+    /* Menu mobile */
+    .menuMobile-logo {
+        left: 30px;
+    }
+    
+    .menuMobile .menuMobile-icons {
+        right: 30px;
+    }
+    
+
+    /* Footer */
+    .sub-cont-footer {
+        gap: 10px 0;
+        margin-top: 10px;
+    }
+    .copyright {
+        margin-top: .5em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .menuMobile-logo {
+        left: 10px;
+    }
+    
+    .menuMobile .menuMobile-icons {
+        right: 10px;
+    }
+    
+}
+
+@media screen and (max-width: 320px) {}

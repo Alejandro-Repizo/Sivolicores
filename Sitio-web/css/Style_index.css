@@ -244,7 +244,7 @@ a {
 
 /*--------------------------------------*/
 
-/*----------------Menu movile-----------------*/
+/*----------------Menu mobile-----------------*/
 
 .menuMobile {
     width: 100%;
@@ -910,8 +910,6 @@ footer {
 }
 
 /*_--------------------------*/
-
-.cont-footer-cat {}
 
 .cont-footer-cat ul li .cat-footer-title {
     font-family: 'Montserrat', sans-serif;

@@ -57,17 +57,3 @@ $(document).ready(function () {
     });
 
 });
-
-
-//Menu de las pagiunas
-var altura2 = $('.menu3').offset().top;
-
-$(window).on('scroll', function () {
-    if ($(window).scrollTop() > altura2) {
-        $('.menu3').addClass('menu-oculto2'),
-            $('.menu4').addClass('menu-fixed');
-    } else {
-        $('.menu3').removeClass('menu-oculto2'),
-            $('.menu4').removeClass('menu-fixed');
-    }
-});
