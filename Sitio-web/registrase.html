@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,10 @@
     <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
     <title>Registrase</title>
     <!--Css-->
-    <link rel="stylesheet" href="css/Style_registrase.css">
+    <link rel="stylesheet" href="css/Style_base.css">
+    <link rel="stylesheet" href="css/Style_registro.css">
     <link rel="stylesheet" href="font-awesome/css/all.min.css">
-    <link href="http://allfont.es/allfont.css?fonts=montserrat-bold" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!--script-->
@@ -75,7 +76,7 @@
                         <img src="imagenes/barra-navegación/Bebidas-1.jpg" alt="">
                     </ul>
                 </li>
-                <li><a href="#" class="dropbtn">Cócteles</i></a>
+                <li><a href="recetas_cocteles.html" class="dropbtn">Cócteles</i></a>
                 </li>
             </div>
             <div class="menu3-icons" id="menu3-icons">
@@ -128,7 +129,7 @@
                         <img src="imagenes/barra-navegación/Bebidas-1.jpg" alt="">
                     </ul>
                 </li>
-                <li><a href="#" class="dropbtn">Cócteles</i></a>
+                <li><a href="recetas_cocteles.html" class="dropbtn">Cócteles</i></a>
                 </li>
             </div>
             <div class="menu4-icons" id="menu4-icons">
@@ -136,9 +137,59 @@
                 <a href="#"><i class="fas fa-shopping-cart"></i></a>
             </div>
         </nav>
+
+        <!---Menú mobile-->
+        <nav class="menuMobile" id="">
+            <!--Logo-->
+            <a href="index.html" class="menuMobile-logo">
+                <img src="imagenes/icons/logo.jpeg" alt="logo" width="140" height="60">
+            </a>
+
+            <div class="menuMobile-icons">
+                <a href="#" id="btn-burger"><i class="fas fa-bars"></i></a>
+                <a href="login.html"><i class="fas fa-user-circle"></i></a>
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </nav>
+
+        <!-- Menu mobile wrapper -->
+        <div class="contenedor-menu" id="menuMobileWrapper">
+            <ul class="menuMobileWrapper">
+                <li><a href="#">Licores<i class="fa fa-chevron-down cont-icons-right"></i></a>
+                    <ul>
+                        <li><a href="producto.html"><i class="sub-opciones"></i>Aguardiente</a></li>
+                        <li><a href="producto.html"><i class="sub-opciones"></i>Whisky</a></li>
+                        <li><a href="producto.html"><i class="sub-opciones"></i>Ginebra</a></li>
+                        <li><a href="producto.html"><i class="sub-opciones"></i>Vodka</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Cervezas<i class="fa fa-chevron-down cont-icons-right"></i></a>
+                    <ul>
+                        <li><a href="productos.html"><i class="sub-opciones"></i>Importadas</a></li>
+                        <li><a href="productos.html"><i class="sub-opciones"></i>Nacionales</a></li>
+                        <li><a href="productos.html"><i class="sub-opciones"></i>Intenacionales</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Vinos<i class="fa fa-chevron-down cont-icons-right"></i></a>
+                    <ul>
+                        <li><a href="productos.html"><i class="sub-opciones"></i>Jovenes</a></li>
+                        <li><a href="productos.html"><i class="sub-opciones"></i>Espumosos</a></li>
+                        <li><a href="productos.html"><i class="sub-opciones"></i>Reserva</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Bebidas<i class="fa fa-chevron-down cont-icons-right"></i></a>
+                    <ul>
+                        <li><a href="productos.html"><i class="sub-opciones"></i>Agua</a></li>
+                        <li><a href="productos.html"><i class="sub-opciones"></i>Gaseosas</a></li>
+                        <li><a href="productos.html"><i class="sub-opciones"></i>Jugos y Té</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"></i>Cócteles</a></li>
+
+            </ul>
+        </div>
     </div>
     <div class="banner">
-
         <div class="text-banner">
             <h1 class="h1">Registrase</h1>
         </div>
@@ -151,27 +202,27 @@
                         <h2>Registrase</h2>
                         <label for="">Nombres:</label>
                         <input type="text" name="" id="" required>
-    
+
                         <label for="">Apellidos:</label>
                         <input type="text" name="" id="" required>
-                        
+
                         <label for="">Dirección:</label>
                         <input type="text" name="" id="" required>
 
                         <label for="">Teléfono:</label>
                         <input type="tel" name="" id="" required>
-                     
+
                     </div>
                 </div>
                 <div class="fila2">
                     <div class="register-form">
-                        
+
                         <label for="" class="m-t-3">Correo electrónico:</label>
                         <input type="email" name="" id="" required>
-    
+
                         <label for="">Contraseña:</label>
                         <input type="password" name="" id="" required>
-                        
+
                         <label for="">Confirmar contraseña:</label>
                         <input type="password" name="" id="" required>
 
@@ -187,63 +238,71 @@
     <!--Footer-->
     <footer>
         <div class="contenedor-footer">
-            <div class="sub-cont-footer">
-                <!--Parte de contactenos-->
-                <div class="cont-contacto">
-                    <h1>Contáctenos</h1>
-                    <h6>Linea de atención al cliente 01 8000 183475 </h6>
-                    <h6>Móvil: 322 2397</h6>
-                    <h6>sivolicores@gmail.com</h6>
-                    <a href=""><i class="fab fa-facebook-f"></i></a>
-                    <a href=""><i class="fab fa-whatsapp"></i></a>
-                    <a href=""><i class="fab fa-instagram"></i></a>
-                </div>
-                <!--Parte de categorías-->
-                <div class="cont-footer-cat">
-                    <ul>
-                        <li class="p-t-10"><a href="productos.html" class="cat-footer-title">Licores</a></li>
-                        <li><a href="productos.html">Aguardiente</a></li>
-                        <li><a href="productos.html">Whisky</a></li>
-                        <li><a href="productos.html">Ginebra</a></li>
-                        <li><a href="productos.html">Vodka</a></li>
-                    </ul>
-                </div>
-                <!--Parte de categorías-->
-                <div class="cont-footer-cat">
-                    <ul>
-                        <li><a href="productos.html" class="cat-footer-title">Cervezas</a></li>
-                        <li><a href="productos.html">Importadas</a></li>
-                        <li><a href="productos.html">Nacionales</a></li>
-                        <li><a href="productos.html">Intenacionales</a></li>
-                    </ul>
-                </div>
-                <!--Parte de categorías-->
-                <div class="cont-footer-cat">
-                    <ul>
-                        <li><a href="productos.html" class="cat-footer-title">Vinos</a></li>
-                        <li><a href="productos.html">Jovenes</a></li>
-                        <li><a href="productos.html">Espumosos</a></li>
-                        <li><a href="productos.html">Reserva</a></li>
-                    </ul>
-                </div>
-                <!--Parte de categorías-->
-                <div class="cont-footer-cat">
-                    <ul>
-                        <li><a href="productos.html" class="cat-footer-title">Bebidas</a></li>
-                        <li><a href="productos.html">Agua</a></li>
-                        <li><a href="productos.html">Gaseosas</a></li>
-                        <li><a href="productos.html">Jugos y Té</a></li>
-                    </ul>
-                </div>
-                <!--Parte del input:search-->
-                <div class="cont-footer-search">
-                    <h1>Buscar</h1>
-                    <input type="search" name="" id="" placeholder="Buscar">
-                </div>
+
+            <!--Parte de contactenos-->
+            <div class="cont-contacto">
+                <h1>Cont&aacute;ctenos</h1>
+                <h6>Linea de atenci&oacute;n al cliente 01 8000 183475 </h6>
+                <h6>M&oacute;vil: 322 2397</h6>
+                <h6>sivolicores@gmail.com</h6>
+                <a href=""><i class="fab fa-facebook-f"></i></a>
+                <a href=""><i class="fab fa-whatsapp"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
             </div>
-            <!--Ley-->
+            <!--Parte de categorías-->
+            <div class="cont-footer-cat">
+                <ul>
+                    <li class="p-t-10"><a href="productos.html" class="cat-footer-title">Licores</a></li>
+                    <li><a href="productos.html">Aguardiente</a></li>
+                    <li><a href="productos.html">Whisky</a></li>
+                    <li><a href="productos.html">Ginebra</a></li>
+                    <li><a href="productos.html">Vodka</a></li>
+                </ul>
+            </div>
+            <!--Parte de categorías-->
+            <div class="cont-footer-cat">
+                <ul>
+                    <li><a href="productos.html" class="cat-footer-title">Cervezas</a></li>
+                    <li><a href="productos.html">Importadas</a></li>
+                    <li><a href="productos.html">Nacionales</a></li>
+                    <li><a href="productos.html">Intenacionales</a></li>
+                </ul>
+            </div>
+            <!--Parte de categorías-->
+            <div class="cont-footer-cat">
+                <ul>
+                    <li><a href="productos.html" class="cat-footer-title">Vinos</a></li>
+                    <li><a href="productos.html">Jovenes</a></li>
+                    <li><a href="productos.html">Espumosos</a></li>
+                    <li><a href="productos.html">Reserva</a></li>
+                </ul>
+            </div>
+            <!--Parte de categorías-->
+            <div class="cont-footer-cat">
+                <ul>
+                    <li><a href="productos.html" class="cat-footer-title">Bebidas</a></li>
+                    <li><a href="productos.html">Agua</a></li>
+                    <li><a href="productos.html">Gaseosas</a></li>
+                    <li><a href="productos.html">Jugos y Té</a></li>
+                </ul>
+            </div>
+
+            <!--Parte de categorías-->
+            <div class="cont-footer-cat">
+                <ul>
+                    <li><a href="productos.html" class="cat-footer-title">Bebidas</a></li>
+                    <li><a href="productos.html">Agua</a></li>
+                    <li><a href="productos.html">Gaseosas</a></li>
+                    <li><a href="productos.html">Jugos y Té</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- Ley-->
+        <div class="sub-cont-footer">
             <div class="ley">
-                <p>El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Prohíbase el expendio de bebidas
+                <p>El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Proh&iacute;base el expendio de
+                    bebidas
                     embriagantes a menores de edad y mujeres embarazadas. Ley 124 de 1994. </p>
             </div>
             <!--Copyright-->
@@ -254,7 +313,7 @@
     </footer>
 
     <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/mainSites.js"></script>
 </body>
 
 </html>

@@ -80,8 +80,7 @@ a {
     letter-spacing: 1.5px;
 }
 
-
-/*----------------Menú-----------------*/
+/* Menu */
 
 .menu3 {
     width: 100%;
@@ -135,8 +134,7 @@ a {
     color: #d9a520;
 }
 
-
-/*----------------Menú pegajoso-----------------*/
+/* Menu pegajoso */
 
 .menu4 {
     width: 100%;
@@ -192,8 +190,7 @@ a {
     color: #d9a520;
 }
 
-
-/*_--------------------------------------*/
+/*_------------------------------------*/
 
 .dropbtn {
     color: #fff;
@@ -216,8 +213,7 @@ a {
     padding-left: 6px;
 }
 
-
-/*_-------------------------*/
+/*_------------------------------------*/
 
 .nav-sub {
     display: none;
@@ -268,7 +264,7 @@ a {
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.288);
 }
 
-/*----------------Menu mobile-----------------*/
+/* Menu mobile */
 
 .menuMobile {
     width: 100%;
@@ -279,7 +275,6 @@ a {
     display: none;
     position: relative;
 }
-
 
 .contenedor-enlaces-nav {
     display: flex;
@@ -337,14 +332,14 @@ a {
     display: none;
 }
 
-.menuMobileWrapper  li a {
+.menuMobileWrapper li a {
     color: #fff;
     display: block;
     padding: 15px 20px;
     background: #d9a520;
 }
 
-.menuMobileWrapper  li a:hover {
+.menuMobileWrapper li a:hover {
     background-color: #d9a520;
     color: #fff;
     text-decoration: none;
@@ -361,7 +356,7 @@ a {
     display: none;
 }
 
-.menuMobileWrapper   ul li a {
+.menuMobileWrapper ul li a {
     background-color: #fff;
     color: #888888;
     font-weight: lighter;
@@ -370,16 +365,13 @@ a {
 .menuMobileWrapper .activado>a {
     background-color: #a3790e;
     color: #fff;
-   
 }
 
 .sub-opciones {
     padding-left: 10px;
 }
 
-
-
-/*-----------banners---------------------------*/
+/* Banners */
 
 .banner {
     width: 100%;
@@ -394,7 +386,6 @@ a {
     align-items: center;
     position: relative;
     margin-bottom: 3em;
-
 }
 
 .text-banner {
@@ -419,8 +410,7 @@ a {
     margin-bottom: 10px;
 }
 
-
-/*------------------------------------*/
+/*_------------------------------------*/
 
 .text-bottom {
     width: 100%;
@@ -442,8 +432,7 @@ a {
     text-transform: uppercase;
 }
 
-
-/*------------------------------------*/
+/*_------------------------------------*/
 
 .super-contenedor-coctel {
     width: 100%;
@@ -469,7 +458,6 @@ a {
     justify-content: center;
 }
 
-
 .cont-coctel {
     width: 100%;
     flex-direction: column;
@@ -477,7 +465,7 @@ a {
     margin-bottom: 1.5em;
 }
 
-.cont-cot-img{
+.cont-cot-img {
     width: 100%;
     overflow: hidden;
 }
@@ -503,7 +491,7 @@ a {
 }
 
 .paginas a {
-    border: 2px solid  rgb(230, 230, 230);
+    border: 2px solid rgb(230, 230, 230);
     text-decoration: none;
     border-radius: 100%;
     padding: 9px 15px;
@@ -516,7 +504,7 @@ a {
 }
 
 .paginas a:hover {
-    border: 2px solid  goldenrod;
+    border: 2px solid goldenrod;
     background-color: goldenrod;
     color: #fff;
     text-decoration: none;
@@ -527,8 +515,7 @@ a {
     color: #fff;
 }
 
-
-/*----------------------------------------*/
+/*_------------------------------------*/
 
 .text-coctel {
     white-space: pre-line;
@@ -571,15 +558,13 @@ a {
     color: #333333;
     font-weight: 600;
     transition: .2s ease all;
-    
 }
 
 .seguir i {
     margin-left: 10px;
 }
 
-
-.seguir  a:hover {
+.seguir a:hover {
     color: goldenrod;
     text-decoration: none;
 }
@@ -617,8 +602,7 @@ a {
     border-radius: 10px;
 }
 
-
-/*-----------footer------------------*/
+/* Footer */
 
 footer {
     width: 100%;
@@ -683,8 +667,7 @@ footer {
     color: #d9a520;
 }
 
-/*_--------------------------*/
-
+/*_------------------------------------*/
 
 .cont-footer-cat ul li .cat-footer-title {
     font-family: 'Montserrat', sans-serif;
@@ -712,7 +695,7 @@ footer {
     padding: 10px;
 }
 
-/*---------------------------------------*/
+/*_------------------------------------*/
 
 .ley {
     /* margin-top     : 9em; */
@@ -733,7 +716,6 @@ footer {
     color: #555555;
     font-size: 14px;
 }
-
 
 /* Responsive */
 
@@ -757,7 +739,6 @@ footer {
     .contenedor-coctel {
         width: 80%;
     }
-
     /* Footer */
     footer {
         height: auto
@@ -790,11 +771,9 @@ footer {
         line-height: 1.8;
         font-weight: lighter;
     }
-    
     .banner .text-banner .h1 {
         font-size: 2em;
     }
-
     /* Texto coctel */
     .text-coctel a {
         font-size: 20px;
@@ -809,44 +788,31 @@ footer {
     .seguir a {
         font-size: 1em;
     }
-
     /* Menu mobile */
     .menuMobile {
         display: flex;
     }
-
     /* Footer */
     .cont-contacto {
         grid-column: 1 / span 2;
     }
-
-
-
 }
 
 @media screen and (max-width: 768px) {
-
     /* Cocteles */
-    
     .contenedor-coctel {
         width: 95%;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-areas: "article"
-                              "aside";
+        grid-template-areas: "article" "aside";
     }
-
-
     /* Menu mobile */
     .menuMobile-logo {
         left: 30px;
     }
-    
     .menuMobile .menuMobile-icons {
         right: 30px;
     }
-    
-
     /* Footer */
     .sub-cont-footer {
         gap: 10px 0;
@@ -861,11 +827,9 @@ footer {
     .menuMobile-logo {
         left: 10px;
     }
-    
     .menuMobile .menuMobile-icons {
         right: 10px;
     }
-    
 }
 
 @media screen and (max-width: 320px) {}

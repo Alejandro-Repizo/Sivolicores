@@ -1,23 +1,23 @@
 * {
-    padding        : 0;
-    margin         : 0;
-    box-sizing     : border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     text-decoration: none;
 }
 
 body {
-    font-family     : 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #fff;
 }
 
-ul,
-li {
+ul, li {
     list-style: none;
 }
 
 a {
     text-decoration: none;
 }
+
 
 
 .header {
@@ -84,7 +84,7 @@ a {
     letter-spacing: 1.5px;
 }
 
-/*----------------Menú-----------------*/
+/* Menu */
 .menu3 {
     width           : 100%;
     height          : 60px;
@@ -95,8 +95,6 @@ a {
     justify-content : center;
     transition      : .20s ease all;
 }
-
-
 
 .menu-oculto2 {
     display: none;
@@ -141,7 +139,7 @@ a {
     color: #d9a520;
 }
 
-/*----------------Menú pegajoso-----------------*/
+/* Menu pegajoso */
 
 .menu4 {
     width           : 100%;
@@ -202,7 +200,7 @@ a {
     color: #d9a520;
 }
 
-/*_--------------------------------------*/
+/*_------------------------------------*/
 .dropbtn {
     color         : #fff;
     font-size     : 13px;
@@ -224,7 +222,7 @@ a {
     padding-left: 6px;
 }
 
-/*_-------------------------*/
+/*_------------------------------------*/
 .nav-sub {
 
     display         : none;
@@ -280,14 +278,14 @@ a {
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.288);
 }
 
-/*-----------banners---------------------------*/
+/* Banners */
 
 .banner {
     width                : 100%;
     height               : 239px;
     margin-top           : -10px;
     background-repeat    : no-repeat;
-    background-image     : url(../imagenes/Image_Title_Page/Wallpaper_Vino.jpg);
+    background-image     : url(../imagenes/Image_Title_Page/Wallpaper_Vinos.jpg);
     background-position  : center center;
     background-size      : 100% 239px;
     background-attachment: scroll;
@@ -323,67 +321,22 @@ a {
 
 }
 
-/*------------------------------------*/
+/*_------------------------------------*/
 .super-contenedor {
-    width         : 91%;
-    height        : 500px;
-    margin        : auto;
+    width         : 100%;
+    height        : auto;
     display       : flex;
     border        : 1px solid rgba(0, 0, 0, 0.26);
     flex-direction: row;
-}
-
-.super-contenedor .contenedor-left {
-    width : 25%;
-    border: 1px solid rgba(0, 0, 0, 0.26);
-    ;
-
-}
-
-.super-contenedor .contenedor-left .text-left-top {
-    color        : #000002;
-    text-align   : center;
-    margin-bottom: 2em;
-
-}
-
-.super-contenedor .contenedor-left .text-left-top h1 {
-    font-family     : 'Montserrat Bold', arial;
-    font-weight     : 700;
-    font-size       : 18px;
-    line-height     : 1.5;
-    padding         : 8px;
-    color           : #fff;
-    background-color: #000002;
-    border          : 1px solid #000002;
-    text-transform  : uppercase;
-}
-
-.super-contenedor .contenedor-left a {
-    font-size  : 15px;
-    line-height: 1.8;
-    color      : #888888;
-    margin     : 0px 30px;
-    padding    : 10px;
-
-}
-
-.super-contenedor .contenedor-left a i {
-    margin-right: 10px;
-}
-
-.super-contenedor .contenedor-left a:hover {
-    text-decoration: none;
-    color          : #d9a520;
+    justify-content: center;
+    border: 1px solid blue;
 }
 
 
-/*--------------------------*/
+/*_------------------------------------*/
 .contenedor {
-    width : 75%;
+    width : 60%;
     border: 1px solid rgba(0, 0, 0, 0.26);
-
-
 }
 
 .super-contenedor .contenedor .text-left-top {
@@ -404,7 +357,7 @@ a {
     text-transform  : uppercase;
 }
 
-/*-----------footer------------------*/
+/* Footer */
 
 footer {
     width           : 100%;

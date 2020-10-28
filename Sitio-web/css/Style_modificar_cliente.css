@@ -60,18 +60,42 @@ a {
 /*_------------------------------------*/
 
 .super-contenedor {
-    width: 91%;
+    width: 100%;
     height: auto;
-    margin: auto;
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 /*_------------------------------------*/
 
 .contenedor {
+    width: 60%;
+    border: 1px solid rgba(0, 0, 0, 0.26);
+}
+
+.super-contenedor .contenedor .text-left-top {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.super-contenedor .contenedor .text-left-top h1 {
+    font-family: 'Montserrat Bold', arial;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.5;
+    padding: 8px;
+    color: #fff;
+    background-color: #000002;
+    border: 1px solid #000002;
+    text-transform: uppercase;
+}
+
+/*_------------------------------------*/
+
+form {
     width: 100%;
-    height: 500px;
+    height: auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     /*las columnas son 4*/
@@ -104,69 +128,48 @@ a {
 
 /* Formulario */
 
-.super-contenedor .contenedor .fila1 h2 {
+.super-contenedor .contenedor form .fila2 h2 {
     font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
     font-weight: 600;
-    margin-bottom: 2em;
 }
 
-.super-contenedor .contenedor .fila1 form input {
+.super-contenedor .contenedor form .fila1 h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.super-contenedor .contenedor form .fila1 input {
     width: 100%;
     padding: 7px;
     border-radius: 5px;
-    margin: 0px 0px 30px 0px;
+    margin: 0px 0px 15px 0px;
     border: 1px solid rgba(0, 0, 0, 0.26);
 }
 
-.super-contenedor .contenedor .fila1 form input:focus {
+.super-contenedor .contenedor form .fila1 input:focus {
     border: 1px solid #d9a520;
     outline: none;
 }
 
-.super-contenedor .contenedor .fila1 form .button button {
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    width: 100%;
-    height: 50px;
-    font-size: 15px;
-    background-color: #000002;
-    color: #fff;
-    margin: 20px 0px;
-    outline: none;
-    transition: .3s ease all;
-    text-transform: uppercase;
-}
-
-.super-contenedor .contenedor .fila1 form .button button:active {
-    transform: translateY(5px);
-    outline: none;
-}
-
-.super-contenedor .contenedor .fila1 form .button button:hover {
-    background-color: #d9a520;
-    color: #fff;
-}
-
-.button {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0px;
-    width: 100%;
-}
-
 /* Registro */
 
-.super-contenedor .contenedor .fila2 h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    margin-bottom: 2em;
+.m-t-3 {
+    margin-top: 2em;
 }
 
-.super-contenedor .contenedor .fila2 p {
-    white-space: pre-line;
-    word-spacing: 1.5px;
+.super-contenedor .contenedor form .fila2 input {
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 0px 0px 15px 0px;
+    border: 1px solid rgba(0, 0, 0, 0.26);
+}
+
+.super-contenedor .contenedor form .fila2 input:focus {
+    border: 1px solid #d9a520;
+    outline: none;
 }
 
 .super-contenedor .contenedor .fila2 .register-form .button button {
@@ -174,7 +177,7 @@ a {
     border-radius: 5px;
     border: 1px solid transparent;
     cursor: pointer;
-    width: 150px;
+    width: 100%;
     height: 50px;
     font-size: 15px;
     background-color: #000002;
@@ -198,7 +201,7 @@ a {
 .button {
     display: flex;
     justify-content: center;
-    margin: 20px 0px;
+    margin: 5px 0px;
     width: 100%;
 }
 
@@ -223,25 +226,27 @@ a {
     .super-contenedor {
         width: 100%;
     }
+    .contenedor {
+        width: 90%;
+        height: auto;
+    }
 }
 
 @media screen and (max-width: 768px) {
-    .contenedor {
+    form {
         width: 100%;
         height: auto;
         display: grid;
         grid-template-columns: 1fr;
-        gap: 40px 0px;
         grid-template-rows: 1fr;
         grid-template-areas: "fila1" "fila2";
     }
-    .super-contenedor .contenedor .fila1 h2 {
+    .super-contenedor .contenedor form .fila1 h2 {
         margin-bottom: 1em;
-        font-size: 1.8em;
+        font-size: 1em;
     }
-    .super-contenedor .contenedor .fila2 h2 {
-        margin-bottom: 1em;
-        font-size: 1.8em;
+    .m-t-3 {
+        margin-top: 0px;
     }
     .button {
         margin: .1em 0px;
@@ -256,6 +261,11 @@ a {
     }
 }
 
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 480px) {
+    .contenedor {
+        width: 95%;
+        height: auto;
+    }
+}
 
 @media screen and (max-width: 320px) {}

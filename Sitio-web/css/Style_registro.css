@@ -24,7 +24,7 @@ a {
     width: 100%;
     height: 239px;
     background-repeat: no-repeat;
-    background-image: url(../imagenes/Image_Title_Page/Wallpaper_Vinos.jpg);
+    background-image: url(../imagenes/Image_Title_Page/Wallpaper_Vino1.jpg);
     background-position: center center;
     background-size: cover;
     background-attachment: scroll;
@@ -72,6 +72,11 @@ a {
 .contenedor {
     width: 100%;
     height: 500px;
+}
+
+form {
+    width: 100%;
+    height: 500px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     /*las columnas son 4*/
@@ -104,69 +109,48 @@ a {
 
 /* Formulario */
 
-.super-contenedor .contenedor .fila1 h2 {
+.super-contenedor .contenedor form .fila1 h2 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
-.super-contenedor .contenedor .fila1 form input {
+.super-contenedor .contenedor form .fila1 input {
     width: 100%;
     padding: 7px;
     border-radius: 5px;
-    margin: 0px 0px 30px 0px;
+    margin: 0px 0px 15px 0px;
     border: 1px solid rgba(0, 0, 0, 0.26);
 }
 
-.super-contenedor .contenedor .fila1 form input:focus {
+.super-contenedor .contenedor form .fila1 input:focus {
     border: 1px solid #d9a520;
     outline: none;
 }
 
-.super-contenedor .contenedor .fila1 form .button button {
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    width: 100%;
-    height: 50px;
-    font-size: 15px;
-    background-color: #000002;
-    color: #fff;
-    margin: 20px 0px;
-    outline: none;
-    transition: .3s ease all;
-    text-transform: uppercase;
-}
-
-.super-contenedor .contenedor .fila1 form .button button:active {
-    transform: translateY(5px);
-    outline: none;
-}
-
-.super-contenedor .contenedor .fila1 form .button button:hover {
-    background-color: #d9a520;
-    color: #fff;
-}
-
-.button {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0px;
-    width: 100%;
-}
-
 /* Registro */
 
-.super-contenedor .contenedor .fila2 h2 {
+.super-contenedor .contenedor form .fila2 h2 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
-.super-contenedor .contenedor .fila2 p {
-    white-space: pre-line;
-    word-spacing: 1.5px;
+.m-t-3 {
+    margin-top: 4.5em;
+}
+
+.super-contenedor .contenedor form .fila2 input {
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 0px 0px 15px 0px;
+    border: 1px solid rgba(0, 0, 0, 0.26);
+}
+
+.super-contenedor .contenedor form .fila2 input:focus {
+    border: 1px solid #d9a520;
+    outline: none;
 }
 
 .super-contenedor .contenedor .fila2 .register-form .button button {
@@ -174,7 +158,7 @@ a {
     border-radius: 5px;
     border: 1px solid transparent;
     cursor: pointer;
-    width: 150px;
+    width: 100%;
     height: 50px;
     font-size: 15px;
     background-color: #000002;
@@ -198,7 +182,7 @@ a {
 .button {
     display: flex;
     justify-content: center;
-    margin: 20px 0px;
+    margin: 5px 0px;
     width: 100%;
 }
 
@@ -227,21 +211,22 @@ a {
 
 @media screen and (max-width: 768px) {
     .contenedor {
+        height: auto;
+    }
+    form {
         width: 100%;
         height: auto;
         display: grid;
         grid-template-columns: 1fr;
-        gap: 40px 0px;
         grid-template-rows: 1fr;
         grid-template-areas: "fila1" "fila2";
     }
-    .super-contenedor .contenedor .fila1 h2 {
+    .super-contenedor .contenedor form .fila1 h2 {
         margin-bottom: 1em;
         font-size: 1.8em;
     }
-    .super-contenedor .contenedor .fila2 h2 {
-        margin-bottom: 1em;
-        font-size: 1.8em;
+    .m-t-3 {
+        margin-top: 0px;
     }
     .button {
         margin: .1em 0px;
