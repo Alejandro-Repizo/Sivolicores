@@ -36,7 +36,7 @@ $(document).ready(function() {
         opcion = 'editarUsuario';
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
-        PK_ID_Administrador = $.trim($('PK_ID_Administrador').val());
+        PK_ID_Administrador = $.trim($('#ad_primaria').val());
         Ad_Nombre = $.trim($('#Ad_Nombre').val());
         Ad_Apellido = $.trim($('#Ad_Apellido').val());
         Ad_Email = $.trim($('#Ad_Email').val());
