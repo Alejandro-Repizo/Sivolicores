@@ -15,7 +15,7 @@ $(document).ready(function(){
         //Agregamos las columnas del tbody los botones
         "columns": [
             { "data": "PK_ID_Receta" },
-            { "data": "RC_Image" , "render": function(data, type, row) {return '<img src="../imagenes/imagenesBD/'+data+'" width="100px" height="60px"/>' ;}},
+            { "data": "RC_Image" , "render": function(data, type, row) {return '<img src="../imagenes/Coctel/'+data+'" width="100px" height="60px"/>' ;}},
             { "data": "RC_Nombre" },
             { "data": "RC_Fecha" },
             { "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-secondary btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>" }
@@ -80,7 +80,7 @@ $(document).ready(function(){
                     Swal.fire({
                         type: 'success',
                         title: 'Éxito',
-                        text: 'Recectá Cóctel registrada con éxito'
+                        text: 'Recetá Cóctel registrada con éxito'
                     });
                 }else{
                     Swal.fire({
@@ -202,7 +202,7 @@ $(document).ready(function(){
         Swal.fire({
             title: '¿Estás seguro de eliminar el registro?',
             text: 'registro a eliminar id: ' + id,
-            icon: 'warning',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

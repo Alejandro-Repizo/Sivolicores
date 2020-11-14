@@ -179,10 +179,32 @@
                         <div class="form-group">
                             <label for="Cat_Nombre" class="col-form-label">Nombre categor&iacute;a:</label>
                             <input type="text" class="form-control" id="Cat_Nombre">
+
+                            <h5 class="mt-4">Imagen de la categor&iacute;a</h5>
+                            <hr> 
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-cloud-upload-alt"></i></span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" onchange='cambiar()' id="Cat_Imagen" name="Cat_Imagen" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" id="info" for="Cat_Imagen">Seleciona la imagen</label>
+                                </div>
+                            </div>
+
+                            <h5 class="mt-4">Imagen del banner</h5>
+                            <hr> 
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-cloud-upload-alt"></i></span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" onchange='cambiar2()' id="Cat_Banner_Imagen" name="Cat_Banner_Imagen" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" id="info2" for="Cat_Banner_Imagen">Seleciona la imagen</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-dark" id="btnGuardar">Guardar</button>

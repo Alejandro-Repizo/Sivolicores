@@ -151,9 +151,11 @@
                                 <thead class="text-center">
                                     <tr>
                                         <th>Id</th>
+                                        <th>C&oacute;digo</th>
                                         <th>Imagen</th>
                                         <th>Nombre del Producto</th>
                                         <th>Precio</th>
+                                        <th>Categor&iacute;a</th>
                                         <th>Acci&oacute;n</th>
                                     </tr>
                                 </thead>
@@ -170,7 +172,7 @@
 
      <!--Modal para Guardar una receta cóctel-->
      <div class="modal fade" id="modalProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
@@ -201,7 +203,7 @@
                             <label for="Pt_Precio" class="col-form-label">Precio:</label>
                             <input type="text" class="form-control" id="Pt_Precio" placeholder="$">
 
-                            <h5 class="mt-4">Categor&iacute;a y marca</h5>
+                            <h5 class="mt-4">Categor&iacute;as y marca</h5>
                             <hr>
 
                             <label for="FK_ID_Categoria" class="col-form-label">Categor&iacute;a:</label>
@@ -209,10 +211,17 @@
                                 <option selected="true" disabled="disabled">Seleccione la categor&iacute;a</option>
                             </select>
 
+                            <label for="FK_ID_SubCategoria" class="col-form-label">Subcategoria:</label>
+                            <select class="form-control" id="FK_ID_SubCategoria">
+                               
+                            </select>
+
                             <label for="FK_ID_Marca" class="col-form-label">Marca:</label>
                             <select class="form-control" id="FK_ID_Marca">
                                 <option selected="true" disabled="disabled">Seleccione la marca</option>
                             </select>
+
+                           
 
                             <h5 class="mt-4">Otros datos</h5>
                             <hr>
@@ -251,7 +260,7 @@
 
     <!--Modal para editar una receta cóctel-->
     <div class="modal fade" id="modalEditarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
@@ -262,7 +271,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             
-                            <h5>Informaci&oacute;n b&aacute;sicae</h5>
+                            <h5>Informaci&oacute;n b&aacute;sica</h5>
                             <hr>
                             <label for="Pt_Nombre2" class="col-form-label">Nombre del producto:</label>
                             <input type="text" class="form-control" id="Pt_Nombre2">

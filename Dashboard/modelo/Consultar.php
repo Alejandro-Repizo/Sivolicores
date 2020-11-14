@@ -409,7 +409,7 @@ class Consultar {
             //acá está el error
             $check = getimagesize($RC_Image['file']['tmp_name']);
            if($check != false){
-                $carpeta_destino ='../vista/imagenes/imagenesBD/';
+                $carpeta_destino ='../vista/imagenes/Coctel/';
                 $archivo_subido = $carpeta_destino . $RC_Image['file']['name'];
                 #Con está función movemos la foto
                 move_uploaded_file($RC_Image['file']['tmp_name'], $archivo_subido);
@@ -511,7 +511,7 @@ class Consultar {
             $Nombre_img_receta = $Receta_Image['RC_Image'];
 
             //Con esta funcion la eliminamos
-            unlink("../vista/imagenes/imagenesBD/".$Nombre_img_receta);
+            unlink("../vista/imagenes/Coctel/".$Nombre_img_receta);
             
             //Consulta para eliminar
             $consulta = "DELETE FROM tbl_receta_coctel WHERE PK_ID_Receta = '$id'";
@@ -603,10 +603,43 @@ class Consultar {
             //Guardar categoria
             $conexion = new ConexionBD();
             $Cat_Nombre = $con->getNombre();
-            $consulta = "INSERT INTO tbl_categoria (Cat_Nombre) VALUES ('$Cat_Nombre') ";
-            $resultado = $conexion->prepare($consulta);
-            $resultado->execute();
+            $Cat_Imagen = $con->getCat_Imagen();
+            $Cat_Banner_Imagen = $con->getCat_Banner_Imagen();
+            $carpeta_destino = '../vista/imagenes/Categorias/';
+            $carpeta_destino_banner ='../vista/imagenes/Banner/';
 
+            if (!empty($Cat_Imagen) and !empty($Cat_Banner_Imagen)) {
+               
+                $archivo_subido = $carpeta_destino . $Cat_Imagen['file']['name'];
+                move_uploaded_file($Cat_Imagen['file']['tmp_name'], $archivo_subido);
+
+                $archivo_subido = $carpeta_destino_banner . $Cat_Banner_Imagen['file2']['name'];
+                move_uploaded_file($Cat_Banner_Imagen['file2']['tmp_name'], $archivo_subido);
+                
+                $ImNombre = $Cat_Imagen['file']['name'];
+                $ImNombre2 = $Cat_Banner_Imagen['file2']['name'];
+
+                $consulta = "INSERT INTO tbl_categoria (Cat_Nombre, Cat_Imagen, Cat_Banner_Imagen) VALUES ('$Cat_Nombre', '$ImNombre', '$ImNombre2')";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+            }elseif (!empty($Cat_Banner_Imagen)) {
+              
+                $archivo_subido = $carpeta_destino_banner . $Cat_Banner_Imagen['file2']['name'];
+                move_uploaded_file($Cat_Banner_Imagen['file2']['tmp_name'], $archivo_subido);
+                
+                $ImNombre2 = $Cat_Banner_Imagen['file2']['name'];
+
+                $consulta = "INSERT INTO tbl_categoria (Cat_Nombre, Cat_Banner_Imagen) VALUES ('$Cat_Nombre', '$ImNombre2')";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+            }else {
+                $consulta = "INSERT INTO tbl_categoria (Cat_Nombre) VALUES ('$Cat_Nombre')";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+            } 
+            
             // Consulta del último registro genererado
             $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM tbl_categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
             $resultado = $conexion->prepare($consulta);
@@ -633,12 +666,96 @@ class Consultar {
         try {
             //Editar categoria
             $conexion = new ConexionBD();
-            $Cat_Nombre = $con->getNombre();
             $id = $con->getPK_ID_Categoria();
-            $consulta = "UPDATE tbl_categoria SET Cat_Nombre = '$Cat_Nombre' WHERE PK_ID_Categoria = '$id' ";
-            $resultado = $conexion->prepare($consulta);
-            $resultado->execute();
+            $Cat_Nombre = $con->getNombre();
+            $Cat_Imagen = $con->getCat_Imagen();
+            $Cat_Banner_Imagen = $con->getCat_Banner_Imagen();
+            $carpeta_destino = '../vista/imagenes/Categorias/';
+            $carpeta_destino_banner ='../vista/imagenes/Banner/';
 
+            if (!empty($Cat_Imagen) and !empty($Cat_Banner_Imagen)) {
+                //Consulta para traer nombre imagen
+                $consulta = "SELECT Cat_Imagen, Cat_Nombre FROM tbl_categoria WHERE PK_ID_Categoria = '$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+                //Traemos el nombre de la imagen que esta en la base de datos
+                $Categoria_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+                $Nombre_img_categoria = $Categoria_Image['Cat_Imagen'];
+                $Nombre_Categoria = $Categoria_Image['Cat_Nombre'];
+
+                if (!empty($Nombre_img_categoria)) {
+                    //Con esta funcion la eliminamos
+                    unlink("../vista/imagenes/Categorias/".$Nombre_img_categoria);
+                }
+
+                // Treamos la imagen de banners
+                $consulta = "SELECT B_Imagen FROM tbl_banner WHERE B_Nombre = '$Nombre_Categoria'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+                //Traemos el nombre de la imagen que esta en la base de datos
+                $banner_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+                $Nombre_img_banner = $banner_Image['B_Imagen'];
+
+                if (!empty($Nombre_img_banner)) {
+                    //Con esta funcion la eliminamos
+                    unlink("../vista/imagenes/Banner/".$Nombre_img_banner);
+                }
+                
+                $archivo_subido = $carpeta_destino . $Cat_Imagen['file']['name'];
+                move_uploaded_file($Cat_Imagen['file']['tmp_name'], $archivo_subido);
+
+                $archivo_subido = $carpeta_destino_banner . $Cat_Banner_Imagen['file2']['name'];
+                move_uploaded_file($Cat_Banner_Imagen['file2']['tmp_name'], $archivo_subido);
+                
+                $ImNombre = $Cat_Imagen['file']['name'];
+                $ImNombre2 = $Cat_Banner_Imagen['file2']['name'];
+
+                $consulta = "UPDATE tbl_categoria SET Cat_Nombre = '$Cat_Nombre', 
+                Cat_Imagen = '$ImNombre', Cat_Banner_Imagen = '$ImNombre2' WHERE PK_ID_Categoria = '$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+            }elseif (!empty($Cat_Banner_Imagen)) {
+                //Consulta para traer nombre imagen
+                $consulta = "SELECT Cat_Nombre FROM tbl_categoria WHERE PK_ID_Categoria = '$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+                //Traemos el nombre de la imagen que esta en la base de datos
+                $Categoria_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+                $Nombre_Categoria = $Categoria_Image['Cat_Nombre'];
+                
+                // Treamos la imagen de banners
+                $consulta = "SELECT B_Imagen FROM tbl_banner WHERE B_Nombre = '$Nombre_Categoria'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+                //Traemos el nombre de la imagen que esta en la base de datos
+                $banner_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+                $Nombre_img_banner = $banner_Image['B_Imagen'];
+
+                if (!empty($Nombre_img_banner)) {
+                    //Con esta funcion la eliminamos
+                    unlink("../vista/imagenes/Banner/".$Nombre_img_banner);
+                }
+                
+                $archivo_subido = $carpeta_destino_banner . $Cat_Banner_Imagen['file2']['name'];
+                move_uploaded_file($Cat_Banner_Imagen['file2']['tmp_name'], $archivo_subido);
+                
+                $ImNombre2 = $Cat_Banner_Imagen['file2']['name'];
+
+                $consulta = "UPDATE tbl_categoria SET Cat_Nombre = '$Cat_Nombre', Cat_Banner_Imagen = '$ImNombre2' WHERE PK_ID_Categoria = '$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+            }else {
+                $consulta = "UPDATE tbl_categoria SET Cat_Nombre = '$Cat_Nombre' WHERE PK_ID_Categoria = '$id'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+            }  
+            
             // Consulta del último registro genererado
             $consulta = "SELECT PK_ID_Categoria, Cat_Nombre FROM tbl_categoria ORDER BY PK_ID_Categoria DESC LIMIT 1";
             $resultado = $conexion->prepare($consulta);
@@ -651,7 +768,7 @@ class Consultar {
             if($data != TRUE){
                 $data = ['error'=> true];
             }
-        
+            
             //Cerrar conexión
             $conexion = null;
         } catch (Exception $ex) {
@@ -666,8 +783,43 @@ class Consultar {
         try {
             //Borrar categoria
             $conexion = new ConexionBD();
-            // $Cat_Nombre = $con->getNombre();
+            $Cat_Nombre = $con->getNombre();
             $id = $con->getPK_ID_Categoria();
+
+            //Consulta para traer nombre imagen
+            $consulta = "SELECT Cat_Imagen FROM tbl_categoria WHERE PK_ID_Categoria = '$id'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Traemos el nombre de la imagen que esta en la base de datos
+            $Categoria_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+            $Nombre_img_categoria = $Categoria_Image['Cat_Imagen'];
+
+            if (!empty($Nombre_img_categoria)) {
+                //Con esta funcion la eliminamos
+                unlink("../vista/imagenes/Categorias/".$Nombre_img_categoria);
+            }
+
+            // Treamos la imagen de banners
+            $consulta = "SELECT B_Imagen FROM tbl_banner WHERE B_Nombre = '$Cat_Nombre'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Traemos el nombre de la imagen que esta en la base de datos
+            $banner_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+            $Nombre_img_banner = $banner_Image['B_Imagen'];
+
+            if (!empty($Nombre_img_banner)) {
+                //Con esta funcion la eliminamos
+                unlink("../vista/imagenes/Banner/".$Nombre_img_banner);
+            }
+            
+            //Consulta para elminar en la tabla banners
+            $consulta = "DELETE FROM tbl_banner WHERE B_Nombre = '$Cat_Nombre'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Consulta para eliminar
             $consulta = "DELETE FROM tbl_categoria WHERE PK_ID_Categoria = '$id' ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
@@ -719,28 +871,35 @@ class Consultar {
     public function editarBanner(Banner $con){
         try{
             //Editar
+            $conexion = new ConexionBD();
             $B_Imagen = $con->getB_Imagen();
-            $B_Nombre = $con->getB_Nombre();
             $PK_ID_Banner = $con->getPK_ID_Banner();
             $check = getimagesize($B_Imagen['file']['tmp_name']);
-           if($check != false){
+            if($check != false){
+
+                //Consulta para traer nombre imagen
+                $consulta = "SELECT B_Imagen FROM tbl_banner WHERE PK_ID_Banner = '$PK_ID_Banner'";
+                $resultado = $conexion->prepare($consulta);
+                $resultado->execute();
+
+                //Traemos el nombre de la imagen que esta en la base de datos
+                $Banner_Image = $resultado->fetch(PDO::FETCH_ASSOC);
+                $Nombre_img_banner = $Banner_Image['B_Imagen'];
+
+                //Con esta funcion la eliminamos
+                unlink("../vista/imagenes/Banner/".$Nombre_img_banner);
+
+                //Agregamos la nueva imagen
                 $carpeta_destino ='../vista/imagenes/Banner/';
                 $archivo_subido = $carpeta_destino . $B_Imagen['file']['name'];
                 #Con está función movemos la foto
                 move_uploaded_file($B_Imagen['file']['tmp_name'], $archivo_subido);
-                $conexion = new ConexionBD();
                 $ImNombre = $B_Imagen['file']['name'];
-                $consulta = "UPDATE tbl_banner SET B_Nombre = '$B_Nombre', B_Imagen = '$ImNombre' WHERE PK_ID_Banner = '$PK_ID_Banner'";
+                $consulta = "UPDATE tbl_banner SET B_Imagen = '$ImNombre' WHERE PK_ID_Banner = '$PK_ID_Banner'";
                 $resultado = $conexion->prepare($consulta);
                 $resultado->execute();
             
-            }else{
-                $conexion = new ConexionBD();
-                $consulta = "UPDATE tbl_banner SET B_Nombre = '$B_Nombre' WHERE PK_ID_Banner = '$PK_ID_Banner'";
-                $resultado = $conexion->prepare($consulta);
-                $resultado->execute(); 
             }
-
             //Cerrar conexión
             $conexion = null;
         }catch (Exception $ex) {
@@ -1010,6 +1169,27 @@ class Consultar {
         print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
+    public function cargarSubCatxCat($PK_ID_Categoria){
+        try {
+            //Cargar datos a la tabla subcategoria
+            $conexion = new ConexionBD();
+            $consulta = "SELECT PK_ID_SubCategoria, SCat_Nombre FROM tbl_catxsub JOIN tbl_subcategoria 
+            ON tbl_catxsub.FK_ID_SubCategoria = tbl_subcategoria.PK_ID_SubCategoria  WHERE FK_ID_Categoria = '$PK_ID_Categoria'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            //Cerrar conexión
+            $conexion = null;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
+
     public function agregarSubCategoria(SubCategoria $con, $PK_ID_Categoria){
         try {
             //Guardar Subcategoria
@@ -1155,7 +1335,8 @@ class Consultar {
         try{
             //Cargar datos de la tabla productos
             $conexion = new ConexionBD();
-            $consulta = "SELECT  PK_ID_Producto, Pt_Imagen, Pt_Nombre, Pt_Precio from tbl_producto";
+            $consulta = "SELECT PK_ID_Producto, Pt_codigo, Pt_Imagen, Pt_Nombre, Pt_Precio, Cat_Nombre from tbl_producto 
+            JOIN tbl_categoria ON tbl_producto.FK_ID_Categoria = tbl_categoria.PK_ID_Categoria ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -1187,25 +1368,48 @@ class Consultar {
             $Pt_Grados_alchol= $con->getPt_Grados_alchol();
             $Pt_Color = $con->getPt_Color();
             $Pt_Imagen = $con->getPt_Imagen();
-            
-            //acá está el error
-            $check = getimagesize($Pt_Imagen['file']['tmp_name']);
-            if($check != false){
-                $carpeta_destino ='../vista/imagenes/Productos/';
-                $archivo_subido = $carpeta_destino . $Pt_Imagen['file']['name'];
-                #Con está función movemos la foto
-                move_uploaded_file($Pt_Imagen['file']['tmp_name'], $archivo_subido);
-                $conexion = new ConexionBD();
-                $ImNombre = $Pt_Imagen['file']['name'];
 
-                $consulta = "INSERT INTO tbl_producto (Pt_codigo, Pt_Nombre, Pt_Precio,Pt_Imagen,Pt_Presentacion,Pt_Grados_alchol,Pt_Pais,Pt_Color,Pt_Stock,FK_ID_Categoria,FK_ID_Marca) 
-                VALUES ('$Pt_codigo', '$Pt_Nombre', '$Pt_Precio', '$ImNombre', '$Pt_Presentacion','$Pt_Grados_alchol', '$Pt_Pais', '$Pt_Color', '$Pt_Stock', '$FK_ID_Categoria', '$FK_ID_Marca')";
-                $resultado = $conexion->prepare($consulta);
-                $resultado->execute();
-            
-                //Cerrar conexión
-                $conexion = null;
+            $FK_ID_SubCategoria = $con->getFK_ID_SubCategoria();
+            if(!empty($FK_ID_SubCategoria)) {
+                //acá está el error
+                $check = getimagesize($Pt_Imagen['file']['tmp_name']);
+                if($check != false){
+                    $carpeta_destino ='../vista/imagenes/Productos/';
+                    $archivo_subido = $carpeta_destino . $Pt_Imagen['file']['name'];
+                    #Con está función movemos la foto
+                    move_uploaded_file($Pt_Imagen['file']['tmp_name'], $archivo_subido);
+                    $conexion = new ConexionBD();
+                    $ImNombre = $Pt_Imagen['file']['name'];
+
+                    $consulta = "INSERT INTO tbl_producto (Pt_codigo, Pt_Nombre, Pt_Precio,Pt_Imagen,Pt_Presentacion,Pt_Grados_alchol,Pt_Pais,Pt_Color,Pt_Stock,FK_ID_Categoria,FK_ID_Marca, FK_ID_SubCategoria) 
+                    VALUES ('$Pt_codigo', '$Pt_Nombre', '$Pt_Precio', '$ImNombre', '$Pt_Presentacion','$Pt_Grados_alchol', '$Pt_Pais', '$Pt_Color', '$Pt_Stock', '$FK_ID_Categoria', '$FK_ID_Marca', '$FK_ID_SubCategoria')";
+                    $resultado = $conexion->prepare($consulta);
+                    $resultado->execute();
+                
+                    //Cerrar conexión
+                    $conexion = null;
+                }
+            }else {
+                $check = getimagesize($Pt_Imagen['file']['tmp_name']);
+                if($check != false){
+                    $carpeta_destino ='../vista/imagenes/Productos/';
+                    $archivo_subido = $carpeta_destino . $Pt_Imagen['file']['name'];
+                    #Con está función movemos la foto
+                    move_uploaded_file($Pt_Imagen['file']['tmp_name'], $archivo_subido);
+                    $conexion = new ConexionBD();
+                    $ImNombre = $Pt_Imagen['file']['name'];
+
+                    $consulta = "INSERT INTO tbl_producto (Pt_codigo, Pt_Nombre, Pt_Precio,Pt_Imagen,Pt_Presentacion,Pt_Grados_alchol,Pt_Pais,Pt_Color,Pt_Stock,FK_ID_Categoria,FK_ID_Marca) 
+                    VALUES ('$Pt_codigo', '$Pt_Nombre', '$Pt_Precio', '$ImNombre', '$Pt_Presentacion','$Pt_Grados_alchol', '$Pt_Pais', '$Pt_Color', '$Pt_Stock', '$FK_ID_Categoria', '$FK_ID_Marca')";
+                    $resultado = $conexion->prepare($consulta);
+                    $resultado->execute();
+                
+                    //Cerrar conexión
+                    $conexion = null;
+                }
             }
+            var_dump($FK_ID_SubCategoria);
+            
         }catch (Exception $ex) {
             $ex->getMessage();
         }
@@ -1425,6 +1629,27 @@ class Consultar {
         }
         //Envíar el arreglo final en formato JSON a JS
         print json_encode($data, JSON_NUMERIC_CHECK);
+    }
+
+
+    public function TotalClientes(){
+        try{
+            //Cargar datos a la tabla pedidos Dashboard
+            $conexion = new ConexionBD();
+            $consulta = "SELECT COUNT(RepV_Fecha) FROM tbl_reporte_ventas";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = $resultado->fetch();
+
+            //Cerrar conexión 
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
     }
    
 

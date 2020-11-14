@@ -84,7 +84,7 @@ $(document).ready(function(){
         Swal.fire({
             title: '¿Estás seguro de cancelar el envío?',
             text: 'envío a cancelar id: ' + id,
-            icon: 'warning',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

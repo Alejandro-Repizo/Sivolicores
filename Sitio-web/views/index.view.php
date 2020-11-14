@@ -12,7 +12,7 @@
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="css/Style_index.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <!-- SweetAlert -->
@@ -36,7 +36,7 @@
             </a>
             <!--Iconos-->
             <div class="header-icons">
-                <a href="login.html"><i class="fas fa-user-circle header-bar"></i></a>
+                <a href="#" id="btn-user"><i class="fas fa-user-circle header-bar"></i></a>
                 <a href="carrito_pedidos.html"><i class="fas fa-shopping-cart"></i></a>
             </div>
 
@@ -82,10 +82,34 @@
                         <img src="imagenes/barra-navegación/Bebidas-1.jpg" alt="">
                     </ul>
                 </li>
-                <li><a href="recetas_cocteles.html" class="dropbtn">Cócteles</i></a>
+                <li><a href="recetas_cocteles.php" class="dropbtn">Cócteles</i></a>
                 </li>
             </div>
         </nav>
+
+        <!-- Menú Lateral -->
+        <div class="right-menu ">
+            <div class="icon-menu-top">
+                <div class="icon-menu-right">
+                    <a href="#"><i class="fas fa-user-circle"></i>Alejandro Repizo</a>
+                </div>
+                <div class="icon-menu-right">
+                    <a href="#" id="btn-pedido"><i class="fas fa-truck"></i>Tus pedidos</a>
+                </div>
+                <div class="icon-menu-right">
+                    <a href="editar_cliente.html"><i class="fa fa-cog"></i>Modificar Informaci&oacute;n</a>
+                </div>
+                <div class="icon-menu-right">
+                    <a href="#" id="btn-beh"><i class="fas fa-arrow-circle-left"></i>Atr&aacute;s</a>
+                </div>
+            </div>
+            <div class="icon-menu-down">
+                <div class="icon-menu-right">
+                    <a href="#"><i class="fas fa-power-off"></i>Cerrar Sesi&oacute;n</a>
+                </div>
+            </div>
+        </div>
+
         <!---Menú pegajoso-->
         <nav class="menu2" id="menu2">
             <!--Logo-->
@@ -135,7 +159,7 @@
                 </li>
             </div>
             <div class="menu2-icons">
-                <a href="login.html"><i class="fas fa-user-circle menu2-bar"></i></a>
+                <a href="#" class="" id="btn-user-peg"><i class="fas fa-user-circle menu2-bar"></i></a>
                 <a href="#"><i class="fas fa-shopping-cart"></i></a>
             </div>
         </nav>
@@ -149,7 +173,7 @@
 
             <div class="menuMobile-icons">
                 <a href="#" id="btn-burger"><i class="fas fa-bars"></i></a>
-                <a href="login.html"><i class="fas fa-user-circle"></i></a>
+                <a href="#" id="btn-user-mob"><i class="fas fa-user-circle"></i></a>
                 <a href="carrito_pedidos.html"><i class="fas fa-shopping-cart"></i></a>
             </div>
         </nav>
@@ -186,7 +210,7 @@
                         <li><a href="productos.html"><i class="sub-opciones"></i>Jugos y Té</a></li>
                     </ul>
                 </li>
-                <li><a href="recetas_cocteles.html"></i>Cócteles</a></li>
+                <li><a href="recetas_cocteles.php"></i>Cócteles</a></li>
 
             </ul>
         </div>
@@ -278,7 +302,7 @@
                     </div>
                 </div>
                 <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
+                    <a href="registrase.html" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
                     <div class="a">
                         <span class="producto-price">$0,000</span>
                     </div>
@@ -296,7 +320,7 @@
                     </div>
                 </div>
                 <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
+                    <a href="login.html" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
                     <div class="a">
                         <span class="producto-price">$0,000</span>
                     </div>
@@ -511,7 +535,7 @@
                         Británica de grandes supermercados pero también podéis hacer el cóctel
                         sin ella y tampoco cambiará demasiado el resultado
                     </p>
-                    <a href="recetas_cocteles.html" class="m-t-p-10">Seguir leyendo<i
+                    <a href="recetas_cocteles.php" class="m-t-p-10">Seguir leyendo<i
                             class="icon-a fas fa-long-arrow-alt-right"></i></a>
                 </div>
             </div>
@@ -584,83 +608,10 @@
             </div>
         </div>
     </div>
+    
+    <?php require 'modal.view.php';?>
 
-    <!--Footer-->
-    <footer>
-        <div class="contenedor-footer">
-
-            <!--Parte de contactenos-->
-            <div class="cont-contacto">
-                <h1>Cont&aacute;ctenos</h1>
-                <h6>Linea de atenci&oacute;n al cliente 01 8000 183475 </h6>
-                <h6>M&oacute;vil: 322 2397</h6>
-                <h6>sivolicores@gmail.com</h6>
-                <a href=""><i class="fab fa-facebook-f"></i></a>
-                <a href=""><i class="fab fa-whatsapp"></i></a>
-                <a href=""><i class="fab fa-instagram"></i></a>
-            </div>
-            <!--Parte de categorías-->
-            <div class="cont-footer-cat">
-                <ul>
-                    <li class="p-t-10"><a href="productos.html" class="cat-footer-title">Licores</a></li>
-                    <li><a href="productos.html">Aguardiente</a></li>
-                    <li><a href="productos.html">Whisky</a></li>
-                    <li><a href="productos.html">Ginebra</a></li>
-                    <li><a href="productos.html">Vodka</a></li>
-                </ul>
-            </div>
-            <!--Parte de categorías-->
-            <div class="cont-footer-cat">
-                <ul>
-                    <li><a href="productos.html" class="cat-footer-title">Cervezas</a></li>
-                    <li><a href="productos.html">Importadas</a></li>
-                    <li><a href="productos.html">Nacionales</a></li>
-                    <li><a href="productos.html">Intenacionales</a></li>
-                </ul>
-            </div>
-            <!--Parte de categorías-->
-            <div class="cont-footer-cat">
-                <ul>
-                    <li><a href="productos.html" class="cat-footer-title">Vinos</a></li>
-                    <li><a href="productos.html">Jovenes</a></li>
-                    <li><a href="productos.html">Espumosos</a></li>
-                    <li><a href="productos.html">Reserva</a></li>
-                </ul>
-            </div>
-            <!--Parte de categorías-->
-            <div class="cont-footer-cat">
-                <ul>
-                    <li><a href="productos.html" class="cat-footer-title">Bebidas</a></li>
-                    <li><a href="productos.html">Agua</a></li>
-                    <li><a href="productos.html">Gaseosas</a></li>
-                    <li><a href="productos.html">Jugos y Té</a></li>
-                </ul>
-            </div>
-
-            <!--Parte de categorías-->
-            <div class="cont-footer-cat">
-                <ul>
-                    <li><a href="productos.html" class="cat-footer-title">Bebidas</a></li>
-                    <li><a href="productos.html">Agua</a></li>
-                    <li><a href="productos.html">Gaseosas</a></li>
-                    <li><a href="productos.html">Jugos y Té</a></li>
-                </ul>
-            </div>
-
-        </div>
-        <!-- Ley-->
-        <div class="sub-cont-footer">
-            <div class="ley">
-                <p>El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Proh&iacute;base el expendio de
-                    bebidas
-                    embriagantes a menores de edad y mujeres embarazadas. Ley 124 de 1994. </p>
-            </div>
-            <!--Copyright-->
-            <div class="copyright">
-                <p>Copyright © 2020 All rights reserved. </p>
-            </div>
-        </div>
-    </footer>
+    <?php require 'footer.view.php';?>
     <!--Jquery, Bootstrap, Popper-->
     <script src="assets/jquery/jquery-3.3.1.min.js"></script>
     <script src="assets/popper/popper.min.js"></script>

@@ -106,7 +106,7 @@
                 <hr>
                 <li><i class="inf-icons fas fa-users"></i>TOTAL DE CLIENTES HOY</a>
                 </li>
-                <li class="inf-date">0</li>
+                <li class="inf-date" id='TotalClientes'></li>
                 <hr>
                 <li><i class="inf-icons far fa-clock"></i>HORA</a>
                 </li>

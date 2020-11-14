@@ -161,78 +161,11 @@
             <div class="text-left-top">
                 <h1>inicio</h1>
             </div>
-
         </div>
     </div>
 
-    <!--Footer-->
-    <footer>
-        <div class="contenedor-footer">
-            <div class="sub-cont-footer">
-                <!--Parte de contactenos-->
-                <div class="cont-contacto">
-                    <h1>Contáctenos</h1>
-                    <h6>Linea de atención al cliente 01 8000 183475 </h6>
-                    <h6>Móvil: 322 2397</h6>
-                    <h6>sivolicores@gmail.com</h6>
-                    <a href=""><i class="fab fa-facebook-f"></i></a>
-                    <a href=""><i class="fab fa-whatsapp"></i></a>
-                    <a href=""><i class="fab fa-instagram"></i></a>
-                </div>
-                <!--Parte de categorías-->
-                <div class="cont-footer-cat">
-                    <ul>
-                        <li class="p-t-10"><a href="productos.html" class="cat-footer-title">Licores</a></li>
-                        <li><a href="productos.html">Aguardiente</a></li>
-                        <li><a href="productos.html">Whisky</a></li>
-                        <li><a href="productos.html">Ginebra</a></li>
-                        <li><a href="productos.html">Vodka</a></li>
-                    </ul>
-                </div>
-                <!--Parte de categorías-->
-                <div class="cont-footer-cat">
-                    <ul>
-                        <li><a href="productos.html" class="cat-footer-title">Cervezas</a></li>
-                        <li><a href="productos.html">Importadas</a></li>
-                        <li><a href="productos.html">Nacionales</a></li>
-                        <li><a href="productos.html">Intenacionales</a></li>
-                    </ul>
-                </div>
-                <!--Parte de categorías-->
-                <div class="cont-footer-cat">
-                    <ul>
-                        <li><a href="productos.html" class="cat-footer-title">Vinos</a></li>
-                        <li><a href="productos.html">Jovenes</a></li>
-                        <li><a href="productos.html">Espumosos</a></li>
-                        <li><a href="productos.html">Reserva</a></li>
-                    </ul>
-                </div>
-                <!--Parte de categorías-->
-                <div class="cont-footer-cat">
-                    <ul>
-                        <li><a href="productos.html" class="cat-footer-title">Bebidas</a></li>
-                        <li><a href="productos.html">Agua</a></li>
-                        <li><a href="productos.html">Gaseosas</a></li>
-                        <li><a href="productos.html">Jugos y Té</a></li>
-                    </ul>
-                </div>
-                <!--Parte del input:search-->
-                <div class="cont-footer-search">
-                    <h1>Buscar</h1>
-                    <input type="search" name="" id="" placeholder="Buscar">
-                </div>
-            </div>
-            <!--Ley-->
-            <div class="ley">
-                <p>El exceso de alcohol es perjudicial para la salud. Ley 30 de 1986. Prohíbase el expendio de bebidas
-                    embriagantes a menores de edad y mujeres embarazadas. Ley 124 de 1994. </p>
-            </div>
-            <!--Copyright-->
-            <div class="copyright">
-                <p>Copyright © 2020 All rights reserved. </p>
-            </div>
-        </div>
-    </footer>
+   <?php require 'footer.view.php';?>
+   
     <!--Jquery, Bootstrap, Popper-->
     <script src="assets/jquery/jquery-3.3.1.min.js"></script>
     <script src="assets/popper/popper.min.js"></script>

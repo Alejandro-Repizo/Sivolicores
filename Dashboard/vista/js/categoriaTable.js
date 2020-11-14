@@ -40,6 +40,8 @@ $(document).ready(function(){
     //Botón nueva marca
     $('#btnNuevo').click(function () {
         $('#formNuevaCategoria').trigger("reset");
+        document.getElementById('info').innerHTML = 'Selecciona la imagen'; 
+        document.getElementById('info2').innerHTML = 'Selecciona la imagen'
         $(".modal-header").css("background-color", "#800000");//Para colocar color al header
         $(".modal-title").text("Nueva Categoría").css("color", "#fff");//Para colocar titulo y color
         $("#modalCategoria").modal("show");//Para mostrar el modal
@@ -53,11 +55,22 @@ $(document).ready(function(){
         e.preventDefault();
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
+
         //Con esto se captura los datos de la tabla.
         Cat_Nombre = $.trim($("#Cat_Nombre").val());
-        if(formulario_valido()){
-            var parametros = 'id='+ id +'&Cat_Nombre='+ Cat_Nombre +'&opcion=' + opcion;
-            peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        Cat_Banner_Imagen = $.trim($('#Cat_Banner_Imagen').val()); //Estó solo es para la función formulario_Valido
+        
+        if(formulario_valido() || formulario_valido_editar()){
+            let formData = new FormData();
+            let files = $('#Cat_Imagen')[0].files[0];
+            let files2 = $('#Cat_Banner_Imagen')[0].files[0];
+    
+            formData.append('Cat_Nombre', Cat_Nombre);
+            formData.append('file', files);
+            formData.append('file2', files2);
+            formData.append('id',id);
+            formData.append('opcion', opcion);
+      
             peticionXML.onload = function(){ 
                 var datos = JSON.parse(peticionXML.responseText);
                 if(datos.error){
@@ -80,12 +93,12 @@ $(document).ready(function(){
                     console.log(peticionXML.status);
                 }
             }
-            peticionXML.send(parametros);
+            peticionXML.send(formData);
         }else {
             Swal.fire({
                 type: 'warning',
                 title: 'Error',
-                text: 'Se ha producido un error.'
+                text: 'Revise que las casillas esté llenas.'
             });
         }
         $("#modalCategoria").modal("hide");
@@ -93,6 +106,8 @@ $(document).ready(function(){
 
     //Código para el botón editar
     $(document).on("click", ".btnEditar", function () {
+        document.getElementById('info').innerHTML = 'Seleciona la imagen'; 
+        document.getElementById('info2').innerHTML = 'Seleciona la imagen';    
         opcion = "editarCategoria"; //editar
         fila = $(this).closest("tr");
         id = parseInt(fila.find('td:eq(0)').text()); //Con esto se captura los datos de la tabla.
@@ -117,7 +132,7 @@ $(document).ready(function(){
         Swal.fire({
             title: '¿Estás seguro de eliminar el registro?',
             text: 'Registro a eliminar id: ' + id,
-            icon: 'warning',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -146,10 +161,30 @@ $(document).ready(function(){
     function formulario_valido() { 
         if(Cat_Nombre == ''){
             return false;
+        }else if(Cat_Banner_Imagen == ''){
+            return false;
+        }
+        return true;
+    }
+
+    function formulario_valido_editar() {
+        if (Cat_Nombre == '') {
+            return false;
         }
         return true;
     }
   
 });
+
+function cambiar(){
+    var pdrs = document.getElementById('Cat_Imagen').files[0].name;
+    document.getElementById('info').innerHTML = pdrs;
+}
+
+function cambiar2(){
+    var pdrs = document.getElementById('Cat_Banner_Imagen').files[0].name;
+    document.getElementById('info2').innerHTML = pdrs;
+}
+
 
 

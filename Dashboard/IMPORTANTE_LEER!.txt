@@ -1,0 +1,12 @@
+Para la parte del modulo de banners,
+
+los banners fijos tales, como el parallax, slides, cocteles, editar, login, etc...
+deben ser agregados antes con los siguientes nombres:
+
+Parallax, Slide_uno, Slide_dos, Slide_tres, Receta_coctel, Carrito, Finalizar_pedido,
+Login y Registro.
+
+Si cambia los anteriores nombres, para una correcta visualización en el sitio web 
+debe cambiar los nombres que están en el array $banner_config que está en el archivo 
+config.php dentro de la carpeta app.
+

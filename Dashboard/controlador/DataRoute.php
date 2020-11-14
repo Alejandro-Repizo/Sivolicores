@@ -284,17 +284,28 @@ if(isset($_POST['opcion'])){
         case 'agregarCategoria':
             $controlador = new Controlador();
             $Cat_Nombre = $_POST['Cat_Nombre'];
+            $Cat_Banner_Imagen = $_FILES;
+            $Cat_Imagen = '';
+            if(count($Cat_Banner_Imagen)  > 1){
+                $Cat_Imagen = $_FILES;
+            }
+            
             if (!empty($Cat_Nombre)) {
                 $Cat_Nombre = trim($Cat_Nombre);
                 $Cat_Nombre = filter_var($Cat_Nombre, FILTER_SANITIZE_STRING);
             }
-            $controlador->agregarCategoria($Cat_Nombre);
+            $controlador->agregarCategoria($Cat_Nombre, $Cat_Imagen, $Cat_Banner_Imagen);
             break;
 
         case 'editarCategoria':
             $controlador = new Controlador();
             $Cat_Nombre = $_POST['Cat_Nombre'];
             $id = $_POST['id'];
+            $Cat_Banner_Imagen = $_FILES;
+            $Cat_Imagen = '';
+            if(count($Cat_Banner_Imagen)  > 1){
+                $Cat_Imagen = $_FILES;
+            }
             if (!empty($Cat_Nombre)) {
                 $Cat_Nombre = trim($Cat_Nombre);
                 $Cat_Nombre = filter_var($Cat_Nombre, FILTER_SANITIZE_STRING);
@@ -303,7 +314,7 @@ if(isset($_POST['opcion'])){
                 $id = trim($id);
                 $id = filter_var($id, FILTER_VALIDATE_INT);
             }
-            $controlador->editarCategoria($id,$Cat_Nombre);
+            $controlador->editarCategoria($id,$Cat_Nombre, $Cat_Imagen, $Cat_Banner_Imagen);
             break;
         
         case 'borrarCategoria':
@@ -330,17 +341,12 @@ if(isset($_POST['opcion'])){
         case 'editarBanner':
             $controlador = new Controlador();
             $id = $_POST['id'];
-            $B_Nombre = $_POST['B_Nombre'];
             $B_Imagen = $_FILES;
             if (!empty($id)) {
                 $id = trim($id);
-                $id =  filter_var($id, FILTER_VALIDATE_INT);
+                $id = filter_var($id, FILTER_VALIDATE_INT);
             }
-            if (!empty($B_Nombre)) {
-                $B_Nombre = trim($B_Nombre);
-                $$B_Nombre = filter_var($B_Nombre, FILTER_SANITIZE_STRING);
-            }
-            $controlador->editarBanner($id, $B_Nombre, $B_Imagen);
+            $controlador->editarBanner($id, $B_Imagen);
             break;
 
         //Módulo Pedidos
@@ -403,6 +409,12 @@ if(isset($_POST['opcion'])){
             $controlador = new Controlador();
             $controlador->cargarSubCategoria();
             break;
+
+        case 'cargarSubCatxCat':
+            $controlador = new Controlador();
+            $PK_ID_Categoria = $_POST['PK_ID_Categoria'];
+            $controlador->cargarSubCatxCat($PK_ID_Categoria);
+        break;
 
         case 'agregarSubCategoria':
             $controlador = new Controlador();
@@ -475,6 +487,7 @@ if(isset($_POST['opcion'])){
             $Pt_Stock = $_POST['Pt_Stock'];
             $Pt_Precio = $_POST['Pt_Precio'];
             $FK_ID_Categoria = $_POST['FK_ID_Categoria'];
+            $FK_ID_SubCategoria = $_POST['FK_ID_SubCategoria'];
             $FK_ID_Marca = $_POST['FK_ID_Marca'];
             $Pt_Pais = $_POST['Pt_Pais'];
             $Pt_Grados_alchol = $_POST['Pt_Grados_alchol'];
@@ -501,6 +514,10 @@ if(isset($_POST['opcion'])){
                 $FK_ID_Categoria = trim($FK_ID_Categoria);
                 $FK_ID_Categoria = filter_var($FK_ID_Categoria, FILTER_VALIDATE_INT);
             }
+            if (!empty($FK_ID_SubCategoria)) {
+                $FK_ID_SubCategoria = trim($FK_ID_SubCategoria);
+                $FK_ID_SubCategoria = filter_var($FK_ID_SubCategoria, FILTER_VALIDATE_INT);
+            }
             if (!empty($FK_ID_Marca)) {
                 $FK_ID_Marca = trim($FK_ID_Marca);
                 $FK_ID_Marca = filter_var($FK_ID_Marca, FILTER_VALIDATE_INT);
@@ -517,7 +534,7 @@ if(isset($_POST['opcion'])){
                 $Pt_Color = trim($Pt_Color);
                 $Pt_Color = filter_var($Pt_Color, FILTER_SANITIZE_STRING);
             }
-            $controlador->agregarProducto($Pt_Nombre,$Pt_codigo,$Pt_Presentacion,$Pt_Stock,$Pt_Precio, $FK_ID_Categoria,$FK_ID_Marca,$Pt_Pais,$Pt_Grados_alchol, $Pt_Color, $Pt_Imagen);
+            $controlador->agregarProducto($Pt_Nombre,$Pt_codigo,$Pt_Presentacion,$Pt_Stock,$Pt_Precio, $FK_ID_Categoria,$FK_ID_SubCategoria,$FK_ID_Marca,$Pt_Pais,$Pt_Grados_alchol, $Pt_Color, $Pt_Imagen);
             break;
         
         case 'cargarEditarProducto':
@@ -612,7 +629,12 @@ if(isset($_POST['opcion'])){
             $Controlador = new Controlador();
             $Controlador->cargarGraficaDashboard();
             break;
+        case 'TotalClientes':
+            $Controlador = new Controlador();
+            $Controlador->TotalClientes();
+            break;
     }
+    
 
 }
 

@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     var fila, opcion;
     opcion = "cargarBanner";
@@ -8,14 +8,14 @@ $(document).ready(function(){
         "ajax": {
             "url": "../../controlador/DataRoute.php",
             "method": 'POST',
-            "data": { opcion: opcion},//enviamos cargar para que haga un SELECT
+            "data": { opcion: opcion },//enviamos cargar para que haga un SELECT
             "dataSrc": ""
 
         },
         //Agregamos las columnas del tbody los botones
         "columns": [
             { "data": "PK_ID_Banner" },
-            { "data": "B_Imagen" , "render": function(data, type, row) {return '<img src="../imagenes/Banner/'+data+'" width="100px" height="60px"/>' ;}},
+            { "data": "B_Imagen", "render": function (data, type, row) { return '<img src="../imagenes/Banner/' + data + '" width="100px" height="60px"/>'; } },
             { "data": "B_Nombre" },
             { "data": "B_Fecha_actualizacion" },
             { "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-secondary btnEditar'><i class='fas fa-edit'></i></button></div></div>" }
@@ -44,37 +44,28 @@ $(document).ready(function(){
         var peticionXML = new XMLHttpRequest;
         peticionXML.open('POST', '../../controlador/DataRoute.php');
         //Con esto se captura los datos de la tabla.
-        B_Nombre = $.trim($("#B_Nombre").val());
-        if(formulario_valido()){
-            var formData = new FormData();
-            var files = $("#B_Imagen")[0].files[0];
+        var formData = new FormData();
+        var files = $("#B_Imagen")[0].files[0];
 
-            formData.append('B_Nombre',B_Nombre);
-            formData.append('id',id);
-            formData.append('opcion', opcion);
-            formData.append('file', files);
+        formData.append('id', id);
+        formData.append('opcion', opcion);
+        formData.append('file', files);
 
-            peticionXML.onload = function(){ 
-                tablaBanner.ajax.reload(null, false);
-                Swal.fire({
-                    type: 'success',
-                    title: 'Éxito',
-                    text: 'Banner actualizado con éxito'
-                });
-            }
-            peticionXML.onreadystatechange = function(){
-                if(peticionXML.readyState == 4 && peticionXML.status == 200){
-                    console.log(peticionXML.status);
-                }
-            }
-            peticionXML.send(formData);
-        }else {
+        peticionXML.onload = function () {
+            tablaBanner.ajax.reload(null, false);
             Swal.fire({
-                type: 'warning',
-                title: 'Error',
-                text: 'Revise que todas las casillas estén llenas.'
+                type: 'success',
+                title: 'Éxito',
+                text: 'Banner actualizado con éxito'
             });
         }
+        peticionXML.onreadystatechange = function () {
+            if (peticionXML.readyState == 4 && peticionXML.status == 200) {
+                console.log(peticionXML.status);
+            }
+        }
+        peticionXML.send(formData);
+
         $("#modalBanner").modal("hide");
     });
 
@@ -83,12 +74,10 @@ $(document).ready(function(){
     //Código para el botón editar
     $(document).on("click", ".btnEditar", function () {
         opcion = "editarBanner"; //editar
+        document.getElementById('info').innerHTML = 'Seleciona la imagen'; 
         //Con esto se captura los datos de la tabla.
         fila = $(this).closest("tr");
         id = parseInt(fila.find('td:eq(0)').text());
-        B_Nombre = fila.find('td:eq(2)').text();
-        //seteamos los valores recolectados en la tabla hacia los input's.
-        $("#B_Nombre").val(B_Nombre);
         //Opciones de color y demás
         $(".modal-header").css("background-color", "#6C757D");
         $(".modal-title").text("Editar banner").css("color", "#fff");;
@@ -96,17 +85,9 @@ $(document).ready(function(){
 
     });
 
-    //función para válidar datos vácios
-    function formulario_valido() { 
-        if(B_Nombre == ''){
-            return false;
-        } 
-        return true;
-    }
-
 });
 
-function cambiar(){
+function cambiar() {
     var pdrs = document.getElementById('B_Imagen').files[0].name;
     document.getElementById('info').innerHTML = pdrs;
 }

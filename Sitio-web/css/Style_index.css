@@ -78,6 +78,67 @@ a {
     color: #d9a520;
 }
 
+/* Menu lateral derecho */
+.right-menu {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    right: -100vw;
+    transition: .6s ease all;
+    display: grid;
+    grid-template-columns: minmax(auto, 300px);
+    align-content: space-around;
+    background-color: #000002;
+    justify-content: center;
+}
+.right-menu-active {
+    right: 0;
+}
+
+.icon-menu-top {
+    display: grid;
+    justify-content: center;
+    gap: 10px;
+}
+
+.icon-menu-right h4 {
+    font-size: 14px;
+}
+
+.icon-menu-right {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+.icon-menu-right i {
+    font-size: 22px;
+    color: #888888;
+    padding: 5px 10px;
+}
+
+.icon-menu-right a {
+   color: #fff;
+   text-decoration: none;
+   cursor: pointer;
+}
+.icon-menu-right a:hover {
+    color: #d9a520;
+}
+
+.icon-menu-down {
+    display: grid;
+    justify-content: center;
+}
+
+.icon-behind {
+    display: none;
+}
+
+
 /*_------------------------------------*/
 
 .menu {
@@ -835,6 +896,41 @@ a {
     border-right: 1px solid #b1afaf;
 }
 
+
+/* Tabla Modal pedidos */
+
+.contenedor-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-top table {
+    width: 85%;
+    text-align: center;
+}
+
+.contenedor-top table thead tr th {
+    padding: 20px 10px 15px;
+    font-size: 15px;
+}
+
+.contenedor-top table tbody tr {
+    border: 2px solid rgb(230, 230, 230);
+}
+
+.contenedor-top table tbody tr td {
+    padding: 10px 10px;
+}
+
+.contenedor-top table tbody tr td input {
+    width: 80px;
+    text-align: center;
+    padding: 5px;
+    border: 2px solid rgb(230, 230, 230);
+}
+
 /* Footer */
 
 footer {
@@ -1065,6 +1161,10 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
+    /* Menu lateral izquierdo */
+    .right-menu {
+        width: 100vw;
+    }
     .menuMobile-logo {
         left: 30px;
     }
@@ -1111,9 +1211,19 @@ footer {
     .copyright {
         margin-top: .5em;
     }
+
+    /* Modal */
+    .contenedor-top table {
+        display: block;
+        overflow-x: auto;
+    }
+    .contenedor-top table {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 480px) {
+
     .menuMobile-logo {
         left: 10px;
     }

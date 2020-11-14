@@ -39,3 +39,51 @@ $("#btn-burger").click(function(e) {
         $('#menuMobileWrapper').children('ul').slideDown();
     }
 });
+
+
+$("#btn-user").click(function(e){
+    e.preventDefault();
+    if($('.right-menu').hasClass('right-menu-active')){
+        $('.right-menu').removeClass('right-menu-active');
+    } else {
+        $('.right-menu').toggleClass('right-menu-active');
+        $('#btn-user').addClass('icon-behind');
+        $('#btn-user-peg').addClass('icon-behind');
+    }
+}) 
+
+$("#btn-user-peg").click(function(e){
+    e.preventDefault();
+    if($('.right-menu').hasClass('right-menu-active')){
+        $('.right-menu').removeClass('right-menu-active');
+    } else {
+        $('.right-menu').toggleClass('right-menu-active');
+        $('#btn-user-peg').addClass('icon-behind');
+        $('#btn-user').addClass('icon-behind');
+    }
+}) 
+
+$("#btn-user-mob").click(function(e){
+    e.preventDefault();
+    if($('.right-menu').hasClass('right-menu-active')){
+        $('.right-menu').removeClass('right-menu-active');
+    } else {
+        $('.right-menu').toggleClass('right-menu-active');
+    }
+}) 
+
+
+$("#btn-beh").click(function(e){
+    e.preventDefault();
+    $('.right-menu').removeClass('right-menu-active');
+    $('#btn-user-peg').removeClass('icon-behind');
+    $('#btn-user').removeClass('icon-behind');
+}) 
+
+//Modal pedidos
+$("#btn-pedido").click( function(e) {
+    e.preventDefault();
+    $(".modal-header").css("background-color", "#000002");
+    $(".modal-title").text("Tus pedidos").css("color", "#d9a520").css("font-family", "'Montserrat', sans-serif").css("font-size", "16px");
+    $("#modalPedidos").modal("show");
+})

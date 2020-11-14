@@ -77,7 +77,8 @@ a {
 .header .header-top h6 {
     font-size: 12px;
     color: #888888;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.1px;
+    font-weight: 600;
 }
 
 
@@ -361,7 +362,7 @@ a {
     display: none;
 }
 
-.menuMobileWrapper   ul li a {
+.menuMobileWrapper ul li a {
     background-color: #fff;
     color: #888888;
     font-weight: lighter;
@@ -377,12 +378,140 @@ a {
     padding-left: 10px;
 }
 
+/* Menu lateral derecho */
+.right-menu {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    right: -100vw;
+    transition: .6s ease all;
+    display: grid;
+    grid-template-columns: minmax(auto, 300px);
+    align-content: space-around;
+    background-color: #000002;
+    justify-content: center;
+}
+.right-menu-active {
+    right: 0;
+}
+
+.icon-menu-top {
+    display: grid;
+    justify-content: center;
+    gap: 10px;
+}
+
+.icon-menu-right h4 {
+    font-size: 14px;
+}
+
+.icon-menu-right {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+.icon-menu-right i {
+    font-size: 22px;
+    color: #888888;
+    padding: 5px 10px;
+}
+
+.icon-menu-right a {
+   color: #fff;
+   text-decoration: none;
+   cursor: pointer;
+}
+.icon-menu-right a:hover {
+    color: #d9a520;
+    text-decoration: none;
+}
+
+.icon-menu-down {
+    display: grid;
+    justify-content: center;
+}
+
+.icon-behind {
+    display: none;
+}
+
+/* Tabla Modal pedidos */
+
+.contenedor-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-top table {
+    width: 85%;
+    text-align: center;
+}
+
+.contenedor-top table thead tr th {
+    padding: 20px 10px 15px;
+    font-size: 15px;
+}
+
+.contenedor-top table tbody tr {
+    border: 2px solid rgb(230, 230, 230);
+}
+
+.contenedor-top table tbody tr td {
+    padding: 10px 10px;
+}
+
+.contenedor-top table tbody tr td input {
+    width: 80px;
+    text-align: center;
+    padding: 5px;
+    border: 2px solid rgb(230, 230, 230);
+}
+
+/* Paginacion */
+
+.paginas {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.paginas a {
+    border: 2px solid rgb(230, 230, 230);
+    text-decoration: none;
+    border-radius: 100%;
+    padding: 9px 15px;
+    font-weight: 600;
+    font-size: 12px;
+    color: rgb(230, 230, 230);
+    font-family: segoe UI;
+    transition: 1s ease all;
+    margin: 10px;
+}
+
+.paginas a:hover {
+    border: 2px solid goldenrod;
+    background-color: goldenrod;
+    color: #fff;
+    text-decoration: none;
+}
+
+.active {
+    background-color: goldenrod;
+    color: #fff;
+}
 
 /* Footer */
 
 footer {
     width: 100%;
-    height: 580px;
+    height: auto;
     background-color: #000002;
     padding: 30px;
     margin-top: 30px;
@@ -550,6 +679,10 @@ footer {
 
 @media screen and (max-width: 768px) {
 
+    /* Menu lateral derecho */
+    .right-menu {
+        width: 100vw;
+    }
     /* Menu mobile */
     .menuMobile-logo {
         left: 30px;
@@ -566,6 +699,15 @@ footer {
     }
     .copyright {
         margin-top: .5em;
+    }
+
+    /* Modal */
+    .contenedor-top table {
+        display: block;
+        overflow-x: auto;
+    }
+    .contenedor-top table {
+        width: 100%;
     }
 }
 

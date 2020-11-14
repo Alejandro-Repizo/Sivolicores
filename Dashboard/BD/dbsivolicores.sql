@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-10-2020 a las 06:17:39
+-- Tiempo de generación: 14-11-2020 a las 07:36:29
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.30
 
@@ -48,6 +48,21 @@ CREATE TABLE `tbl_banner` (
   `B_Fecha_actualizacion` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tbl_banner`
+--
+
+INSERT INTO `tbl_banner` (`PK_ID_Banner`, `B_Imagen`, `B_Nombre`, `B_Fecha_actualizacion`) VALUES
+(1, 'Cócteles-con-vino.jpg', 'Parallax', '2020-11-13 17:28:51'),
+(2, 'Juniper_slide_1.jpg', 'Slide_uno', '2020-11-13 17:33:20'),
+(3, 'Oktoberfest_Slide_1.jpg', 'Slide_dos', '2020-11-13 17:33:20'),
+(4, 'budweiser_slide_1.jpg', 'Slide_tres', '2020-11-13 17:35:07'),
+(5, 'Wallpaper_Cócteles.jpg', 'Receta_coctel', '2020-11-13 17:39:56'),
+(6, 'Wallpaper_cart.jpg', 'Carrito', '2020-11-13 17:39:56'),
+(7, 'Wallpaper_Contacto.jpg', 'Finalizar_pedido', '2020-11-13 17:39:56'),
+(8, 'Wallpaper_Vinos.jpg', 'Login', '2020-11-13 17:39:56'),
+(9, 'Wallpaper_Vino1.jpg', 'Registro', '2020-11-13 17:39:56');
+
 -- --------------------------------------------------------
 
 --
@@ -71,7 +86,9 @@ CREATE TABLE `tbl_carrito_pedidos` (
 
 CREATE TABLE `tbl_categoria` (
   `PK_ID_Categoria` int(11) NOT NULL,
-  `Cat_Nombre` varchar(45) NOT NULL
+  `Cat_Nombre` varchar(45) NOT NULL,
+  `Cat_Imagen` text NOT NULL,
+  `Cat_Banner_Imagen` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -83,6 +100,23 @@ CREATE TRIGGER `Tbl_catxsub_Tbl_categoria_BEFORE_DELETE` BEFORE DELETE ON `tbl_c
       FROM tbl_catxsub
      WHERE (FK_ID_Categoria = old.PK_ID_Categoria);
 END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `tbl_categoria_tbl_banner` AFTER INSERT ON `tbl_categoria` FOR EACH ROW INSERT INTO tbl_banner
+(B_Imagen, B_Nombre)
+VALUES
+(new.Cat_Banner_Imagen, new.Cat_Nombre)
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `tbl_categoria_tbl_banner_UPDATE` AFTER UPDATE ON `tbl_categoria` FOR EACH ROW UPDATE
+    tbl_banner
+SET
+    B_Imagen =(NEW.Cat_Banner_Imagen),
+    B_Nombre =(NEW.Cat_Nombre)
+WHERE
+    (B_Nombre = old.Cat_Nombre)
 $$
 DELIMITER ;
 
@@ -197,7 +231,8 @@ CREATE TABLE `tbl_producto` (
   `Pt_Color` varchar(45) NOT NULL,
   `Pt_Stock` varchar(5) NOT NULL,
   `FK_ID_Categoria` int(11) NOT NULL,
-  `FK_ID_Marca` int(11) NOT NULL
+  `FK_ID_Marca` int(11) NOT NULL,
+  `FK_ID_SubCategoria` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -356,7 +391,8 @@ ALTER TABLE `tbl_pedido`
 ALTER TABLE `tbl_producto`
   ADD PRIMARY KEY (`PK_ID_Producto`),
   ADD KEY `FK_ID_Categoria` (`FK_ID_Categoria`),
-  ADD KEY `FK_ID_Marca` (`FK_ID_Marca`);
+  ADD KEY `FK_ID_Marca` (`FK_ID_Marca`),
+  ADD KEY `PK_ID_SubCategoria` (`FK_ID_SubCategoria`);
 
 --
 -- Indices de la tabla `tbl_receta_coctel`
@@ -390,7 +426,7 @@ ALTER TABLE `tbl_subcategoria`
 -- AUTO_INCREMENT de la tabla `tbl_banner`
 --
 ALTER TABLE `tbl_banner`
-  MODIFY `PK_ID_Banner` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PK_ID_Banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_carrito_pedidos`
@@ -487,7 +523,8 @@ ALTER TABLE `tbl_pedido`
 --
 ALTER TABLE `tbl_producto`
   ADD CONSTRAINT `FK_ID_Categoria` FOREIGN KEY (`FK_ID_Categoria`) REFERENCES `tbl_categoria` (`PK_ID_Categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_ID_Marca` FOREIGN KEY (`FK_ID_Marca`) REFERENCES `tbl_marca` (`PK_ID_Marca`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_ID_Marca` FOREIGN KEY (`FK_ID_Marca`) REFERENCES `tbl_marca` (`PK_ID_Marca`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `PK_ID_SubCategoria` FOREIGN KEY (`FK_ID_SubCategoria`) REFERENCES `tbl_subcategoria` (`PK_ID_SubCategoria`);
 
 --
 -- Filtros para la tabla `tbl_reporte_pedido`

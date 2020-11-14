@@ -11,6 +11,7 @@ class Producto{
     private $Pt_Color;
     private $Pt_Stock;
     private $FK_ID_Categoria;
+    private $FK_ID_SubCategoria;
     private $FK_ID_Marca;
     private $Pt_Grados_alchol;
 
@@ -127,6 +128,14 @@ class Producto{
         return $this->FK_ID_Categoria = $FK_ID_Categoria;
     }
 
+
+    public function getFK_ID_SubCategoria(){
+        return $this->FK_ID_SubCategoria;
+    }
+        
+    public function setFK_ID_SubCategoria($FK_ID_SubCategoria){
+        return $this->FK_ID_SubCategoria = $FK_ID_SubCategoria;
+    }
 
 
 

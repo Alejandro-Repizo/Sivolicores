@@ -123,7 +123,7 @@ $(document).ready(function () {
         Swal.fire({
             title: '¿Estás seguro de eliminar el producto?',
             text: 'Producto a eliminar id: ' + id,
-            icon: 'warning',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

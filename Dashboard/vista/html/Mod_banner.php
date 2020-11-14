@@ -171,10 +171,7 @@
                 <form id="formEditarBanner" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="B_Nombre" class="col-form-label">Nombre del banner:</label>
-                            <input type="text" class="form-control" id="B_Nombre">
-
-                            <h5 class="mt-4">Imagen banner</h5>
+                            <h5 class="mt-2">Imagen banner</h5>
                             <hr>
 
                             <div class="input-group mb-3">

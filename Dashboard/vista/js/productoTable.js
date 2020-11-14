@@ -4,6 +4,7 @@ $(document).ready(function(){
     opcion = "cargarProducto";
     controladorCargaCategoria = 1;
     controladorCargaMarca = 1;
+    controladorCargaSubcategoria = 1;
 
     tablaProducto = $('#tablaProducto').DataTable({
         // Para agregar los botones de editar y borrar de forma predeterminada
@@ -17,9 +18,11 @@ $(document).ready(function(){
         //Agregamos las columnas del tbody los botones
         "columns": [
             { "data": "PK_ID_Producto" },
+            { "data": "Pt_codigo" },
             { "data": "Pt_Imagen" , "render": function(data, type, row) {return '<img src="../imagenes/Productos/'+data+'" width="50px" height="70px"/>' ;}},
             { "data": "Pt_Nombre" },
             { "data": "Pt_Precio" },
+            { "data": "Cat_Nombre" },
             { "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-secondary btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>" }
         ],
 
@@ -76,6 +79,9 @@ $(document).ready(function(){
     
             }
         }
+        document.getElementById('FK_ID_SubCategoria').innerHTML = "";
+        document.getElementById('FK_ID_SubCategoria').innerHTML = "Seleccione la subcategoria";
+        controladorCargaSubcategoria = 1;
         controladorCargaCategoria++;
         //Acá enviamos la petición pero pos acá en está no va nada 
         peticionXML.send(parametros);
@@ -105,6 +111,32 @@ $(document).ready(function(){
         peticionXML.send(parametros);
     });
 
+    $('#FK_ID_SubCategoria').click(function () {
+        opcion = "cargarSubCatxCat";
+        FK_ID_Categoria = $.trim($("#FK_ID_Categoria").val());
+        var parametros = '&opcion=' + opcion + '&PK_ID_Categoria=' + FK_ID_Categoria;
+
+        var peticionXML = new XMLHttpRequest;
+        peticionXML.open('POST', '../../controlador/DataRoute.php');
+        peticionXML.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        if(controladorCargaSubcategoria == 1){
+            peticionXML.onload = function() {
+                var FK_ID_SubCategoria = $('#FK_ID_SubCategoria');
+                var datos = JSON.parse(peticionXML.responseText);
+
+                FK_ID_SubCategoria.append('<option selected="true" disabled="disabled">Seleccione la subcategoria</option>');
+                $.each(datos, function (key, value) { 
+                    FK_ID_SubCategoria.append('<option value=' + datos[key].PK_ID_SubCategoria + '>' + datos[key].SCat_Nombre + '</option>');
+                });
+    
+            }
+       
+        }
+        controladorCargaSubcategoria++;
+        //Acá enviamos la petición pero pos acá en está no va nada 
+        peticionXML.send(parametros);
+    });
+
 
     //Formulario que está dentro del modal para agregar una nueva recetá cóctel
     $("#formNuevoProducto").submit(function (e) {
@@ -119,6 +151,7 @@ $(document).ready(function(){
         Pt_Stock = $.trim($("#Pt_Stock").val());
         Pt_Precio = $.trim($("#Pt_Precio").val());
         FK_ID_Categoria = $.trim($("#FK_ID_Categoria").val());
+        FK_ID_SubCategoria = $.trim($("#FK_ID_SubCategoria").val());
         FK_ID_Marca = $.trim($("#FK_ID_Marca").val());
         Pt_Pais = $.trim($("#Pt_Pais").val());
         Pt_Grados_alchol = $.trim($("#Pt_Grados_alchol").val());
@@ -135,6 +168,7 @@ $(document).ready(function(){
             formData.append('Pt_Stock',Pt_Stock);
             formData.append('Pt_Precio',Pt_Precio);
             formData.append('FK_ID_Categoria',FK_ID_Categoria);
+            formData.append('FK_ID_SubCategoria',FK_ID_SubCategoria);
             formData.append('FK_ID_Marca',FK_ID_Marca);
             formData.append('Pt_Pais',Pt_Pais);
             formData.append('Pt_Grados_alchol',Pt_Grados_alchol);
@@ -300,7 +334,7 @@ $(document).ready(function(){
         Swal.fire({
             title: '¿Estás seguro de eliminar el producto?',
             text: 'Producto a eliminar id: ' + id,
-            icon: 'warning',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

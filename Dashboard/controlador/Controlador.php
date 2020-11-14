@@ -159,16 +159,20 @@ class Controlador{
         $consultar->cargarCategoria();
     }
 
-    public function agregarCategoria($Cat_Nombre){
+    public function agregarCategoria($Cat_Nombre, $Cat_Imagen, $Cat_Banner_Imagen){
         $Consultar = new consultar();
         $Categoria = new Categoria($Cat_Nombre);
+        $Categoria->setCat_Imagen($Cat_Imagen);
+        $Categoria->setCat_Banner_Imagen($Cat_Banner_Imagen);
         $Consultar->agregarCategoria($Categoria);
     }
 
-    public function editarCategoria($id, $Cat_Nombre){
+    public function editarCategoria($id, $Cat_Nombre,$Cat_Imagen, $Cat_Banner_Imagen){
         $Consultar = new consultar();
         $Categoria = new Categoria($Cat_Nombre);
         $Categoria->setPK_ID_Categoria($id);
+        $Categoria->setCat_Imagen($Cat_Imagen);
+        $Categoria->setCat_Banner_Imagen($Cat_Banner_Imagen);
         $Consultar->editarCategoria($Categoria);
     }
 
@@ -185,10 +189,9 @@ class Controlador{
         $consultar->cargarBanner();
     }
 
-    public function editarBanner($id, $B_Nombre, $B_Imagen){
+    public function editarBanner($id, $B_Imagen){
         $Banner = new Banner();
         $Banner->setPK_ID_Banner($id);
-        $Banner->setB_Nombre($B_Nombre);
         $Banner->setB_Imagen($B_Imagen);
         $consultar = new consultar();
         $consultar->editarBanner($Banner);
@@ -233,6 +236,11 @@ class Controlador{
         $consultar->cargarSubCategoria();
     }
 
+    public function cargarSubCatxCat($PK_ID_Categoria){
+        $consultar = new consultar();
+        $consultar->cargarSubCatxCat($PK_ID_Categoria);
+    }
+
     public function agregarSubCategoria($SCat_Nombre, $PK_ID_Categoria){
         $Consultar = new consultar();
         $SubCategoria = new SubCategoria($SCat_Nombre);
@@ -266,7 +274,7 @@ class Controlador{
     }
 
     public function agregarProducto($Pt_Nombre,$Pt_codigo,$Pt_Presentacion,$Pt_Stock,$Pt_Precio, 
-    $FK_ID_Categoria,$FK_ID_Marca,$Pt_Pais,$Pt_Grados_alchol, $Pt_Color, $Pt_Imagen){
+    $FK_ID_Categoria,$FK_ID_SubCategoria,$FK_ID_Marca,$Pt_Pais,$Pt_Grados_alchol, $Pt_Color, $Pt_Imagen){
 
         $Producto = new Producto($Pt_Nombre);
         $Producto->setPt_codigo($Pt_codigo);
@@ -274,6 +282,7 @@ class Controlador{
         $Producto->setPt_Stock($Pt_Stock);
         $Producto->setPt_Precio($Pt_Precio);
         $Producto->setFK_ID_Categoria($FK_ID_Categoria);
+        $Producto->setFK_ID_SubCategoria($FK_ID_SubCategoria);
         $Producto->setFK_ID_Marca($FK_ID_Marca);
         $Producto->setPt_Pais($Pt_Pais);
         $Producto->setPt_Grados_alchol($Pt_Grados_alchol);
@@ -334,7 +343,10 @@ class Controlador{
         $consultar = new consultar();
         $consultar->cargarGraficaDashboard();
     }
-
+    public function TotalClientes(){
+        $consultar = new consultar();
+        $consultar->TotalClientes();
+    }
 
 
 
