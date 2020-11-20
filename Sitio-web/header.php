@@ -1,4 +1,4 @@
-<?php 
+<?php  session_start();
 
     // Validacion de conexion
     $conexion = conexion($bd_config);

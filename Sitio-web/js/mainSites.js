@@ -82,7 +82,7 @@ $("#btn-beh").click(function(e){
 
 //Modal pedidos
 $("#btn-pedido").click( function(e) {
-    e.preventDefault();
+    
     $(".modal-header").css("background-color", "#000002");
     $(".modal-title").text("Tus pedidos").css("color", "#d9a520").css("font-family", "'Montserrat', sans-serif").css("font-size", "16px");
     $("#modalPedidos").modal("show");

@@ -36,7 +36,7 @@
                         <!--Imagen cóctel-->
                         <div class="cont-cot-img">
                             <a href="coctel.php?id=<?php echo $receta['PK_ID_Receta'];?>">
-                                <img src="../Dashboard/vista/imagenes/Coctel/<?php echo $receta['RC_Image'];?>" alt="">
+                                <img src="../Dashboard/vista/imagenes/Coctel/<?php echo $receta['RC_Image'];?>" alt="<?php echo $receta['RC_Image'];?>">
                             </a>
                         </div>
                         <div class="text-coctel">
@@ -92,6 +92,7 @@
     <script src="assets/sweetAlert2/sweetalert2.all.min.js"></script>
     <!-- Main -->
     <script src="js/mainSites.js"></script>
+    <script src="js/functions.js"></script>
 </body>
 
 </html>

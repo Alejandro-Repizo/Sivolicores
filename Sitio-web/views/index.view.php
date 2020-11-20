@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><?php session_start(); ?>
 <html lang="es">
 
 <head>
@@ -45,70 +45,35 @@
         <nav class="menu" id="menu">
             <div class="contenedor-enlaces-nav">
                 <!--Categorías-->
-                <li><a href="productos.html" class="dropbtn">Licores<i class="enlaces-icon fas fa-angle-down"></i></a>
+                <?php foreach($categorias as $categoria):?>
+
+                <?php if(!empty($categoria['Cat_Imagen'])):?>
+
+                <li><a href="#"class="dropbtn"><?php echo $categoria['Cat_Nombre'];?><i class="enlaces-icon fas fa-angle-down"></i></a>
                     <ul class="nav-sub">
-                        <li class="nav-text">Licores</li>
-                        <li><a href="productos.html">Aguardiente</li>
-                        <li><a href="productos.html">Whisky</a></li>
-                        <li><a href="productos.html">Ginebra</a></li>
-                        <li><a href="productos.html">Vodka</a></li>
-                        <img src="imagenes/barra-navegación/Licores-1.jpg" alt="">
+                        <li class="nav-text"><?php echo $categoria['Cat_Nombre'];?></li>
+                        <?php $subs = obtener_subcategoria($categoria['PK_ID_Categoria'], $conexion);?>
+                        <?php foreach($subs as $sub):?>
+                            <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
+                        <?php endforeach; ?>
+                        <img src="../Dashboard/vista/imagenes/Categorias/<?php echo $categoria['Cat_Imagen']?>" alt="<?php echo $categoria['Cat_Imagen']?>">
                     </ul>
                 </li>
-                <li><a href="productos.html" class="dropbtn">Cervezas<i class="enlaces-icon fas fa-angle-down"></i></a>
-                    <ul class="nav-sub">
-                        <li class="nav-text">Cervezas</li>
-                        <li><a href="productos.html">Importadas</a></li>
-                        <li><a href="productos.html">Nacionales</a></li>
-                        <li><a href="productos.html">Intenacionales</a></li>
-                        <img src="imagenes/barra-navegación/Cervezas-1.jpg" alt="">
-                    </ul>
-                </li>
-                <li><a href="productos.html" class="dropbtn">Vinos<i class="enlaces-icon fas fa-angle-down"></i></a>
-                    <ul class="nav-sub">
-                        <li class="nav-text">Vinos</li>
-                        <li><a href="productos.html">Jovenes</a></li>
-                        <li><a href="productos.html">Espumosos</a></li>
-                        <li><a href="productos.html">Reserva</a></li>
-                        <img src="imagenes/barra-navegación/Vino-1.jpg" alt="">
-                    </ul>
-                </li>
-                <li><a href="productos.html" class="dropbtn">Bebidas<i class="enlaces-icon fas fa-angle-down"></i></a>
-                    <ul class="nav-sub">
-                        <li class="nav-text">Bebidas</li>
-                        <li><a href="productos.html">Agua</a></li>
-                        <li><a href="productos.html">Gaseosas</a></li>
-                        <li><a href="productos.html">Jugos y Té</a></li>
-                        <img src="imagenes/barra-navegación/Bebidas-1.jpg" alt="">
-                    </ul>
-                </li>
-                <li><a href="recetas_cocteles.php" class="dropbtn">Cócteles</i></a>
-                </li>
+
+                <?php else: ?>
+                    <?php if($categoria['Cat_Nombre'] == 'cócteles' or $categoria['Cat_Nombre'] == 'Cócteles'): ?>
+                        <li><a href="recetas_cocteles.php" class="dropbtn"><?php echo $categoria['Cat_Nombre'];?></a></li>
+                    <?php else: ?>
+                        <li><a href="productos.php?id=<?php echo $categoria['PK_ID_Categoria'];?>"class="dropbtn"><?php echo $categoria['Cat_Nombre'];?></a></li>
+                    <?php endif; ?>
+                <?php endif;?>
+
+                <?php endforeach; ?>
             </div>
         </nav>
 
         <!-- Menú Lateral -->
-        <div class="right-menu ">
-            <div class="icon-menu-top">
-                <div class="icon-menu-right">
-                    <a href="#"><i class="fas fa-user-circle"></i>Alejandro Repizo</a>
-                </div>
-                <div class="icon-menu-right">
-                    <a href="#" id="btn-pedido"><i class="fas fa-truck"></i>Tus pedidos</a>
-                </div>
-                <div class="icon-menu-right">
-                    <a href="editar_cliente.html"><i class="fa fa-cog"></i>Modificar Informaci&oacute;n</a>
-                </div>
-                <div class="icon-menu-right">
-                    <a href="#" id="btn-beh"><i class="fas fa-arrow-circle-left"></i>Atr&aacute;s</a>
-                </div>
-            </div>
-            <div class="icon-menu-down">
-                <div class="icon-menu-right">
-                    <a href="#"><i class="fas fa-power-off"></i>Cerrar Sesi&oacute;n</a>
-                </div>
-            </div>
-        </div>
+        <?php require 'menu.php'; ?>
 
         <!---Menú pegajoso-->
         <nav class="menu2" id="menu2">
@@ -118,45 +83,28 @@
             </a>
             <div class="contenedor-enlaces-nav">
                 <!--Categorías-->
-                <li><a href="productos.html" class="dropbtn">Licores<i class="enlaces-icon fas fa-angle-down"></i></a>
+                <?php foreach($categorias as $categoria): ?>
+
+                <?php if(!empty($categoria['Cat_Imagen'])):?>
+                <li><a href="#" class="dropbtn"><?php echo $categoria['Cat_Nombre'];?><i class="enlaces-icon fas fa-angle-down"></i></a>
                     <ul class="nav-sub">
-                        <li class="nav-text">Licores</li>
-                        <li><a href="productos.html">Aguardiente</li>
-                        <li><a href="productos.html">Whisky</a></li>
-                        <li><a href="productos.html">Ginebra</a></li>
-                        <li><a href="productos.html">Vodka</a></li>
-                        <img src="imagenes/barra-navegación/Licores-1.jpg" alt="">
+                        <li class="nav-text"><?php echo $categoria['Cat_Nombre'];?></li>
+                        <?php $subs = obtener_subcategoria($categoria['PK_ID_Categoria'], $conexion);?>
+                        <?php foreach($subs as $sub):?>
+                            <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
+                        <?php endforeach; ?>
+                        <img src="../Dashboard/vista/imagenes/Categorias/<?php echo $categoria['Cat_Imagen']?>" alt="">
                     </ul>
                 </li>
-                <li><a href="productos.html" class="dropbtn">Cervezas<i class="enlaces-icon fas fa-angle-down"></i></a>
-                    <ul class="nav-sub">
-                        <li class="nav-text">Cervezas</li>
-                        <li><a href="productos.html">Importadas</a></li>
-                        <li><a href="productos.html">Nacionales</a></li>
-                        <li><a href="productos.html">Intenacionales</a></li>
-                        <img src="imagenes/barra-navegación/Cervezas-1.jpg" alt="">
-                    </ul>
-                </li>
-                <li><a href="productos.html" class="dropbtn">Vinos<i class="enlaces-icon fas fa-angle-down"></i></a>
-                    <ul class="nav-sub">
-                        <li class="nav-text">Vinos</li>
-                        <li><a href="productos.html">Jovenes</a></li>
-                        <li><a href="productos.html">Espumosos</a></li>
-                        <li><a href="productos.html">Reserva</a></li>
-                        <img src="imagenes/barra-navegación/Vino-1.jpg" alt="">
-                    </ul>
-                </li>
-                <li><a href="productos.html" class="dropbtn">Bebidas<i class="enlaces-icon fas fa-angle-down"></i></a>
-                    <ul class="nav-sub">
-                        <li class="nav-text">Bebidas</li>
-                        <li><a href="productos.html">Agua</a></li>
-                        <li><a href="productos.html">Gaseosas</a></li>
-                        <li><a href="productos.html">Jugos y Té</a></li>
-                        <img src="imagenes/barra-navegación/Bebidas-1.jpg" alt="">
-                    </ul>
-                </li>
-                <li><a href="#" class="dropbtn">Cócteles</i></a>
-                </li>
+                <?php else: ?>
+                    <?php if($categoria['Cat_Nombre'] == 'cócteles' or $categoria['Cat_Nombre'] == 'Cócteles'): ?>
+                        <li><a href="recetas_cocteles.php" class="dropbtn"><?php echo $categoria['Cat_Nombre'];?></a></li>
+                    <?php else: ?>
+                        <li><a href="productos.php?id=<?php echo $categoria['PK_ID_Categoria'];?>" class="dropbtn"><?php echo $categoria['Cat_Nombre'];?></a></li>
+                    <?php endif; ?>
+                <?php endif; ?>
+
+                <?php endforeach; ?>
             </div>
             <div class="menu2-icons">
                 <a href="#" class="" id="btn-user-peg"><i class="fas fa-user-circle menu2-bar"></i></a>
@@ -181,37 +129,26 @@
         <!-- Menu mobile wrapper -->
         <div class="contenedor-menu" id="menuMobileWrapper">
             <ul class="menuMobileWrapper">
-                <li><a href="#">Licores<i class="fa fa-chevron-down cont-icons-right"></i></a>
-                    <ul>
-                        <li><a href="producto.html"><i class="sub-opciones"></i>Aguardiente</a></li>
-                        <li><a href="producto.html"><i class="sub-opciones"></i>Whisky</a></li>
-                        <li><a href="producto.html"><i class="sub-opciones"></i>Ginebra</a></li>
-                        <li><a href="producto.html"><i class="sub-opciones"></i>Vodka</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Cervezas<i class="fa fa-chevron-down cont-icons-right"></i></a>
-                    <ul>
-                        <li><a href="productos.html"><i class="sub-opciones"></i>Importadas</a></li>
-                        <li><a href="productos.html"><i class="sub-opciones"></i>Nacionales</a></li>
-                        <li><a href="productos.html"><i class="sub-opciones"></i>Intenacionales</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Vinos<i class="fa fa-chevron-down cont-icons-right"></i></a>
-                    <ul>
-                        <li><a href="productos.html"><i class="sub-opciones"></i>Jovenes</a></li>
-                        <li><a href="productos.html"><i class="sub-opciones"></i>Espumosos</a></li>
-                        <li><a href="productos.html"><i class="sub-opciones"></i>Reserva</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Bebidas<i class="fa fa-chevron-down cont-icons-right"></i></a>
-                    <ul>
-                        <li><a href="productos.html"><i class="sub-opciones"></i>Agua</a></li>
-                        <li><a href="productos.html"><i class="sub-opciones"></i>Gaseosas</a></li>
-                        <li><a href="productos.html"><i class="sub-opciones"></i>Jugos y Té</a></li>
-                    </ul>
-                </li>
-                <li><a href="recetas_cocteles.php"></i>Cócteles</a></li>
+                <!--Categorías-->
+                <?php foreach($categorias as $categoria): ?>
 
+                <?php if(!empty($categoria['Cat_Imagen'])):?>
+                <li><a href="#"><?php echo $categoria['Cat_Nombre'];?><i class="fa fa-chevron-down cont-icons-right"></i></a>
+                    <ul>
+                        <?php $subs = obtener_subcategoria($categoria['PK_ID_Categoria'], $conexion);?>
+                        <?php foreach($subs as $sub):?>
+                        <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><i class="sub-opciones"></i><?php echo $sub['SCat_Nombre'];?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+                <?php else: ?>
+                    <?php if($categoria['Cat_Nombre'] == 'cócteles' or $categoria['Cat_Nombre'] == 'Cócteles'): ?>
+                        <li><a href="recetas_cocteles.php"><?php echo $categoria['Cat_Nombre'];?></a></li>
+                    <?php else: ?>
+                        <li><a href="productos.php?id=<?php echo $categoria['PK_ID_Categoria'];?>"><?php echo $categoria['Cat_Nombre'];?></a></li>
+                    <?php endif; ?>
+                <?php endif; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
 
@@ -227,14 +164,14 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100 tamaño" src="imagenes/Image_Slide/Juniper_slide_1.jpg" alt="First slide">
+                    <img class="d-block w-100 tamaño" src="imagenes/Image_Slide/<?php echo $slide_uno['0']['B_Imagen']?>" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100 tamaño" src="imagenes/Image_Slide/Oktoberfest_Slide_1.jpg"
+                    <img class="d-block w-100 tamaño" src="imagenes/Image_Slide/<?php echo $slide_dos['0']['B_Imagen']?>"
                         alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100 tamaño" src="imagenes/Image_Slide/budweiser_slide_1.jpg"
+                    <img class="d-block w-100 tamaño" src="imagenes/Image_Slide/<?php echo $slide_tres['0']['B_Imagen']?>"
                         alt="Third slide">
                 </div>
             </div>
@@ -271,12 +208,11 @@
         <!--Contenedor de productos-->
         <div class="contenedor">
             <!--Fila de los productos-->
-            <!--Contenedor producto-->
+            <?php foreach($productos as $producto): ?>
             <div class="cont-producto">
                 <div class="cont-imagen">
                     <!--Imagen-->
-                    <img src="imagenes/Productos/Casillero_Del_Diablo_Cabernet_Sauvignon_720x960.jpg" alt=""
-                        class="img-producto">
+                    <img src="../Dashboard/vista/imagenes/Productos/<?php echo $producto['Pt_Imagen']?>" alt="<?php echo $producto['Pt_Imagen']?>" class="img-producto">
                     <div class="opacity-img">
                         <div class="cont-button">
                             <button type="submit">Agregar al carrito</button>
@@ -284,224 +220,21 @@
                     </div>
                 </div>
                 <div class="text-producto">
-                    <a href="info_producto.html" class="producto-title">Vino Casillero Del Diablo Malbec - 750 ml</a>
+                    <a href="producto_single.php?id=<?php echo $producto['PK_ID_Producto']?>" class="producto-title"><?php echo $producto['Pt_Nombre']?> - 
+                    <?php echo $producto['Pt_Presentacion']?></a>
                     <div class="a">
-                        <span class="producto-price">$0,000</span>
+                        <span class="producto-price"><?php echo "$ ".$producto['Pt_Precio']?></span>
                     </div>
                 </div>
             </div>
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="registrase.html" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="login.html" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
-
-            <!--Contenedor producto-->
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="imagenes/Productos/Cerveza_Corona_Six_pack_720x960.jpg" alt="" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-producto">
-                    <a href="" class="producto-title">Cerveza Corona Six pack Botella - 355ml</a>
-                    <div class="a">
-                        <span class="producto-price">$0,000</span>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
 
         </div>
 
     </div>
 
     <!--Parte del Parrallax-->
-    <div class="contenedor-parallax">
+    <div class="contenedor-parallax" style="background-image: url(../Dashboard/vista/imagenes/Banner/<?php echo $parallax['0']['B_Imagen']?>);">
         <div class="text-parallax">
             <h4>los mejores</h4>
             <h1>C&oacute;cteles</h1>
@@ -518,69 +251,25 @@
     <div class="super-contenedor-coctel">
         <div class="contenedor-coctel">
             <!--Fila receta cóctel-->
-
-            <div class="cont-coctel">
-                <!--Imagen cóctel-->
-                <div class="cont-cot-img">
-                    <a href="">
-                        <img src="imagenes/Image_Cóctel/Cóctel_bloody_mary_820x540.jpg" alt="">
-                    </a>
+            <?php foreach($receta_coctel as $receta): ?>
+                <div class="cont-coctel">
+                    <!--Imagen cóctel-->
+                    <div class="cont-cot-img">
+                        <a href="coctel.php?id=<?php echo $receta['PK_ID_Receta'];?>">
+                            <img src="../Dashboard/vista/imagenes/Coctel/<?php echo $receta['RC_Image'];?>" alt="<?php echo $receta['RC_Image'];?>">
+                        </a>
+                    </div>
+                    <div class="text-coctel">
+                        <a href="coctel.php?id=<?php echo $receta['PK_ID_Receta'];?>"><?php echo $receta['RC_Nombre'];?></a>
+                        <span>Por <strong><?php echo $receta['RC_Autor']?></strong>el <strong><?php echo fecha($receta['RC_Fecha'])?></strong></span>
+                        <p>
+                        <?php echo $receta['RC_Descripcion']; ?>
+                        </p>
+                        <a href="coctel.php?id=<?php echo $receta['PK_ID_Receta'];?>" class="m-t-p-10">Seguir leyendo<i
+                                class="icon-a fas fa-long-arrow-alt-right"></i></a>
+                    </div>
                 </div>
-                <div class="text-coctel">
-                    <a href="">Cóctel Bloody Mary </a>
-                    <span>Por <strong>Mario Hugo </strong>en <strong>Marzo 28, 2020</strong></span>
-                    <p>
-                        El Bloody Mary auténtico lleva “Worcestershire Sauce”, una salsa típica de Inglaterra con un
-                        sabor avinagrado que está de muerte. Se puede comprar en España en las secciones de comida
-                        Británica de grandes supermercados pero también podéis hacer el cóctel
-                        sin ella y tampoco cambiará demasiado el resultado
-                    </p>
-                    <a href="recetas_cocteles.php" class="m-t-p-10">Seguir leyendo<i
-                            class="icon-a fas fa-long-arrow-alt-right"></i></a>
-                </div>
-            </div>
-
-            <!--Fila receta cóctel-->
-
-            <div class="cont-coctel">
-                <!--Imagen cóctel-->
-                <div class="cont-cot-img">
-                    <a href="">
-                        <img src="imagenes/Image_Cóctel/Cóctel_Black_Russian820x540.jpg" alt="">
-                    </a>
-                </div>
-                <div class="text-coctel">
-                    <a href="">Cóctel Black Russian </a>
-                    <span>Por <strong>Mario Hugo </strong>en <strong>Marzo 28, 2020</strong></span>
-                    <p>
-                        Lo primero que debes hacer es añadir el hielo en un vas corto. Luego agrégale dos shots de
-                        vodka, uno de licor de café y uno de café expreso o instantáneo, para después revolver todo
-                        y así obtendrás un “Black Russian”.
-                    </p>
-                    <a href="" class="m-t-p-10">Seguir leyendo<i class="icon-a fas fa-long-arrow-alt-right"></i></a>
-                </div>
-            </div>
-
-            <!--Fila receta cóctel-->
-
-            <div class="cont-coctel">
-                <!--Imagen cóctel-->
-                <div class="cont-cot-img">
-                    <a href="">
-                        <img src="imagenes/Image_Cóctel/Cóctel_daiquiri_820x540.jpg" alt="">
-                    </a>
-                </div>
-                <div class="text-coctel">
-                    <a href="">Cóctel Daiquiri </a>
-                    <span>Por <strong>Mario Hugo </strong>en <strong>Marzo 28, 2020</strong></span>
-                    <p>
-                        El Daiquiri es un cóctel cubano con una gran historia y de preparación muy sencilla. El
-                        sabor exquisito de esta bebida surge a partir de la combinación de ron blanco, con zumo de
-                        limón o lima y mucho hielo frappé.
-                    </p>
-                    <a href="" class="m-t-p-10">Seguir leyendo<i class="icon-a fas fa-long-arrow-alt-right"></i></a>
-                </div>
-            </div>
+            <?php endforeach; ?>
 
         </div>
     </div>
@@ -611,7 +300,7 @@
     
     <?php require 'modal.view.php';?>
 
-    <?php require 'footer.view.php';?>
+    <?php require 'footer.php';?>
     <!--Jquery, Bootstrap, Popper-->
     <script src="assets/jquery/jquery-3.3.1.min.js"></script>
     <script src="assets/popper/popper.min.js"></script>
@@ -620,6 +309,7 @@
     <script src="assets/sweetAlert2/sweetalert2.all.min.js"></script>
     <!-- Main -->
     <script src="js/main.js"></script>
+    <script src="js/functions.js"></script>
 </body>
 
 </html>

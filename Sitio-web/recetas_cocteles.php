@@ -18,7 +18,7 @@
     // Banner
     $banner = obtener_banner_por_nombre($banner_config['receta_coctel'], $conexion);
 
-
+    
     require 'views/recetas_cocteles.view.php';
 
 ?>

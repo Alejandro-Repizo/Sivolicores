@@ -18,7 +18,7 @@ $coctel_config = [
 
 // Configuracion productos 
 $producto_config = [
-    'producto_por_pagina' => '2'
+    'producto_por_pagina' => '12'
 ];
 
 // Nombre banners 
@@ -28,7 +28,7 @@ $banner_config = [
     'slide_uno' => 'Slide_uno',
     'slide_dos' => 'Slide_dos',
     'slide_tres' => 'Slide_tres',
-    'receta_coctel' => 'Receta_coctel',
+    'receta_coctel' => 'Cócteles',
     'carrito' => 'Carrito',
     'finalizar_pedido' => 'Finalizar_pedido',
     'login' => 'Login',

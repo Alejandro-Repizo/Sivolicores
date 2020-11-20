@@ -84,10 +84,23 @@ function obtener_producto_por_id($id, $conexion) {
     return ($resultado) ? $resultado : false;
 }
 
+function obtener_productos_index($limit, $conexion) {
+    $sentencia = $conexion->prepare("SELECT * FROM tbl_producto ORDER BY RAND() LIMIT $limit");
+    $sentencia->execute();
+    return $sentencia->fetchAll();
+}
+
 
 
 
 // Receta coctel
+
+function obtener_coctel_index($conexion) {
+    $sentencia = $conexion->prepare("SELECT * FROM tbl_receta_coctel ORDER BY RAND() LIMIT 3");
+    $sentencia->execute();
+    return $sentencia->fetchAll();
+}
+
 
 # Funcion para obtener un post por ID
 # Return: El post, o false si no se encontro ningun post con ese ID.
@@ -165,4 +178,26 @@ function obtener_banner_por_nombre($nombre, $conexion) {
     $sentencia = $conexion->prepare("SELECT B_Imagen FROM tbl_banner WHERE B_Nombre = '$nombre'");
     $sentencia->execute();
     return $sentencia->fetchAll();
+}
+
+
+//Traemos los datos del usuario
+
+function obtener_datos_cliente($id, $conexion) {
+    $sentencia = $conexion->prepare("SELECT * FROM tbl_cliente WHERE PK_ID_Cliente = '$id'");
+    $sentencia->execute();
+    return $sentencia->fetchAll();
+}
+
+function url_actual(){
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $url = "https://"; 
+    }else{
+        $url = "http://"; 
+    }
+    
+    return $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    // return __DIR__;
+    
+    
 }

@@ -26,6 +26,9 @@
         $nombre_banner = obtener_nombre_banner($id, $conexion);
     }
 
+    // Banner
+    $banner = obtener_banner_por_nombre($nombre_banner[0]['Cat_Nombre'], $conexion);
+
     if(!$productos) {
         header('location: index.php');
     }

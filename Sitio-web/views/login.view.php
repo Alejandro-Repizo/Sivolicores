@@ -18,9 +18,9 @@
 
 <body>
 
-    <?php require 'header.view.php';?>
+    <?php require 'header.php';?>
 
-    <div class="banner">
+    <div class="banner" style="background-image: url(imagenes/Image_Title_Page/<?php echo $banner['0']['B_Imagen']?>);">
         <div class="text-banner">
             <h1 class="h1">Iniciar sesi&oacute;n</h1>
         </div>
@@ -30,15 +30,16 @@
             <div class="fila1">
                 <div class="login-form">
                     <h2>Iniciar sesi&oacute;n</h2>
-                    <form action="cliente.html" method="post">
-                        <label for="">Nombre de usuario o email :</label>
-                        <input type="text" name="" id="" required>
-
-                        <label for="">Contraseña :</label>
-                        <input type="password" name="" id="" required>
-
+                    <form action="#" method="post" name="form_login">
+                        <label for="">Correo electronico:</label>
+                        <input type="email" name="Cl_email" id="Cl_email" required>
+                        <label for="">Contraseña:</label>
+                        <input type="password" name="Cl_password" id="Cl_password" required>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alerta" style="display: none;">
+                            <h4 id="mensaje_error" style="font-size: 13px; line-height: 1.4;"></h4>
+                        </div>
                         <div class="button">
-                            <button type="submit">Iniciar sesi&oacute;n</button>
+                            <button type="submit" id="btn_Iniciar_Sesion">Iniciar sesi&oacute;n</button>
                         </div>
                     </form>
                 </div>
@@ -48,8 +49,8 @@
                     <h2>Registrase</h2>
                     <p>Al registrase en nuestra tienda en linea, tendrá acceso al estado e historial de sus pedidos.para eso sólo tiene que rellanar los espacios que aparecerán a continuación para crear un nueva cuenta.
                     </p>
-                    <div class="button" src="registrase.html">
-                        <a href="registrase.html"><button type="submit">Regístrate</button></a>
+                    <div class="button" src="registrase.php">
+                        <a href="registrase.php"><button type="submit">Regístrate</button></a>
                     </div>
                 </div>
             </div>
@@ -58,7 +59,7 @@
     
     <?php require 'modal.view.php';?>
     
-    <?php require 'footer.view.php';?>
+    <?php require 'footer.php';?>
     
     <!--Jquery, Bootstrap, Popper-->
     <script src="assets/jquery/jquery-3.3.1.min.js"></script>
@@ -68,6 +69,7 @@
     <script src="assets/sweetAlert2/sweetalert2.all.min.js"></script>
     <!-- Main -->
     <script src="js/mainSites.js"></script>
+    <script src="js/functions.js"></script>
 </body>
 
 </html>

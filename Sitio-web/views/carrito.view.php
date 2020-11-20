@@ -144,6 +144,7 @@
     <script src="assets/sweetAlert2/sweetalert2.all.min.js"></script>
     <!-- Main -->
     <script src="js/mainSites.js"></script>
+    <script src="js/functions.js"></script>
 </body>
 
 </html>

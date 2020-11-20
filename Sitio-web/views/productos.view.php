@@ -20,7 +20,7 @@
 
     <?php require 'header.php';?>
 
-    <div class="banner" style="background-image: url(imagenes/Image_Title_Page/Wallpaper_Cerveza.jpg);">
+    <div class="banner" style="background-image: url(imagenes/Image_Title_Page/<?php echo $banner['0']['B_Imagen']?>);">
         <div class="text-banner">
             <h1 class="h1"><?php echo $nombre_banner[0]['Cat_Nombre'];?></h1>
             <h4 class="h4">Te ofrecemos una gran variedad de <?php echo $nombre_banner[0]['Cat_Nombre'];?> a los mejores precios y a domicilio. </h4>
@@ -68,6 +68,7 @@
     <script src="assets/sweetAlert2/sweetalert2.all.min.js"></script>
     <!-- Main -->
     <script src="js/mainSites.js"></script>
+    <script src="js/functions.js"></script>
 </body>
 
 </html>

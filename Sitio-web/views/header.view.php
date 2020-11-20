@@ -50,28 +50,7 @@
         </div>
     </nav>
 
-    <!-- Menú Lateral -->
-    <div class="right-menu ">
-        <div class="icon-menu-top">
-            <div class="icon-menu-right">
-                <a href="#"><i class="fas fa-user-circle"></i>Alejandro Repizo</a>
-            </div>
-            <div class="icon-menu-right">
-                <a href="#" id="btn-pedido"><i class="fas fa-truck"></i>Tus pedidos</a>
-            </div>
-            <div class="icon-menu-right">
-                <a href="editar_cliente.html"><i class="fa fa-cog"></i>Modificar Informaci&oacute;n</a>
-            </div>
-            <div class="icon-menu-right">
-                <a href="#" id="btn-beh"><i class="fas fa-arrow-circle-left"></i>Atr&aacute;s</a>
-            </div>
-        </div>
-        <div class="icon-menu-down">
-            <div class="icon-menu-right">
-                <a href="#"><i class="fas fa-power-off"></i>Cerrar Sesi&oacute;n</a>
-            </div>
-        </div>
-    </div>
+    <?php require 'menu.php'; ?>
 
     <!---Menú pegajoso-->
     <nav class="menu4" id="menu4">
