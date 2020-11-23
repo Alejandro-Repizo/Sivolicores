@@ -46,11 +46,11 @@
         </div>
         <div class="menu3-icons" id="menu3-icons">
             <a href="#" id="btn-user"><i class="fas fa-user-circle menu3-bar"></i></a>
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
         </div>
     </nav>
 
-    <?php require 'menu.php'; ?>
+    
 
     <!---Menú pegajoso-->
     <nav class="menu4" id="menu4">
@@ -85,7 +85,7 @@
         </div>
         <div class="menu4-icons" id="menu4-icons">
             <a href="#" id="btn-user-peg"><i class="fas fa-user-circle menu4-bar"></i></a>
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
         </div>
     </nav>
 
@@ -99,7 +99,7 @@
         <div class="menuMobile-icons">
             <a href="#" id="btn-burger"><i class="fas fa-bars"></i></a>
             <a href="#" id="btn-user-mob"><i class="fas fa-user-circle"></i></a>
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
         </div>
     </nav>
 

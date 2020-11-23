@@ -9,10 +9,10 @@
         $conexion = conexion($bd_config);
         
         // Limipiamos y recibimos los datos:
-        $Cl_Nombre = limpiarDatos($_POST['Cl_Nombre']);
-        $Cl_Apellido = limpiarDatos($_POST['Cl_Apellido']);
-        $Cl_Dirección = limpiarDatos($_POST['Cl_Dirección']);
-        $Cl_Telefono = limpiarDatos($_POST['Cl_Telefono']);
+        $Cl_Nombre = limpiarString($_POST['Cl_Nombre']);
+        $Cl_Apellido = limpiarString($_POST['Cl_Apellido']);
+        $Cl_Dirección = limpiarString($_POST['Cl_Dirección']);
+        $Cl_Telefono = limpiarNumber($_POST['Cl_Telefono']);
 
         // Traemos la llave primaria
         if(isset($_SESSION['PK'])) {
@@ -21,7 +21,7 @@
 
         if(isset($_POST['Cl_password'])) {
             // Hasheamos la password
-            $Cl_password = limpiarDatos($_POST['Cl_password']);
+            $Cl_password = limpiarString($_POST['Cl_password']);
             $Cl_password = hash('md5', $Cl_password);
 
             // Consulta a la base de datos

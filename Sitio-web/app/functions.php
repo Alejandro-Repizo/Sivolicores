@@ -201,3 +201,25 @@ function url_actual(){
     
     
 }
+
+// Limpiar string
+
+function limpiarString($string) {
+    $string = trim($string);
+    $string = filter_var($string, FILTER_SANITIZE_STRING);
+    return $string;
+}
+
+// Limpiar correo
+
+function limpiarEmail($email) {
+    $email = trim($email);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    return $email;
+}
+
+function limpiarNumber($number) {
+    $number = trim($number);
+    $number = filter_var($number, FILTER_SANITIZE_NUMBER_INT);
+    return $number;
+}

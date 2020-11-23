@@ -18,7 +18,7 @@
 
 <body>
     
-    <?php require 'header.view.php';?>
+    <?php require 'header.php';?>
 
     <div class="banner">
         <div class="text-banner">
@@ -41,68 +41,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="display-product">
-                            <div class="cont-producto">
-                                <div class="cont-imagen">
-                                    <!--Imagen-->
-                                    <img src="imagenes/Productos/Ginebra_Greenalls_720x960.jpg" alt=""
-                                        class="img-producto">
-                                    <div class="opacity-img">
-                                        <div class="cont-button">
-                                            <button type="submit">X</button>
+                    <?php 
+                
+                    if(!empty($_SESSION["shopping_cart"])){
+                        // var_dump($_SESSION["shopping_cart"]);
+                        foreach($_SESSION["shopping_cart"] as $keys => $values)
+                        {
+                    ?>
+                        <tr>
+                            <td class="display-product">
+                                <div class="cont-producto">
+                                    <div class="cont-imagen">
+                                        <!--Imagen-->
+                                        <img src="../Dashboard/vista/imagenes/Productos/<?php echo $values['Pt_Imagen'] ?>" alt="" class="img-producto">
+                                        <div class="opacity-img">
+                                            <div class="cont-button">
+                                                <button type="submit" id="btn_delete_cart">X</button>
+                                                <input type="hidden" name="hidden_name"  id="PK_ID_Producto" value="<?php echo $values['PK_ID_Producto']?>" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>Lorem ipsum</td>
-                        <td>$0.000</td>
-                        <td><input type="number" name="" id="" min="1" max="20" value="1"></td>
-                        <td>$0.000</td>
-                    </tr>
+                            </td>
+                            <td><?php echo $values['Pt_Nombre']?></td>
+                            <td><?php echo $values['Pt_Precio']?></td>
+                            <td><input type="number" name="Aumentador" id="Aumentador" min="1" max="20" value="<?php echo $values['Pt_Cantidad'] ?>"></td>
+                            <td><?php echo $values["Pt_Cantidad"] * $values["Pt_Precio"]?></td>
+                        </tr>
+                    <?php
+                            }
+                    }else {
+                        ?>
+                    <h1>El Carro esta vacio</h1>
+                    
+                        <?php 
+                        var_dump($_SESSION["shopping_cart"]);
 
-                    <tr>
-                        <td class="display-product">
-                            <div class="cont-producto">
-                                <div class="cont-imagen">
-                                    <!--Imagen-->
-                                    <img src="imagenes/Productos/Ginebra_Greenalls_720x960.jpg" alt=""
-                                        class="img-producto">
-                                    <div class="opacity-img">
-                                        <div class="cont-button">
-                                            <button type="submit">X</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Lorem ipsum</td>
-                        <td>$0.000</td>
-                        <td><input type="number" name="" id="" min="1" max="20" value="1"></td>
-                        <td>$0.000</td>
-                    </tr>
-
-                    <tr>
-                        <td class="display-product">
-                            <div class="cont-producto">
-                                <div class="cont-imagen">
-                                    <!--Imagen-->
-                                    <img src="imagenes/Productos/Ginebra_Greenalls_720x960.jpg" alt=""
-                                        class="img-producto">
-                                    <div class="opacity-img">
-                                        <div class="cont-button">
-                                            <button type="submit">X</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Lorem ipsum</td>
-                        <td>$0.000</td>
-                        <td><input type="number" name="" id="" min="1" max="20" value="1"></td>
-                        <td>$0.000</td>
-                    </tr>
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -134,7 +110,7 @@
     
     <?php require 'modal.view.php';?>
     
-    <?php require 'footer.view.php';?>
+    <?php require 'footer.php';?>
     
     <!--Jquery, Bootstrap, Popper-->
     <script src="assets/jquery/jquery-3.3.1.min.js"></script>

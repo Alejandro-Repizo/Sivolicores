@@ -20,7 +20,7 @@
 
     <?php require 'header.php';?>
     
-    <div class="banner"  style="background-image: url(../Dashboard/vista/imagenes/Banner/<?php echo $banner['0']['B_Imagen']?>);">
+    <div class="banner" style="background-image: url(../Dashboard/vista/imagenes/Banner/<?php echo $banner['0']['B_Imagen']?>);">
         <div class="text-banner">
             <h1 class="h1">Recetas c&oacute;cteles</h1>
             <h4 class="h4">Te ofrecemos una gran variedad de recetas c&oacute;cteles </h4>

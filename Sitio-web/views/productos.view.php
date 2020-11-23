@@ -33,24 +33,31 @@
         <div class="contenedor">
             <!--Fila de los productos-->
             <?php foreach($productos as $producto): ?>
-            <div class="cont-producto">
-                <div class="cont-imagen">
-                    <!--Imagen-->
-                    <img src="../Dashboard/vista/imagenes/Productos/<?php echo $producto['Pt_Imagen']?>" alt="<?php echo $producto['Pt_Imagen']?>" class="img-producto">
-                    <div class="opacity-img">
-                        <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
+    
+                <div class="cont-producto">
+                    <div class="cont-imagen">
+                        <!--Imagen-->
+                        <img src="../Dashboard/vista/imagenes/Productos/<?php echo $producto['Pt_Imagen']?>" alt="<?php echo $producto['Pt_Imagen']?>" class="img-producto">
+                        <div class="opacity-img">
+                            <div class="cont-button" name="add_to_cart">
+                                <input type="hidden" name="hidden_name" id="Pt_Nombre<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Nombre']?>" />
+                                <input type="hidden" id="PK_ID_Producto" value="<?php echo $producto['PK_ID_Producto']?>" />
+                                <input type="hidden" name="hidden_price" id="Pt_Precio<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Precio']; ?>" />
+                                <input type="hidden" id="Pt_Imagen<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Imagen']; ?>" />
+                                <input type="hidden" name="quantity" value="1" id="Pt_Cantidad<?php echo $producto['PK_ID_Producto']?>" />
+                                <button type="submit" id="btn_add_cart">Agregar al carrito</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-producto">
+                        <a href="producto_single.php?id=<?php echo $producto['PK_ID_Producto']?>" class="producto-title"><?php echo $producto['Pt_Nombre'];?> - 
+                        <?php echo $producto['Pt_Presentacion']?></a>
+                        <div class="a">
+                            <span class="producto-price"><?php echo "$ ".$producto['Pt_Precio'];?></span>
                         </div>
                     </div>
                 </div>
-                <div class="text-producto">
-                    <a href="producto_single.php?id=<?php echo $producto['PK_ID_Producto']?>" class="producto-title"><?php echo $producto['Pt_Nombre']?> - 
-                    <?php echo $producto['Pt_Presentacion']?></a>
-                    <div class="a">
-                        <span class="producto-price"><?php echo "$ ".$producto['Pt_Precio']?></span>
-                    </div>
-                </div>
-            </div>
+        
             <?php endforeach; ?>
         </div>
         

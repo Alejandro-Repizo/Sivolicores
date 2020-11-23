@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     require 'app/config.php';
     require 'app/functions.php';
 
@@ -32,6 +32,9 @@
     if(!$productos) {
         header('location: index.php');
     }
+
+
+
 
 
     require 'views/productos.view.php';

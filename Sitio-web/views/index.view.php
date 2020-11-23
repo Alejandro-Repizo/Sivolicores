@@ -37,7 +37,7 @@
             <!--Iconos-->
             <div class="header-icons">
                 <a href="#" id="btn-user"><i class="fas fa-user-circle header-bar"></i></a>
-                <a href="carrito_pedidos.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
             </div>
 
         </div>
@@ -122,7 +122,7 @@
             <div class="menuMobile-icons">
                 <a href="#" id="btn-burger"><i class="fas fa-bars"></i></a>
                 <a href="#" id="btn-user-mob"><i class="fas fa-user-circle"></i></a>
-                <a href="carrito_pedidos.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
             </div>
         </nav>
 

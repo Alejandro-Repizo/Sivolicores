@@ -8,12 +8,12 @@
         $conexion = conexion($bd_config);
 
         // Limipiamos y recibimos los datos:
-        $Cl_Nombre = limpiarDatos($_POST['Cl_Nombre']);
-        $Cl_Apellido = limpiarDatos($_POST['Cl_Apellido']);
-        $Cl_Dirección = limpiarDatos($_POST['Cl_Dirección']);
-        $Cl_Telefono = limpiarDatos($_POST['Cl_Telefono']);
-        $Cl_email = limpiarDatos($_POST['Cl_email']);
-        $Cl_password = limpiarDatos($_POST['Cl_password']);
+        $Cl_Nombre = limpiarString($_POST['Cl_Nombre']);
+        $Cl_Apellido = limpiarString($_POST['Cl_Apellido']);
+        $Cl_Dirección = limpiarString($_POST['Cl_Dirección']);
+        $Cl_Telefono = limpiarNumber($_POST['Cl_Telefono']);
+        $Cl_email = limpiarEmail($_POST['Cl_email']);
+        $Cl_password = limpiarString($_POST['Cl_password']);
         $Cl_password = hash('md5', $Cl_password);
         $Cl_Pedidos_realizado = 0;
 

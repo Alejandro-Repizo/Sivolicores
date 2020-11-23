@@ -25,6 +25,7 @@
                 break;
             }
         }
+        // Revise la consola
 
     } catch (Exception $ex) {
         echo "Error:  $ex";

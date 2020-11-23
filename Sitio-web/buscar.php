@@ -28,5 +28,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET['busqueda'])) {
     header('Location: ' . RUTA . '/index.php');
 }
 
+// Banner
+$banner = obtener_banner_por_nombre($banner_config['receta_coctel'], $conexion);
+
 require 'views/buscar.view.php';
 ?>

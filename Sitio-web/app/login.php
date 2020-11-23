@@ -7,8 +7,8 @@
         $conexion = conexion($bd_config);
 
         // Limpiamos y recibimos los datos;
-        $Cl_email = limpiarDatos($_POST['Cl_email']);
-        $Cl_password = limpiarDatos($_POST['Cl_password']);
+        $Cl_email = limpiarEmail($_POST['Cl_email']);
+        $Cl_password = limpiarString($_POST['Cl_password']);
         $Cl_password = hash('md5',$Cl_password);
        
         // Consulta a la base de datos

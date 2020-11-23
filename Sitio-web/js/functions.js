@@ -197,6 +197,62 @@ $(document).ready( function() {
         ev.preventDefault();
     })
 
+
+    //Carrtito 
+    $("#btn_add_cart").click (function() {
+        
+        let PK_ID_Producto = $.trim($("#PK_ID_Producto").val());
+        let Pt_Nombre = $.trim($('#Pt_Nombre'+PK_ID_Producto+'').val());
+        let Pt_Precio = $('#Pt_Precio'+PK_ID_Producto+'').val();
+        let Pt_Cantidad = $('#Pt_Cantidad'+PK_ID_Producto+'').val();
+        let Pt_Imagen = $.trim($('#Pt_Imagen'+PK_ID_Producto).val());
+        let action = 'add';
+        if (Pt_Cantidad > 0) {
+            $.ajax({
+                url: "app/action.php",
+                method: "POST",
+                data: {PK_ID_Producto:PK_ID_Producto, Pt_Nombre:Pt_Nombre, Pt_Precio:Pt_Precio, Pt_Cantidad:Pt_Cantidad,Pt_Imagen:Pt_Imagen, action:action},
+                success:function(data)
+				{
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Producto añadido al carrito'
+                    })
+				}
+            });
+        }
+    });
+
+    // Eliminar producto
+    $("#btn_delete_cart").click (function() {
+        let PK_ID_Producto = $.trim($("#PK_ID_Producto").val());
+        let action = 'remove';
+        Swal.fire({
+            title: '¿Estás seguro de eliminar este producto?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: ' #d9a520',
+            cancelButtonColor: '#000002',
+            confirmButtonText: 'Si, ¡Eliminar!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url:"app/action.php",
+                    method:"POST",
+                    data:{PK_ID_Producto:PK_ID_Producto, action:action},
+                    success:function()
+                    {
+                        Toast.fire({
+                            type: 'success',
+                            title: 'El producto ha sido eliminado'
+                        });
+                        setTimeout(() => location.href = 'carrito.php', 1500);
+                    }
+                })
+            }
+        });
+        
+    });
 });
 
 function formulario_valido() {
