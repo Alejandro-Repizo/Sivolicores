@@ -535,9 +535,7 @@ class Consultar {
         try {
             //Cargar datos a la tabla reporte venta
             $conexion = new ConexionBD();
-            $consulta = "SELECT RepV_Fecha,Cl_Nombre, Pt_Nombre,Pt_Cantidad, Car_Total, RepV_Estado FROM tbl_reporte_ventas JOIN tbl_carrito_pedidos
-            ON tbl_reporte_ventas .FK_ID_Carrito = tbl_carrito_pedidos.PK_ID_Carrito JOIN tbl_cliente ON tbl_carrito_pedidos.FK_ID_Cliente = tbl_cliente.PK_ID_Cliente 
-            JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
+            $consulta = "SELECT Ped_Fecha, Cl_Nombre, Pt_Nombre,Pt_Cantidad,Total,Estado FROM tbl_reporte_ventas";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -558,9 +556,7 @@ class Consultar {
         try {
             //Cargar datos a la tabla reporte pedidos
             $conexion = new ConexionBD();
-            $consulta = "SELECT RepP_Fecha,Cl_Nombre, Pt_Nombre,Pt_Cantidad, Car_Total, RepP_Estado FROM tbl_reporte_pedido JOIN tbl_carrito_pedidos
-            ON tbl_reporte_pedido .FK_ID_Carrito = tbl_carrito_pedidos.PK_ID_Carrito JOIN tbl_cliente ON tbl_carrito_pedidos.FK_ID_Cliente = tbl_cliente.PK_ID_Cliente 
-            JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
+            $consulta = "SELECT Ped_Fecha, Cl_Nombre, Pt_Nombre,Pt_Cantidad,Total,Estado FROM tbl_reporte_pedido";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -915,10 +911,8 @@ class Consultar {
         try{
             //Cargar datos a pedidos
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Ped_Fecha, Pt_Nombre, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Car_Total, Ped_Estado FROM tbl_pedido
-             JOIN tbl_carrito_pedidos ON tbl_carrito_pedidos.PK_ID_Carrito = tbl_pedido.FK_ID_Carrito 
-             JOIN tbl_cliente ON tbl_cliente.PK_ID_Cliente = tbl_carrito_pedidos.FK_ID_Cliente 
-             JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto ";
+            $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Ped_Fecha, Pt_Nombre, Pt_Cantidad, Ped_Direccion, 
+            Cl_Telefono, Total, Estado FROM tbl_pedido";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -1033,10 +1027,8 @@ class Consultar {
         try{
             //Cargar datos a pedidos
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_Envio, Cl_Nombre, Pt_Nombre, Pt_Cantidad, Env_Direccion, Cl_Telefono, Car_Total,Env_observaciones, Env_Estado FROM tbl_envio
-            JOIN tbl_carrito_pedidos ON tbl_carrito_pedidos.PK_ID_Carrito = tbl_envio.FK_ID_Carrito 
-            JOIN tbl_cliente ON tbl_cliente.PK_ID_Cliente = tbl_carrito_pedidos.FK_ID_Cliente 
-            JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto";
+            $consulta = "SELECT PK_ID_Envio, Cl_Nombre, Pt_Nombre,Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado FROM tbl_envio";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 

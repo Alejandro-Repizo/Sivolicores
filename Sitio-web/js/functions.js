@@ -192,7 +192,6 @@ $(document).ready( function() {
         ev.preventDefault();
     })
 
-
     //Carrtito 
     $(document).on('click', '#btn_add_cart',function() {
         let PK_ID_Producto = $.trim($("#PK_ID_Producto").val());
@@ -217,8 +216,7 @@ $(document).ready( function() {
         }
     });
 
-    // Eliminar producto
-    
+    // Eliminar producto 
     $(document).on('click', '.btn_delete_cart',function() {
         let PK_ID_Producto = $(this).attr("id");
         let action = 'remove';
@@ -251,7 +249,7 @@ $(document).ready( function() {
 
     // Actualizar un producto
     $(document).on('click', '#btn_update_cart', function() {
-    
+        
         let productos =  document.querySelectorAll('.cantidad');
         let map = new Map();
         let PK_ID_Producto;
@@ -298,6 +296,47 @@ $(document).ready( function() {
               setTimeout(() => location.href = 'carrito.php', 1000);
 			}
         });
+    });
+
+
+    // Enviar pedidos
+    $("#btn_finalizar_pedido").click( function() {
+
+        // debugger
+        let productos = document.querySelectorAll('.productoEnvio');
+        let map = new Map();
+        let PK_ID_Producto;
+        let Pt_Cantidad;
+        let Cl_Nombre = $.trim($("#Cl_Nombre").val());
+        let Cl_Direccion = $.trim($("#Cl_Dirección").val());
+        let Cl_Telefono = $.trim($("#Cl_Telefono").val());
+        let Ped_Observaciones = $.trim($("#Ped_Observaciones").val());
+
+        productos.forEach((producto) =>{
+            map.set(Number(producto.id), Number(producto.value));
+        });
+
+        for(let[key, value] of map) {
+            PK_ID_Producto =  key;
+            Pt_Cantidad = value;
+            console.log(PK_ID_Producto + " - " + Pt_Cantidad);
+            $.ajax({
+                url: "app/Enviar.php",
+                method: "POST",
+                data: {PK_ID_Producto:PK_ID_Producto, Pt_Cantidad:Pt_Cantidad, Cl_Nombre:Cl_Nombre, Cl_Direccion:Cl_Direccion, Cl_Telefono:Cl_Telefono, Ped_Observaciones:Ped_Observaciones},
+                success:function(data)
+            	{
+                    Swal.fire({
+                        type: 'success',
+                        title: 'El pedido ha sido solicitado ¡correctamente!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    setTimeout(() => location.href = 'index.php', 1500);
+            	}
+            });
+        }
+
     });
 });
 

@@ -15,12 +15,12 @@ $(document).ready(function(){
         },
         //Agregamos las columnas del tbody y los botones
         "columns": [
-            { "data": "RepV_Fecha" },
+            { "data": "Ped_Fecha" },
             { "data": "Cl_Nombre" },
             { "data": "Pt_Nombre" },
             { "data": "Pt_Cantidad" },
-            { "data": "Car_Total" },
-            { "data": "RepV_Estado", "render": function(data, type, row) {return '<span class="badge badge-success">'+data+'</span>' ;}},
+            { "data": "Total" },
+            { "data": "Estado", "render": function(data, type, row) {return '<span class="badge badge-success">'+data+'</span>' ;}},
         ],
 
         //Para cambiar el lenguaje a español

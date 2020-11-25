@@ -21,8 +21,8 @@ $(document).ready(function(){
             { "data": "Pt_Cantidad" },
             { "data": "Ped_Direccion" },
             { "data": "Cl_Telefono" },
-            { "data": "Car_Total" },
-            { "data": "Ped_Estado", "render": function(data, type, row) {return '<span class="badge badge-warning">'+data+'</span>' ;}},
+            { "data": "Total" },
+            { "data": "Estado", "render": function(data, type, row) {return '<span class="badge badge-warning">'+data+'</span>' ;}},
             { "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-warning btnEditar'><i class='fas fa-truck-loading'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-times'></i></button></div>" }
         ],
         

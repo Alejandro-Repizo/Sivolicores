@@ -41,6 +41,11 @@ function obtener_subcategoria($id, $conexion) {
 function id_producto($id) {
     return (int)limpiarDatos($id);
 }
+function obtener_info_venta_producto($id, $conexion){
+    $sentencia = $conexion->prepare("SELECT Pt_Precio, Pt_Nombre FROM tbl_producto WHERE PK_ID_Producto = '$id'");
+    $sentencia->execute();
+    return $sentencia->fetchAll();
+}
 
 function obtener_producto($id, $conexion) {
     $sentencia = $conexion->prepare("SELECT  * FROM tbl_producto WHERE FK_ID_Categoria = $id");
@@ -203,9 +208,8 @@ function url_actual(){
     
     return $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     // return __DIR__;
-    
-    
 }
+
 
 // Limpiar string
 

@@ -50,7 +50,7 @@
         </div>
     </nav>
 
-    
+    <?php include 'menu.php' ?>
 
     <!---Menú pegajoso-->
     <nav class="menu4" id="menu4">

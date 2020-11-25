@@ -18,9 +18,9 @@
 
 <body>
 
-    <?php require 'header.view.php';?>
+    <?php require 'header.php';?>
 
-    <div class="banner">
+    <div class="banner"style="background-image: url(../Dashboard/vista/imagenes/Banner/<?php echo $banner['0']['B_Imagen']?>);">
         <div class="text-banner">
             <h1 class="h1">Pedidos</h1>
             <h4 class="h4">Te ofrecemos una gran variedad de productos a los mejores precios y a domicilio. </h4>
@@ -33,12 +33,12 @@
             <div class="fila1">
                 <div class="cont-fila1">
                     <h3>Detalles pedido</h3>
-                    <form action="" method="post">
-                        <input type="text"
-                            placeholder="Dirección completa. Ej: Calle 98 - 65 / apto 201 / Ed. Barcelona*">
-                        <input type="text" placeholder="Teléfono / Celular">
+                    <form action="#" method="post" name="formulario">
+                        <input type="text" id="Cl_Dirección" placeholder="Dirección completa. Ej: Calle 98 - 65 / apto 201 / Ed. Barcelona*" value="<?php echo $dato['Cl_Dirección']; ?>">
+                        <input type="text" id="Cl_Telefono" placeholder="Teléfono / Celular" value="<?php echo $dato['Cl_Telefono']; ?>"> 
+                        <input type="hidden" name="Cl_Nombre" id="Cl_Nombre" value="<?php echo $dato['Cl_Nombre']; ?>">
                         <label for="">Notas del Pedido</label>
-                        <textarea name="" id="" cols="30" rows="10"
+                        <textarea name="Ped_Observaciones" id="Ped_Observaciones" cols="30" rows="10"
                             placeholder="Notas sobre tu pedido, indicaciones especiales de entrega."></textarea>
                     </form>
                 </div>
@@ -47,6 +47,12 @@
             <div class="fila2">
                 <!--Contenedor producto-->
                 <div class="cont-fila2">
+                    <?php  
+                    if(!empty($_SESSION["shopping_cart"])){
+                        $total_price = 0;
+                        $total_item = 0;
+                        
+                    ?>
                     <h3>tu pedido</h3>
                     <table class="tbl-top">
                         <thead>
@@ -57,23 +63,26 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($_SESSION["shopping_cart"] as $keys => $values)
+                            { 
+                                ?>
                             <tr>
-                                <td>Lorem ipsumn</td>
-                                <td class="txt-center">0</td>
-                                <td class="txt-bold">$0.000</td>
+                                <input type="hidden" id="<?php echo $values['PK_ID_Producto'];?>" value="<?php echo $values['Pt_Cantidad'];?>" class="productoEnvio">
+                                <td><?php echo $values['Pt_Nombre']?></td>
+                                <td class="txt-center"><?php echo $values['Pt_Cantidad'];?></td>
+                                <td class="txt-bold">$ <?php echo number_format($values["Pt_Cantidad"] * $values["Pt_Precio"])?></td>
                             </tr>
-                            <tr>
-                                <td>Lorem ipsumn</td>
-                                <td class="txt-center">0</td>
-                                <td class="txt-bold">$0.000</td>
-                            </tr>
-
+                            <?php 
+                                $total_price = $total_price + ($values["Pt_Cantidad"] * $values["Pt_Precio"]);
+                                $total_item = $total_item + 1;
+                            } 
+                            ?>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td class="txt-sub">Subtotal:</td>
                                 <td></td>
-                                <td class="txt-num">$0.000</td>
+                                <td class="txt-num">$ <?php echo number_format($total_price)?></td>
                             </tr>
                             <tr>
                                 <td class="txt-sub">Envío:</td>
@@ -83,62 +92,27 @@
                             <tr>
                                 <td class="txt-total">Total:</td>
                                 <td></td>
-                                <td class="txt-size">$0.000</td>
+                                <td class="txt-size">$ <?php echo number_format($total_price)?></td>
                             </tr>
                         </tfoot>
 
                     </table>
                     <div class="button">
-                        <button type="submit">Finaliza Compra</button>
+                        <button type="submit" id="btn_finalizar_pedido">Finaliza Compra</button>
                     </div>
                 </div>
+                <?php 
+                    }
+                ?>
             </div>
 
 
         </div>
     </div>
-    <!--Modal para pedidos-->
-    <div class="modal fade" id="modalPedidos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="contenedor-top">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>PRODUCTO</th>
-                                    <th>FECHA</th>
-                                    <th>CANTIDAD</th>
-                                    <th>TOTAL</th>
-                                    <th>ESTADO</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Cerveza Corona Six pack Botella - 355ml</td>
-                                    <td>29/10/2020</td>
-                                    <td>0</td>
-                                    <td>$0.000</td>
-                                    <td>Completo</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <?php require 'footer.view.php';?>
+    <?php require 'modal.view.php';?>
+
+    <?php require 'footer.php';?>
     
     <!--Jquery, Bootstrap, Popper-->
     <script src="assets/jquery/jquery-3.3.1.min.js"></script>

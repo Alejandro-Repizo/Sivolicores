@@ -53,7 +53,7 @@
                         <a href="producto_single.php?id=<?php echo $producto['PK_ID_Producto']?>" class="producto-title"><?php echo $producto['Pt_Nombre'];?> - 
                         <?php echo $producto['Pt_Presentacion']?></a>
                         <div class="a">
-                            <span class="producto-price"><?php echo "$ ".$producto['Pt_Precio'];?></span>
+                            <span class="producto-price"><?php echo "$ ". number_format($producto['Pt_Precio']);?></span>
                         </div>
                     </div>
                 </div>

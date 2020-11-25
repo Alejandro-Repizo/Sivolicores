@@ -18,11 +18,11 @@ $(document).ready(function(){
             { "data": "Cl_Nombre" },
             { "data": "Pt_Nombre" },
             { "data": "Pt_Cantidad" },
-            { "data": "Env_Direccion" },
+            { "data": "Ped_Direccion" },
             { "data": "Cl_Telefono" },
-            { "data": "Car_Total" },
-            { "data": "Env_observaciones" },
-            { "data": "Env_Estado", "render": function(data, type, row) {return '<span class="badge badge-success">'+data+'</span>' ;}},
+            { "data": "Total" },
+            { "data": "Ped_Observaciones" },
+            { "data": "Estado", "render": function(data, type, row) {return '<span class="badge badge-success">'+data+'</span>' ;}},
             { "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-success btnEditar'><i class='fas fa-check'></i></button><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-times'></i></button></div>" }
         ],
 

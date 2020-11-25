@@ -21,8 +21,8 @@
 
     <div class="banner" style="background-image: url(../Dashboard/vista/imagenes/Banner/<?php echo $banner['0']['B_Imagen']?>);">
         <div class="text-banner">
-            <h1 class="h1">Carrito de pedidos </h1>
-            <h4 class="h4">Te ofrecemos una gran variedad de productos a los mejores precios y a domicilio. </h4>
+            <h1 class="h1">Carrito de pedidos</h1>
+            <h4 class="h4">Te ofrecemos una gran variedad de productos a los mejores precios y a domicilio.</h4>
         </div>
     </div>
 
@@ -67,7 +67,7 @@
                             </div>
                         </td>
                         <td><?php echo $values['Pt_Nombre']?></td>
-                        <td><?php echo $values['Pt_Precio']?></td>
+                        <td><?php echo number_format($values['Pt_Precio'])?></td>
                         <td><input type="number" id="<?php echo $values['PK_ID_Producto']?>"  class="cantidad"
                         min="1" max="<?php echo $stock['Pt_Stock'];?>" value="<?php echo $values['Pt_Cantidad'];?>"></td>
                         <td><?php echo number_format($values["Pt_Cantidad"] * $values["Pt_Precio"])?></td>
@@ -96,7 +96,7 @@
 
                         <tr>
                             <td class="text-bold">Subtotal:</td>
-                            <td class="txt-size">$ <?php echo number_format($total_price, 2)?></td>
+                            <td class="txt-size">$ <?php echo number_format($total_price)?></td>
                         </tr>
                         <tr>
                             <td class="text-bold">Envío:</td>
@@ -104,13 +104,13 @@
                         </tr>
                         <tr>
                             <td class="text-bold text-size">Total:</td>
-                            <td class="txt-size">$<?php echo number_format($total_price, 2)?></td>
+                            <td class="txt-size">$<?php echo number_format($total_price)?></td>
                         </tr>
 
                     </tbody>
                 </table>
                 <div class="button">
-                    <a href="finalizar_pedido.html"><button type="submit">Finalizar pedido</button></a>
+                    <a href="finalizar.php"><button type="submit">Finalizar pedido</button></a>
                 </div>
             </div>
         </div>

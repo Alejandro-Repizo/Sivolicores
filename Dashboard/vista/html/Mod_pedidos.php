@@ -147,8 +147,8 @@
                                         <th>Fecha</th>
                                         <th>Producto</th>
                                         <th>Cant.</th>
-                                        <th>Dirección</th>
-                                        <th>Teléfono</th>
+                                        <th>Direcci&oacute;n</th>
+                                        <th>Tel&eacute;fono</th>
                                         <th>Total</th>
                                         <th>Estado</th>
                                         <th>Acci&oacute;n</th>
