@@ -18,6 +18,9 @@
     //     $dato = $dato['0'];
     // }
 
+    // Banner
+    $banner = obtener_banner_por_nombre($banner_config['carrito'], $conexion);
+
 
     require 'views/carrito.view.php'
 

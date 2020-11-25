@@ -14,7 +14,7 @@ if(isset($_POST["action"]))
 				if($_SESSION["shopping_cart"][$keys]['PK_ID_Producto'] == $_POST["PK_ID_Producto"])
 				{
 					$is_available++;
-					$_SESSION["shopping_cart"][$keys]['Pt_Cantidad'] = $_SESSION["shopping_cart"][$keys]['Pt_Cantidad'] + $_POST["Pt_Cantidad"];
+					$_SESSION["shopping_cart"][$keys]['Pt_Cantidad'] += $_POST["Pt_Cantidad"];
 				}
 			}
 			if($is_available == 0)
@@ -42,11 +42,29 @@ if(isset($_POST["action"]))
 		}
 	}
 
+	if($_POST["action"] == 'update')
+	{
+		if(isset($_SESSION["shopping_cart"]))
+		{
+			$is_available = 0;
+			foreach($_SESSION["shopping_cart"] as $keys => $values)
+			{
+				if($_SESSION["shopping_cart"][$keys]['PK_ID_Producto'] == $_POST["PK_ID_Producto"])
+				{
+					$is_available++;
+					$_SESSION["shopping_cart"][$keys]['Pt_Cantidad'] = 0;
+					$contador = $_POST["Pt_Cantidad"];
+					$_SESSION["shopping_cart"][$keys]['Pt_Cantidad'] = $contador;
+				}
+			}
+		}
+	}
+
 	if($_POST["action"] == 'remove')
 	{
 		foreach($_SESSION["shopping_cart"] as $keys => $values)
 		{
-			if($values["PK_ID_Producto"] == $_POST["PK_ID_Producto"])
+			if($values["PK_ID_Producto"] === $_POST["PK_ID_Producto"])
 			{
 				unset($_SESSION["shopping_cart"][$keys]);
 			}

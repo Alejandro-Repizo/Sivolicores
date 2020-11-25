@@ -90,6 +90,11 @@ function obtener_productos_index($limit, $conexion) {
     return $sentencia->fetchAll();
 }
 
+function obtener_stock_producto($id, $conexion) {
+    $sentencia = $conexion->prepare("SELECT Pt_Stock FROM tbl_producto WHERE PK_ID_Producto = '$id'");
+    $sentencia->execute();
+    return $sentencia->fetch();
+}
 
 
 

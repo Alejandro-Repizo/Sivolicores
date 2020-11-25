@@ -5,12 +5,7 @@ $(document).ready( function() {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
+        timer: 1500
     });
 
     // Login 
@@ -199,8 +194,7 @@ $(document).ready( function() {
 
 
     //Carrtito 
-    $("#btn_add_cart").click (function() {
-        
+    $(document).on('click', '#btn_add_cart',function() {
         let PK_ID_Producto = $.trim($("#PK_ID_Producto").val());
         let Pt_Nombre = $.trim($('#Pt_Nombre'+PK_ID_Producto+'').val());
         let Pt_Precio = $('#Pt_Precio'+PK_ID_Producto+'').val();
@@ -216,7 +210,7 @@ $(document).ready( function() {
 				{
                     Toast.fire({
                         type: 'success',
-                        title: 'Producto añadido al carrito'
+                        title: 'Producto añadido al carrito!'
                     })
 				}
             });
@@ -224,8 +218,9 @@ $(document).ready( function() {
     });
 
     // Eliminar producto
-    $("#btn_delete_cart").click (function() {
-        let PK_ID_Producto = $.trim($("#PK_ID_Producto").val());
+    
+    $(document).on('click', '.btn_delete_cart',function() {
+        let PK_ID_Producto = $(this).attr("id");
         let action = 'remove';
         Swal.fire({
             title: '¿Estás seguro de eliminar este producto?',
@@ -244,7 +239,7 @@ $(document).ready( function() {
                     {
                         Toast.fire({
                             type: 'success',
-                            title: 'El producto ha sido eliminado'
+                            title: 'Eliminando el producto'
                         });
                         setTimeout(() => location.href = 'carrito.php', 1500);
                     }
@@ -252,6 +247,57 @@ $(document).ready( function() {
             }
         });
         
+    });
+
+    // Actualizar un producto
+    $(document).on('click', '#btn_update_cart', function() {
+    
+        let productos =  document.querySelectorAll('.cantidad');
+        let map = new Map();
+        let PK_ID_Producto;
+        let Pt_Cantidad;
+        let action = 'update';
+
+        productos.forEach((producto) =>{
+            map.set(Number(producto.id), Number(producto.value));
+        });
+
+        for(let[key, value] of map) {
+            PK_ID_Producto =  key;
+            Pt_Cantidad = value;
+            console.log(PK_ID_Producto + " - " + Pt_Cantidad);
+            $.ajax({
+                url: "app/action.php",
+                method: "POST",
+                data: {PK_ID_Producto:PK_ID_Producto, Pt_Cantidad:Pt_Cantidad, action:action},
+                success:function(data)
+            	{
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Actualizando el pedido'
+                    });
+                  setTimeout(() => location.href = 'carrito.php', 1000);
+            	}
+            });
+        }
+    });
+
+    // Eliminar todo el carrito
+    $("#btn_delete_all").click( function() {
+        let action = "empty";
+        $.ajax({
+            url: "app/action.php",
+            method: "POST",
+            data: {action:action},
+            success:function(data)
+			{
+                Toast.fire({
+                    type: 'success',
+                    title: 'Eliminando el pedido'
+                });
+              setTimeout(() => location.href = 'carrito.php', 1000);
+			}
+        });
     });
 });
 
