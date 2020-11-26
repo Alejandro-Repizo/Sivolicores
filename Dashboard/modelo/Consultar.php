@@ -933,22 +933,28 @@ class Consultar {
         try{
             //Traemos los datos de los campos deacuerdo al id
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_Pedido, Ped_Fecha, Ped_Estado, Ped_Direccion, 
-            Ped_observaciones, FK_ID_Carrito FROM tbl_pedido WHERE PK_ID_Pedido = '$id'";
+            $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Pt_Nombre, Ped_Fecha, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado, PK_ID_Cliente FROM tbl_pedido WHERE PK_ID_Pedido = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             //Hacemos un insert con los datos anteriores a la tabla envios
             $datosPedido = $resultado->fetch(PDO::FETCH_ASSOC);
             $PK_ID_Pedido = $datosPedido['PK_ID_Pedido'];
+            $Cl_Nombre = $datosPedido['Cl_Nombre'];
+            $Pt_Nombre = $datosPedido['Pt_Nombre'];
             $Ped_Fecha = $datosPedido['Ped_Fecha'];
-            $Ped_Estado = "Por completar";
+            $Pt_Cantidad = $datosPedido['Pt_Cantidad'];
             $Ped_Direccion = $datosPedido['Ped_Direccion'];
-            $Ped_observaciones = $datosPedido['Ped_observaciones'];
-            $FK_ID_Carrito = $datosPedido['FK_ID_Carrito'];
+            $Cl_Telefono = $datosPedido['Cl_Telefono'];
+            $Total = $datosPedido['Total'];
+            $Ped_Observaciones = $datosPedido['Ped_Observaciones'];
+            $Estado = "Por completar";
+            $PK_ID_Cliente = $datosPedido['PK_ID_Cliente'];
             
-            $consulta = "INSERT INTO tbl_envio(PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,FK_ID_Carrito)
-            VALUES ('$PK_ID_Pedido','$Ped_Fecha','$Ped_Estado','$Ped_Direccion','$Ped_observaciones','$FK_ID_Carrito')";
+            $consulta = "INSERT INTO tbl_envio (PK_ID_Envio, Cl_Nombre, Pt_Nombre, Ped_Fecha, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado, PK_ID_Cliente) VALUES ('$PK_ID_Pedido','$Cl_Nombre','$Pt_Nombre','$Ped_Fecha',
+            '$Pt_Cantidad','$Ped_Direccion','$Cl_Telefono','$Total','$Ped_Observaciones','$Estado','$PK_ID_Cliente')";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -958,8 +964,8 @@ class Consultar {
             $resultado->execute();
 
             //Consulta último registro generado
-            $consulta = "SELECT PK_ID_Pedido, Ped_Fecha, Ped_Estado, Ped_Direccion, 
-            Ped_observaciones, FK_ID_Carrito FROM tbl_pedido ORDER BY PK_ID_Pedido DESC LIMIT 1";
+            $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Ped_Fecha, Pt_Nombre, Pt_Cantidad, Ped_Direccion, 
+            Cl_Telefono, Total, Estado FROM tbl_pedido ORDER BY PK_ID_Pedido DESC LIMIT 1";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -980,22 +986,28 @@ class Consultar {
         try{
             //Traemos los datos de los campos deacuerdo al id
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_Envio, Ped_Fecha, Ped_Estado, Ped_Direccion, 
-            Ped_observaciones, FK_ID_Carrito FROM tbl_pedido WHERE PK_ID_Pedido = '$id'";
+            $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Pt_Nombre, Ped_Fecha, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado, PK_ID_Cliente FROM tbl_pedido WHERE PK_ID_Pedido = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             //Hacemos un insert con los datos anteriores a la tabla reporte pedidos
             $datosPedido = $resultado->fetch(PDO::FETCH_ASSOC);
             $PK_ID_Pedido = $datosPedido['PK_ID_Pedido'];
+            $Cl_Nombre = $datosPedido['Cl_Nombre'];
+            $Pt_Nombre = $datosPedido['Pt_Nombre'];
             $Ped_Fecha = $datosPedido['Ped_Fecha'];
-            $Ped_Estado = "Cancelado";
+            $Pt_Cantidad = $datosPedido['Pt_Cantidad'];
             $Ped_Direccion = $datosPedido['Ped_Direccion'];
-            $Ped_observaciones = $datosPedido['Ped_observaciones'];
-            $FK_ID_Carrito = $datosPedido['FK_ID_Carrito'];
+            $Cl_Telefono = $datosPedido['Cl_Telefono'];
+            $Total = $datosPedido['Total'];
+            $Ped_Observaciones = $datosPedido['Ped_Observaciones'];
+            $Estado = "Cancelado";
+            $PK_ID_Cliente = $datosPedido['PK_ID_Cliente'];
             
-            $consulta = "INSERT INTO tbl_reporte_pedido(PK_ID_reporte, RepP_Fecha,RepP_Estado,RepP_Direccion,RepP_Observaciones,FK_ID_Carrito)
-            VALUES ('$PK_ID_Pedido','$Ped_Fecha','$Ped_Estado','$Ped_Direccion','$Ped_observaciones','$FK_ID_Carrito')";
+            $consulta = "INSERT INTO tbl_reporte_pedido(PK_ID_reporte,Cl_Nombre, Pt_Nombre, Ped_Fecha, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado, PK_ID_Cliente) VALUES ('$PK_ID_Pedido','$Cl_Nombre','$Pt_Nombre','$Ped_Fecha',
+            '$Pt_Cantidad','$Ped_Direccion','$Cl_Telefono','$Total','$Ped_Observaciones','$Estado','$PK_ID_Cliente')";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -1048,22 +1060,28 @@ class Consultar {
         try{
             //Traemos los datos de los campos deacuerdo al id
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,
-            FK_ID_Carrito FROM tbl_envio WHERE PK_ID_Envio = '$id'";
+            $consulta = "SELECT PK_ID_Envio, Cl_Nombre, Pt_Nombre, Ped_Fecha, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado, PK_ID_Cliente FROM tbl_envio WHERE PK_ID_Envio = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             //Hacemos un insert con los datos anteriores a la tabla envios
             $datosEnvio = $resultado->fetch(PDO::FETCH_ASSOC);
             $PK_ID_Envio = $datosEnvio['PK_ID_Envio'];
-            $Env_Fecha = $datosEnvio['Env_Fecha'];
-            $Env_Estado = "Completado";
-            $Env_Direccion = $datosEnvio['Env_Direccion'];
-            $Env_Observaciones = $datosEnvio['Env_Observaciones'];
-            $FK_ID_Carrito = $datosEnvio['FK_ID_Carrito'];
+            $Cl_Nombre = $datosEnvio['Cl_Nombre'];
+            $Pt_Nombre = $datosEnvio['Pt_Nombre'];
+            $Ped_Fecha = $datosEnvio['Ped_Fecha'];
+            $Pt_Cantidad = $datosEnvio['Pt_Cantidad'];
+            $Ped_Direccion = $datosEnvio['Ped_Direccion'];
+            $Cl_Telefono = $datosEnvio['Cl_Telefono'];
+            $Total = $datosEnvio['Total'];
+            $Ped_Observaciones = $datosEnvio['Ped_Observaciones'];
+            $Estado = "Completado";
+            $PK_ID_Cliente = $datosEnvio['PK_ID_Cliente'];
             
-            $consulta = "INSERT INTO tbl_reporte_ventas(PK_ID_reporte, RepV_Fecha,RepV_Estado,RepV_Direccion,RepV_Observaciones,FK_ID_Carrito)
-            VALUES ('$PK_ID_Envio','$Env_Fecha','$Env_Estado','$Env_Direccion','$Env_Observaciones','$FK_ID_Carrito')";
+            $consulta = "INSERT INTO tbl_reporte_ventas(PK_ID_reporte, Cl_Nombre, Pt_Nombre, Ped_Fecha, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado, PK_ID_Cliente) VALUES ('$PK_ID_Envio','$Cl_Nombre','$Pt_Nombre','$Ped_Fecha',
+            '$Pt_Cantidad','$Ped_Direccion','$Cl_Telefono','$Total','$Ped_Observaciones','$Estado','$PK_ID_Cliente')";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -1073,8 +1091,8 @@ class Consultar {
             $resultado->execute();
 
             //Consulta último registro generado
-            $consulta = "SELECT PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,
-            FK_ID_Carrito FROM tbl_envio ORDER BY PK_ID_Envio DESC LIMIT 1";
+            $consulta = "SELECT PK_ID_Envio, Cl_Nombre, Pt_Nombre,Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado FROM tbl_envio ORDER BY PK_ID_Envio DESC LIMIT 1";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -1095,22 +1113,28 @@ class Consultar {
         try{
             //Traemos los datos de los campos deacuerdo al id
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,
-            FK_ID_Carrito FROM tbl_envio WHERE PK_ID_Envio = '$id'";
+            $consulta = "SELECT PK_ID_Envio, Cl_Nombre, Pt_Nombre, Ped_Fecha, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado, PK_ID_Cliente FROM tbl_envio WHERE PK_ID_Envio = '$id'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             //Hacemos un insert con los datos anteriores a la tabla envios
             $datosEnvio = $resultado->fetch(PDO::FETCH_ASSOC);
             $PK_ID_Envio = $datosEnvio['PK_ID_Envio'];
-            $Env_Fecha = $datosEnvio['Env_Fecha'];
-            $Env_Estado = "Cancelado";
-            $Env_Direccion = $datosEnvio['Env_Direccion'];
-            $Env_Observaciones = $datosEnvio['Env_Observaciones'];
-            $FK_ID_Carrito = $datosEnvio['FK_ID_Carrito'];
+            $Cl_Nombre = $datosEnvio['Cl_Nombre'];
+            $Pt_Nombre = $datosEnvio['Pt_Nombre'];
+            $Ped_Fecha = $datosEnvio['Ped_Fecha'];
+            $Pt_Cantidad = $datosEnvio['Pt_Cantidad'];
+            $Ped_Direccion = $datosEnvio['Ped_Direccion'];
+            $Cl_Telefono = $datosEnvio['Cl_Telefono'];
+            $Total = $datosEnvio['Total'];
+            $Ped_Observaciones = $datosEnvio['Ped_Observaciones'];
+            $Estado = "Cancelado";
+            $PK_ID_Cliente = $datosEnvio['PK_ID_Cliente'];
             
-            $consulta = "INSERT INTO tbl_reporte_pedido(PK_ID_reporte, RepP_Fecha,RepP_Estado,RepP_Direccion,RepP_Observaciones,FK_ID_Carrito)
-            VALUES ('$PK_ID_Envio','$Env_Fecha','$Env_Estado','$Env_Direccion','$Env_Observaciones','$FK_ID_Carrito')";
+            $consulta = "INSERT INTO tbl_reporte_pedido(PK_ID_reporte, Cl_Nombre, Pt_Nombre, Ped_Fecha, Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado, PK_ID_Cliente) VALUES ('$PK_ID_Envio','$Cl_Nombre','$Pt_Nombre','$Ped_Fecha',
+            '$Pt_Cantidad','$Ped_Direccion','$Cl_Telefono','$Total','$Ped_Observaciones','$Estado','$PK_ID_Cliente')";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -1120,8 +1144,8 @@ class Consultar {
             $resultado->execute();
 
             //Consulta último registro generado
-            $consulta = "SELECT PK_ID_Envio, Env_Fecha,Env_Estado,Env_Direccion,Env_Observaciones,
-            FK_ID_Carrito FROM tbl_envio ORDER BY PK_ID_Envio DESC LIMIT 1";
+            $consulta = "SELECT PK_ID_Envio, Cl_Nombre, Pt_Nombre,Pt_Cantidad, Ped_Direccion, Cl_Telefono, Total,
+            Ped_Observaciones, Estado FROM tbl_envio ORDER BY PK_ID_Envio DESC LIMIT 1";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -1553,10 +1577,8 @@ class Consultar {
         try{
             //Cargar datos a la tabla pedidos Dashboard
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Ped_Estado, Car_Total  FROM tbl_pedido
-            JOIN tbl_carrito_pedidos ON tbl_carrito_pedidos.PK_ID_Carrito = tbl_pedido.FK_ID_Carrito 
-            JOIN tbl_cliente ON tbl_cliente.PK_ID_Cliente = tbl_carrito_pedidos.FK_ID_Cliente 
-            JOIN tbl_producto ON tbl_carrito_pedidos.FK_ID_Producto = tbl_producto.PK_ID_Producto ORDER BY PK_ID_Pedido DESC LIMIT 10";
+            $consulta = "SELECT PK_ID_Pedido, Cl_Nombre, Estado, Total  FROM tbl_pedido
+            ORDER BY PK_ID_Pedido DESC LIMIT 10";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -1576,7 +1598,7 @@ class Consultar {
         try{
             //Cargar datos a la grafica
             $conexion = new ConexionBD();
-            $consulta = "SELECT Ped_Estado, COUNT(PK_ID_Pedido) FROM tbl_pedido GROUP BY Ped_Estado ORDER BY COUNT(PK_ID_Pedido) DESC ";
+            $consulta = "SELECT Estado, COUNT(PK_ID_Pedido) FROM tbl_pedido GROUP BY Estado ORDER BY COUNT(PK_ID_Pedido) DESC ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -1584,34 +1606,34 @@ class Consultar {
             $data = [];
 
             while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                array_push($data, array($fila['Ped_Estado'], $fila['COUNT(PK_ID_Pedido)']));
+                array_push($data, array($fila['Estado'], $fila['COUNT(PK_ID_Pedido)']));
             }
             
             //Consulta para traer los envios
-            $consulta = "SELECT Env_Estado, COUNT(PK_ID_Envio) FROM tbl_envio GROUP BY Env_Estado ORDER BY COUNT(PK_ID_Envio) DESC ";
+            $consulta = "SELECT Estado, COUNT(PK_ID_Envio) FROM tbl_envio GROUP BY Estado ORDER BY COUNT(PK_ID_Envio) DESC ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                array_push($data, array($fila['Env_Estado'], $fila['COUNT(PK_ID_Envio)']));
+                array_push($data, array($fila['Estado'], $fila['COUNT(PK_ID_Envio)']));
             }
 
             //Consulta para traer los reporte envios
-            $consulta = "SELECT Repv_Estado, COUNT(PK_ID_reporte)FROM tbl_reporte_ventas GROUP BY Repv_Estado ORDER BY COUNT(PK_ID_reporte) DESC ";
+            $consulta = "SELECT Estado, COUNT(PK_ID_reporte)FROM tbl_reporte_ventas GROUP BY Estado ORDER BY COUNT(PK_ID_reporte) DESC ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                array_push($data, array($fila['Repv_Estado'], $fila['COUNT(PK_ID_reporte)']));
+                array_push($data, array($fila['Estado'], $fila['COUNT(PK_ID_reporte)']));
             }
 
             //Consulta para traer los reporte pedidos
-            $consulta = "SELECT RepP_Estado, COUNT(PK_ID_reporte)FROM tbl_reporte_pedido GROUP BY RepP_Estado ORDER BY COUNT(PK_ID_reporte) DESC ";
+            $consulta = "SELECT Estado, COUNT(PK_ID_reporte)FROM tbl_reporte_pedido GROUP BY Estado ORDER BY COUNT(PK_ID_reporte) DESC ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                array_push($data, array($fila['RepP_Estado'], $fila['COUNT(PK_ID_reporte)']));
+                array_push($data, array($fila['Estado'], $fila['COUNT(PK_ID_reporte)']));
             }
 
             //Cerrar conexión

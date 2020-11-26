@@ -177,24 +177,33 @@ $(document).ready( function() {
         ev.preventDefault();
     });
 
-    // Test pedidos
+    // Pedidos usuario
     $("#btn-pedido").click (function(ev) {
-
         let oReq = new XMLHttpRequest();
         oReq.open("POST", "app/pedidos.php");
         oReq.onload = function (oEvent){
             let datos =  JSON.parse(oReq.response);
-            console.log(datos);
+    
+            for(let i = 0; i < datos.length; i++) {
+                for(let j = 0; j < datos[i].length; j++) {
+                    let elemento = document.createElement('tr');
+                    elemento.innerHTML += ("<td>" + datos[i][j].Pt_Nombre + "</td>");
+                    elemento.innerHTML += ("<td>" + datos[i][j].Ped_Fecha + "</td>");
+                    elemento.innerHTML += ("<td>" + datos[i][j].Pt_Cantidad + "</td>");
+                    elemento.innerHTML += ("<td>" + datos[i][j].Total + "</td>");
+                    elemento.innerHTML += ("<td>" + datos[i][j].Estado + "</td>");
+                    document.getElementById('tablaPedido').appendChild(elemento);
+                }
+            }
         }
-
         oReq.send();
 
         ev.preventDefault();
     })
 
     //Carrtito 
-    $(document).on('click', '#btn_add_cart',function() {
-        let PK_ID_Producto = $.trim($("#PK_ID_Producto").val());
+    $(document).on('click', '.btn_add_cart',function() {
+        let PK_ID_Producto = $(this).attr("id");
         let Pt_Nombre = $.trim($('#Pt_Nombre'+PK_ID_Producto+'').val());
         let Pt_Precio = $('#Pt_Precio'+PK_ID_Producto+'').val();
         let Pt_Cantidad = $('#Pt_Cantidad'+PK_ID_Producto+'').val();
@@ -209,7 +218,7 @@ $(document).ready( function() {
 				{
                     Toast.fire({
                         type: 'success',
-                        title: 'Producto añadido al carrito!'
+                        title: 'Producto añadido al ¡carrito!'
                     })
 				}
             });
@@ -297,7 +306,6 @@ $(document).ready( function() {
 			}
         });
     });
-
 
     // Enviar pedidos
     $("#btn_finalizar_pedido").click( function() {

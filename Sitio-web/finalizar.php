@@ -16,11 +16,18 @@
         $id = $_SESSION['PK'];
         $dato = obtener_datos_cliente($id, $conexion);
         $dato = $dato['0'];
+        // Banner
+        $banner = obtener_banner_por_nombre($banner_config['finalizar_pedido'], $conexion);
+       
+    }else {
+        header('Location: index.php');
     }
 
-    // Banner
-    $banner = obtener_banner_por_nombre($banner_config['finalizar_pedido'], $conexion);
- 
+    if(empty($_SESSION["shopping_cart"])) {
+        header('Location: index.php');
+    }
     require 'views/finalizar_pedido.view.php';
+
+   
 
 ?>

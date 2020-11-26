@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once 'app/config.php';
     require_once 'app/functions.php';
 
@@ -14,8 +15,11 @@
         $id = $_SESSION['PK'];
         $dato = obtener_datos_cliente($id, $conexion);
         $dato = $dato['0'];
+        // Banner
+        $banner = obtener_banner_por_nombre($banner_config['login'], $conexion);
+    }else {
+        header('Location: index.php');
     }
-    
     require 'views/editar_cliente.view.php';
 
 ?>

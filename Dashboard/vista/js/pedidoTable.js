@@ -57,7 +57,7 @@ $(document).ready(function(){
         Swal.fire({
             title: '¿Estás seguro de enviar este pedido?',
             text: 'pedido a enviar id: ' + id,
-            icon: 'warning',
+            type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#28A745',
             cancelButtonColor: '#d33',

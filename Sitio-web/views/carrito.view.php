@@ -109,14 +109,21 @@
 
                     </tbody>
                 </table>
+                <?php if(isset($_SESSION['PK'])) {?>
                 <div class="button">
                     <a href="finalizar.php"><button type="submit">Finalizar pedido</button></a>
                 </div>
+                <?php } else {?>
+                <div class="alert alert-danger" role="alert">
+                    Para finalizar el pedido necesitas iniciar sesi&oacute;n,
+                    puedes hacerlo dando <a href="login.php" style="color: #931C24; font-weight: bold;">click ac&aacute;</a>
+                </div>
+                <?php } ?>
             </div>
         </div>
         <?php } else { ?>
             <div class="alert alert-warning" role="alert">
-                El carrito de pedidos se encuentra vac&iacute;o!
+                El carrito de pedidos se encuentra ¡vac&iacute;o!
             </div>
         <?php    
         }

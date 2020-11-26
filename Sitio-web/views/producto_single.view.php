@@ -41,11 +41,14 @@
                 <!--Contenedor información producto-->
                 <div class="cont-fila2">
                     <!--tabla superior información producto-->
+                    <input type="hidden" name="hidden_name" id="Pt_Nombre<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Nombre']?>" />
+                    <input type="hidden" name="hidden_price" id="Pt_Precio<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Precio']; ?>" />
+                    <input type="hidden" id="Pt_Imagen<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Imagen']; ?>" />
                     <table class="tbl-top">
                         <tbody>
                             <tr>
                                 <td>
-                                    <h2><?php echo $producto['Pt_Nombre'];?></h2>
+                                    <h2 ><?php echo $producto['Pt_Nombre'];?></h2>
                                 </td>
                             </tr>
                             <tr>
@@ -60,16 +63,16 @@
                                 <td class="txt-cantidad">Cantidad</td>
                             </tr>
                             <tr>
-                                <td><input type="number" name="" id="" value='1' min="0" max="<?php echo $producto['Pt_Stock'];?>"></td>
+                                <td><input type="number" id="Pt_Cantidad<?php echo $producto['PK_ID_Producto']?>" value='1' min="1" max="<?php echo $producto['Pt_Stock'];?>"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <h3>$ <?php echo $producto['Pt_Precio'];?></h3>
+                                    <h3>$ <?php echo number_format($producto['Pt_Precio']);?></h3>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="button"><button type="submit">agregar al carrito</button></div>
+                                    <div class="button"><button type="submit" class="btn_add_cart" id="<?php echo $producto['PK_ID_Producto']?>">Agregar al carrito</button></div>
                                 </td>
                             </tr>
                             <tr>

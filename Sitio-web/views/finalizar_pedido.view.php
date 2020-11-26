@@ -98,7 +98,7 @@
 
                     </table>
                     <div class="button">
-                        <button type="submit" id="btn_finalizar_pedido">Finaliza Compra</button>
+                        <button type="submit" id="btn_finalizar_pedido">Finalizar Comprar</button>
                     </div>
                 </div>
                 <?php 

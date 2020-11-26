@@ -32,8 +32,8 @@ $(document).ready(function(){
             var elemento = document.createElement('tr');
             elemento.innerHTML += ("<td>" + pedido.PK_ID_Pedido + "</td>");
             elemento.innerHTML += ("<td>" + pedido.Cl_Nombre + "</td>");
-            elemento.innerHTML += ("<td><span class='badge badge-warning'>" + pedido.Ped_Estado + "</span></td>");
-            elemento.innerHTML += ("<td>" + pedido.Car_Total + "</td>");
+            elemento.innerHTML += ("<td><span class='badge badge-warning'>" + pedido.Estado + "</span></td>");
+            elemento.innerHTML += ("<td>" + pedido.Total + "</td>");
             document.getElementById('TablaDashboardPedido').appendChild(elemento);
         });
     };

@@ -21,14 +21,8 @@
                                     <th>ESTADO</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Cerveza Corona Six pack Botella - 355ml</td>
-                                    <td>29/10/2020</td>
-                                    <td>0</td>
-                                    <td>$0.000</td>
-                                    <td>Completo</td>
-                                </tr>
+                            <tbody  id="tablaPedido">
+                                
                             </tbody>
                         </table>
                     </div>

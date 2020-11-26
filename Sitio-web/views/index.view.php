@@ -108,7 +108,7 @@
             </div>
             <div class="menu2-icons">
                 <a href="#" class="" id="btn-user-peg"><i class="fas fa-user-circle menu2-bar"></i></a>
-                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
             </div>
         </nav>
 
@@ -193,7 +193,7 @@
         <div class="text-top-title">
             <h1>Nuestros productos</h1>
         </div>
-        <div class="text-top-opcion">
+        <!-- <div class="text-top-opcion">
             <a href="#">
                 <li>Nuevos</li>
             </a>
@@ -201,7 +201,7 @@
                 <li>Recomendados</li>
             </a>
 
-        </div>
+        </div> -->
     </div>
     <!--Contenedor princiapl de productos-->
     <div class="contenedor-superior">
@@ -215,7 +215,11 @@
                     <img src="../Dashboard/vista/imagenes/Productos/<?php echo $producto['Pt_Imagen']?>" alt="<?php echo $producto['Pt_Imagen']?>" class="img-producto">
                     <div class="opacity-img">
                         <div class="cont-button">
-                            <button type="submit">Agregar al carrito</button>
+                            <input type="hidden" name="hidden_name" id="Pt_Nombre<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Nombre']?>" />
+                            <input type="hidden" name="hidden_price" id="Pt_Precio<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Precio']; ?>" />
+                            <input type="hidden" id="Pt_Imagen<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Imagen']; ?>" />
+                            <input type="hidden" name="quantity" value="1" id="Pt_Cantidad<?php echo $producto['PK_ID_Producto']?>" />
+                            <button type="submit" class="btn_add_cart" id="<?php echo $producto['PK_ID_Producto']?>">Agregar al carrito</button>
                         </div>
                     </div>
                 </div>
@@ -223,7 +227,7 @@
                     <a href="producto_single.php?id=<?php echo $producto['PK_ID_Producto']?>" class="producto-title"><?php echo $producto['Pt_Nombre']?> - 
                     <?php echo $producto['Pt_Presentacion']?></a>
                     <div class="a">
-                        <span class="producto-price"><?php echo "$ ".$producto['Pt_Precio']?></span>
+                        <span class="producto-price"><?php echo "$ ". number_format($producto['Pt_Precio'])?></span>
                     </div>
                 </div>
             </div>

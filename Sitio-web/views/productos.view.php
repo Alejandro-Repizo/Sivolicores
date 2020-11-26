@@ -41,11 +41,10 @@
                         <div class="opacity-img">
                             <div class="cont-button" name="add_to_cart">
                                 <input type="hidden" name="hidden_name" id="Pt_Nombre<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Nombre']?>" />
-                                <input type="hidden" id="PK_ID_Producto" value="<?php echo $producto['PK_ID_Producto']?>" />
                                 <input type="hidden" name="hidden_price" id="Pt_Precio<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Precio']; ?>" />
                                 <input type="hidden" id="Pt_Imagen<?php echo $producto['PK_ID_Producto']?>" value="<?php echo $producto['Pt_Imagen']; ?>" />
                                 <input type="hidden" name="quantity" value="1" id="Pt_Cantidad<?php echo $producto['PK_ID_Producto']?>" />
-                                <button type="submit" id="btn_add_cart">Agregar al carrito</button>
+                                <button type="submit" class="btn_add_cart" id="<?php echo $producto['PK_ID_Producto']?>">Agregar al carrito</button>
                             </div>
                         </div>
                     </div>

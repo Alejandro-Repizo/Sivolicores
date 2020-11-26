@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
     <link rel="shortcut icon" href="imagenes/icons/favicon.ico" type="image/x-icon">
-    <title>Cliente</title>
+    <title>Editar Informaci&oacute;n</title>
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="css/Style_modificar_cliente.css">
 
@@ -20,7 +20,7 @@
    
     <?php require 'header.php';?>
 
-    <div class="banner">
+    <div class="banner" style="background-image: url(imagenes/Image_Title_Page/<?php echo $banner['0']['B_Imagen']?>);">
         <div class="text-banner">
             <h1 class="h1">Modificar informaci&oacute;n</h1>
         </div>

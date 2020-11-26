@@ -51,7 +51,7 @@ $(document).ready(function(){
         Swal.fire({
             title: '¿Estás seguro de completar este envío?',
             text: 'envío a completar id: ' + id,
-            icon: 'warning',
+            type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#28A745',
             cancelButtonColor: '#d33',
@@ -84,7 +84,7 @@ $(document).ready(function(){
         Swal.fire({
             title: '¿Estás seguro de cancelar el envío?',
             text: 'envío a cancelar id: ' + id,
-            type: 'warning',
+            type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
