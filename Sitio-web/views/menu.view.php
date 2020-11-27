@@ -25,7 +25,7 @@
         <?php if(isset($_SESSION['PK'])): ?>
             <div class="icon-menu-down">
                 <div class="icon-menu-right">
-                    <a href="cerrar.php"><i class="fas fa-power-off"></i>Cerrar Sesi&oacute;n</a>
+                    <a href="#" id="btn_Cerrar_Sesion"><i class="fas fa-power-off"></i>Cerrar Sesi&oacute;n</a>
                 </div>
             </div>
         <?php endif;  ?>

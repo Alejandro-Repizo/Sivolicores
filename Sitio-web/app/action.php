@@ -2,6 +2,8 @@
 
 
 session_start();
+$total_item = 0;
+
 if(isset($_POST["action"]))
 {
 	if($_POST["action"] == "add")
@@ -11,10 +13,12 @@ if(isset($_POST["action"]))
 			$is_available = 0;
 			foreach($_SESSION["shopping_cart"] as $keys => $values)
 			{
+				$total_item = $total_item + 1;
 				if($_SESSION["shopping_cart"][$keys]['PK_ID_Producto'] == $_POST["PK_ID_Producto"])
 				{
 					$is_available++;
 					$_SESSION["shopping_cart"][$keys]['Pt_Cantidad'] += $_POST["Pt_Cantidad"];
+					$total_item;
 				}
 			}
 			if($is_available == 0)
@@ -27,6 +31,7 @@ if(isset($_POST["action"]))
 					'Pt_Imagen'          =>     $_POST["Pt_Imagen"]
 				);
 				$_SESSION["shopping_cart"][] = $item_array;
+				$total_item = $total_item + 1;
 			}
 		}
 		else
@@ -39,6 +44,7 @@ if(isset($_POST["action"]))
 				'Pt_Imagen'          =>     $_POST["Pt_Imagen"]
 			);
 			$_SESSION["shopping_cart"][] = $item_array;
+			$total_item = $total_item + 1;
 		}
 	}
 
@@ -61,19 +67,25 @@ if(isset($_POST["action"]))
 	}
 
 	if($_POST["action"] == 'remove')
-	{
+	{	
 		foreach($_SESSION["shopping_cart"] as $keys => $values)
-		{
+		{	
 			if($values["PK_ID_Producto"] === $_POST["PK_ID_Producto"])
 			{
 				unset($_SESSION["shopping_cart"][$keys]);
+				
 			}
+			$total_item++;
 		}
+		--$total_item;
 	}
 	if($_POST["action"] == 'empty')
 	{
 		unset($_SESSION["shopping_cart"]);
+		$total_item = 0;
 	}
+
+	echo json_encode($total_item);
 }
 
 

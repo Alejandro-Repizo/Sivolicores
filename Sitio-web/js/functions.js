@@ -39,6 +39,21 @@ $(document).ready( function() {
         ev.preventDefault();
     });
 
+    // Cerrar sesion
+    $("#btn_Cerrar_Sesion").click (function (ev) { 
+        $.ajax({
+            url: "app/cerrar.php",
+            method: "POST",
+            success:function()
+            {
+                let data = 0;
+                localStorage.setItem("cart", data)
+                obtener_localstorage()
+                location.href = "index.php";
+            }
+        });
+    })
+
     // Registro usuario
     $("#btn_registrase").click (function (ev) { 
 
@@ -220,6 +235,8 @@ $(document).ready( function() {
                         type: 'success',
                         title: 'Producto añadido al ¡carrito!'
                     })
+                    localStorage.setItem("cart", data)
+                    obtener_localstorage()
 				}
             });
         }
@@ -242,12 +259,13 @@ $(document).ready( function() {
                     url:"app/action.php",
                     method:"POST",
                     data:{PK_ID_Producto:PK_ID_Producto, action:action},
-                    success:function()
+                    success:function(data)
                     {
                         Toast.fire({
                             type: 'success',
                             title: 'Eliminando el producto'
                         });
+                        localStorage.setItem("cart", data)
                         setTimeout(() => location.href = 'carrito.php', 1500);
                     }
                 })
@@ -302,7 +320,8 @@ $(document).ready( function() {
                     type: 'success',
                     title: 'Eliminando el pedido'
                 });
-              setTimeout(() => location.href = 'carrito.php', 1000);
+               localStorage.setItem("cart", data)
+               setTimeout(() => location.href = 'carrito.php', 1000);
 			}
         });
     });
@@ -340,6 +359,9 @@ $(document).ready( function() {
                         showConfirmButton: false,
                         timer: 1500
                     })
+                    let cantidad = 0;
+                    localStorage.setItem("cart", cantidad)
+                    obtener_localstorage()
                     setTimeout(() => location.href = 'index.php', 1500);
             	}
             });
@@ -386,3 +408,11 @@ function password_iguales() {
     }
     return false;
 }
+
+function obtener_localstorage() {
+
+    let cart = localStorage.getItem("cart")
+    $('.badge').text(cart);
+}
+
+obtener_localstorage();

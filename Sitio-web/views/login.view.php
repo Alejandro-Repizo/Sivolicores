@@ -20,7 +20,7 @@
 
     <?php require 'header.php';?>
 
-    <div class="banner" style="background-image: url(imagenes/Image_Title_Page/<?php echo $banner['0']['B_Imagen']?>);">
+    <div class="banner" style="background-image: url(../Dashboard/vista/imagenes/Banner/<?php echo $banner['0']['B_Imagen']?>);">
         <div class="text-banner">
             <h1 class="h1">Iniciar sesi&oacute;n</h1>
         </div>

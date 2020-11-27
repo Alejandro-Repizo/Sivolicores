@@ -37,7 +37,7 @@
             <!--Iconos-->
             <div class="header-icons">
                 <a href="#" id="btn-user"><i class="fas fa-user-circle header-bar"></i></a>
-                <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
+                <a href="carrito.php"><i class="fas fa-shopping-cart"></i><span class="badge">0</span></a>
             </div>
 
         </div>
@@ -54,7 +54,7 @@
                         <li class="nav-text"><?php echo $categoria['Cat_Nombre'];?></li>
                         <?php $subs = obtener_subcategoria($categoria['PK_ID_Categoria'], $conexion);?>
                         <?php foreach($subs as $sub):?>
-                            <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
+                            <li><a href="productos.php?idS=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
                         <?php endforeach; ?>
                         <img src="../Dashboard/vista/imagenes/Categorias/<?php echo $categoria['Cat_Imagen']?>" alt="<?php echo $categoria['Cat_Imagen']?>">
                     </ul>
@@ -91,7 +91,7 @@
                         <li class="nav-text"><?php echo $categoria['Cat_Nombre'];?></li>
                         <?php $subs = obtener_subcategoria($categoria['PK_ID_Categoria'], $conexion);?>
                         <?php foreach($subs as $sub):?>
-                            <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
+                            <li><a href="productos.php?idS=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
                         <?php endforeach; ?>
                         <img src="../Dashboard/vista/imagenes/Categorias/<?php echo $categoria['Cat_Imagen']?>" alt="">
                     </ul>
@@ -108,7 +108,7 @@
             </div>
             <div class="menu2-icons">
                 <a href="#" class="" id="btn-user-peg"><i class="fas fa-user-circle menu2-bar"></i></a>
-                <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
+                <a href="carrito.php"><i class="fas fa-shopping-cart"></i><span class="badge">0</span></a>
             </div>
         </nav>
 
@@ -122,7 +122,7 @@
             <div class="menuMobile-icons">
                 <a href="#" id="btn-burger"><i class="fas fa-bars"></i></a>
                 <a href="#" id="btn-user-mob"><i class="fas fa-user-circle"></i></a>
-                <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
+                <a href="carrito.php"><i class="fas fa-shopping-cart"></i><span class="badge">0</span></a>
             </div>
         </nav>
 
@@ -137,7 +137,7 @@
                     <ul>
                         <?php $subs = obtener_subcategoria($categoria['PK_ID_Categoria'], $conexion);?>
                         <?php foreach($subs as $sub):?>
-                        <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><i class="sub-opciones"></i><?php echo $sub['SCat_Nombre'];?></a></li>
+                        <li><a href="productos.php?idS=<?php echo $sub['PK_ID_SubCategoria'];?>"><i class="sub-opciones"></i><?php echo $sub['SCat_Nombre'];?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </li>
@@ -164,14 +164,14 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100 tamaño" src="imagenes/Image_Slide/<?php echo $slide_uno['0']['B_Imagen']?>" alt="First slide">
+                    <img class="d-block w-100 tamaño" src="../Dashboard/vista/imagenes/Banner/<?php echo $slide_uno['0']['B_Imagen']?>" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100 tamaño" src="imagenes/Image_Slide/<?php echo $slide_dos['0']['B_Imagen']?>"
+                    <img class="d-block w-100 tamaño" src="../Dashboard/vista/imagenes/Banner/<?php echo $slide_dos['0']['B_Imagen']?>"
                         alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100 tamaño" src="imagenes/Image_Slide/<?php echo $slide_tres['0']['B_Imagen']?>"
+                    <img class="d-block w-100 tamaño" src="../Dashboard/vista/imagenes/Banner/<?php echo $slide_tres['0']['B_Imagen']?>"
                         alt="Third slide">
                 </div>
             </div>
@@ -265,7 +265,7 @@
                     </div>
                     <div class="text-coctel">
                         <a href="coctel.php?id=<?php echo $receta['PK_ID_Receta'];?>"><?php echo $receta['RC_Nombre'];?></a>
-                        <span>Por <strong><?php echo $receta['RC_Autor']?></strong>el <strong><?php echo fecha($receta['RC_Fecha'])?></strong></span>
+                        <span>Por <strong><?php echo $receta['RC_Autor']?></strong> el <strong><?php echo fecha($receta['RC_Fecha'])?></strong></span>
                         <p>
                         <?php echo $receta['RC_Descripcion']; ?>
                         </p>

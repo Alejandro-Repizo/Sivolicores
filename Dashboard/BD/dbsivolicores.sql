@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2020 a las 07:36:29
+-- Tiempo de generación: 26-11-2020 a las 22:10:02
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.30
 
@@ -35,6 +35,14 @@ CREATE TABLE `tbl_administrador` (
   `Ad_Password` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tbl_administrador`
+--
+
+INSERT INTO `tbl_administrador` (`PK_ID_Administrador`, `Ad_Nombre`, `Ad_Apellido`, `Ad_Email`, `Ad_Password`) VALUES
+(0, 'testing', 'testingon', 'testing@outlook.com', '827ccb0eea8a706c4c34a16891f84e7b'),
+(1, 'root', 'rooter', 'root@outlook.com', '12345');
+
 -- --------------------------------------------------------
 
 --
@@ -46,36 +54,6 @@ CREATE TABLE `tbl_banner` (
   `B_Imagen` text NOT NULL,
   `B_Nombre` varchar(45) NOT NULL,
   `B_Fecha_actualizacion` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbl_banner`
---
-
-INSERT INTO `tbl_banner` (`PK_ID_Banner`, `B_Imagen`, `B_Nombre`, `B_Fecha_actualizacion`) VALUES
-(1, 'Cócteles-con-vino.jpg', 'Parallax', '2020-11-13 17:28:51'),
-(2, 'Juniper_slide_1.jpg', 'Slide_uno', '2020-11-13 17:33:20'),
-(3, 'Oktoberfest_Slide_1.jpg', 'Slide_dos', '2020-11-13 17:33:20'),
-(4, 'budweiser_slide_1.jpg', 'Slide_tres', '2020-11-13 17:35:07'),
-(5, 'Wallpaper_Cócteles.jpg', 'Receta_coctel', '2020-11-13 17:39:56'),
-(6, 'Wallpaper_cart.jpg', 'Carrito', '2020-11-13 17:39:56'),
-(7, 'Wallpaper_Contacto.jpg', 'Finalizar_pedido', '2020-11-13 17:39:56'),
-(8, 'Wallpaper_Vinos.jpg', 'Login', '2020-11-13 17:39:56'),
-(9, 'Wallpaper_Vino1.jpg', 'Registro', '2020-11-13 17:39:56');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_carrito_pedidos`
---
-
-CREATE TABLE `tbl_carrito_pedidos` (
-  `PK_ID_Carrito` int(11) NOT NULL,
-  `Pt_Cantidad` int(11) NOT NULL,
-  `Car_Total` float NOT NULL,
-  `Car_SubTotal` float NOT NULL,
-  `FK_ID_Cliente` int(11) NOT NULL,
-  `FK_ID_Producto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -146,7 +124,7 @@ CREATE TABLE `tbl_cliente` (
   `Cl_Fecha_registro` datetime NOT NULL DEFAULT current_timestamp(),
   `Cl_Pedidos_realizado` varchar(5) NOT NULL,
   `Cl_email` varchar(64) NOT NULL,
-  `Cl_password` varchar(45) NOT NULL
+  `Cl_password` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -157,11 +135,16 @@ CREATE TABLE `tbl_cliente` (
 
 CREATE TABLE `tbl_envio` (
   `PK_ID_Envio` int(11) DEFAULT NULL,
-  `Env_Fecha` text DEFAULT NULL,
-  `Env_Estado` varchar(45) DEFAULT NULL,
-  `Env_Direccion` text DEFAULT NULL,
-  `Env_Observaciones` text DEFAULT NULL,
-  `FK_ID_Carrito` int(11) DEFAULT NULL
+  `Cl_Nombre` text NOT NULL,
+  `Pt_Nombre` text NOT NULL,
+  `Ped_Fecha` text DEFAULT NULL,
+  `Pt_Cantidad` varchar(40) NOT NULL,
+  `Ped_Direccion` text DEFAULT NULL,
+  `Cl_Telefono` varchar(45) NOT NULL,
+  `Total` text NOT NULL,
+  `Ped_Observaciones` text DEFAULT NULL,
+  `Estado` varchar(45) DEFAULT NULL,
+  `PK_ID_Cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -206,11 +189,16 @@ CREATE TABLE `tbl_marca` (
 
 CREATE TABLE `tbl_pedido` (
   `PK_ID_Pedido` int(11) NOT NULL,
+  `Cl_Nombre` text NOT NULL,
+  `Pt_Nombre` text NOT NULL,
   `Ped_Fecha` datetime NOT NULL DEFAULT current_timestamp(),
-  `Ped_Estado` varchar(45) NOT NULL,
+  `Pt_Cantidad` varchar(40) NOT NULL,
   `Ped_Direccion` varchar(45) NOT NULL,
-  `Ped_observaciones` text DEFAULT NULL,
-  `FK_ID_Carrito` int(11) NOT NULL
+  `Cl_Telefono` varchar(45) NOT NULL,
+  `Total` text NOT NULL,
+  `Ped_Observaciones` text DEFAULT NULL,
+  `Estado` varchar(45) NOT NULL,
+  `PK_ID_Cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -223,13 +211,13 @@ CREATE TABLE `tbl_producto` (
   `PK_ID_Producto` int(11) NOT NULL,
   `Pt_codigo` varchar(5) NOT NULL,
   `Pt_Nombre` varchar(45) NOT NULL,
-  `Pt_Precio` varchar(20) NOT NULL,
+  `Pt_Precio` int(100) NOT NULL,
   `Pt_Imagen` text DEFAULT NULL,
   `Pt_Presentacion` varchar(5) NOT NULL,
   `Pt_Grados_alchol` varchar(10) NOT NULL,
   `Pt_Pais` varchar(45) NOT NULL,
   `Pt_Color` varchar(45) NOT NULL,
-  `Pt_Stock` varchar(5) NOT NULL,
+  `Pt_Stock` int(11) NOT NULL,
   `FK_ID_Categoria` int(11) NOT NULL,
   `FK_ID_Marca` int(11) NOT NULL,
   `FK_ID_SubCategoria` int(11) DEFAULT NULL
@@ -271,11 +259,16 @@ CREATE TABLE `tbl_receta_coctel` (
 
 CREATE TABLE `tbl_reporte_pedido` (
   `PK_ID_reporte` int(11) DEFAULT NULL,
-  `RepP_Fecha` text DEFAULT NULL,
-  `RepP_Estado` varchar(45) DEFAULT NULL,
-  `RepP_Direccion` text DEFAULT NULL,
-  `RepP_Observaciones` text DEFAULT NULL,
-  `FK_ID_Carrito` int(11) DEFAULT NULL
+  `Cl_Nombre` text NOT NULL,
+  `Pt_Nombre` text NOT NULL,
+  `Ped_Fecha` text DEFAULT NULL,
+  `Pt_Cantidad` varchar(40) NOT NULL,
+  `Ped_Direccion` text DEFAULT NULL,
+  `Cl_Telefono` varchar(45) NOT NULL,
+  `Total` text NOT NULL,
+  `Ped_Observaciones` text DEFAULT NULL,
+  `Estado` varchar(45) DEFAULT NULL,
+  `PK_ID_Cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -286,11 +279,16 @@ CREATE TABLE `tbl_reporte_pedido` (
 
 CREATE TABLE `tbl_reporte_ventas` (
   `PK_ID_reporte` int(11) DEFAULT NULL,
-  `RepV_Fecha` text DEFAULT NULL,
-  `Repv_Estado` varchar(45) DEFAULT NULL,
-  `RepV_Direccion` text DEFAULT NULL,
-  `RepV_Observaciones` text DEFAULT NULL,
-  `FK_ID_Carrito` int(11) DEFAULT NULL
+  `Cl_Nombre` text NOT NULL,
+  `Pt_Nombre` text NOT NULL,
+  `Ped_Fecha` text DEFAULT NULL,
+  `Pt_Cantidad` varchar(40) NOT NULL,
+  `Ped_Direccion` text DEFAULT NULL,
+  `Cl_Telefono` varchar(45) NOT NULL,
+  `Total` text NOT NULL,
+  `Ped_Observaciones` text DEFAULT NULL,
+  `Estado` varchar(45) DEFAULT NULL,
+  `PK_ID_Cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -333,14 +331,6 @@ ALTER TABLE `tbl_banner`
   ADD PRIMARY KEY (`PK_ID_Banner`);
 
 --
--- Indices de la tabla `tbl_carrito_pedidos`
---
-ALTER TABLE `tbl_carrito_pedidos`
-  ADD PRIMARY KEY (`PK_ID_Carrito`),
-  ADD KEY `FK_ID_Cliente` (`FK_ID_Cliente`),
-  ADD KEY `FK_ID_Producto` (`FK_ID_Producto`);
-
---
 -- Indices de la tabla `tbl_categoria`
 --
 ALTER TABLE `tbl_categoria`
@@ -360,12 +350,6 @@ ALTER TABLE `tbl_cliente`
   ADD PRIMARY KEY (`PK_ID_Cliente`);
 
 --
--- Indices de la tabla `tbl_envio`
---
-ALTER TABLE `tbl_envio`
-  ADD KEY `FK_ID_Carrito` (`FK_ID_Carrito`);
-
---
 -- Indices de la tabla `tbl_inventario`
 --
 ALTER TABLE `tbl_inventario`
@@ -382,35 +366,22 @@ ALTER TABLE `tbl_marca`
 -- Indices de la tabla `tbl_pedido`
 --
 ALTER TABLE `tbl_pedido`
-  ADD PRIMARY KEY (`PK_ID_Pedido`),
-  ADD KEY `FK_ID_Carrito` (`FK_ID_Carrito`);
+  ADD PRIMARY KEY (`PK_ID_Pedido`);
 
 --
 -- Indices de la tabla `tbl_producto`
 --
 ALTER TABLE `tbl_producto`
   ADD PRIMARY KEY (`PK_ID_Producto`),
+  ADD KEY `PK_ID_SubCategoria` (`FK_ID_SubCategoria`),
   ADD KEY `FK_ID_Categoria` (`FK_ID_Categoria`),
-  ADD KEY `FK_ID_Marca` (`FK_ID_Marca`),
-  ADD KEY `PK_ID_SubCategoria` (`FK_ID_SubCategoria`);
+  ADD KEY `FK_ID_Marca` (`FK_ID_Marca`);
 
 --
 -- Indices de la tabla `tbl_receta_coctel`
 --
 ALTER TABLE `tbl_receta_coctel`
   ADD PRIMARY KEY (`PK_ID_Receta`);
-
---
--- Indices de la tabla `tbl_reporte_pedido`
---
-ALTER TABLE `tbl_reporte_pedido`
-  ADD KEY `FK_ID_Carrito` (`FK_ID_Carrito`);
-
---
--- Indices de la tabla `tbl_reporte_ventas`
---
-ALTER TABLE `tbl_reporte_ventas`
-  ADD KEY `FK_ID_Carrito` (`FK_ID_Carrito`);
 
 --
 -- Indices de la tabla `tbl_subcategoria`
@@ -426,13 +397,7 @@ ALTER TABLE `tbl_subcategoria`
 -- AUTO_INCREMENT de la tabla `tbl_banner`
 --
 ALTER TABLE `tbl_banner`
-  MODIFY `PK_ID_Banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `tbl_carrito_pedidos`
---
-ALTER TABLE `tbl_carrito_pedidos`
-  MODIFY `PK_ID_Carrito` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PK_ID_Banner` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_categoria`
@@ -487,13 +452,6 @@ ALTER TABLE `tbl_subcategoria`
 --
 
 --
--- Filtros para la tabla `tbl_carrito_pedidos`
---
-ALTER TABLE `tbl_carrito_pedidos`
-  ADD CONSTRAINT `FK_ID_Cliente` FOREIGN KEY (`FK_ID_Cliente`) REFERENCES `tbl_cliente` (`PK_ID_Cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_ID_Producto` FOREIGN KEY (`FK_ID_Producto`) REFERENCES `tbl_producto` (`PK_ID_Producto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Filtros para la tabla `tbl_catxsub`
 --
 ALTER TABLE `tbl_catxsub`
@@ -501,42 +459,10 @@ ALTER TABLE `tbl_catxsub`
   ADD CONSTRAINT `tbl_catxsub_ibfk_2` FOREIGN KEY (`FK_ID_SubCategoria`) REFERENCES `tbl_subcategoria` (`PK_ID_SubCategoria`);
 
 --
--- Filtros para la tabla `tbl_envio`
---
-ALTER TABLE `tbl_envio`
-  ADD CONSTRAINT `tbl_envio_ibfk_1` FOREIGN KEY (`FK_ID_Carrito`) REFERENCES `tbl_carrito_pedidos` (`PK_ID_Carrito`);
-
---
 -- Filtros para la tabla `tbl_inventario`
 --
 ALTER TABLE `tbl_inventario`
   ADD CONSTRAINT `FK_ID_ProductoInventario` FOREIGN KEY (`FK_ID_ProductoInventario`) REFERENCES `tbl_producto` (`PK_ID_Producto`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `tbl_pedido`
---
-ALTER TABLE `tbl_pedido`
-  ADD CONSTRAINT `FK_ID_Carrito` FOREIGN KEY (`FK_ID_Carrito`) REFERENCES `tbl_carrito_pedidos` (`PK_ID_Carrito`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `tbl_producto`
---
-ALTER TABLE `tbl_producto`
-  ADD CONSTRAINT `FK_ID_Categoria` FOREIGN KEY (`FK_ID_Categoria`) REFERENCES `tbl_categoria` (`PK_ID_Categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_ID_Marca` FOREIGN KEY (`FK_ID_Marca`) REFERENCES `tbl_marca` (`PK_ID_Marca`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `PK_ID_SubCategoria` FOREIGN KEY (`FK_ID_SubCategoria`) REFERENCES `tbl_subcategoria` (`PK_ID_SubCategoria`);
-
---
--- Filtros para la tabla `tbl_reporte_pedido`
---
-ALTER TABLE `tbl_reporte_pedido`
-  ADD CONSTRAINT `tbl_reporte_pedido_ibfk_1` FOREIGN KEY (`FK_ID_Carrito`) REFERENCES `tbl_carrito_pedidos` (`PK_ID_Carrito`);
-
---
--- Filtros para la tabla `tbl_reporte_ventas`
---
-ALTER TABLE `tbl_reporte_ventas`
-  ADD CONSTRAINT `tbl_reporte_ventas_ibfk_1` FOREIGN KEY (`FK_ID_Carrito`) REFERENCES `tbl_carrito_pedidos` (`PK_ID_Carrito`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

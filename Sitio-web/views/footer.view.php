@@ -7,9 +7,9 @@
                 <h6>Linea de atenci&oacute;n al cliente 01 8000 183475 </h6>
                 <h6>M&oacute;vil: 322 2397</h6>
                 <h6>sivolicores@gmail.com</h6>
-                <a href=""><i class="fab fa-facebook-f"></i></a>
-                <a href=""><i class="fab fa-whatsapp"></i></a>
-                <a href=""><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
 
             <?php foreach($datos as $dato):?>

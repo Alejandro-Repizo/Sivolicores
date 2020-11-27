@@ -28,7 +28,7 @@
                         <li class="nav-text"><?php echo $categoria['Cat_Nombre'];?></li>
                         <?php $subs = obtener_subcategoria($categoria['PK_ID_Categoria'], $conexion);?>
                         <?php foreach($subs as $sub):?>
-                            <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
+                            <li><a href="productos.php?idS=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
                         <?php endforeach; ?>
                         <img src="../Dashboard/vista/imagenes/Categorias/<?php echo $categoria['Cat_Imagen']?>" alt="<?php echo $categoria['Cat_Imagen']?>">
                     </ul>
@@ -46,7 +46,7 @@
         </div>
         <div class="menu3-icons" id="menu3-icons">
             <a href="#" id="btn-user"><i class="fas fa-user-circle menu3-bar"></i></a>
-            <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
+            <a href="carrito.php"><i class="fas fa-shopping-cart"></i><span class="badge">0</span></a>
         </div>
     </nav>
 
@@ -68,7 +68,7 @@
                     <li class="nav-text"><?php echo $categoria['Cat_Nombre'];?></li>
                     <?php $subs = obtener_subcategoria($categoria['PK_ID_Categoria'], $conexion);?>
                     <?php foreach($subs as $sub):?>
-                        <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
+                        <li><a href="productos.php?idS=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
                     <?php endforeach; ?>
                     <img src="../Dashboard/vista/imagenes/Categorias/<?php echo $categoria['Cat_Imagen']?>" alt="">
                 </ul>
@@ -85,7 +85,7 @@
         </div>
         <div class="menu4-icons" id="menu4-icons">
             <a href="#" id="btn-user-peg"><i class="fas fa-user-circle menu4-bar"></i></a>
-            <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
+            <a href="carrito.php"><i class="fas fa-shopping-cart"></i><span class="badge">0</span></a>
         </div>
     </nav>
 
@@ -99,7 +99,7 @@
         <div class="menuMobile-icons">
             <a href="#" id="btn-burger"><i class="fas fa-bars"></i></a>
             <a href="#" id="btn-user-mob"><i class="fas fa-user-circle"></i></a>
-            <a href="carrito.php"><i class="fas fa-shopping-cart"></i></a>
+            <a href="carrito.php"><i class="fas fa-shopping-cart"></i><span class="badge">0</span></a>
         </div>
     </nav>
 
@@ -114,7 +114,7 @@
                     <ul>
                         <?php $subs = obtener_subcategoria($categoria['PK_ID_Categoria'], $conexion);?>
                         <?php foreach($subs as $sub):?>
-                        <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><i class="sub-opciones"></i><?php echo $sub['SCat_Nombre'];?></a></li>
+                        <li><a href="productos.php?idS=<?php echo $sub['PK_ID_SubCategoria'];?>"><i class="sub-opciones"></i><?php echo $sub['SCat_Nombre'];?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </li>

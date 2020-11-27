@@ -82,6 +82,16 @@ a {
 }
 
 
+.badge {
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: -5px;
+    border-radius: 100%;
+    background-color: #d9a520;
+}
+
+
 /* Menu */
 
 .menu3 {

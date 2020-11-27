@@ -77,6 +77,15 @@ a {
 .header .header-top .header-icons a i:hover {
     color: #d9a520;
 }
+.badge {
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: -5px;
+    border-radius: 30%;
+    background-color: #d9a520;
+}
+
 
 /* Menu lateral derecho */
 .right-menu {
@@ -494,9 +503,9 @@ a {
 
 .tamaño {
     height: 540px;
-    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    transform-origin: 0 0
 }
 
 .temporal-imagen {
@@ -507,7 +516,7 @@ a {
 
 .text-top {
     width: 100%;
-    height: 120px;
+    height: auto;
     margin: 20px 0px;
     display: flex;
     flex-wrap: wrap;
@@ -1176,7 +1185,7 @@ footer {
     }
     /* Texto superior de productos */
     .text-top .text-top-title h1 {
-        font-size: 1.5em;
+        font-size: 1.3em;
     }
     /* Texto superior receta cocteles */
     .text-bottom {
