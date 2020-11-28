@@ -1552,6 +1552,7 @@ class Consultar {
     }
 
 
+    // Dashaboard y menu lateral izquerdo
     public function cargarTablaClienteDashboard(){
         try{
             //Cargar datos a la tabla cliente dashboard
@@ -1645,25 +1646,79 @@ class Consultar {
         print json_encode($data, JSON_NUMERIC_CHECK);
     }
 
-
-    public function TotalClientes(){
+    public function cargarGraficaDashboardDos(){
         try{
-            //Cargar datos a la tabla pedidos Dashboard
+            //Cargar datos a la grafica
             $conexion = new ConexionBD();
-            $consulta = "SELECT COUNT(RepV_Fecha) FROM tbl_reporte_ventas";
+            $consulta = "SELECT Estado, COUNT(PK_ID_Reporte) FROM tbl_reporte_pedido GROUP BY Estado ORDER BY COUNT(PK_ID_Reporte) DESC ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            //Coloca todo en una arreglo
+            $data = [];
+
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, array($fila['Estado'], $fila['COUNT(PK_ID_Reporte)']));
+            }
+            
+            //Consulta para traer los envios
+            $consulta = "SELECT Estado, COUNT(PK_ID_Reporte) FROM tbl_reporte_ventas GROUP BY Estado ORDER BY COUNT(PK_ID_Reporte) DESC ";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, array($fila['Estado'], $fila['COUNT(PK_ID_Reporte)']));
+            }
+            //Cerrar conexión
+            $conexion = null;
+        }catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        //Envíar el arreglo final en formato JSON a JS
+        print json_encode($data, JSON_NUMERIC_CHECK);
+    }
+    
+
+    public function cargarEstadisticas(){
+        try{
+            //Cargar datos a la grafica
+            $conexion = new ConexionBD();
+            $consulta = "SELECT COUNT(PK_ID_Pedido) FROM tbl_pedido";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
             //Coloca todo en una arreglo
             $data = $resultado->fetch();
 
-            //Cerrar conexión 
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, array($fila['COUNT(Ped_Fecha)']));
+            }
+            
+            //Consulta para traer los reporte envios
+            $consulta = "SELECT COUNT(Ped_Fecha) FROM tbl_reporte_ventas";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, array($fila['COUNT(Ped_Fecha)']));
+            }
+
+            //Consulta para traer los reporte clientes
+            $consulta = "SELECT COUNT(Cl_Fecha_registro) FROM tbl_cliente";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, array($fila['COUNT(Cl_Fecha_registro)']));
+            }
+
+            //Cerrar conexión
             $conexion = null;
         }catch (Exception $ex) {
             $ex->getMessage();
         }
         //Envíar el arreglo final en formato JSON a JS
-        print json_encode($data, JSON_UNESCAPED_UNICODE);
+        print json_encode($data, JSON_NUMERIC_CHECK);
     }
    
 

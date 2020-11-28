@@ -96,14 +96,47 @@ $(document).ready(function(){
 
     var peticionXML4 = new XMLHttpRequest();
     peticionXML4.open('POST', '../../controlador/DataRoute.php');
-    opcion = 'TotalClientes';
+    opcion = 'cargarGraficaDashboardDos';
     parametros = 'opcion=' + opcion;
     peticionXML4.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     peticionXML4.onload = function(){
         var datos = JSON.parse(peticionXML4.responseText);
-        document.getElementById('TotalClientes').innerHTML = datos['0'];
+        option2.series[0].data = datos;
+        chart2 = new Highcharts.Chart(option2);
         
     };
+
+
+    option2 = {
+        chart: {
+            renderTo: 'containerTwo',
+            type: 'pie',
+            plotBackgroundColor: '#f8f9fa', //Color fondo
+            plotBorderwidth: 1,
+            plotShadow: false
+        },
+        title: {
+            text: 'Cantidad de pedidos cancelados y completados'
+        },
+        tooltip: {
+            pointFormat: '<b>{series.name}: </b>{point.percentage:.2f}%'
+        },
+        plotOptions: {
+            pie: {
+                allwoPointSelect: true,
+                cursor: 'pointer',
+                datalabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>{point.percentage:.2f}%'
+                }
+            }
+        },
+        series: [{
+            name: 'Marcas',
+            colorByPoint: true,
+            data: []
+        }]
+    }
 
     peticionXML4.send(parametros);
 

@@ -328,7 +328,7 @@ class Controlador{
         $Consultar->borrarProducto($Producto);
     }
 
-
+    // Dashboard y menu lateral izquierdo
     public function cargarTablaClienteDashboard(){
         $consultar = new consultar();
         $consultar->cargarTablaClienteDashboard();
@@ -343,11 +343,18 @@ class Controlador{
         $consultar = new consultar();
         $consultar->cargarGraficaDashboard();
     }
-    public function TotalClientes(){
+
+    public function cargarGraficaDashboardDos(){
         $consultar = new consultar();
-        $consultar->TotalClientes();
+        $consultar->cargarGraficaDashboardDos();
     }
 
+    public function cargarEstadisticas(){
+        $consultar = new consultar();
+        $consultar->cargarEstadisticas();
+    }
+
+    
 
 
 

@@ -629,9 +629,15 @@ if(isset($_POST['opcion'])){
             $Controlador = new Controlador();
             $Controlador->cargarGraficaDashboard();
             break;
-        case 'TotalClientes':
+
+        case 'cargarGraficaDashboardDos':
             $Controlador = new Controlador();
-            $Controlador->TotalClientes();
+            $Controlador->cargarGraficaDashboardDos();
+            break;
+
+        case 'cargarEstadisticas':
+            $Controlador = new Controlador();
+            $Controlador->cargarEstadisticas();
             break;
     }
     

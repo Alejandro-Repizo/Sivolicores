@@ -40,7 +40,7 @@
             <div class="nav-search">
                 
             </div>
-            <a href="../Sitio-web/index.php">
+            <a href="../../../Sitio-web/index.php">
                 <i class="external-icon-nav fas fa-external-link-alt"></i>
             </a>
         </div>
@@ -106,17 +106,17 @@
             <h6>ESTAD&Iacute;STICAS R&Aacute;PIDAS</h6>
             <ul>
                 <hr>
-                <li><i class="inf-icons fas fa-truck"></i>NUEVOS PEDIDOS HOY</a>
+                <li><i class="inf-icons fas fa-truck"></i>TOTAL DE PEDIDOS </a>
                 </li>
-                <li class="inf-date">0</li>
+                <li class="inf-date" id="pedidosEstadisticas"></li>
                 <hr>
-                <li><i class="inf-icons fas fa-money-bill-alt"></i>TOTAL DE VENTAS HOY</a>
+                <li><i class="inf-icons fas fa-money-bill-alt"></i>TOTAL DE VENTAS </a>
                 </li>
-                <li class="inf-date">0</li>
+                <li class="inf-date" id="ventasEstadisticas"></li>
                 <hr>
-                <li><i class="inf-icons fas fa-users"></i>TOTAL DE CLIENTES HOY</a>
+                <li><i class="inf-icons fas fa-users"></i>TOTAL DE CLIENTES </a>
                 </li>
-                <li class="inf-date">0</li>
+                <li class="inf-date" id="clienteEstadisticas"></li>
                 <hr>
                 <li><i class="inf-icons far fa-clock"></i>HORA</a>
                 </li>
@@ -205,6 +205,7 @@
     <!--Main-->
     <script src="../js/main.js"></script>
     <script src="../js/bannerTable.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 
 </html>

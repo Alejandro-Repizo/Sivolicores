@@ -13,28 +13,35 @@
             </div>
 
             <?php foreach($datos as $dato):?>
-                
-                <?php if($dato['Cat_Nombre'] == 'cócteles' or $dato['Cat_Nombre'] == 'Cócteles'): ?>
-                    <!--Parte de categorías-->
+                <?php if(!empty($dato['Cat_Imagen'])):?>
                     <div class="cont-footer-cat">
                         <ul>
-                            <li class="p-t-10 cat-footer-title"><a href="recetas_cocteles.php" class="cat-footer-title"><?php echo $dato['Cat_Nombre'];?></a></li>
-                        </ul>
-                    </div>
-                <?php else: ?>
-                    <!--Parte de categorías-->
-                    <div class="cont-footer-cat">
-                        <ul>
-                            <li class="p-t-10 cat-footer-title"><a href="productos.php?id=<?php echo $dato['PK_ID_Categoria'];?>" class="cat-footer-title"><?php echo $dato['Cat_Nombre'];?></a></li>
-                            <?php $subs = obtener_subcategoria($dato['PK_ID_Categoria'], $conexion);
-                                foreach($subs as $sub):
-                            ?>
-                            <li><a href="productos.php?id=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
+                            <li class="p-t-10 cat-footer-title"><a href="#" class="cat-footer-title"><?php echo $dato['Cat_Nombre'];?></a></li>
+                            <?php $subs = obtener_subcategoria($dato['PK_ID_Categoria'], $conexion);?>
+                            <?php foreach($subs as $sub):?>
+                            <li><a href="productos.php?idS=<?php echo $sub['PK_ID_SubCategoria'];?>"><?php echo $sub['SCat_Nombre'];?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
+                <?php else: ?>
+                    <?php if($dato['Cat_Nombre'] == 'cócteles' or $dato['Cat_Nombre'] == 'Cócteles'): ?>
+                        <!--Parte de categorías-->
+                        <div class="cont-footer-cat">
+                            <ul>
+                                <li class="p-t-10 cat-footer-title"><a href="recetas_cocteles.php" class="cat-footer-title"><?php echo $dato['Cat_Nombre'];?></a></li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+                        <!--Parte de categorías-->
+                        <div class="cont-footer-cat">
+                            <ul>
+                                <li class="p-t-10 cat-footer-title"><a href="productos.php?id=<?php echo $dato['PK_ID_Categoria'];?>" class="cat-footer-title"><?php echo $dato['Cat_Nombre'];?></a></li>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
+
 
         </div>
         <!-- Ley-->

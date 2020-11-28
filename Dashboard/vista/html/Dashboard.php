@@ -30,7 +30,7 @@
                 <i class="fas fa-align-justify"></i>
             </a> -->
             <div class="nav-search"></div>
-            <a href="#">
+            <a href="../../../Sitio-web/index.php">
                 <i class="external-icon-nav fas fa-external-link-alt"></i>
             </a>
         </div>
@@ -96,17 +96,17 @@
             <h6>ESTAD&Iacute;STICAS R&Aacute;PIDAS</h6>
             <ul>
                 <hr>
-                <li><i class="inf-icons fas fa-truck"></i>NUEVOS PEDIDOS HOY</a>
+                <li><i class="inf-icons fas fa-truck"></i>TOTAL DE PEDIDOS </a>
                 </li>
-                <li class="inf-date">0</li>
+                <li class="inf-date" id="pedidosEstadisticas"></li>
                 <hr>
-                <li><i class="inf-icons fas fa-money-bill-alt"></i>TOTAL DE VENTAS HOY</a>
+                <li><i class="inf-icons fas fa-money-bill-alt"></i>TOTAL DE VENTAS </a>
                 </li>
-                <li class="inf-date">0</li>
+                <li class="inf-date" id="ventasEstadisticas"></li>
                 <hr>
-                <li><i class="inf-icons fas fa-users"></i>TOTAL DE CLIENTES HOY</a>
+                <li><i class="inf-icons fas fa-users"></i>TOTAL DE CLIENTES </a>
                 </li>
-                <li class="inf-date" id='TotalClientes'></li>
+                <li class="inf-date" id="clienteEstadisticas"></li>
                 <hr>
                 <li><i class="inf-icons far fa-clock"></i>HORA</a>
                 </li>
@@ -131,7 +131,7 @@
                 <div class="sbc-box"><a href="Mod_productos.php"><i class="sbc-icons fas fa-wine-bottle"></i>Productos</a></div>
                 <div class="sbc-box"><a href="Mod_inventario.php"><i class="sbc-icons fas fa-clipboard-list"></i>Inventario</a></div>
                 <div class="sbc-box"><a href="Mod_clientes.php"><i class="sbc-icons fas fa-users"></i>Clientes</a></div>
-                <div class="sbc-box"><a href="Mod_pedidos.php"><i class="sbc-icons fas fa-truck"></i>Pedidos</a></div>
+                <div class="sbc-box"><a href="Mod_envios.php"><i class="sbc-icons fas fa-truck-loading"></i>Env&iacute;os</a></div>
             </div>
             <!--Primer sub contenedor central-->
             <div class="first-sub-central-box">
@@ -186,33 +186,11 @@
                     <div class="sbc-vis-top">
                         <div class="sbc-vis-top-left">
                             <i class="sbc-vis-icons-top-left fas fa-chart-area"></i>
-                            <h6>Visión general</h6>
+                            <h6>Estad&iacute;sticas</h6>
                         </div>
                     </div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Total ventas</td>
-                                <td>$0.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Total ventas este año</td>
-                                <td>$0.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Total pedidos</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Número de clientes</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Número de productos</td>
-                                <td>0</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- En este container se muestran los graficos -->
+                    <div id="containerTwo" style="min-width: 280px; width: 90%; height: 350px; margin: 0 auto;"></div>
                 </div>
                 <!--Tabla estadística-->
                 <div class="sbc-tbl-est">
@@ -223,7 +201,7 @@
                         </div>
                     </div>
                     <!-- En este container se muestran los graficos -->
-                    <div id="container" style="min-width: 280px; width: 90%; height: 350px; margin: 0 auto"></div>
+                    <div id="container" style="min-width: 280px; width: 90%; height: 350px; margin: 0 auto;"></div>
                 </div>
             </div>
             
@@ -241,6 +219,7 @@
     <!--Main-->
     <script src="../js/main.js"></script>
     <script src="../js/dashboard.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 
 </html>
