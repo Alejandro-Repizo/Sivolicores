@@ -34,7 +34,7 @@
                 <div class="cont-fila1">
                     <h3>Detalles pedido</h3>
                     <form action="#" method="post" name="formulario">
-                        <input type="text" id="Cl_Dirección" placeholder="Dirección completa. Ej: Calle 98 - 65 / apto 201 / Ed. Barcelona*" value="<?php echo $dato['Cl_Dirección']; ?>">
+                        <input type="text" id="Cl_Direccion" placeholder="Dirección completa. Ej: Calle 98 - 65 / apto 201 / Ed. Barcelona*" value="<?php echo $dato['Cl_Direccion']; ?>">
                         <input type="text" id="Cl_Telefono" placeholder="Teléfono / Celular" value="<?php echo $dato['Cl_Telefono']; ?>"> 
                         <input type="hidden" name="Cl_Nombre" id="Cl_Nombre" value="<?php echo $dato['Cl_Nombre']; ?>">
                         <label for="">Notas del Pedido</label>

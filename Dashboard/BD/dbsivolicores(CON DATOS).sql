@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2020 a las 00:33:35
+-- Tiempo de generación: 28-11-2020 a las 01:00:57
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.30
 
@@ -65,7 +65,7 @@ INSERT INTO `tbl_banner` (`PK_ID_Banner`, `B_Imagen`, `B_Nombre`, `B_Fecha_actua
 (2, 'Wallpaper_Cerveza.jpg', 'Cervezas', '2020-11-26 16:33:45'),
 (3, 'Wallpaper_Gaseosas.jpg', 'Bebidas', '2020-11-26 16:35:09'),
 (4, 'Wallpaper_Vino.jpg', 'Vinos', '2020-11-26 16:35:54'),
-(5, 'Wallpaper_Cócteles.jpg', 'Cócteles', '2020-11-26 16:36:14'),
+(5, 'cocteles-de-fruta.jpg', 'Cócteles', '2020-11-26 16:36:14'),
 (6, '2016-09-08.jpg', 'Parallax', '2020-11-26 18:03:54'),
 (7, 'banner3.jpg', 'Slide_uno', '2020-11-26 18:03:54'),
 (8, 'Oktoberfest_Slide_1.jpg', 'Slide_dos', '2020-11-26 18:03:54'),
@@ -73,7 +73,8 @@ INSERT INTO `tbl_banner` (`PK_ID_Banner`, `B_Imagen`, `B_Nombre`, `B_Fecha_actua
 (10, 'Wallpaper_Vodka.jpg', 'Carrito', '2020-11-26 18:03:54'),
 (11, 'Wallpaper_Vinos.jpg', 'Finalizar_pedido', '2020-11-26 18:03:54'),
 (12, 'Wallpaper_Vinos.jpg', 'Login', '2020-11-26 18:03:54'),
-(13, 'Wallpaper_Vino1.jpg', 'Registro', '2020-11-26 18:03:54');
+(13, 'Wallpaper_Vino1.jpg', 'Registro', '2020-11-26 18:03:54'),
+(14, '', 'Test', '2020-11-26 19:00:00');
 
 -- --------------------------------------------------------
 
@@ -97,7 +98,8 @@ INSERT INTO `tbl_categoria` (`PK_ID_Categoria`, `Cat_Nombre`, `Cat_Imagen`, `Cat
 (2, 'Cervezas', '', 'Wallpaper_Cerveza.jpg'),
 (3, 'Bebidas', 'Bebidas-1.jpg', 'Wallpaper_Gaseosas.jpg'),
 (4, 'Vinos', '', 'Wallpaper_Vino.jpg'),
-(5, 'Cócteles', '', 'Wallpaper_Cócteles.jpg');
+(5, 'Cócteles', '', 'Wallpaper_Cócteles.jpg'),
+(6, 'Test', '', '');
 
 --
 -- Disparadores `tbl_categoria`
@@ -157,12 +159,12 @@ CREATE TABLE `tbl_cliente` (
   `PK_ID_Cliente` int(11) NOT NULL,
   `Cl_Nombre` varchar(45) NOT NULL,
   `Cl_Apellido` varchar(45) NOT NULL,
-  `Cl_Dirección` varchar(45) NOT NULL,
+  `Cl_Direccion` varchar(200) NOT NULL,
   `Cl_Telefono` varchar(16) NOT NULL,
   `Cl_Fecha_registro` datetime NOT NULL DEFAULT current_timestamp(),
   `Cl_Pedidos_realizado` varchar(5) NOT NULL,
   `Cl_email` varchar(64) NOT NULL,
-  `Cl_password` varchar(200) NOT NULL
+  `Cl_password` varchar(400) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -307,7 +309,7 @@ CREATE TABLE `tbl_pedido` (
   `Pt_Nombre` text NOT NULL,
   `Ped_Fecha` datetime NOT NULL DEFAULT current_timestamp(),
   `Pt_Cantidad` varchar(40) NOT NULL,
-  `Ped_Direccion` varchar(45) NOT NULL,
+  `Ped_Direccion` varchar(200) NOT NULL,
   `Cl_Telefono` varchar(45) NOT NULL,
   `Total` text NOT NULL,
   `Ped_Observaciones` text DEFAULT NULL,
@@ -581,13 +583,13 @@ ALTER TABLE `tbl_subcategoria`
 -- AUTO_INCREMENT de la tabla `tbl_banner`
 --
 ALTER TABLE `tbl_banner`
-  MODIFY `PK_ID_Banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `PK_ID_Banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_categoria`
 --
 ALTER TABLE `tbl_categoria`
-  MODIFY `PK_ID_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `PK_ID_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_cliente`

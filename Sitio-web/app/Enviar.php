@@ -25,7 +25,7 @@
         
         // Limipiamos y recibimos los datos:
         $Cl_Nombre = limpiarString($_POST['Cl_Nombre']);
-        $Cl_Dirección = limpiarString($_POST['Cl_Direccion']);
+        $Cl_Direccion = limpiarString($_POST['Cl_Direccion']);
         $Cl_Telefono = limpiarNumber($_POST['Cl_Telefono']);
         $Ped_Observaciones = limpiarString($_POST['Ped_Observaciones']);
         $Estado = 'pendiente';
@@ -35,7 +35,7 @@
         // Insert en la base de datos
         $statement = $conexion->prepare("INSERT INTO tbl_pedido (Cl_Nombre,Pt_Nombre, Pt_Cantidad, Ped_Direccion, 
         Cl_Telefono, Total, Ped_Observaciones, Estado, PK_ID_Cliente) 
-        VALUES ('$Cl_Nombre', '$Pt_Nombre', '$Pt_Cantidad', '$Cl_Dirección','$Cl_Telefono', '$Total', '$Ped_Observaciones', '$Estado', '$PK_ID_Cliente')");
+        VALUES ('$Cl_Nombre', '$Pt_Nombre', '$Pt_Cantidad', '$Cl_Direccion','$Cl_Telefono', '$Total', '$Ped_Observaciones', '$Estado', '$PK_ID_Cliente')");
         $statement->execute() or die ("Error al grabar el registro");
 
         if ($statement){

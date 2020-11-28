@@ -43,8 +43,8 @@
                         <label for="Cl_Apellido">Apellidos:</label>
                         <input type="text" name="Cl_Apellido" id="Cl_Apellido" value="<?php echo $dato['Cl_Apellido']; ?>">
 
-                        <label for="Cl_Dirección" class="">Dirección:</label>
-                        <input type="text" name="Cl_Dirección" id="Cl_Dirección" value="<?php echo $dato['Cl_Dirección']; ?>">
+                        <label for="Cl_Direccion" class="">Dirección:</label>
+                        <input type="text" name="Cl_Direccion" id="Cl_Direccion" value="<?php echo $dato['Cl_Direccion']; ?>">
 
                         <label for="Cl_Telefono">Teléfono:</label>
                         <input type="text" name="Cl_Telefono" id="Cl_Telefono" value="<?php echo $dato['Cl_Telefono']; ?>">

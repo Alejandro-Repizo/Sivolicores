@@ -37,8 +37,8 @@
                         <label for="Cl_Apellido">Apellidos:</label>
                         <input type="text" name="Cl_Apellido" id="Cl_Apellido" required>
 
-                        <label for="Cl_Dirección">Direcci&oacute;n:</label>
-                        <input type="text" name="Cl_Dirección" id="Cl_Dirección" required>
+                        <label for="Cl_Direccion">Direcci&oacute;n:</label>
+                        <input type="text" name="Cl_Direccion" id="Cl_Direccion" required>
 
                         <label for="Cl_Telefono">Tel&eacute;fono:</label>
                         <input type="tel" name="Cl_Telefono" id="Cl_Telefono" required>

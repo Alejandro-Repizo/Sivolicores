@@ -62,7 +62,7 @@ $(document).ready( function() {
 
         Cl_Nombre = $.trim($("#Cl_Nombre").val());
         Cl_Apellido = $.trim($("#Cl_Apellido").val());
-        Cl_Dirección = $.trim($("#Cl_Dirección").val());
+        Cl_Direccion = $.trim($("#Cl_Direccion").val());
         Cl_Telefono = $.trim($("#Cl_Telefono").val());
         Cl_email = $.trim($("#Cl_email").val());
         Cl_password = $.trim($("#Cl_password").val());
@@ -71,7 +71,7 @@ $(document).ready( function() {
             if (password_iguales()) {
                 oData.append("Cl_Nombre", Cl_Nombre);
                 oData.append("Cl_Apellido", Cl_Apellido);
-                oData.append("Cl_Dirección", Cl_Dirección);
+                oData.append("Cl_Direccion", Cl_Direccion);
                 oData.append("Cl_Telefono", Cl_Telefono);
                 oData.append("Cl_email", Cl_email);
                 oData.append("Cl_password", Cl_password);
@@ -335,7 +335,7 @@ $(document).ready( function() {
         let PK_ID_Producto;
         let Pt_Cantidad;
         let Cl_Nombre = $.trim($("#Cl_Nombre").val());
-        let Cl_Direccion = $.trim($("#Cl_Dirección").val());
+        let Cl_Direccion = $.trim($("#Cl_Direccion").val());
         let Cl_Telefono = $.trim($("#Cl_Telefono").val());
         let Ped_Observaciones = $.trim($("#Ped_Observaciones").val());
 
@@ -375,7 +375,7 @@ function formulario_valido() {
         return false;
     }else if(Cl_Apellido == ''){
         return false;
-    }else if(Cl_Dirección == ''){
+    }else if(Cl_Direccion == ''){
         return false;
     }else if(Cl_Telefono == ''){
         return false;
@@ -394,7 +394,7 @@ function formulario_valido_editar() {
         return false;
     }else if(Cl_Apellido == ''){
         return false;
-    }else if(Cl_Dirección == ''){
+    }else if(Cl_Direccion == ''){
         return false;
     }else if(Cl_Telefono == ''){
         return false;

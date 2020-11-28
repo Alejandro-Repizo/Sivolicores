@@ -12,7 +12,7 @@
         $Cl_password = hash('md5',$Cl_password);
        
         // Consulta a la base de datos
-        $statement = $conexion->prepare("SELECT PK_ID_Cliente, Cl_Nombre, Cl_Apellido, Cl_Dirección, 
+        $statement = $conexion->prepare("SELECT PK_ID_Cliente, Cl_Nombre, Cl_Apellido, Cl_Direccion, 
         Cl_Telefono, Cl_Pedidos_realizado, Cl_email, Cl_password FROM tbl_cliente
         WHERE Cl_email = '$Cl_email' AND Cl_password = '$Cl_password'");
         $statement->execute();
