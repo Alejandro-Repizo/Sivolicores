@@ -1,5 +1,7 @@
-<?php
-
+<?php 
+    // Iniciamos session
+    session_start();
+    
     require 'app/config.php';
     require 'app/functions.php';
 

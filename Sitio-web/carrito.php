@@ -1,4 +1,5 @@
 <?php
+    // Iniciamos session
     session_start();
     
     require_once 'app/config.php';
@@ -10,14 +11,6 @@
         // header('location: error.php');
         echo 'error conexion';
     }
-
-   // Traemos la pk;
-    // if(isset($_SESSION['PK'])) {
-    //     $id = $_SESSION['PK'];
-    //     $dato = obtener_datos_cliente($id, $conexion);
-    //     $dato = $dato['0'];
-    // }
-
     // Banner
     $banner = obtener_banner_por_nombre($banner_config['carrito'], $conexion);
 

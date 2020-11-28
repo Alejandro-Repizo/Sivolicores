@@ -19,7 +19,6 @@
 <body>
 
     <?php require 'header.php';?>
-
     <div class="banner"style="background-image: url(../Dashboard/vista/imagenes/Banner/<?php echo $banner['0']['B_Imagen']?>);">
         <div class="text-banner">
             <h1 class="h1">Pedidos</h1>

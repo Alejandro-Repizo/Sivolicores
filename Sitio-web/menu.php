@@ -1,10 +1,8 @@
 <?php
+   
     require_once 'app/config.php';
     require_once 'app/functions.php';
  
-    // Iniciamos session
-    
-
     // Traemos la pk;
     if(isset($_SESSION['PK'])) {
         $id = $_SESSION['PK'];

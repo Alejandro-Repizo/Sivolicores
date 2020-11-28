@@ -9,10 +9,6 @@
 
     $categorias =  obtener_categoria($conexion);
   
-    
-   
-    
-
     require 'views/header.view.php';
   
 

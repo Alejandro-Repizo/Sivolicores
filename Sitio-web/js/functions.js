@@ -131,7 +131,7 @@ $(document).ready( function() {
 
         Cl_Nombre = $.trim($("#Cl_Nombre").val());
         Cl_Apellido = $.trim($("#Cl_Apellido").val());
-        Cl_Dirección = $.trim($("#Cl_Dirección").val());
+        Cl_Direccion = $.trim($("#Cl_Direccion").val());
         Cl_Telefono = $.trim($("#Cl_Telefono").val());
         Cl_password = $.trim($("#Cl_password").val());
         Cl_password2 = $.trim($("#Cl_password2").val());
@@ -142,7 +142,7 @@ $(document).ready( function() {
                 
                 oData.append("Cl_Nombre", Cl_Nombre);
                 oData.append("Cl_Apellido", Cl_Apellido);
-                oData.append("Cl_Dirección", Cl_Dirección);
+                oData.append("Cl_Direccion", Cl_Direccion);
                 oData.append("Cl_Telefono", Cl_Telefono);
                 oData.append("Cl_password", Cl_password);
 

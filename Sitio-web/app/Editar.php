@@ -11,7 +11,7 @@
         // Limipiamos y recibimos los datos:
         $Cl_Nombre = limpiarString($_POST['Cl_Nombre']);
         $Cl_Apellido = limpiarString($_POST['Cl_Apellido']);
-        $Cl_Dirección = limpiarString($_POST['Cl_Dirección']);
+        $Cl_Direccion = limpiarString($_POST['Cl_Direccion']);
         $Cl_Telefono = limpiarNumber($_POST['Cl_Telefono']);
 
         // Traemos la llave primaria
@@ -25,12 +25,12 @@
             $Cl_password = hash('md5', $Cl_password);
 
             // Consulta a la base de datos
-            $statement = $conexion->prepare("UPDATE tbl_cliente SET Cl_Nombre = '$Cl_Nombre', Cl_Apellido = '$Cl_Apellido', Cl_Dirección = '$Cl_Dirección',
+            $statement = $conexion->prepare("UPDATE tbl_cliente SET Cl_Nombre = '$Cl_Nombre', Cl_Apellido = '$Cl_Apellido', Cl_Direccion = '$Cl_Direccion',
             Cl_Telefono = '$Cl_Telefono', Cl_password = '$Cl_password' WHERE PK_ID_Cliente = '$id'");
     
         }else {
             // Consulta a la base de datos
-            $statement = $conexion->prepare("UPDATE tbl_cliente SET Cl_Nombre = '$Cl_Nombre', Cl_Apellido = '$Cl_Apellido', Cl_Dirección = '$Cl_Dirección',
+            $statement = $conexion->prepare("UPDATE tbl_cliente SET Cl_Nombre = '$Cl_Nombre', Cl_Apellido = '$Cl_Apellido', Cl_Direccion = '$Cl_Direccion',
             Cl_Telefono = '$Cl_Telefono' WHERE PK_ID_Cliente = '$id'");
      
         }

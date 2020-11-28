@@ -1,4 +1,5 @@
 <?php
+    // Iniciamos session
     session_start();
     
     require_once 'app/config.php';
@@ -11,14 +12,14 @@
         echo 'error conexion';
     }
 
-   // Traemos la pk;
+    // Traemos la pk;
     if(isset($_SESSION['PK'])) {
         $id = $_SESSION['PK'];
         $dato = obtener_datos_cliente($id, $conexion);
         $dato = $dato['0'];
-        // Banner
+         // Banner
         $banner = obtener_banner_por_nombre($banner_config['finalizar_pedido'], $conexion);
-       
+        
     }else {
         header('Location: index.php');
     }
@@ -26,6 +27,8 @@
     if(empty($_SESSION["shopping_cart"])) {
         header('Location: index.php');
     }
+
+
     require 'views/finalizar_pedido.view.php';
 
    
