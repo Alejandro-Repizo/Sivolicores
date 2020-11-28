@@ -13,7 +13,7 @@
         $Cl_Direccion = limpiarString($_POST['Cl_Direccion']);
         $Cl_Telefono = limpiarNumber($_POST['Cl_Telefono']);
         $Cl_email = limpiarEmail($_POST['Cl_email']);
-        $Cl_password = $_POST['Cl_password'];
+        $Cl_password = limpiarString($_POST['Cl_password']);
         $Cl_password = hash('md5', $Cl_password);
         $Cl_Pedidos_realizado = 0;
 
