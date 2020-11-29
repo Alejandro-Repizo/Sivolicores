@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2020 a las 01:00:57
+-- Tiempo de generación: 29-11-2020 a las 00:58:12
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.30
 
@@ -147,7 +147,9 @@ CREATE TABLE `tbl_catxsub` (
 
 INSERT INTO `tbl_catxsub` (`FK_ID_Categoria`, `FK_ID_SubCategoria`) VALUES
 (1, 1),
-(3, 2);
+(3, 2),
+(1, 3),
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -242,7 +244,29 @@ INSERT INTO `tbl_inventario` (`PK_ID_Inventario`, `FK_ID_ProductoInventario`) VA
 (37, 37),
 (38, 38),
 (39, 39),
-(40, 40);
+(40, 40),
+(41, 41),
+(42, 42),
+(43, 43),
+(44, 44),
+(45, 45),
+(46, 46),
+(47, 47),
+(48, 48),
+(49, 49),
+(50, 50),
+(51, 51),
+(52, 52),
+(53, 53),
+(54, 54),
+(55, 55),
+(56, 56),
+(57, 57),
+(58, 58),
+(59, 59),
+(60, 60),
+(61, 61),
+(62, 62);
 
 --
 -- Disparadores `tbl_inventario`
@@ -295,7 +319,25 @@ INSERT INTO `tbl_marca` (`PK_ID_Marca`, `Ma_Nombre`) VALUES
 (21, 'Cielo'),
 (22, 'Manantial'),
 (23, 'H2Oh!'),
-(24, 'Saviloe');
+(24, 'Saviloe'),
+(25, 'Ron abuelo añejo'),
+(26, 'Ron viejo de caldas'),
+(27, 'Ron Barcardi'),
+(28, 'Ron Barceló'),
+(29, 'Ron Botran'),
+(30, 'Ron Havana Club'),
+(31, 'Ron la hechicera'),
+(32, 'Ron Medellin'),
+(33, 'Ron Parce'),
+(34, 'Baileys'),
+(35, 'Buchanan´s'),
+(36, 'Cardhu'),
+(37, 'Coloma'),
+(38, 'Glenfiddich'),
+(39, 'Jack Daniel´s'),
+(40, 'Jameson'),
+(41, 'Johnnie Walker'),
+(42, 'John Thomas');
 
 -- --------------------------------------------------------
 
@@ -383,7 +425,29 @@ INSERT INTO `tbl_producto` (`PK_ID_Producto`, `Pt_codigo`, `Pt_Nombre`, `Pt_Prec
 (37, '0037', 'H20h! Frutos Tropicales', 3500, 'H2OH__Frutos_720x960.jpg', '600ml', '0', 'Colombia', 'Transparante', 90, 3, 23, 2),
 (38, '0038', 'H20h! Limón', 3500, 'H2OH_limon_720x960.jpg', '600ml', '0', 'Colombia', 'Transparante', 30, 3, 23, 2),
 (39, '0039', 'H20h! Maracuyá', 3500, 'H2OH_Maracuya_720x960.jpg', '600ml', '0', 'Colombia', 'Transparante', 60, 3, 23, 2),
-(40, '0040', 'Saviloe', 3000, 'Saviloe_720x960.jpg', '600ml', '0', 'Colombia', 'Transparante', 40, 3, 24, 2);
+(40, '0040', 'Saviloe', 3000, 'Saviloe_720x960.jpg', '600ml', '0', 'Colombia', 'Transparante', 40, 3, 24, 2),
+(41, '0041', 'Ron Abuelo Añejo', 48000, 'Ron_Abuelo_Añejo_720x960.jpg', '750ml', '29', 'Colombia', 'Dorado', 30, 1, 25, 3),
+(42, '0042', 'Ron viejo de caldas', 18400, 'Ron_Caldas_720x960.jpg', '750ml', '29', 'Colombia', 'Dorado', 30, 1, 26, 3),
+(43, '0043', 'Ron Bacardi Gran Añejo', 50500, 'Ron_Bacardi_Gran_Añejo_720x960.jpg', '750ml', '29', 'Cuba', 'Dorado', 40, 1, 27, 3),
+(44, '0044', 'Ron Bacardi Limón', 50000, 'Ron_Bacardi_Limon_720x960.jpg', '750ml', '29', 'Cuba', 'Transparante', 30, 1, 27, 3),
+(45, '0045', 'Ron Añejo Barceló', 55400, 'Ron_Barcelo_Añejo_720x960.jpg', '750ml', '29', 'República Dominicana', 'Dorado', 30, 1, 28, 3),
+(46, '0046', 'Ron Botran Añejo 15 años', 126000, 'Ron_Botran_720x960.jpg', '750ml', '29', 'Guatemala', 'Dorado', 59, 1, 29, 3),
+(47, '0047', 'Ron Havana Club Añejo 3 años', 50000, 'Ron_Havana_720x960.jpg', '750ml', '29', 'Cuba', 'Transparante', 30, 1, 30, 3),
+(48, '0048', 'Ron La Hechicera', 150000, 'Ron_Hechicera_720x960.jpg', '700ml', '29', 'Colombia', 'Dorado', 30, 1, 31, 3),
+(49, '0049', 'Ron Medellín Extra Añejo 5 años', 44000, 'Ron_Medellin_720x960.jpg', '750ml', '29', 'Colombia', 'Dorado', 40, 1, 32, 3),
+(50, '0050', 'Ron Parce Añejo 12 años', 195000, 'Ron_Parce_12_720x960.jpg', '750ml', '29', 'Colombia', 'Dorado chimba', 30, 1, 33, 3),
+(51, '0051', 'Ron Parce Añejo 8 años', 150000, 'Ron_Parce_8_720x960.jpg', '750ml', '29', 'Colombia', 'Dorado', 100, 1, 33, 3),
+(52, '0052', 'Crema de Whisky Baileys', 47400, 'Baileys_720x960.jpg', '750ml', '17', 'Irlanda', 'Crema', 13, 1, 34, 4),
+(53, '0053', 'Whisky Buchanan´s 12 años', 109900, 'Buchanan_720x960.jpg', '750ml', '29', 'Escocia', 'Dorado', 40, 1, 35, 4),
+(54, '0054', 'Whisky Buchanan´s Master', 133900, 'Buchanan_Master_720x960.jpg', '750ml', '29', 'Escocia', 'Dorado', 12, 1, 35, 4),
+(55, '0055', 'Cardhu 12 años', 140200, 'Cardhu_720x960.jpg', '750ml', '29', 'Escocia', 'Dorado', 40, 1, 36, 4),
+(56, '0056', 'Coloma', 41850, 'Coloma_720x960.jpg', '750ml', '29', 'Colombia', 'Dorado', 30, 1, 37, 4),
+(57, '0057', 'Whisky Glenfiddich 12 años', 129900, 'Glenfiddigh_720x960.jpg', '750ml', '29', 'Escocia', 'Transparante', 30, 1, 38, 4),
+(58, '0058', 'Whisky Jack Daniel´s Old N°7', 107900, 'Jack_Daniels_old_7_720x960.jpg', '750ml', '29', 'Estados Unidos', 'Dorado', 100, 1, 39, 4),
+(59, '0059', 'Whisky Jack Daniel´s Single Barrel', 206900, 'Jack_Daniels_Single_Barrel_720x960.jpg', '750ml', '29', 'Estados Unidos', 'Dorado', 40, 1, 39, 4),
+(60, '0060', 'Whisky Jameson Irish Santard', 93900, 'Jameson_Irish_720x960.jpg', '750ml', '29', 'Irlanda', 'Transparante', 59, 1, 40, 4),
+(61, '0061', 'Whisky Johnnie Walker Double Black', 121900, 'Jhonnie_Walker_Double_Black_720x960.jpg', '750ml', '29', 'Escocia', 'Dorado chimba', 30, 1, 41, 4),
+(62, '0062', 'Whisky John Thomas Tradicional', 36990, 'John_Thomas_720x960.jpg', '750ml', '29', 'Colombia', 'Dorado', 200, 1, 42, 4);
 
 --
 -- Disparadores `tbl_producto`
@@ -486,7 +550,9 @@ CREATE TABLE `tbl_subcategoria` (
 
 INSERT INTO `tbl_subcategoria` (`PK_ID_SubCategoria`, `SCat_Nombre`) VALUES
 (1, 'Aguardiente'),
-(2, 'Agua');
+(2, 'Agua'),
+(3, 'Ron'),
+(4, 'Whisky');
 
 --
 -- Disparadores `tbl_subcategoria`
@@ -601,13 +667,13 @@ ALTER TABLE `tbl_cliente`
 -- AUTO_INCREMENT de la tabla `tbl_inventario`
 --
 ALTER TABLE `tbl_inventario`
-  MODIFY `PK_ID_Inventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `PK_ID_Inventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_marca`
 --
 ALTER TABLE `tbl_marca`
-  MODIFY `PK_ID_Marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `PK_ID_Marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_pedido`
@@ -619,7 +685,7 @@ ALTER TABLE `tbl_pedido`
 -- AUTO_INCREMENT de la tabla `tbl_producto`
 --
 ALTER TABLE `tbl_producto`
-  MODIFY `PK_ID_Producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `PK_ID_Producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_receta_coctel`
@@ -631,7 +697,7 @@ ALTER TABLE `tbl_receta_coctel`
 -- AUTO_INCREMENT de la tabla `tbl_subcategoria`
 --
 ALTER TABLE `tbl_subcategoria`
-  MODIFY `PK_ID_SubCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `PK_ID_SubCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

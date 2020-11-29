@@ -235,7 +235,7 @@ class Consultar {
         try{
             //Cargar datos a la tabla cliente
             $conexion = new ConexionBD();
-            $consulta = "SELECT PK_ID_Cliente,Cl_Nombre,Cl_email,Cl_Pedidos_realizado,Cl_Fecha_registro FROM tbl_cliente ";
+            $consulta = "SELECT PK_ID_Cliente,Cl_Nombre,Cl_email,Cl_Fecha_registro FROM tbl_cliente ";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 

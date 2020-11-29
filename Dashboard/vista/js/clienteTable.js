@@ -18,7 +18,6 @@ $(document).ready(function () {
               { "data": "PK_ID_Cliente" },
               { "data": "Cl_Nombre" },
               { "data": "Cl_email" },
-              { "data": "Cl_Pedidos_realizado" },
               { "data": "Cl_Fecha_registro" },
               { "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-outline-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>"}
           ],

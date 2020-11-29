@@ -144,8 +144,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Cliente nombre</th>
-                                        <th>Corre electrónico</th>
-                                        <th>Total pedidos</th>
+                                        <th>Corre electr&oacute;nico</th>
                                         <th>Fecha registro</th>
                                         <th>Acci&oacute;n</th>
                                     </tr>
